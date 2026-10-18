@@ -1,0 +1,91 @@
+\section{Results}
+\label{sec:results}
+
+\subsection{Overview and data quality}
+
+Table~\ref{tab:models} summarizes the six models and their completed question sets. Answer extraction succeeds on between 96.8\% and 100\% of calls across models, and every reported condition is computed over complete sixteen-call matrices. Coverage differs across models because of provider rate limits: the two Qwen models cover nearly the full ninety-question suite, the two Agnes models cover the leading block of the fixed shuffled question order, and the two remaining models cover the leading block available within our access window. All within-model comparisons are paired and unaffected by coverage, and pooled analyses use the intersection of completed questions, stated explicitly wherever pooled numbers appear.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Models, coverage, and data quality. Parse rate is the fraction of calls from which the mandated answer format was extracted; $n$ is the number of questions with a complete call matrix.}
+\label{tab:models}
+\input{tables/tab_models}
+\end{table}
+
+\subsection{RQ1: Accuracy under budget-matched ensembling}
+
+Table~\ref{tab:main} reports accuracy for the five aggregation conditions, and Figure~\ref{fig:conditions} visualizes the four models with at least twenty complete questions. Two patterns dominate. First, the two Qwen flagships are at or near ceiling on five of six benchmarks, and for them every ensemble condition reproduces greedy decoding to within one question: SC-6, PE-6, and COMB-12 all return 93.2\% for Qwen3.8-Max and 93.0\% for Qwen3.8-Omni-Flash, identical to greedy. The aggregation strategies are not failing; they are vacuous, because the answer distribution they aggregate contains a single value, a point that Section~\ref{sec:rq4} quantifies. Second, in the cells where models have room to err, aggregation changes answers substantially. Agnes3.0-Flash improves from 78.8\% under greedy to 90.9\% under both SC-6 and PE-6, a 12.1 point gain, with the hybrid matching at 90.9\%. Agnes2.5-Flash improves from 90.0\% to 95.0\% under SC-6 and 92.5\% under PE-6. These are large effects by the standards of inference-time methods, and they appear under both diversity sources.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Main results. Accuracy (\%) under budget-matched conditions: greedy single call, six-vote self-consistency (SC-6), six-paraphrase ensemble (PE-6), three-paraphrase two-sample hybrid (HB-6), and the twelve-vote combined ensemble (COMB-12). Fragile is the fraction of questions whose SC-6 and PE-6 answers disagree; Degen.\ is the fraction of questions where both agreement scores equal one.}
+\label{tab:main}
+\input{tables/tab_main}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\columnwidth]{figures/conditions.pdf}
+\caption{Accuracy of the five aggregation conditions for the four models with at least twenty complete question matrices. The two Qwen flagships show identical accuracy across all conditions, which reflects answer degeneracy rather than agreement between strategies.}
+\label{fig:conditions}
+\end{figure}
+
+The comparison between the two diversity sources is closely matched where both are active. Pooled over the intersection of the four well-covered models, 112 model-question pairs on 28 common questions, SC-6 gains 5.4 points over greedy and PE-6 gains 3.6 points, and the pooled SC-6 advantage over PE-6 is 1.8 points with a bootstrap interval from 0.0 to 4.5 points that touches zero; no per-model McNemar test between SC-6 and PE-6 approaches significance at these sample sizes. The two strategies are statistically indistinguishable in our data, but they are not interchangeable, for two reasons shown below: they disagree on individual questions at measurable rates (Section~\ref{sec:rq2}), and their agreement signals detect different errors (Section~\ref{sec:rq3}).
+
+Two further observations qualify the received view that majority voting is uniformly safe. GPT-6-Luna loses accuracy under SC-6, falling from 80.0\% under greedy to 73.3\%, because its sampled votes scatter across options and the modal answer is often wrong; its paraphrase ensemble and hybrid instead gain, reaching 86.7\%. The twelve-vote combined ensemble does not dominate the six-vote conditions either: pooled, it reaches 96.4\% against 97.3\% for SC-6, because the paraphrase votes it adds are individually less accurate for these models and dilute the majority. Doubling the budget therefore buys no guarantee; vote quality governs the marginal value of additional votes, and a practitioner who knows which source is weaker is better served by concentrating the budget on the stronger one.
+
+\subsection{RQ2: Paraphrase fragility}
+\label{sec:rq2}
+
+Fragility, the fraction of questions where paraphrasing alone flips the majority answer, is negligible in the degenerate regime and substantial in the high-entropy regime. Qwen3.8-Max shows fragility on 1.1\% of questions and Qwen3.8-Omni-Flash on 4.2\%, concentrated almost entirely in LogiQA, where the respective per-dataset fragility rates are 6.7\% and 21.4\%. The models with high answer entropy on logical reasoning show more: GPT-6-Luna flips on 13.3\% of its questions overall and on 40\% of its LogiQA questions, and Gemini3.8-Flash on 8.3\% overall and 33.3\% of LogiQA. Fragility is not random noise; it tracks the same model-task cells that carry answer entropy and ensembling gains, which supports reading it as an observable symptom of unstable knowledge rather than as a formatting artifact. For evaluation practice, the practical consequence is that a single-prompt score on a hard benchmark understates the instability of the measured system by an amount that fragility makes visible.
+
+\subsection{RQ3: Consistency as an error signal}
+\label{sec:rq3}
+
+Table~\ref{tab:uncert} evaluates agreement scores as unsupervised detectors of ensemble errors, and Figure~\ref{fig:auroc} visualizes AUROC. The pattern follows the regime structure. For the Qwen flagships, where almost every question is degenerate, sample agreement carries almost no signal (AUROC 0.58 for Qwen3.8-Max) because the score is constant at one for nearly all questions, right or wrong. Qwen3.8-Omni-Flash retains moderate signal (0.79), reflecting its slightly higher entropy tail. In the models with genuine entropy the scores become informative and the stronger source differs across models: for Agnes3.0-Flash, sample agreement is highly discriminative (AUROC 0.96) while paraphrase agreement is weak (0.60), whereas for GPT-6-Luna paraphrase agreement is the stronger signal (0.92 against 0.58) and for Gemini3.8-Flash both signals are strong (0.95). Agnes2.5-Flash, whose answers are mostly degenerate, shows a reversed sample-agreement ranking that we read as noise at its low error rate. Pooled over the four well-covered models, sample agreement reaches 0.74 and paraphrase agreement 0.60. The two agreement scores therefore measure different failure modes: unstable sampling reveals sample-detectable errors, paraphrase sensitivity reveals prompt-detectable errors, and a system that can afford both probes obtains complementary evidence. The risk-coverage analysis in Table~\ref{tab:uncert} tells the same story: sample agreement reduces the area under the risk-coverage curve for every model with informative signal, and the largest reductions occur exactly where accuracy aggregation also helps.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Uncertainty estimation. Error rate of the COMB-12 reference, AUROC of reversed agreement scores for predicting ensemble errors, and the area under the risk-coverage curve (AURC) for each signal, where smaller AURC is better. Dashes indicate that the model produced constant scores or zero errors.}
+\label{tab:uncert}
+\input{tables/tab_uncert_full}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\columnwidth]{figures/auroc.pdf}
+\caption{AUROC of reversed agreement scores for detecting ensemble errors. The dashed line marks chance. Signal strength follows the entropy regime, and the stronger source differs across models.}
+\label{fig:auroc}
+\end{figure}
+
+\subsection{RQ4: The regime structure}
+\label{sec:rq4}
+
+Table~\ref{tab:regime} reports per model and dataset the greedy accuracy, the combined-ensemble accuracy, the mean normalized answer entropy, and the degeneracy rate, and Figure~\ref{fig:regime} plots the ensemble gain against entropy for every model-dataset cell. The scatter shows the central dependency of the entire study: gains from ensembling are confined to cells with positive entropy. Across the pooled (model, question) pairs of the four well-covered models, the Spearman rank correlation between answer entropy and the COMB-12 gain over greedy is 0.62. Stratified, the dependence is stark. In the degenerate stratum, 104 of 112 pooled pairs, greedy accuracy is 97.1\% and every ensemble condition lands within 1.0 point of it. In the high-entropy stratum above 0.15, eight pooled pairs, greedy accuracy is 25.0\%, SC-6 lifts it to 87.5\%, PE-6 and the hybrid to 62.5\%, and the combined ensemble to 75.0\%. Within the high-entropy stratum, however, entropy alone does not guarantee gains: GPT-6-Luna and Gemini3.8-Flash on LogiQA have the highest entropy in the study, above 0.8, yet their ensemble accuracy does not move, because their correct answers are not the modal ones. Entropy is therefore a necessary condition for ensembling to matter and a sufficient condition only for consistency-based uncertainty estimation, which is informative in exactly those cells (Section~\ref{sec:rq3}).
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Regime map by model and dataset: greedy accuracy, COMB-12 accuracy, their difference, mean normalized answer entropy, and the degeneracy rate (both agreement scores equal to one).}
+\label{tab:regime}
+\input{tables/tab_regime}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\columnwidth]{figures/regime.pdf}
+\caption{Ensemble gain over greedy against mean answer entropy for every model-dataset cell. Gains concentrate where entropy is positive, and the two cells with entropy above 0.8 without gains are LogiQA under GPT-6-Luna and Gemini3.8-Flash, where the modal answer is not the correct one.}
+\label{fig:regime}
+\end{figure}
+
+The budget curves in Figure~\ref{fig:budget} complete the picture. For the flagships, both curves are flat at the greedy level at every budget. For Agnes3.0-Flash and Agnes2.5-Flash, accuracy rises with budget under both strategies, with sample voting climbing earlier and paraphrase voting catching up by $k=6$. The practical reading is that the choice between the two sources matters less than the choice of whether to aggregate at all, which the entropy regime determines, and that a small probe budget spent measuring agreement first would have identified the correct strategy in every case we observe.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\columnwidth]{figures/budget.pdf}
+\caption{Accuracy against call budget $k$ for self-consistency (SC-$k$) and paraphrase ensembling (PE-$k$), with $k=1$ corresponding to the greedy baseline. Flat curves indicate the degenerate regime; rising curves indicate cells where aggregation changes answers.}
+\label{fig:budget}
+\end{figure}

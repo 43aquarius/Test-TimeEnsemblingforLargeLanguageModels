@@ -1,0 +1,57 @@
+\documentclass[preprint,12pt]{elsarticle}
+
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,bookmarks=true]{hyperref}
+
+\journal{Neurocomputing}
+
+\widowpenalty=10000
+\setlength{\emergencystretch}{1.5em}
+\clubpenalty=10000
+
+\hypersetup{
+    pdftitle={When Does Test-Time Ensembling Help Large Language Models? A Budget-Matched Study of Answer-Space and Prompt-Space Diversity},
+    pdfauthor={Chang Tan},
+    pdfsubject={Test-time ensembling for large language models},
+    pdfkeywords={large language models, self-consistency, prompt ensembling, uncertainty estimation, test-time compute}
+}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{When Does Test-Time Ensembling Help Large Language Models? A Budget-Matched Study of Answer-Space and Prompt-Space Diversity}
+
+\author[inst1]{Chang Tan\corref{cor1}}
+\ead{aquars43@foxmail.com}
+\cortext[cor1]{Corresponding author.}
+\address[inst1]{Dalian University of Technology, Dalian, Liaoning, China}
+
+\begin{abstract}
+Test-time ensembling improves the reliability of large language models by aggregating answers from multiple model calls instead of trusting a single greedy prediction. Two families of strategies dominate practice. Self-consistency resamples the stochastic decoder on one fixed prompt, so the ensemble varies along what we call the answer space. Prompt ensembling instead fixes the decoding configuration and varies the prompt over semantically equivalent paraphrases, so the ensemble varies along the prompt space. Both families consume the same scarce resource, namely the number of model calls, yet prior work studies them in isolation and the question of which source of diversity buys more accuracy per call remains open. We present a controlled, budget-matched comparison across six commercial large language models and six reasoning and knowledge benchmarks under a unified protocol in which every question is answered sixteen times per model: six decodes of the original prompt, six paraphrased prompts answered once each, a hybrid condition that combines three paraphrases with two decodes each, a twelve-vote combined condition, and a greedy baseline. The results reveal a regime structure that current evaluation practice overlooks. On benchmarks that modern flagship models saturate, the sampled answer distribution degenerates to a single value, both ensembles collapse onto the greedy baseline, and consistency-based uncertainty estimates lose their discriminative power, which raises a caution for hallucination detection methods built on sampling. In regimes with genuine answer entropy, both ensembles lift accuracy over greedy decoding, the two diversity sources are statistically indistinguishable at matched budgets while disagreeing on individual questions, majority voting can even reduce accuracy when the modal answer is wrong, and the two agreement signals detect complementary errors across models. We distill the findings into a practical decision rule for allocating a fixed test-time budget, and we release all prompts, paraphrases, and raw predictions to support reproducible evaluation.
+\end{abstract}
+
+\begin{keyword}
+Large language models \sep test-time compute \sep self-consistency \sep prompt ensembling \sep uncertainty estimation \sep robustness
+\end{keyword}
+
+\end{frontmatter}
+
+\input{sections/introduction}
+\input{sections/related}
+\input{sections/method}
+\input{sections/setup}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/conclusion}
+
+\bibliographystyle{elsarticle-num}
+\bibliography{refs}
+
+\end{document}

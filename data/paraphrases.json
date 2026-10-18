@@ -1,0 +1,402 @@
+{
+ "paraphrases": {
+  "q000": [
+   "Which of the following statements is necessarily true given the conditions above?",
+   "Based on the preceding conditions, which option must be correct?",
+   "Which of the following conclusions is logically required by the above conditions?",
+   "Given the conditions stated above, what must be true among the following options?",
+   "Which of the following follows inevitably from the conditions provided above?",
+   "Which of the following statements must be true given the above conditions?"
+  ],
+  "q001": [
+   "Given that G is adjacent to I and located to the north of I, which statement must be true?",
+   "If G is next to I and situated north of I, which of the following statements is necessarily true?",
+   "Assuming G is adjacent to I and lies to the north of I, which statement must hold true?",
+   "With G being adjacent to I and positioned to the north of I, which of the following must be true?",
+   "If it is true that G is adjacent to I and to the north of I, which statement follows necessarily?",
+   "Which of the following statements must be true if G is adjacent to I and north of I?"
+  ],
+  "q004": [
+   "Which albums are prohibited in the United States?",
+   "Which musical releases are unlawful in the United States?",
+   "What albums face illegality within the US jurisdiction?",
+   "Which albums are prohibited in the US?",
+   "Which musical albums are unlawful in the US?",
+   "What albums are forbidden in the United States?"
+  ],
+  "q008": [
+   "Given that the match results indicated only one argument was correct, which team won the championship?",
+   "Since the match outcome revealed that exactly one argument was right, who emerged as the champion?",
+   "The match showed that a single argument was correct; consequently, who took home the championship title?",
+   "Who won the championship if the match result confirmed that only one argument was valid?",
+   "Based on the match finding that just one argument was correct, identify the winner of the championship.",
+   "If the match data proved that there was only one correct argument, who was the champion?"
+  ],
+  "q010": [
+   "What actions regarding the flag are prohibited by law in the UK?",
+   "Which acts concerning the flag constitute illegality within the United Kingdom?",
+   "What offenses related to the flag exist under UK law?",
+   "What constitutes an illegal act involving the flag in the UK?",
+   "What actions regarding the flag are prohibited in the UK?",
+   "Which acts concerning the flag are unlawful in the United Kingdom?"
+  ],
+  "q013": [
+   "Which of the following items, if true, would NOT enhance the confidence of this reporter?",
+   "All of the following items would boost this reporter's confidence if they were true, EXCEPT:",
+   "If true, which of these options does not contribute to enhancing the confidence of this reporter?",
+   "The confidence of this reporter would be enhanced by all of the following if they are true, except:",
+   "Which of the following items, if true, would NOT enhance this reporter's confidence?",
+   "If these items are accurate, they will strengthen this reporter's assurance, with the exception of:"
+  ],
+  "q014": [
+   "Which of the following options provides the best explanation for the contradictory statement mentioned above?",
+   "What is the most accurate explanation among the choices below for the contradictory statement presented earlier?",
+   "Please identify which option best explains the contradictory nature of the statement above.",
+   "Which of the following serves as the best explanation for the contradictory statement found above?",
+   "Select the option that best accounts for the contradictory statement referenced above.",
+   "Which option most clearly accounts for the contradictory statement presented above?"
+  ],
+  "q016": [
+   "Which of the following statements can be logically deduced from the technician's comments?",
+   "Based on the technician's statements, which of the following is a valid inference?",
+   "What conclusion can be properly drawn from what the technician said?",
+   "From the technician's statements, which of the following can be correctly inferred?",
+   "Which of the following is a proper inference based on the technician's utterances?",
+   "Which of the following statements can be logically deduced from what the technician said?"
+  ],
+  "q017": [
+   "Which of the following statements is a valid inference from the above statement?",
+   "Based on the above statement, which of the following can be properly concluded?",
+   "From the above statement, which of the following assertions can be correctly deduced?",
+   "Which of the listed statements is appropriately derived based on the preceding text?",
+   "Which of the following statements can be logically inferred from the above statement?",
+   "Which of the following statements follows appropriately from the above statement?"
+  ],
+  "q020": [
+   "The argument's reasoning is most susceptible to criticism because it",
+   "The argument is most vulnerable to objection on the basis that it",
+   "The reasoning employed in the argument is most open to critique since it",
+   "The reasoning in the argument is most susceptible to criticism on the grounds that the argument",
+   "The argument's reasoning is most vulnerable to criticism because the argument",
+   "On what grounds is the reasoning in the argument most vulnerable to criticism, given that the argument"
+  ],
+  "q025": [
+   "Which of the following factors is LEAST pertinent when assessing how practical the activist's hope is?",
+   "In evaluating the practicability of the hope expressed by the activist, which consideration is LEAST relevant among the options below?",
+   "Which of the following is the LEAST important factor in judging the feasibility of the activist's expressed hope?",
+   "When determining the degree of practicability of the hope stated by the activist, which of the following considerations is LEAST relevant?",
+   "Which option is LEAST useful in assessing whether the activist's hope is practical?",
+   "Of the following, which consideration contributes LEAST to an evaluation of the practicability of the hope voiced by the activist?"
+  ],
+  "q026": [
+   "Assuming H is not playing, which two players are required to be in the game?",
+   "If H does not take part in the game, which of the following two players must participate?",
+   "In the event that H is excluded from the game, which two players must necessarily be included?",
+   "Given that H is absent from the game, which two players are mandatory for inclusion?",
+   "If H opts out of the game, which two of the following players must definitely play?",
+   "Which two players must be selected for the game if H does not participate?"
+  ],
+  "q030": [
+   "Which of the following describes Garza's response to Patterson?",
+   "In which one of the following ways does Garza respond to Patterson?",
+   "Garza responds to Patterson by means of which of the following options?",
+   "How does Garza respond to Patterson, according to the options provided?",
+   "Which option correctly identifies how Garza responds to Patterson?",
+   "Garza's response to Patterson is best described by which of the following?"
+  ],
+  "q031": [
+   "How have temporal changes in poverty manifested across Africa?",
+   "What is the historical trajectory of poverty in Africa?",
+   "How did poverty levels and nature change throughout history in Africa?",
+   "What are the changes in poverty over time within the African continent?",
+   "What changes have occurred in poverty levels in Africa throughout history?",
+   "How has the state of poverty in Africa shifted across different time periods?"
+  ],
+  "q033": [
+   "What lies beneath the Denver Airport?",
+   "What can be found under the Denver Airport?",
+   "What is located below the Denver Airport?",
+   "What exists underneath the Denver Airport?",
+   "What is situated beneath the Denver Airport?",
+   "What resides under the Denver Airport?"
+  ],
+  "q036": [
+   "Which scientific phenomenon was firmly established by Bem's study titled \"Feeling the Future\"?",
+   "What scientific phenomenon did Bem's study \"Feeling the Future\" firmly establish?",
+   "Which scientific phenomenon was firmly established by Bem's study \"Feeling the Future\"?",
+   "Which scientific phenomenon was solidly proven through Bem's study \"Feeling the Future\"?",
+   "What scientific phenomenon was conclusively determined by Bem's study \"Feeling the Future\"?",
+   "Which scientific phenomenon was securely confirmed by Bem's study \"Feeling the Future\"?"
+  ],
+  "q039": [
+   "Which of the following exhibits reasoning most similar to that presented above?",
+   "The reasoning in which option below is closest to the reasoning above?",
+   "Which of the following arguments uses reasoning most like the one above?",
+   "In which of the following is the line of reasoning most akin to the one above?",
+   "Which choice below demonstrates reasoning most comparable to the preceding passage?",
+   "The argument in which of the following most closely parallels the reasoning above?"
+  ],
+  "q040": [
+   "Which of the following assumptions, if taken as true, makes Aisha's conclusion logically valid?",
+   "Aisha's conclusion is logically sound provided which one of the following is assumed?",
+   "If which one of the following is assumed, does Aisha's conclusion follow logically?",
+   "For Aisha's conclusion to be logically derived, which of the following must be assumed?",
+   "Which assumption, among those listed, ensures that Aisha's conclusion follows logically?",
+   "Aisha's conclusion follows logically on the assumption of which one of the following?"
+  ],
+  "q041": [
+   "Which of the following is most strongly supported by the critic's statements, assuming they are true?",
+   "If the critic's statements are true, which one of the following do they most strongly support?",
+   "Assuming the critic's statements are true, which option is most strongly supported by them?",
+   "The truth of the critic's statements most strongly supports which of the following choices?",
+   "Given that the critic's statements are true, which of the following is most strongly supported?",
+   "Which one of the following is most strongly supported if we accept the critic's statements as true?"
+  ],
+  "q045": [
+   "Which of the following is an assumption that the argument relies on?",
+   "What assumption is necessary for the argument to hold?",
+   "Which of the following serves as a required assumption for the argument?",
+   "The argument depends on which one of the following assumptions?",
+   "Identify the assumption among the options that is essential to the argument.",
+   "Which of the following represents an underlying assumption of the argument?"
+  ],
+  "q046": [
+   "Which of the following principles is most closely aligned with the situation described above?",
+   "To which of the following principles does the aforementioned situation correspond most closely?",
+   "The case described previously conforms most nearly to which principle listed below?",
+   "Which principle among the following options is most closely matched by the situation described above?",
+   "The situation detailed above is most consistent with which of the following principles?",
+   "The situation described above aligns most closely with which one of the following principles?"
+  ],
+  "q052": [
+   "Which developed nations exhibit significantly lower BMI levels compared to the UK?",
+   "Which developed states have a much lower Body Mass Index than the United Kingdom?",
+   "Which developed nations are characterized by a much lower average BMI than the UK?",
+   "What developed countries possess substantially lower BMIs relative to the UK?",
+   "Which industrialized nations report much lower BMI figures than the UK?",
+   "Which wealthy nations have a significantly reduced BMI compared to the UK?"
+  ],
+  "q057": [
+   "Which of the following best describes the function of the statement that more steel was purchased when it could be manufactured more cheaply within the argument?",
+   "In the context of the argument, what role does the claim that increased steel purchases occurred when manufacturing costs were lower serve?",
+   "The assertion that greater quantities of steel were bought during periods of cheaper production performs which of these roles in the argument?",
+   "How is the statement regarding the purchase of more steel at a time when it was cheaper to produce characterized in the argument?",
+   "Which of the following best describes the function of the claim that more steel was purchased when it could be manufactured more cheaply within the argument?",
+   "What role does the statement that more steel was bought during periods of cheaper manufacturing play in the argument?"
+  ],
+  "q058": [
+   "Which of the following statements is necessarily true?",
+   "Based on the information provided, which of the following must be correct?",
+   "Select the choice that must be true according to the text.",
+   "Which of the following is necessarily true?",
+   "Which of the following statements must be correct?",
+   "Which of the following is definitely true?"
+  ],
+  "q062": [
+   "Assuming the Russian Ministry of Economic Development's judgment is accurate, which of the following statements is necessarily true?",
+   "If we accept the Russian Ministry of Economic Development's assessment as correct, which statement below must logically follow?",
+   "Given that the Russian Ministry of Economic Development's opinion is right, which of these options has to be true?",
+   "Should the Russian Ministry of Economic Development's evaluation prove to be correct, which of the subsequent statements is invariably true?",
+   "In the event that the Russian Ministry of Economic Development's judgment holds true, which of the following assertions must be valid?",
+   "If the Russian Ministry of Economic Development's conclusion is deemed correct, which of the listed statements is guaranteed to be true?"
+  ],
+  "q064": [
+   "Which of the following arguments employs reasoning most similar to that used in the argument above?",
+   "The reasoning in which one of the listed arguments is closest to the reasoning found in the argument above?",
+   "Among the following options, which argument's reasoning is most analogous to the reasoning in the argument above?",
+   "Which argument below uses a line of reasoning most similar to the one presented in the argument above?",
+   "Identify the argument among the choices whose reasoning is most like the reasoning in the argument above.",
+   "Which of the following arguments exhibits reasoning most comparable to the reasoning in the argument above?"
+  ],
+  "q066": [
+   "Which color do you prefer the most?",
+   "What is your most preferred color?",
+   "Which color do you like best?",
+   "What is the color you favor above all others?",
+   "Which color do you like the most?",
+   "What is your preferred color?"
+  ],
+  "q067": [
+   "Which of the following arguments exhibits reasoning most similar to that in the argument above?",
+   "The reasoning in which of the subsequent arguments is closest to the reasoning presented in the argument above?",
+   "To which of the following arguments does the reasoning in the argument above bear the strongest resemblance?",
+   "Identify the argument among the choices whose reasoning most closely parallels that of the argument above.",
+   "Which argument below employs a line of reasoning most akin to that found in the argument above?",
+   "In which of the following cases is the reasoning most nearly identical to that in the argument above?"
+  ],
+  "q068": [
+   "Who among your relatives cannot legally marry you in the state of California?",
+   "What is the list of relatives you are forbidden to marry in California?",
+   "Which kinship relations result in a marriage ban in California?",
+   "Who among relatives is prohibited from marrying in California?",
+   "Which family members are you forbidden to marry in California?",
+   "What type of relative cannot be married to you in California?"
+  ],
+  "q069": [
+   "In which countries do people drink less beer than Americans?",
+   "Americans consume more beer than residents of which other countries?",
+   "For which countries is American beer consumption higher than that of their citizens?",
+   "Compared to Americans, in which countries is beer consumption lower?",
+   "In which other countries do people drink less beer than Americans?",
+   "For which other nations is American beer consumption higher?"
+  ],
+  "q070": [
+   "In America, what is it unlawful to do with a flag?",
+   "In the United States, what is prohibited regarding flags?",
+   "In America, what behavior towards a flag is unlawful?",
+   "In the US, what specific act involving a flag is against the law?",
+   "What does US law forbid doing to a flag?",
+   "What action against a flag is illegal under United States law?"
+  ],
+  "q071": [
+   "What is the method to target fat loss specifically in your abdomen?",
+   "How do you focus on losing abdominal fat?",
+   "What steps allow you to target belly fat for loss?",
+   "How can one aim for fat loss in the abdominal region?",
+   "What is the approach to targeting fat reduction in your midsection?",
+   "What methods allow you to target fat loss in your abdomen?"
+  ],
+  "q073": [
+   "Assuming the following item is true, which one would most strengthen the argument?",
+   "If the following item is true, can it provide the strongest support for the argument?",
+   "Which of the following items, if true, would most strengthen the argument?",
+   "Does the following item, if true, offer the greatest strengthening to the argument?",
+   "If the following item is true, which choice most strengthens the argument?",
+   "Which of the following, assuming it is true, would most bolster the argument?"
+  ],
+  "q075": [
+   "What is the true capability of an exorcist?",
+   "What are the actual powers possessed by an exorcist?",
+   "What is the authentic strength of an exorcist?",
+   "What real abilities does an exorcist have?",
+   "What is the factual power level of an exorcist?",
+   "Which ability does an exorcist actually possess?"
+  ],
+  "q076": [
+   "How does the winter weather in Paris compare to that in New York?",
+   "What are the differences between winters in Paris and New York?",
+   "How do winters in New York stack up against those in Paris?",
+   "What is the comparison between the winter seasons of Paris and New York?",
+   "How does the winter in Paris compare to that in New York?",
+   "What is the winter like in Paris relative to New York?"
+  ],
+  "q077": [
+   "Which of the following, if true, would most strengthen the journalist's reasoning?",
+   "If true, which of the following most strengthens the journalist's line of reasoning?",
+   "Which option, assuming it is true, provides the strongest support for the journalist's reasoning?",
+   "The journalist's reasoning is most strengthened by which of the following, if true?",
+   "Which of the following statements, if accurate, most bolsters the journalist's argument?",
+   "What fact, if true, would most reinforce the journalist's reasoning among the choices below?"
+  ],
+  "q078": [
+   "What actions can be performed using a person's true name?",
+   "What is possible to do with an individual's true name?",
+   "How can one utilize a person's true name?",
+   "What is possible to do with a person's true name?",
+   "What actions can be taken using a person's true name?",
+   "What can one accomplish with a person's true name?"
+  ],
+  "q079": [
+   "Which of the following statements, assuming it is true, would most effectively undermine the conclusion presented above?",
+   "If correct, which statement below serves as the strongest weakener for the aforementioned conclusion?",
+   "To most effectively weaken the conclusion cited above, which of the following statements should be considered correct?",
+   "If correct, which of the following statements serves as the strongest weakener for the aforementioned conclusion?",
+   "Assuming accuracy, which of the following statements most powerfully weakens the preceding conclusion?",
+   "Of the following, which statement, if accepted as correct, most seriously undermines the conclusion mentioned above?"
+  ],
+  "q082": [
+   "Which of the following statements, if true, provides the best explanation for the inconsistency described above?",
+   "What is the best explanation for the inconsistency above, assuming one of the following statements is true?",
+   "If one of the following statements is true, which one best explains the inconsistency mentioned above?",
+   "Which statement, were it true, would offer the best explanation for the inconsistency cited above?",
+   "To best explain the inconsistency above, which of the following statements must be considered true?",
+   "Which of the following, if true, serves as the most compelling explanation for the inconsistency previously stated?"
+  ],
+  "q083": [
+   "Assuming the statements below are true, which one does NOT weaken Aristotle’s interpretation?",
+   "If the following statements are true, all but one fail to undermine Aristotle’s interpretation.",
+   "Given that the following statements are true, identify the option that does not weaken Aristotle’s interpretation.",
+   "All of the following statements, if true, weaken Aristotle’s interpretation EXCEPT:",
+   "Which of the following statements, if true, would NOT weaken Aristotle’s interpretation?",
+   "If the statements below are true, every one except one weakens Aristotle’s interpretation."
+  ],
+  "q085": [
+   "Which of the following, if true, would most strengthen the researcher's argument?",
+   "If true, which of the following options provides the strongest support for the researcher's argument?",
+   "Which statement, assuming it is true, most strongly bolsters the researcher's argument?",
+   "What fact, if accurate, would most enhance the strength of the researcher's argument?",
+   "Which of the following, when considered true, serves to most strengthen the researcher's argument?",
+   "The researcher's argument is most strengthened by which of the following, if true?"
+  ],
+  "q086": [
+   "Which of the following assumptions allows the conclusion of the argument to be properly drawn?",
+   "If which one of the following is assumed, can the conclusion of the argument be properly drawn?",
+   "The conclusion of the argument follows logically if which one of the following is assumed?",
+   "Assuming which one of the following would permit the proper drawing of the argument's conclusion?",
+   "For the conclusion of the argument to be properly drawn, which one of the following must be assumed?",
+   "Which assumption, if taken as true, ensures that the conclusion of the argument is properly drawn?"
+  ],
+  "q087": [
+   "Which of the following statements most accurately summarizes the features of form and potential mentioned above?",
+   "What is the most accurate summary of the aforementioned features of form and potential among the choices below?",
+   "Which statement below provides the best summary of the features of form and potential referenced earlier?",
+   "Identify the option that most precisely summarizes the features of form and potential cited above.",
+   "Which of the following options offers the most accurate summary of the previously mentioned features of form and potential?",
+   "Select the statement that best summarizes the features of form and potential as described above."
+  ],
+  "q088": [
+   "What occurs to tiger sharks when they cease swimming?",
+   "What is the consequence for tiger sharks that halt their swimming?",
+   "What happens to tiger sharks in the event they stop swimming?",
+   "What is the outcome for tiger sharks if they do not swim?",
+   "What happens to tiger sharks in the event that they stop swimming?",
+   "Which outcome befalls tiger sharks if they do not continue swimming?"
+  ],
+  "q089": [
+   "Which of the following arguments has reasoning most similar to that in the argument above?",
+   "The reasoning in which of the following arguments is most akin to the reasoning in the argument presented above?",
+   "In which one of the following arguments is the line of reasoning most like that found in the argument above?",
+   "Which of the following arguments employs reasoning most comparable to that in the argument stated above?",
+   "The argument above shares its reasoning with which one of the following options?",
+   "Identify the argument among the following choices whose reasoning is most similar to that in the argument above."
+  ]
+ },
+ "instructions": {
+  "gsm8k": {
+   "P0": "Solve the problem step by step. End your response with \"Answer: <number>\".",
+   "P1": "Work through the problem one step at a time, then conclude with \"Answer: <number>\".",
+   "P2": "Reason carefully about the problem and compute the result. The last line must be \"Answer: <number>\".",
+   "P3": "Please solve this math problem. Show your reasoning, and finish with \"Answer: <number>\".",
+   "P4": "Figure out the solution by working through the calculations. End with \"Answer: <number>\".",
+   "P5": "Approach the problem methodically and determine the final value. Terminate your reply with \"Answer: <number>\".",
+   "P6": "Think the problem through and calculate the answer. Your response must end with \"Answer: <number>\"."
+  },
+  "piqa": {
+   "P0": "Do not explain your reasoning. Reply with only \"Answer: 1\" if Solution 1 is better, or \"Answer: 2\" if Solution 2 is better.",
+   "P1": "Give only your verdict: \"Answer: 1\" or \"Answer: 2\". No explanation.",
+   "P2": "Respond with just \"Answer: 1\" or \"Answer: 2\" to indicate the better solution; add nothing else.",
+   "P3": "State your pick as \"Answer: 1\" or \"Answer: 2\" with no other text.",
+   "P4": "Output only \"Answer: 1\" or \"Answer: 2\", whichever solution you judge better.",
+   "P5": "No explanations. Simply end with \"Answer: 1\" or \"Answer: 2\".",
+   "P6": "Decide which solution wins and reply with its number alone: \"Answer: 1\" or \"Answer: 2\"."
+  },
+  "sat_math": {
+   "P0": "Do not explain your reasoning. Reply with only the letter of the correct option, in the form \"Answer: <letter>\".",
+   "P1": "Give only the letter of the right answer, formatted as \"Answer: <letter>\". No explanation.",
+   "P2": "Respond with just the letter of your chosen option using the format \"Answer: <letter>\"; do not add anything else.",
+   "P3": "State your final choice as \"Answer: <letter>\" with no other text.",
+   "P4": "Output only the letter of the correct option, ending your reply with \"Answer: <letter>\".",
+   "P5": "No explanations. Simply conclude with \"Answer: <letter>\" where the letter is your selected option.",
+   "P6": "Choose one option and reply with its letter alone, in the form \"Answer: <letter>\"."
+  },
+  "truthfulqa": {
+   "P0": "Do not explain your reasoning. Reply with only the letter of the correct option, in the form \"Answer: <letter>\"."
+  },
+  "lsat_lr": {
+   "P0": "Do not explain your reasoning. Reply with only the letter of the correct option, in the form \"Answer: <letter>\"."
+  },
+  "logiqa": {
+   "P0": "Do not explain your reasoning. Reply with only the letter of the correct option, in the form \"Answer: <letter>\"."
+  }
+ }
+}

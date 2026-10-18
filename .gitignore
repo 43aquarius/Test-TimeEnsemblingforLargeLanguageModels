@@ -1,0 +1,19 @@
+# Never commit real credentials
+scripts/credentials.py
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Node
+node_modules/
+package-lock.json
+
+# Generated outputs (regenerate with the pipeline scripts)
+download/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp

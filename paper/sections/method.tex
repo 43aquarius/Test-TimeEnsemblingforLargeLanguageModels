@@ -1,0 +1,55 @@
+\section{A Budget-Matched Framework for Test-Time Ensembling}
+\label{sec:method}
+
+\subsection{Setup and notation}
+
+Let $M$ denote a large language model and let $q$ denote a question with a gold answer $y^*(q)$. For multiple-choice tasks the answer is an option letter, and for free-form numeric tasks the answer is a value compared numerically. A prompt $x$ is a rendering of $q$ into natural language, consisting of an optional passage, a question stem, an option list, and an instruction that specifies the required output format. We distinguish one canonical prompt $x_0$ and $K$ paraphrased prompts $x_1, \dots, x_K$ that preserve the semantics of $x_0$ under a validation procedure described in Section~\ref{sec:setup}.
+
+The model produces an answer through stochastic decoding. We write $a(M, x, s)$ for the answer extracted from the $s$-th independent decode of prompt $x$ at temperature $\tau = 0.7$, and $a_g(M, x)$ for the greedy decode at $\tau = 0$. Answers are extracted from the model output by a fixed parser that searches for the mandated answer format and falls back to pattern matching over the final output lines; the parse rate is reported in Section~\ref{sec:results}.
+
+\subsection{The call matrix}
+
+For every question and model we collect a matrix of sixteen calls:
+\begin{equation}
+\mathcal{C}(M, q) \;=\; \bigl\{ a_g(M, x_0) \bigr\} \;\cup\; \bigcup_{s=1}^{S} \bigl\{ a(M, x_0, s) \bigr\} \;\cup\; \bigcup_{k=1}^{K} \bigl\{ a(M, x_k, s) : s \le r_k \bigr\},
+\label{eq:matrix}
+\end{equation}
+with $S = 6$ samples on the canonical prompt, $K = 6$ paraphrases, and $r_k = 2$ decodes for the first three paraphrases and $r_k = 1$ for the remaining three. The matrix therefore contains one greedy call, six canonical samples, six first-decode paraphrase calls, and three second-decode paraphrase calls. Every experimental condition studied in this paper is a deterministic function of this matrix, which guarantees that all comparisons hold the question, the model, and the realized decoding randomness constant across conditions.
+
+\subsection{Ensemble conditions}
+
+All conditions aggregate votes by majority rule. Ties are broken in favor of the earliest vote in a fixed canonical order, which prefers the canonical prompt over paraphrases and earlier paraphrases over later ones; we report tie incidence, which is negligible except where noted.
+
+The \emph{self-consistency} condition of size $k$ aggregates the first $k$ canonical samples:
+\begin{equation}
+\mathrm{SC}\text{-}k(q) \;=\; \operatorname*{majority}\bigl( a(M, x_0, 1), \dots, a(M, x_0, k) \bigr), \qquad k \le 6 .
+\end{equation}
+The \emph{paraphrase ensemble} of size $k$ aggregates one decode of each of the first $k$ paraphrases:
+\begin{equation}
+\mathrm{PE}\text{-}k(q) \;=\; \operatorname*{majority}\bigl( a(M, x_1, 1), \dots, a(M, x_k, 1) \bigr), \qquad k \le 6 .
+\end{equation}
+Both conditions spend exactly $k$ model calls and differ only in where the diversity comes from: $\mathrm{SC}\text{-}k$ perturbs the decoder while the prompt is fixed, whereas $\mathrm{PE}\text{-}k$ perturbs the prompt while the decoder configuration is fixed. This is the budget match that makes the two conditions comparable.
+
+The \emph{hybrid} condition splits a budget of six calls between the two sources, using two decodes of each of the first three paraphrases:
+\begin{equation}
+\mathrm{HB}\text{-}6(q) \;=\; \operatorname*{majority}\bigl( a(M, x_k, s) : k \in \{1,2,3\},\ s \in \{1,2\} \bigr).
+\end{equation}
+Finally, the \emph{combined} condition aggregates all twelve stochastic votes available in the matrix, $\mathrm{COMB}\text{-}12(q) = \operatorname{majority}\bigl( \mathrm{SC}\text{-}6(q) \cup \mathrm{PE}\text{-}6(q) \bigr)$, and serves as a twelve-call reference point for the marginal value of doubling the budget. The greedy decode $a_g(M, x_0)$ serves as the single-call baseline.
+
+\subsection{Consistency, entropy, and fragility}
+
+Three per-question statistics summarize the answer distribution. \emph{Sample agreement} is the frequency of the modal answer among the six canonical samples,
+\begin{equation}
+c_{\mathrm{S}}(q) \;=\; \max_{v} \frac{1}{6} \sum_{s=1}^{6} \mathbb{1}\bigl[ a(M, x_0, s) = v \bigr],
+\end{equation}
+and \emph{paraphrase agreement} $c_{\mathrm{P}}(q)$ is defined analogously over the six first-decode paraphrase answers. Both lie in $(0, 1]$, and the value $1$ indicates that the corresponding source produced no diversity at all, a situation we call \emph{answer degeneracy}. The \emph{normalized answer entropy} is the Shannon entropy of the empirical answer distribution over the twelve stochastic votes divided by its maximum possible value.
+
+\emph{Fragility} captures disagreement between the two views of the same question: a question is fragile for a model when the majority answer of the canonical samples differs from the majority answer of the paraphrase answers, that is, when $\mathrm{SC}\text{-}6(q) \ne \mathrm{PE}\text{-}6(q)$. Fragility measures how much of the model's answer is an artifact of the particular surface form of the prompt rather than of the underlying question.
+
+\subsection{Error detection and selective prediction}
+
+We evaluate consistency scores as unsupervised error detectors. For each model, the consistency score of a question (reversed, so that lower agreement indicates higher predicted risk) ranks questions, and we compute the area under the receiver operating characteristic curve (AUROC) for predicting whether the reference answer is incorrect, where the reference is the combined twelve-vote ensemble unless stated otherwise. We complement AUROC with risk-coverage curves that plot the error rate of the accepted subset as the acceptance threshold varies, summarized by the area under the risk-coverage curve (AURC), and with the oracle-excess AURC (E-AURC), which measures the gap to the best achievable ranking \citep{guo2017calibration,lin2024uncertainty}. Where a model produces zero errors or constant scores on a dataset, AUROC is undefined and we report the regime instead.
+
+\subsection{Statistical analysis}
+
+Accuracy comparisons between two conditions on the same questions are paired by construction. We report bootstrap 95\% confidence intervals for accuracy differences (10,000 resamples, resampling questions) and two-sided exact McNemar tests for paired correctness indicators. Because models differ in the number of questions they completed within our access constraints, per-model analyses use each model's own completed question set, and pooled analyses use the intersection set, with the sample size stated in every table. We treat question sets as fixed and do not extrapolate beyond the measured benchmarks.

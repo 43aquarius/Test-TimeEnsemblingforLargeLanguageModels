@@ -1,0 +1,1892 @@
+{
+ "q000_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q000",
+  "para_idx": 2
+ },
+ "q000_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q000",
+  "para_idx": 1
+ },
+ "q000_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q000",
+  "para_idx": 3
+ },
+ "q000_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q000",
+  "para_idx": 4
+ },
+ "q000_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q000",
+  "para_idx": 5
+ },
+ "q000_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q000",
+  "para_idx": 6
+ },
+ "q001_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q001",
+  "para_idx": 2
+ },
+ "q001_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q001",
+  "para_idx": 1
+ },
+ "q001_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q001",
+  "para_idx": 3
+ },
+ "q001_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q001",
+  "para_idx": 4
+ },
+ "q001_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q001",
+  "para_idx": 5
+ },
+ "q001_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q001",
+  "para_idx": 6
+ },
+ "q004_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q004",
+  "para_idx": 2
+ },
+ "q004_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q004",
+  "para_idx": 1
+ },
+ "q004_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q004",
+  "para_idx": 3
+ },
+ "q004_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q004",
+  "para_idx": 4
+ },
+ "q004_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q004",
+  "para_idx": 5
+ },
+ "q004_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q004",
+  "para_idx": 6
+ },
+ "q008_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q008",
+  "para_idx": 1
+ },
+ "q008_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q008",
+  "para_idx": 2
+ },
+ "q008_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q008",
+  "para_idx": 3
+ },
+ "q008_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q008",
+  "para_idx": 5
+ },
+ "q008_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q008",
+  "para_idx": 4
+ },
+ "q008_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q008",
+  "para_idx": 6
+ },
+ "q010_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q010",
+  "para_idx": 1
+ },
+ "q010_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q010",
+  "para_idx": 2
+ },
+ "q010_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q010",
+  "para_idx": 3
+ },
+ "q010_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q010",
+  "para_idx": 4
+ },
+ "q010_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q010",
+  "para_idx": 5
+ },
+ "q013_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q013",
+  "para_idx": 1
+ },
+ "q013_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q013",
+  "para_idx": 2
+ },
+ "q010_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q010",
+  "para_idx": 6
+ },
+ "q013_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q013",
+  "para_idx": 3
+ },
+ "q013_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q013",
+  "para_idx": 4
+ },
+ "q013_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q013",
+  "para_idx": 5
+ },
+ "q013_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q013",
+  "para_idx": 6
+ },
+ "q014_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q014",
+  "para_idx": 2
+ },
+ "q014_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q014",
+  "para_idx": 3
+ },
+ "q014_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q014",
+  "para_idx": 1
+ },
+ "q014_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q014",
+  "para_idx": 4
+ },
+ "q014_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q014",
+  "para_idx": 5
+ },
+ "q014_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q014",
+  "para_idx": 6
+ },
+ "q016_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q016",
+  "para_idx": 1
+ },
+ "q016_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q016",
+  "para_idx": 2
+ },
+ "q016_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q016",
+  "para_idx": 3
+ },
+ "q016_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q016",
+  "para_idx": 4
+ },
+ "q016_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q016",
+  "para_idx": 5
+ },
+ "q016_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q016",
+  "para_idx": 6
+ },
+ "q017_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q017",
+  "para_idx": 1
+ },
+ "q017_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q017",
+  "para_idx": 2
+ },
+ "q017_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q017",
+  "para_idx": 3
+ },
+ "q017_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q017",
+  "para_idx": 5
+ },
+ "q017_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q017",
+  "para_idx": 4
+ },
+ "q017_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q017",
+  "para_idx": 6
+ },
+ "q020_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q020",
+  "para_idx": 2
+ },
+ "q020_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q020",
+  "para_idx": 3
+ },
+ "q020_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "no",
+  "raw": "1: yes 2: no",
+  "qid": "q020",
+  "para_idx": 1
+ },
+ "q020_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q020",
+  "para_idx": 4
+ },
+ "q020_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "no",
+  "raw": "1: yes 2: no",
+  "qid": "q020",
+  "para_idx": 5
+ },
+ "q020_P6": {
+  "a_entails_b": "no",
+  "b_entails_a": "no",
+  "raw": "1: no 2: no",
+  "qid": "q020",
+  "para_idx": 6
+ },
+ "q025_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q025",
+  "para_idx": 1
+ },
+ "q025_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q025",
+  "para_idx": 2
+ },
+ "q025_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q025",
+  "para_idx": 3
+ },
+ "q025_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q025",
+  "para_idx": 4
+ },
+ "q025_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q025",
+  "para_idx": 5
+ },
+ "q025_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q025",
+  "para_idx": 6
+ },
+ "q026_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q026",
+  "para_idx": 1
+ },
+ "q026_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q026",
+  "para_idx": 2
+ },
+ "q026_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q026",
+  "para_idx": 4
+ },
+ "q026_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q026",
+  "para_idx": 3
+ },
+ "q026_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q026",
+  "para_idx": 6
+ },
+ "q030_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q030",
+  "para_idx": 1
+ },
+ "q030_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q030",
+  "para_idx": 2
+ },
+ "q026_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q026",
+  "para_idx": 5
+ },
+ "q030_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q030",
+  "para_idx": 4
+ },
+ "q030_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q030",
+  "para_idx": 3
+ },
+ "q030_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q030",
+  "para_idx": 6
+ },
+ "q030_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q030",
+  "para_idx": 5
+ },
+ "q031_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q031",
+  "para_idx": 1
+ },
+ "q031_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q031",
+  "para_idx": 2
+ },
+ "q031_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q031",
+  "para_idx": 3
+ },
+ "q031_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q031",
+  "para_idx": 4
+ },
+ "q031_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q031",
+  "para_idx": 5
+ },
+ "q031_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q031",
+  "para_idx": 6
+ },
+ "q033_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q033",
+  "para_idx": 1
+ },
+ "q033_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q033",
+  "para_idx": 2
+ },
+ "q033_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q033",
+  "para_idx": 3
+ },
+ "q033_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q033",
+  "para_idx": 4
+ },
+ "q033_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q033",
+  "para_idx": 5
+ },
+ "q033_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q033",
+  "para_idx": 6
+ },
+ "q036_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q036",
+  "para_idx": 1
+ },
+ "q036_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q036",
+  "para_idx": 2
+ },
+ "q036_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q036",
+  "para_idx": 3
+ },
+ "q036_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q036",
+  "para_idx": 4
+ },
+ "q036_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q036",
+  "para_idx": 5
+ },
+ "q036_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q036",
+  "para_idx": 6
+ },
+ "q039_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q039",
+  "para_idx": 1
+ },
+ "q039_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q039",
+  "para_idx": 2
+ },
+ "q039_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q039",
+  "para_idx": 3
+ },
+ "q039_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q039",
+  "para_idx": 4
+ },
+ "q039_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q039",
+  "para_idx": 6
+ },
+ "q039_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q039",
+  "para_idx": 5
+ },
+ "q040_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q040",
+  "para_idx": 1
+ },
+ "q040_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q040",
+  "para_idx": 2
+ },
+ "q040_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q040",
+  "para_idx": 3
+ },
+ "q040_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q040",
+  "para_idx": 4
+ },
+ "q040_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q040",
+  "para_idx": 5
+ },
+ "q040_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q040",
+  "para_idx": 6
+ },
+ "q041_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q041",
+  "para_idx": 1
+ },
+ "q041_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q041",
+  "para_idx": 2
+ },
+ "q041_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q041",
+  "para_idx": 3
+ },
+ "q041_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q041",
+  "para_idx": 4
+ },
+ "q041_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q041",
+  "para_idx": 5
+ },
+ "q041_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q041",
+  "para_idx": 6
+ },
+ "q045_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q045",
+  "para_idx": 1
+ },
+ "q045_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q045",
+  "para_idx": 2
+ },
+ "q045_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q045",
+  "para_idx": 3
+ },
+ "q045_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q045",
+  "para_idx": 4
+ },
+ "q045_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q045",
+  "para_idx": 5
+ },
+ "q045_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q045",
+  "para_idx": 6
+ },
+ "q046_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q046",
+  "para_idx": 1
+ },
+ "q046_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q046",
+  "para_idx": 3
+ },
+ "q046_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q046",
+  "para_idx": 2
+ },
+ "q046_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q046",
+  "para_idx": 4
+ },
+ "q046_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q046",
+  "para_idx": 5
+ },
+ "q046_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q046",
+  "para_idx": 6
+ },
+ "q052_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q052",
+  "para_idx": 1
+ },
+ "q052_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q052",
+  "para_idx": 2
+ },
+ "q052_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q052",
+  "para_idx": 3
+ },
+ "q052_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q052",
+  "para_idx": 4
+ },
+ "q052_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q052",
+  "para_idx": 5
+ },
+ "q057_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q057",
+  "para_idx": 1
+ },
+ "q052_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q052",
+  "para_idx": 6
+ },
+ "q057_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q057",
+  "para_idx": 2
+ },
+ "q057_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q057",
+  "para_idx": 3
+ },
+ "q057_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q057",
+  "para_idx": 4
+ },
+ "q057_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q057",
+  "para_idx": 5
+ },
+ "q057_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q057",
+  "para_idx": 6
+ },
+ "q058_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q058",
+  "para_idx": 1
+ },
+ "q058_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q058",
+  "para_idx": 2
+ },
+ "q058_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q058",
+  "para_idx": 3
+ },
+ "q058_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q058",
+  "para_idx": 4
+ },
+ "q058_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q058",
+  "para_idx": 6
+ },
+ "q058_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q058",
+  "para_idx": 5
+ },
+ "q062_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q062",
+  "para_idx": 1
+ },
+ "q062_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q062",
+  "para_idx": 2
+ },
+ "q062_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q062",
+  "para_idx": 3
+ },
+ "q062_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q062",
+  "para_idx": 4
+ },
+ "q062_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q062",
+  "para_idx": 5
+ },
+ "q062_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q062",
+  "para_idx": 6
+ },
+ "q064_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q064",
+  "para_idx": 1
+ },
+ "q064_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q064",
+  "para_idx": 2
+ },
+ "q064_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q064",
+  "para_idx": 3
+ },
+ "q064_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q064",
+  "para_idx": 5
+ },
+ "q064_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q064",
+  "para_idx": 4
+ },
+ "q066_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q066",
+  "para_idx": 1
+ },
+ "q064_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q064",
+  "para_idx": 6
+ },
+ "q066_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q066",
+  "para_idx": 3
+ },
+ "q066_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q066",
+  "para_idx": 2
+ },
+ "q066_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q066",
+  "para_idx": 4
+ },
+ "q066_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q066",
+  "para_idx": 5
+ },
+ "q066_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q066",
+  "para_idx": 6
+ },
+ "q067_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q067",
+  "para_idx": 1
+ },
+ "q067_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q067",
+  "para_idx": 2
+ },
+ "q067_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q067",
+  "para_idx": 3
+ },
+ "q067_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q067",
+  "para_idx": 4
+ },
+ "q067_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q067",
+  "para_idx": 5
+ },
+ "q067_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q067",
+  "para_idx": 6
+ },
+ "q068_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q068",
+  "para_idx": 2
+ },
+ "q068_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q068",
+  "para_idx": 3
+ },
+ "q068_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q068",
+  "para_idx": 4
+ },
+ "q068_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q068",
+  "para_idx": 1
+ },
+ "q068_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q068",
+  "para_idx": 5
+ },
+ "q069_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q069",
+  "para_idx": 1
+ },
+ "q068_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q068",
+  "para_idx": 6
+ },
+ "q069_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q069",
+  "para_idx": 3
+ },
+ "q069_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q069",
+  "para_idx": 2
+ },
+ "q069_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q069",
+  "para_idx": 4
+ },
+ "q069_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q069",
+  "para_idx": 5
+ },
+ "q070_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q070",
+  "para_idx": 1
+ },
+ "q069_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q069",
+  "para_idx": 6
+ },
+ "q070_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q070",
+  "para_idx": 2
+ },
+ "q070_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q070",
+  "para_idx": 3
+ },
+ "q070_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q070",
+  "para_idx": 5
+ },
+ "q070_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q070",
+  "para_idx": 4
+ },
+ "q070_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q070",
+  "para_idx": 6
+ },
+ "q071_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q071",
+  "para_idx": 1
+ },
+ "q071_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q071",
+  "para_idx": 3
+ },
+ "q071_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q071",
+  "para_idx": 2
+ },
+ "q071_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q071",
+  "para_idx": 5
+ },
+ "q071_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q071",
+  "para_idx": 4
+ },
+ "q071_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q071",
+  "para_idx": 6
+ },
+ "q073_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q073",
+  "para_idx": 1
+ },
+ "q073_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q073",
+  "para_idx": 2
+ },
+ "q073_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q073",
+  "para_idx": 3
+ },
+ "q073_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q073",
+  "para_idx": 5
+ },
+ "q073_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q073",
+  "para_idx": 4
+ },
+ "q073_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q073",
+  "para_idx": 6
+ },
+ "q075_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q075",
+  "para_idx": 1
+ },
+ "q075_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q075",
+  "para_idx": 2
+ },
+ "q075_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q075",
+  "para_idx": 4
+ },
+ "q075_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q075",
+  "para_idx": 3
+ },
+ "q075_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q075",
+  "para_idx": 5
+ },
+ "q075_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q075",
+  "para_idx": 6
+ },
+ "q076_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q076",
+  "para_idx": 1
+ },
+ "q076_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q076",
+  "para_idx": 2
+ },
+ "q076_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q076",
+  "para_idx": 3
+ },
+ "q076_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q076",
+  "para_idx": 4
+ },
+ "q076_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q076",
+  "para_idx": 5
+ },
+ "q076_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q076",
+  "para_idx": 6
+ },
+ "q077_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q077",
+  "para_idx": 1
+ },
+ "q077_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q077",
+  "para_idx": 2
+ },
+ "q077_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q077",
+  "para_idx": 3
+ },
+ "q077_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q077",
+  "para_idx": 5
+ },
+ "q077_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q077",
+  "para_idx": 4
+ },
+ "q077_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q077",
+  "para_idx": 6
+ },
+ "q078_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q078",
+  "para_idx": 1
+ },
+ "q078_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q078",
+  "para_idx": 2
+ },
+ "q078_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q078",
+  "para_idx": 4
+ },
+ "q078_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q078",
+  "para_idx": 3
+ },
+ "q078_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q078",
+  "para_idx": 6
+ },
+ "q078_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q078",
+  "para_idx": 5
+ },
+ "q079_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q079",
+  "para_idx": 1
+ },
+ "q079_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q079",
+  "para_idx": 2
+ },
+ "q079_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q079",
+  "para_idx": 3
+ },
+ "q079_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q079",
+  "para_idx": 4
+ },
+ "q079_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q079",
+  "para_idx": 5
+ },
+ "q079_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q079",
+  "para_idx": 6
+ },
+ "q082_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q082",
+  "para_idx": 1
+ },
+ "q082_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q082",
+  "para_idx": 2
+ },
+ "q082_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q082",
+  "para_idx": 4
+ },
+ "q082_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q082",
+  "para_idx": 3
+ },
+ "q082_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q082",
+  "para_idx": 5
+ },
+ "q082_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q082",
+  "para_idx": 6
+ },
+ "q083_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q083",
+  "para_idx": 1
+ },
+ "q083_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q083",
+  "para_idx": 2
+ },
+ "q083_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q083",
+  "para_idx": 3
+ },
+ "q083_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q083",
+  "para_idx": 4
+ },
+ "q083_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q083",
+  "para_idx": 5
+ },
+ "q083_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q083",
+  "para_idx": 6
+ },
+ "q085_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q085",
+  "para_idx": 1
+ },
+ "q085_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q085",
+  "para_idx": 2
+ },
+ "q085_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q085",
+  "para_idx": 3
+ },
+ "q085_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q085",
+  "para_idx": 5
+ },
+ "q085_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q085",
+  "para_idx": 6
+ },
+ "q085_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q085",
+  "para_idx": 4
+ },
+ "q086_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q086",
+  "para_idx": 1
+ },
+ "q086_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q086",
+  "para_idx": 2
+ },
+ "q086_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q086",
+  "para_idx": 4
+ },
+ "q086_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q086",
+  "para_idx": 3
+ },
+ "q086_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q086",
+  "para_idx": 5
+ },
+ "q086_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q086",
+  "para_idx": 6
+ },
+ "q087_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q087",
+  "para_idx": 1
+ },
+ "q087_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q087",
+  "para_idx": 2
+ },
+ "q087_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q087",
+  "para_idx": 3
+ },
+ "q087_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q087",
+  "para_idx": 4
+ },
+ "q087_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q087",
+  "para_idx": 5
+ },
+ "q087_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q087",
+  "para_idx": 6
+ },
+ "q088_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q088",
+  "para_idx": 1
+ },
+ "q088_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q088",
+  "para_idx": 2
+ },
+ "q088_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q088",
+  "para_idx": 3
+ },
+ "q088_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q088",
+  "para_idx": 4
+ },
+ "q088_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q088",
+  "para_idx": 5
+ },
+ "q088_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q088",
+  "para_idx": 6
+ },
+ "q089_P1": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q089",
+  "para_idx": 1
+ },
+ "q089_P2": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q089",
+  "para_idx": 2
+ },
+ "q089_P3": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q089",
+  "para_idx": 3
+ },
+ "q089_P4": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q089",
+  "para_idx": 4
+ },
+ "q089_P6": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q089",
+  "para_idx": 6
+ },
+ "q089_P5": {
+  "a_entails_b": "yes",
+  "b_entails_a": "yes",
+  "raw": "1: yes 2: yes",
+  "qid": "q089",
+  "para_idx": 5
+ }
+}

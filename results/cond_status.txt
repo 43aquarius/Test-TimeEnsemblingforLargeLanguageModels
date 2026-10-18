@@ -1,0 +1,5 @@
+09:19:00
+  [aliyun] rate=5.00/s ok=0 err=0
+  [agnes ] rate=0.10/s ok=11 err=1
+  [apinex] rate=0.08/s ok=0 err=0
+  agnes-3.0-flash     584/ 704 err=  1      TIMEOUT

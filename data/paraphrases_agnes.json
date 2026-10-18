@@ -1,0 +1,857 @@
+{
+ "q000": {
+  "paras": [
+   "Given the conditions outlined above, which of the following statements must hold true?",
+   "In light of the aforementioned conditions, which of the following is necessarily true?",
+   "Based on the preceding conditions, which of the following options is guaranteed to be correct?",
+   "Assuming the conditions above are met, which of the following must be valid?",
+   "Which of the following follows inevitably from the conditions described above?",
+   "According to the conditions stated above, which of the following is certainly true?"
+  ],
+  "sims": [
+   0.866,
+   0.821,
+   0.708,
+   0.772,
+   0.702,
+   0.801
+  ],
+  "n_valid": 4
+ },
+ "q001": {
+  "paras": [
+   "Given that G is adjacent to I and located north of I, which of the following must be correct?",
+   "If G is next to I and lies to the north of I, which statement necessarily holds true?",
+   "Assuming G is adjacent to I and is north of I, which of the following is guaranteed?",
+   "Under the conditions that G is adjacent to I and G is north of I, which option must be true?",
+   "If G is positioned adjacent to and north of I, which of the following statements is required?",
+   "With G adjacent to I and G being north of I, which of the following must definitely apply?"
+  ],
+  "sims": [
+   0.95,
+   0.885,
+   0.909,
+   0.905,
+   0.94,
+   0.901
+  ],
+  "n_valid": 6
+ },
+ "q004": {
+  "paras": [
+   "Which musical albums are prohibited from distribution or possession in the United States?",
+   "In the US, what specific albums are considered illegal?",
+   "Can you list the albums that are banned within the United States?",
+   "What are the titles of the albums that are not legal in the US?",
+   "Which albums face a legal prohibition in the United States?",
+   "Identify the musical recordings that are designated as illegal in the US."
+  ],
+  "sims": [
+   0.782,
+   0.967,
+   0.84,
+   0.9,
+   0.864,
+   0.845
+  ],
+  "n_valid": 6
+ },
+ "q008": {
+  "paras": [
+   "Given that the match outcome proved only one argument to be valid, which participant claimed the championship title?",
+   "Since the final score indicated that just one argument held up, who was the eventual championship winner?",
+   "The match result demonstrated that only one argument was accurate; consequently, who took home the championship?",
+   "With the match outcome confirming that only one argument was correct, identify the winner of the championship.",
+   "As the result of the match revealed that only a single argument was right, who secured the championship victory?",
+   "The outcome of the match established that only one argument was correct; therefore, who won the championship?"
+  ],
+  "sims": [
+   0.841,
+   0.805,
+   0.928,
+   0.941,
+   0.924,
+   0.946
+  ],
+  "n_valid": 6
+ },
+ "q010": {
+  "paras": [
+   "In the United Kingdom, which actions involving the flag are prohibited by law?",
+   "What specific conduct regarding the flag does UK legislation forbid?",
+   "According to laws in the UK, what is not permitted when handling the national flag?",
+   "Which acts concerning the flag are considered illegal within the United Kingdom?",
+   "What legal restrictions in the UK prevent certain actions from being performed on the flag?",
+   "In the UK, what activities involving the flag are banned under the law?"
+  ],
+  "sims": [
+   0.912,
+   0.843,
+   0.873,
+   0.876,
+   0.87,
+   0.879
+  ],
+  "n_valid": 6
+ },
+ "q013": {
+  "paras": [
+   "Which of the following items, if true, would NOT enhance this reporter's confidence?",
+   "If all the listed items are true, which one would fail to boost this reporter's confidence?",
+   "Assuming the following items are factual, which one does not contribute to increasing this reporter's confidence?",
+   "Which of the subsequent items, when assumed to be true, would not strengthen this reporter's confidence?",
+   "If the following statements hold true, which one would not improve this reporter's level of confidence?",
+   "Which of the following, if accurate, would not increase this reporter's confidence?"
+  ],
+  "sims": [
+   0.887,
+   0.8,
+   0.754,
+   0.747,
+   0.73,
+   0.745
+  ],
+  "n_valid": 3
+ },
+ "q014": {
+  "paras": [
+   "What provides the most appropriate explanation for the paradoxical assertion mentioned previously?",
+   "Which option offers the best rationale for the conflicting statement referenced above?",
+   "How is the contradictory statement earlier in the text most effectively explained?",
+   "What is the most compelling interpretation of the apparent contradiction found in the statement above?",
+   "Which of the choices below best accounts for the contradictory nature of the statement cited earlier?",
+   "What best clarifies the discrepancy present in the contradictory statement mentioned above?"
+  ],
+  "sims": [
+   0.637,
+   0.658,
+   0.816,
+   0.727,
+   0.865,
+   0.77
+  ],
+  "n_valid": 3
+ },
+ "q016": {
+  "paras": [
+   "Which of the following conclusions is logically supported by the technician's statements?",
+   "Based on the technician's statements, which of the following can be correctly deduced?",
+   "What is the only statement among the following that can be reasonably inferred from the technician's remarks?",
+   "Which of the following options is a valid inference drawn from the technician's statements?",
+   "Considering the technician's statements, which of the following follows necessarily?",
+   "Which of the following can be properly concluded from the information provided by the technician?"
+  ],
+  "sims": [
+   0.713,
+   0.863,
+   0.864,
+   0.872,
+   0.728,
+   0.813
+  ],
+  "n_valid": 4
+ },
+ "q017": {
+  "paras": [
+   "Based on the provided statement, which of the following conclusions is logically valid?",
+   "Which option presents a deduction that can be appropriately inferred from the given statement?",
+   "Considering the statement above, which of the following assertions is a reasonable consequence?",
+   "Which of the following statements is a valid implication derived from the preceding text?",
+   "From the information given in the above statement, which of the following options can be logically deduced?",
+   "Which option correctly reflects a conclusion that can be appropriately drawn from the statement mentioned above?"
+  ],
+  "sims": [
+   0.597,
+   0.629,
+   0.525,
+   0.694,
+   0.593,
+   0.683
+  ],
+  "n_valid": 0
+ },
+ "q020": {
+  "paras": [
+   "The argument’s reasoning is most susceptible to criticism because the argument",
+   "The most significant weakness in the argument’s reasoning lies in the fact that the argument",
+   "The argument is most open to criticism on the grounds that the argument",
+   "The reasoning in the argument is most flawed in that the argument",
+   "The argument’s logic is most vulnerable to attack because the argument",
+   "The reasoning presented in the argument is most easily criticized for the reason that the argument"
+  ],
+  "sims": [
+   0.876,
+   0.692,
+   0.769,
+   0.726,
+   0.798,
+   0.822
+  ],
+  "n_valid": 4
+ },
+ "q025": {
+  "paras": [
+   "Which of the following factors is LEAST pertinent to assessing how feasible the hope expressed by the activist above is?",
+   "Which of the following considerations would have the LEAST impact on judging the practicability of the hope voiced by the activist above?",
+   "Of the following, which consideration is LEAST useful in determining the extent to which the hope expressed by the activist above is practical?",
+   "Which of the following factors is LEAST relevant to evaluating the degree of feasibility of the hope stated by the activist above?",
+   "Which of the following considerations is LEAST significant in judging the practicality of the hope expressed by the activist above?",
+   "Which of the following factors is LEAST applicable in assessing the practical viability of the hope expressed by the activist above?"
+  ],
+  "sims": [
+   0.827,
+   0.846,
+   0.86,
+   0.83,
+   0.895,
+   0.852
+  ],
+  "n_valid": 6
+ },
+ "q026": {
+  "paras": [
+   "Assuming H is excluded from the game, which two of the following players are required to participate?",
+   "In the scenario where H does not take part in the game, which pair of players is mandatory for inclusion?",
+   "Given that H is not involved in the game, which of the following two players must necessarily be part of it?",
+   "If H’s participation in the game is ruled out, which two players from the options below are essential?",
+   "Should H be absent from the game, which two of the listed players must be included?",
+   "Under the condition that H does not play, which two of the following players are compulsory in the game?"
+  ],
+  "sims": [
+   0.834,
+   0.902,
+   0.889,
+   0.819,
+   0.796,
+   0.811
+  ],
+  "n_valid": 6
+ },
+ "q030": {
+  "paras": [
+   "In response to Patterson, Garza performs which of the following actions?",
+   "Which of the following describes how Garza reacts to Patterson?",
+   "Garza’s response to Patterson involves which of the following?",
+   "How does Garza address Patterson, according to one of the following options?",
+   "Which of the following actions is taken by Garza in reply to Patterson?",
+   "What action does Garza take in response to Patterson?"
+  ],
+  "sims": [
+   0.937,
+   0.914,
+   0.963,
+   0.882,
+   0.934,
+   0.926
+  ],
+  "n_valid": 6
+ },
+ "q031": {
+  "paras": [
+   "In what ways has poverty evolved throughout history in Africa?",
+   "What changes have occurred in poverty levels in Africa over time?",
+   "How did the state of poverty in Africa shift as time progressed?",
+   "Can you describe the temporal evolution of poverty in Africa?",
+   "What has been the trend regarding poverty in Africa across different periods?",
+   "How has the incidence of poverty in Africa varied over the course of time?"
+  ],
+  "sims": [
+   0.92,
+   0.961,
+   0.859,
+   0.9,
+   0.913,
+   0.887
+  ],
+  "n_valid": 6
+ },
+ "q033": {
+  "paras": [
+   "What lies beneath the Denver Airport?",
+   "Which entity is located under the Denver Airport?",
+   "Can you identify what is situated below the Denver Airport?",
+   "What is the entity found underneath the Denver Airport?",
+   "What can be found beneath the structure of the Denver Airport?",
+   "What is positioned under the Denver Airport?"
+  ],
+  "sims": [
+   0.96,
+   0.821,
+   0.907,
+   0.928,
+   0.936,
+   0.873
+  ],
+  "n_valid": 6
+ },
+ "q036": {
+  "paras": [
+   "Which scientific finding did the study \"Feeling the Future\" by Bem definitively confirm?",
+   "As a result of Bem's research titled \"Feeling the Future,\" what scientific phenomenon was conclusively demonstrated?",
+   "What specific scientific concept was validated through the findings of Bem's work \"Feeling the Future\"?",
+   "Following Bem's publication \"Feeling the Future,\" which scientific phenomenon gained firm establishment?",
+   "In the study \"Feeling the Future,\" what scientific phenomenon did Bem's research solidify?",
+   "What was the scientific phenomenon that Bem's study \"Feeling the Future\" successfully proved?"
+  ],
+  "sims": [
+   0.902,
+   0.918,
+   0.881,
+   0.934,
+   0.957,
+   0.941
+  ],
+  "n_valid": 6
+ },
+ "q039": {
+  "paras": [
+   "Which of the following arguments employs reasoning most comparable to the one presented earlier?",
+   "In which of the following cases is the logical structure most akin to the reasoning described above?",
+   "The reasoning found in which of the following examples bears the greatest resemblance to the one above?",
+   "Which of the following displays a line of reasoning most similar to the one outlined above?",
+   "Identify the option in which the reasoning is most closely analogous to the reasoning given above.",
+   "In which of the following is the type of reasoning most parallel to that of the argument above?"
+  ],
+  "sims": [
+   0.783,
+   0.764,
+   0.792,
+   0.818,
+   0.851,
+   0.78
+  ],
+  "n_valid": 6
+ },
+ "q040": {
+  "paras": [
+   "Which of the following, if assumed, would enable Aisha's conclusion to follow logically?",
+   "If which of the following is taken as an assumption, would it render Aisha's conclusion logically valid?",
+   "Aisha’s conclusion can be deduced with logical necessity if which of the following is assumed?",
+   "Which of the following must be assumed in order for Aisha's conclusion to follow logically?",
+   "If which of the following is assumed, would Aisha's conclusion necessarily follow?",
+   "Which of the following, if added as an assumption, would make Aisha's conclusion logically follow?"
+  ],
+  "sims": [
+   0.932,
+   0.91,
+   0.901,
+   0.957,
+   0.927,
+   0.914
+  ],
+  "n_valid": 6
+ },
+ "q041": {
+  "paras": [
+   "Which of the following is most strongly supported by the critic's statements, assuming they are true?",
+   "If the critic's statements are true, which one of the following can be inferred with the greatest strength?",
+   "The critic's statements provide the strongest support for which of the following, on the assumption that they are true?",
+   "Which one of the following is most directly substantiated by the critic's statements, provided they are true?",
+   "Assuming the critic's statements are true, which of the following does they most strongly justify?",
+   "Which of the following conclusions is most strongly backed by the critic's statements if they are true?"
+  ],
+  "sims": [
+   0.928,
+   0.812,
+   0.892,
+   0.815,
+   0.856,
+   0.839
+  ],
+  "n_valid": 6
+ },
+ "q045": {
+  "paras": [
+   "Which of the following must be assumed for the argument to hold?",
+   "The argument relies on which one of the following unstated assumptions?",
+   "Which of the following is a necessary presupposition for the conclusion drawn in the argument?",
+   "The argument depends on which of the following being true?",
+   "Which one of the following must be accepted in order for the argument's reasoning to be valid?",
+   "Which of the following is an implicit condition that the argument requires to be true?"
+  ],
+  "sims": [
+   0.813,
+   0.796,
+   0.714,
+   0.653,
+   0.577,
+   0.666
+  ],
+  "n_valid": 2
+ },
+ "q046": {
+  "paras": [
+   "Which of the following principles most accurately describes the situation outlined above?",
+   "The scenario presented above best aligns with which of the following principles?",
+   "Of the options listed below, which principle most closely matches the situation described above?",
+   "The situation detailed above is most consistent with which of these principles?",
+   "Which of the following principles offers the closest fit to the circumstances described above?",
+   "Based on the situation described above, which principle applies most closely?"
+  ],
+  "sims": [
+   0.824,
+   0.807,
+   0.827,
+   0.871,
+   0.815,
+   0.861
+  ],
+  "n_valid": 6
+ },
+ "q052": {
+  "paras": [
+   "What are the developed nations where the average BMI is significantly below that of the UK?",
+   "In which developed countries does the BMI considerably lag behind the figure recorded in the UK?",
+   "Identify the developed countries that possess a BMI far lower than the one found in the UK.",
+   "Which among the developed states exhibit a BMI that is drastically inferior to that of the UK?",
+   "For which developed countries is the BMI markedly lower compared to the United Kingdom's?",
+   "Name the developed countries where the BMI is substantially less than the UK's average."
+  ],
+  "sims": [
+   0.945,
+   0.876,
+   0.965,
+   0.901,
+   0.961,
+   0.945
+  ],
+  "n_valid": 6
+ },
+ "q057": {
+  "paras": [
+   "Which one of the following functions does the statement that additional steel was bought when it could have been produced at a lower cost serve in the argument?",
+   "In the context of the argument, what role is played by the assertion that more steel was purchased despite the availability of cheaper manufacturing options?",
+   "What is the function of the claim regarding the purchase of extra steel during periods when it could be manufactured more cheaply within the argument's structure?",
+   "How does the argument utilize the fact that more steel was bought when it could have been made more cheaply?",
+   "Which of the following accurately describes the purpose of the claim that steel was purchased in larger quantities when cheaper manufacturing was possible in the argument?",
+   "What role does the reference to the purchase of more steel when it could be manufactured at a lower cost fulfill in the argument?"
+  ],
+  "sims": [
+   0.781,
+   0.825,
+   0.831,
+   0.862,
+   0.824,
+   0.857
+  ],
+  "n_valid": 6
+ },
+ "q058": {
+  "paras": [
+   "Which of the following statements is necessarily true?",
+   "It must be the case that which of the following?",
+   "Which of the following is guaranteed to be true?",
+   "Which of the following is a definite conclusion?",
+   "Which of the following is required to be true?",
+   "Which of the following must hold?"
+  ],
+  "sims": [
+   0.759,
+   0.72,
+   0.692,
+   0.433,
+   0.898,
+   0.787
+  ],
+  "n_valid": 3
+ },
+ "q062": {
+  "paras": [
+   "Assuming the Russian Ministry of Economic Development’s judgment is accurate, which statement necessarily holds true?",
+   "If one accepts the judgment of the Russian Ministry of Economic Development as correct, which of the following is an inevitable conclusion?",
+   "On the condition that the Russian Ministry of Economic Development’s judgment is valid, which statement must be true?",
+   "Which of the following statements is logically necessary if the judgment issued by the Russian Ministry of Economic Development is correct?",
+   "Given that the judgment of the Russian Ministry of Economic Development is correct, which of the following must also be true?",
+   "If the assessment by the Russian Ministry of Economic Development is right, which statement must invariably be true?"
+  ],
+  "sims": [
+   0.933,
+   0.92,
+   0.914,
+   0.928,
+   0.968,
+   0.869
+  ],
+  "n_valid": 6
+ },
+ "q064": {
+  "paras": [
+   "Which of the following arguments employs reasoning that is most closely analogous to the reasoning presented in the argument above?",
+   "The reasoning in the argument above is most similar to that found in which one of the following?",
+   "Which one of the following arguments exhibits a reasoning structure most similar to the reasoning in the argument above?",
+   "In which of the following arguments is the reasoning most similar to the reasoning used in the argument above?",
+   "Which of the following arguments contains reasoning that most closely parallels the reasoning in the argument above?",
+   "Which one of the following most closely resembles the reasoning found in the argument above?"
+  ],
+  "sims": [
+   0.898,
+   0.956,
+   0.869,
+   0.957,
+   0.905,
+   0.903
+  ],
+  "n_valid": 6
+ },
+ "q066": {
+  "paras": [
+   "Which color do you prefer the most?",
+   "What hue holds your greatest affection?",
+   "Among all the colors, which one is your favorite?",
+   "Can you tell me which color you like best?",
+   "What is the color you like most of all?",
+   "Which color is your top choice?"
+  ],
+  "sims": [
+   0.799,
+   0.619,
+   0.929,
+   0.835,
+   0.817,
+   0.761
+  ],
+  "n_valid": 5
+ },
+ "q067": {
+  "paras": [
+   "The argument found in which of the options below employs reasoning that is most analogous to the reasoning presented in the preceding argument?",
+   "In which of the following does the argument contain reasoning that most closely parallels that of the argument above?",
+   "Which one of the following arguments features reasoning that is most similar in structure to the reasoning in the argument above?",
+   "The reasoning in the argument above is most closely reflected in which one of the following arguments?",
+   "Which of the following arguments relies on reasoning that most nearly mirrors the reasoning used in the argument above?",
+   "The pattern of reasoning in the argument above is most closely reproduced in which of the following arguments?"
+  ],
+  "sims": [
+   0.791,
+   0.907,
+   0.83,
+   0.922,
+   0.882,
+   0.835
+  ],
+  "n_valid": 6
+ },
+ "q068": {
+  "paras": [
+   "In California, which blood relatives are prohibited from legally marrying one another?",
+   "What specific family members are barred by California law from entering into a marriage?",
+   "Who are the relatives that cannot legally wed each other within the state of California?",
+   "Under California statutes, which kin are ineligible to obtain a marriage license?",
+   "What are the prohibited degrees of consanguinity for marriage in California?",
+   "Which familial relationships render individuals incapable of marrying in the state of California?"
+  ],
+  "sims": [
+   0.868,
+   0.814,
+   0.904,
+   0.784,
+   0.829,
+   0.867
+  ],
+  "n_valid": 6
+ },
+ "q069": {
+  "paras": [
+   "In which other countries does the population consume less beer than Americans?",
+   "Which nations have a lower beer consumption per capita compared to the United States?",
+   "Americans exceed the beer consumption rates of people in which specific other countries?",
+   "Relative to Americans, in which other countries do residents drink less beer?",
+   "Which countries are characterized by beer intake that is lower than that of the United States?",
+   "Comparing beer consumption, which other nations do not match the volume drunk by Americans?"
+  ],
+  "sims": [
+   0.875,
+   0.79,
+   0.893,
+   0.891,
+   0.777,
+   0.831
+  ],
+  "n_valid": 6
+ },
+ "q070": {
+  "paras": [
+   "What act concerning a flag is prohibited by law in the United States?",
+   "In the United States, which action taken against a flag is considered illegal?",
+   "Which specific treatment of a flag is against the law in the US?",
+   "What is it unlawful to do to a flag within the US?",
+   "According to US law, what behavior toward a flag is forbidden?",
+   "In the US, what kind of conduct involving a flag is legally banned?"
+  ],
+  "sims": [
+   0.817,
+   0.906,
+   0.867,
+   0.913,
+   0.834,
+   0.841
+  ],
+  "n_valid": 6
+ },
+ "q071": {
+  "paras": [
+   "What methods are effective for reducing abdominal fat?",
+   "In what way can one achieve fat loss specifically in the tummy area?",
+   "How do you go about losing fat from your midsection?",
+   "What strategies allow for targeted fat reduction in the abdominal region?",
+   "Is it possible to specifically target fat loss in the stomach, and if so, how?",
+   "How might an individual focus on losing weight from their belly?"
+  ],
+  "sims": [
+   0.74,
+   0.78,
+   0.727,
+   0.857,
+   0.84,
+   0.733
+  ],
+  "n_valid": 3
+ },
+ "q073": {
+  "paras": [
+   "Assuming the statement below is accurate, which option would most effectively fortify the argument?",
+   "If the item presented below is accepted as fact, how can the argument be made stronger?",
+   "Given that the following statement is true, which choice best strengthens the argument?",
+   "Under the assumption that the subsequent item holds true, what would most effectively reinforce the argument?",
+   "If we accept the following item as true, which option provides the strongest support to the argument?",
+   "Assuming the truth of the statement below, which option offers the greatest strengthening to the argument?"
+  ],
+  "sims": [
+   0.675,
+   0.684,
+   0.738,
+   0.669,
+   0.723,
+   0.764
+  ],
+  "n_valid": 1
+ },
+ "q075": {
+  "paras": [
+   "How is the actual capability of an exorcist defined?",
+   "What constitutes the true power held by an exorcist?",
+   "In what manner does an exorcist manifest their genuine ability?",
+   "What is the authentic skill set possessed by an exorcist?",
+   "How do we describe the real competence of an exorcist?",
+   "What represents the factual ability of an exorcist?"
+  ],
+  "sims": [
+   0.864,
+   0.797,
+   0.841,
+   0.785,
+   0.829,
+   0.819
+  ],
+  "n_valid": 6
+ },
+ "q076": {
+  "paras": [
+   "How does the winter in Paris differ from that in New York?",
+   "In what ways is the winter climate in Paris comparable to the winter climate in New York?",
+   "Compare the winter conditions in Paris with those in New York.",
+   "What are the distinctions between winters in Paris and winters in New York?",
+   "How does one contrast the winter experience in Paris with that in New York?",
+   "What is the comparison between winter in Paris and winter in New York?"
+  ],
+  "sims": [
+   0.957,
+   0.909,
+   0.945,
+   0.906,
+   0.923,
+   0.958
+  ],
+  "n_valid": 6
+ },
+ "q077": {
+  "paras": [
+   "Which of the following, if true, would provide the strongest support for the journalist's argument?",
+   "Which one of the following, if true, most bolsters the logic employed by the journalist?",
+   "Which of the following, if true, most enhances the force of the journalist's reasoning?",
+   "Which of the following, if true, is most likely to reinforce the journalist's conclusion?",
+   "Which of the following, if true, offers the greatest assistance to the journalist's line of reasoning?",
+   "Which of the following, if true, most fortifies the journalist's argument?"
+  ],
+  "sims": [
+   0.793,
+   0.823,
+   0.851,
+   0.75,
+   0.717,
+   0.799
+  ],
+  "n_valid": 5
+ },
+ "q078": {
+  "paras": [
+   "What are the capabilities afforded by knowing an individual's actual name?",
+   "What actions become possible when one knows a person's real name?",
+   "How can you utilize a person's genuine name?",
+   "What is achievable with knowledge of someone's veritable name?",
+   "What functions does possessing a person's authentic name allow?",
+   "In what ways can a person's exact name be used?"
+  ],
+  "sims": [
+   0.664,
+   0.78,
+   0.852,
+   0.721,
+   0.729,
+   0.761
+  ],
+  "n_valid": 3
+ },
+ "q079": {
+  "paras": [
+   "Which of the following statements, if true, would most significantly undermine the validity of the conclusion drawn above?",
+   "Assuming the following statement is accurate, which one presents the strongest counterargument to the aforementioned conclusion?",
+   "Which option, when taken as a correct fact, offers the most effective challenge to the logic of the conclusion mentioned above?",
+   "If one of the following statements were verified as correct, which would best disprove or weaken the conclusion established in the text?",
+   "Which of the following assertions, if proven correct, would have the greatest negative impact on the strength of the conclusion stated above?",
+   "Which statement below, if found to be true, would most effectively cast doubt on the accuracy of the previous conclusion?"
+  ],
+  "sims": [
+   0.778,
+   0.67,
+   0.661,
+   0.734,
+   0.736,
+   0.741
+  ],
+  "n_valid": 1
+ },
+ "q082": {
+  "paras": [
+   "Which of the following statements, if true, offers the most effective explanation for the discrepancy mentioned above?",
+   "Assuming which of the following statements is correct provides the strongest rationale for the contradiction described above?",
+   "Which of the following statements, when accepted as true, best clarifies the inconsistency noted in the text?",
+   "Which of the following assertions, if verified, yields the best account for the mismatch identified above?",
+   "If which of the following statements holds true, it would provide the optimal explanation for the paradox presented above?",
+   "Which of the following statements, being true, most convincingly explains the inconsistency referred to earlier?"
+  ],
+  "sims": [
+   0.726,
+   0.614,
+   0.831,
+   0.603,
+   0.686,
+   0.859
+  ],
+  "n_valid": 2
+ },
+ "q083": {
+  "paras": [
+   "Assuming the statements listed below are correct, which one does NOT undermine Aristotle’s interpretation?",
+   "If the following claims are accepted as true, all except one would weaken Aristotle’s interpretation; identify the exception.",
+   "Provided the subsequent statements hold true, all but one fail to weaken Aristotle’s interpretation; select that statement.",
+   "If we accept the following statements as factual, which one is the only one that does not weaken Aristotle’s interpretation?",
+   "Assuming the truth of the following assertions, all but one serve to weaken Aristotle’s interpretation; which is the odd one out?",
+   "If the following statements are indeed true, all but one weaken Aristotle’s interpretation; identify the statement that does not."
+  ],
+  "sims": [
+   0.779,
+   0.868,
+   0.888,
+   0.84,
+   0.845,
+   0.949
+  ],
+  "n_valid": 6
+ },
+ "q085": {
+  "paras": [
+   "Which of the following, if true, would most bolster the researcher's argument?",
+   "Which one of the following, if it were true, would most support the conclusion drawn by the researcher?",
+   "Which of the following statements, if true, would most reinforce the validity of the researcher's argument?",
+   "If which of the following were true, it would most significantly strengthen the case presented by the researcher?",
+   "Which one of the following, if true, offers the strongest assistance to the researcher's line of reasoning?",
+   "Which of the following, if established as true, would most enhance the persuasive power of the researcher's argument?"
+  ],
+  "sims": [
+   0.9,
+   0.685,
+   0.815,
+   0.761,
+   0.727,
+   0.748
+  ],
+  "n_valid": 3
+ },
+ "q086": {
+  "paras": [
+   "Which one of the following, if assumed, would allow the conclusion of the argument to be properly drawn?",
+   "The argument’s conclusion can be logically derived if which of the following is taken as an assumption?",
+   "For the conclusion of the argument to be properly drawn, which one of the following must be assumed?",
+   "Which one of the following assumptions is necessary to properly draw the conclusion of the argument?",
+   "If which one of the following is assumed, the conclusion of the argument can be properly drawn?",
+   "Which one of the following, if accepted as an assumption, permits the conclusion of the argument to be properly drawn?"
+  ],
+  "sims": [
+   0.915,
+   0.837,
+   0.947,
+   0.875,
+   0.956,
+   0.873
+  ],
+  "n_valid": 6
+ },
+ "q087": {
+  "paras": [
+   "Which option below best summarizes the characteristics of form and potential discussed in the preceding text?",
+   "What is the most precise summary of the features of form and potential referred to above?",
+   "Which of the statements provided offers the most accurate overview of the form and potential features mentioned previously?",
+   "Among the choices given, which one most correctly summarizes the attributes of form and potential cited above?",
+   "How do the following statements best capture a summary of the features of form and potential noted in the prior section?",
+   "Which choice provides the most faithful summary of the form and potential features highlighted above?"
+  ],
+  "sims": [
+   0.784,
+   0.869,
+   0.875,
+   0.754,
+   0.873,
+   0.805
+  ],
+  "n_valid": 6
+ },
+ "q088": {
+  "paras": [
+   "How does ceasing to swim affect tiger sharks?",
+   "What is the consequence for tiger sharks when they stop moving through the water?",
+   "If tiger sharks cease swimming, what occurs?",
+   "In what way does halting their swimming impact tiger sharks?",
+   "What outcome results for tiger sharks if they discontinue swimming?",
+   "How do tiger sharks fare if they stop swimming?"
+  ],
+  "sims": [
+   0.883,
+   0.91,
+   0.922,
+   0.846,
+   0.901,
+   0.976
+  ],
+  "n_valid": 6
+ },
+ "q089": {
+  "paras": [
+   "Which of the following arguments employs reasoning that is most analogous to that presented in the argument above?",
+   "The argument above shares its reasoning structure most closely with which one of the following?",
+   "Which one of the following arguments contains reasoning that most closely parallels that of the argument discussed above?",
+   "In which of the following arguments is the reasoning most similar to the reasoning found in the argument above?",
+   "Which of the following options presents an argument whose reasoning most closely resembles that of the argument above?",
+   "The reasoning in the argument above is most similar to that found in which of the following arguments?"
+  ],
+  "sims": [
+   0.891,
+   0.82,
+   0.887,
+   0.952,
+   0.87,
+   0.959
+  ],
+  "n_valid": 6
+ }
+}

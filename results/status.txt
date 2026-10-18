@@ -6,3 +6,5 @@
   agnes-2.5-flash     732/ 960 (76.2%) err=  0      running
   gpt-6-luna          255/1440 (17.7%) err=  3      HTTP429:{"error":{"message":"Rate limit exceeded. Max 5
   gemini-3.8-flash    223/1440 (15.5%) err=  2      HTTP429:{"error":{"message":"Rate limit exceeded. Max 5
+
+ALL WORKERS FINISHED

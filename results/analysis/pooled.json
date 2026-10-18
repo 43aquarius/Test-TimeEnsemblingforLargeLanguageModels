@@ -9,13 +9,120 @@
  "n_questions": 28,
  "gain_sc6": 0.05357142857142857,
  "acc_sc6": 0.9732142857142857,
- "acc_greedy": 0.9196428571428571,
  "gain_pe6": 0.03571428571428571,
  "acc_pe6": 0.9553571428571429,
  "gain_hb6": 0.03571428571428571,
  "acc_hb6": 0.9553571428571429,
  "gain_comb12": 0.044642857142857144,
  "acc_comb12": 0.9642857142857143,
+ "gain_k1": 0.044642857142857144,
+ "acc_k1": 0.9642857142857143,
+ "acc_greedy": 0.9196428571428571,
+ "diff_sc6_vs_pe6": 0.017857142857142856,
+ "ci_sc6_vs_pe6": [
+  0.0,
+  0.05357142857142857
+ ],
+ "tost_sc6_vs_pe6": {
+  "bound3pp": {
+   "ci90": [
+    0.0,
+    0.05357142857142857
+   ],
+   "equivalent": false
+  },
+  "bound5pp": {
+   "ci90": [
+    0.0,
+    0.05357142857142857
+   ],
+   "equivalent": false
+  }
+ },
+ "diff_sc6_vs_greedy": 0.05357142857142857,
+ "ci_sc6_vs_greedy": [
+  0.008928571428571428,
+  0.11607142857142858
+ ],
+ "tost_sc6_vs_greedy": {
+  "bound3pp": {
+   "ci90": [
+    0.008928571428571428,
+    0.11607142857142858
+   ],
+   "equivalent": false
+  },
+  "bound5pp": {
+   "ci90": [
+    0.008928571428571428,
+    0.11607142857142858
+   ],
+   "equivalent": false
+  }
+ },
+ "diff_pe6_vs_greedy": 0.03571428571428571,
+ "ci_pe6_vs_greedy": [
+  0.008928571428571428,
+  0.07142857142857142
+ ],
+ "tost_pe6_vs_greedy": {
+  "bound3pp": {
+   "ci90": [
+    0.008928571428571428,
+    0.07142857142857142
+   ],
+   "equivalent": false
+  },
+  "bound5pp": {
+   "ci90": [
+    0.008928571428571428,
+    0.07142857142857142
+   ],
+   "equivalent": false
+  }
+ },
+ "diff_comb12_vs_greedy": 0.044642857142857144,
+ "ci_comb12_vs_greedy": [
+  0.008928571428571428,
+  0.08928571428571429
+ ],
+ "tost_comb12_vs_greedy": {
+  "bound3pp": {
+   "ci90": [
+    0.008928571428571428,
+    0.08928571428571429
+   ],
+   "equivalent": false
+  },
+  "bound5pp": {
+   "ci90": [
+    0.008928571428571428,
+    0.08928571428571429
+   ],
+   "equivalent": false
+  }
+ },
+ "diff_hb6_vs_greedy": 0.03571428571428571,
+ "ci_hb6_vs_greedy": [
+  0.008928571428571428,
+  0.07142857142857142
+ ],
+ "tost_hb6_vs_greedy": {
+  "bound3pp": {
+   "ci90": [
+    0.008928571428571428,
+    0.07142857142857142
+   ],
+   "equivalent": false
+  },
+  "bound5pp": {
+   "ci90": [
+    0.008928571428571428,
+    0.07142857142857142
+   ],
+   "equivalent": false
+  }
+ },
  "strata": {
   "degenerate (H=0)": {
    "n": 104,
@@ -36,13 +143,43 @@
    "fragile": 0.25
   }
  },
+ "by_locus": {
+  "stem": {
+   "n": 60,
+   "gain_sc6": 0.06666666666666667,
+   "gain_pe6": 0.03333333333333333,
+   "fragile": 0.03333333333333333,
+   "entropy": 0.06515865841528173
+  },
+  "instruction": {
+   "n": 52,
+   "gain_sc6": 0.038461538461538464,
+   "gain_pe6": 0.038461538461538464,
+   "fragile": 0.0,
+   "entropy": 0.030403215010560685
+  }
+ },
  "spearman_entropy_gain": 0.6199766031808845,
- "sc_vs_pe_pooled_diff": 0.017857142857142856,
- "sc_vs_pe_pooled_ci": [
-  0.0,
-  0.044642857142857144
- ],
+ "spearman_entropysc_pegain": 0.4242030008762183,
+ "spearman_entropype_scgain": 0.6569468648464064,
  "auroc_cs_pooled": 0.7384259259259259,
  "auroc_cp_pooled": 0.5983796296296297,
- "auroc_both_pooled": 0.7256944444444444
+ "auroc_both_pooled": 0.7256944444444444,
+ "auroc_cs_pooled_ci": [
+  0.7122641509433962,
+  0.75
+ ],
+ "auroc_cp_pooled_ci": [
+  0.4636363636363636,
+  0.7340909090909091
+ ],
+ "overlap_pooled": {
+  "n_errors": 4,
+  "flagged_by_cs": 2,
+  "flagged_by_cp": 1,
+  "only_cs": 1,
+  "only_cp": 0,
+  "flagged_by_both": 1,
+  "missed_by_both": 2
+ }
 }

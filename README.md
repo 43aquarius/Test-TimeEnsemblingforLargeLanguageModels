@@ -5,7 +5,7 @@
 Chang Tan · Dalian University of Technology · aquars43@foxmail.com
 
 > Preprint, submitted to *Neurocomputing* (Elsevier).
-> 📦 Manuscript and full research artifacts: **[Release v1.0.0](https://github.com/43aquarius/Test-TimeEnsemblingforLargeLanguageModels/releases/tag/v1.0.0)**
+> 📦 Manuscript and full research artifacts: **[Release v1.1.0 (revised)](https://github.com/43aquarius/Test-TimeEnsemblingforLargeLanguageModels/releases/tag/v1.1.0)** · [v1.0.0 (original)](https://github.com/43aquarius/Test-TimeEnsemblingforLargeLanguageModels/releases/tag/v1.0.0)
 
 ---
 
@@ -123,14 +123,27 @@ public releases of six benchmarks. The source files are **not** redistributed
 here; download them per [`data/raw/README.md`](data/raw/README.md) and follow
 their original licenses.
 
-## Release contents (v1.0.0)
+## Revision v1.1.0 — what changed
+
+The revision adds follow-up conditions and controls, and corrects the analysis:
+
+- **Corrected AURC** (acceptance order now confidence-descending) and added bootstrap CIs, question-level cluster bootstrap for pooled statistics, McNemar tests, and TOST equivalence tests; "no difference detected" language replaces "statistically indistinguishable".
+- **Single-sample baseline (S1)** added throughout; greedy is not interchangeable with one stochastic draw.
+- **Greedy-paraphrase control**: every paraphrase re-decoded at τ=0, isolating prompt-space effects from decoding noise (5 models).
+- **MMLU-Pro hard-task probe** (30 questions, 10 options) and a **chain-of-thought condition** (4 models + flagship subset).
+- **Paraphrase robustness**: second generator (Agnes3.0-Flash), bidirectional NLI validation (267/270 and 269/270 pass), stricter-threshold fragility.
+- **Budget-efficiency simulations**: sequential unanimity early stopping (SC-6 accuracy at 2-3 calls mean) and adaptive allocation (matches or beats fixed strategies at ~4.5 calls).
+- **Condorcet-style model** of when majority voting helps or hurts.
+- Full comparison coverage for Qwen3.8-Max (90/90 questions), parse-failure retry + sensitivity analysis, per-locus (stem vs instruction) stratification, token-cost accounting, expanded limitations.
+
+## Release contents (v1.1.0)
 
 | Asset | Description |
 |---|---|
 | `paper_main.pdf` | Manuscript PDF (26 pages, submission version) |
 | `paper_word_version.docx` | Manuscript, Word format |
 | `latex_source.zip` | Complete LaTeX source (elsarticle) |
-| `supplementary_data.zip` | Questions, paraphrases, validation report, raw predictions for all models, and aggregated analysis |
+| `supplementary_data.zip` | Questions, paraphrases, validation reports, MMLU-Pro probe, raw predictions for all conditions, and aggregated analysis |
 
 ## Citation
 

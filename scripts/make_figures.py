@@ -104,18 +104,21 @@ def fig_budget():
     for i, m in enumerate(models):
         ax = axes[i]
         md = R["models"][m]
-        sc = [100 * md["acc"]["greedy"]] + [100 * md["acc"][f"sc{k}"] for k in (2, 4, 6)]
-        pe = [100 * md["acc"]["greedy"]] + [100 * md["acc"][f"pe{k}"] for k in (2, 4, 6)]
+        greedy = 100 * md["acc"]["greedy"]
+        sc = [100 * md["acc"]["k1"]] + [100 * md["acc"][f"sc{k}"] for k in (2, 4, 6)]
+        pe = [100 * md["acc"]["k1"]] + [100 * md["acc"][f"pe{k}"] for k in (2, 4, 6)]
+        ax.axhline(greedy, color="#999999", linewidth=0.9, linestyle=":", label="Greedy")
         ax.plot(ks, sc, "-o", color="#1f4e6e", linewidth=2.0, markersize=3.5, label="SC-$k$")
         ax.plot(ks, pe, "-s", color="#c25b2e", linewidth=2.0, markersize=3.5, label="PE-$k$")
-        ax.set_title(LABEL[m], fontsize=8.5, color="#222222", loc="left", pad=2)
+        ax.set_title(f"{LABEL[m]}  (n={md['n']}; 1 q = {100/md['n']:.1f} pp)",
+                     fontsize=8.0, color="#222222", loc="left", pad=2)
         ax.set_xticks(ks)
         ax.set_xlabel("Budget $k$ (calls)", fontsize=7.5)
         if i % ncol == 0:
             ax.set_ylabel("Accuracy (%)", fontsize=7.5)
         ax.tick_params(labelsize=7)
         if i == 0:
-            ax.legend(loc="lower left", bbox_to_anchor=(0.0, 1.14), ncol=2, frameon=False, fontsize=7.5)
+            ax.legend(loc="lower left", bbox_to_anchor=(0.0, 1.14), ncol=3, frameon=False, fontsize=7.5)
         style_ax(ax)
     for j in range(n, len(axes)):
         axes[j].set_visible(False)
@@ -139,7 +142,8 @@ def fig_auroc():
     ax.axhline(0.5, color="#999999", linewidth=0.8, linestyle="--")
     ax.text(len(models) - 0.4, 0.505, "chance", fontsize=7, color="#777777", ha="right")
     ax.set_xticks(list(xs))
-    ax.set_xticklabels([LABEL[m] for m in models], fontsize=7.5, rotation=20, ha="right")
+    ax.set_xticklabels([LABEL[m] + ("$^{\\dagger}$" if R["models"][m].get("descriptive_only") else "")
+                        for m in models], fontsize=7.5, rotation=20, ha="right")
     ax.set_ylabel("AUROC (error detection)")
     ax.set_ylim(0.3, 1.02)
     ax.legend(loc="lower left", bbox_to_anchor=(0.0, 1.02), ncol=3, frameon=False, fontsize=7.5)

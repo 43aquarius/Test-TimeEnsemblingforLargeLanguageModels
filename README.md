@@ -31,10 +31,17 @@ Paraphrases were generated with an LLM and retained only if their sentence-embed
 ## Key findings
 
 1. **A regime structure governs everything.** On benchmarks that modern flagships saturate, the sampled answer distribution degenerates to a single value: both ensembles collapse exactly onto the greedy baseline, and consistency-based uncertainty estimation loses its discriminative power — a caution for hallucination-detection methods built on sampling.
-2. **Where genuine answer entropy exists, both diversity sources help.** Example: Agnes3.0-Flash improves from 78.8% (greedy) to 90.9% under both SC-6 and PE-6 on its completed question set.
-3. **Majority voting can hurt.** When the modal answer is wrong, voting locks the error in — spending the same budget on paraphrases can recover it.
+2. **Against the correct k=1 baseline, neither source buys a systematic gain.** Measured against S1 (the expected accuracy of one stochastic draw), pooled SC-6 is +0.9 pp and PE-6 is −0.9 pp, with COMB-12 exactly at S1. The much larger greedy-referenced gains reported in v1.0.0/v1.1.0 (e.g. Agnes3.0-Flash +12.1 pp) are mostly an artifact of the greedy reference, which sits 4–11 pp below the sampled expectation on two models (mode locking + one truncation artifact).
+3. **The sign of the gain tracks whether the modal answer is correct.** On the two models whose modal answer is wrong, PE-6 gains +10.0/+5.6 pp over S1 while SC-6 loses 3.3/2.8 pp — the plurality-vote signature in deployed form.
 4. **The two agreement signals are complementary.** Paraphrase agreement and sample agreement each predict ensemble errors (AUROC), but which one is stronger differs across models; neither subsumes the other.
-5. **Practical rule: measure agreement first, then allocate the budget.** Answer entropy (cheap to estimate) predicts where ensembling pays off; aggregation configuration belongs in the reporting standard of every evaluation that uses it.
+5. **Practical rule: measure agreement first, then allocate the budget.** Disagreement strongly predicts the fragility of the greedy reference (Spearman −0.80) but only weakly the ensemble gain over S1 (−0.17); a sequential unanimity rule (a special case of early-stopping self-consistency) preserves SC-6 accuracy within one question at 2–3 calls, and an adaptive probe rule matches the best fixed strategy on four of six models at 68–78% of the budget.
+
+
+## Version history
+
+- **v1.2.0 (Oct 2026) — S1-baseline revision.** The single-sample expectation S1 replaces greedy decoding as the primary k=1 baseline throughout; all gains, figures, and the abstract are recomputed (pooled SC-6−S1 = +0.9 pp, PE-6−S1 = −0.9 pp, COMB-12 = S1). The greedy reference is retained as a secondary column with a quantified audit of its bias (one truncation artifact, two mode-locking cases). AURC is recomputed with uniformly random tie-breaking (1,000 permutations), fixing an ordering artifact (e.g. Qwen3.8-Omni cs 0.009 → 0.031; Agnes3.0-Flash cp 0.158 → 0.073). The support-normalized entropy is replaced by the modal vote share as the headline disagreement statistic, with strata re-cut at share = 1 / [2/3, 1) / < 2/3. The greedy-paraphrase control now reports per-question answer identity between PE-g-6 and PE-6 (88/88, 31/32, 38/39, 11/15, 10/12). The Condorcet-style section is restated as a heuristic model with an asymptotic claim and an explicit idealization list. Adaptive-allocation claims are restated exactly (matches best fixed on 4/6 models, trails by one question on 2/6, 68–78% of budget, same-data caveat), and the early-stopping rule is positioned as a reproduction of Adaptive-Consistency/ESC. A 119-question expansion set (data/questions_expand.json) and a partial agnes-3.0-flash expansion run (results/expand/) are included; the run is rate-limited and in progress.
+- **v1.1.0 (Oct 2026)** — first revision: corrected AURC direction, cluster bootstrap, McNemar/TOST, follow-up conditions (greedy paraphrases, MMLU-Pro, CoT), NLI validation, expanded limitations.
+- **v1.0.0 (Oct 2026)** — original release.
 
 ## Repository structure
 

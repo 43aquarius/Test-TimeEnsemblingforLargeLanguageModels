@@ -1,0 +1,216 @@
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{mizrahi2024state}
+M.~Mizrahi, G.~Kaplan, D.~Malkin, R.~Dror, D.~Shahaf, G.~Stanovsky, State of
+  what art? a call for multi-prompt llm evaluation, Transactions of the
+  Association for Computational Linguistics 12 (2024) 933--949.
+
+\bibitem{sclar2024quantifying}
+M.~Sclar, Y.~Choi, Y.~Tsvetkov, A.~Suhr, Quantifying language models'
+  sensitivity to spurious features in prompt design, or: How i learned to start
+  worrying about prompt formatting, in: International Conference on Learning
+  Representations (ICLR), 2024.
+
+\bibitem{leidinger2023language}
+A.~Leidinger, R.~van Rooij, E.~Shutova, The language of prompting: What
+  linguistic properties make a prompt successful?, in: Findings of the
+  Association for Computational Linguistics: EMNLP 2023, 2023, pp. 9049--9066.
+
+\bibitem{zhu2023promptbench}
+K.~Zhu, J.~Wang, H.~Zhou, Z.~Wang, H.~Chen, Y.~Wang, L.~Yang, W.~Ye, Y.~Zhang,
+  N.~Z. Gong, X.~Xie, Promptbench: Towards evaluating the robustness of large
+  language models on adversarial prompts, arXiv preprint arXiv:2306.04528
+  (2023).
+
+\bibitem{wang2023selfconsistency}
+X.~Wang, J.~Wei, D.~Schuurmans, Q.~Le, E.~Chi, S.~Narang, A.~Chowdhery,
+  D.~Zhou, Self-consistency improves chain of thought reasoning in language
+  models, International Conference on Learning Representations (ICLR) (2023).
+
+\bibitem{kuhn2023semantic}
+L.~Kuhn, Y.~Gal, S.~Farquhar, Semantic uncertainty: Linguistic invariances for
+  uncertainty estimation in natural language generation, in: International
+  Conference on Learning Representations (ICLR), 2023.
+
+\bibitem{farquhar2024detecting}
+S.~Farquhar, J.~Kossen, L.~Kuhn, Y.~Gal, Detecting hallucinations in large
+  language models using semantic entropy, Nature 630 (2024) 625--630.
+
+\bibitem{wei2022chain}
+J.~Wei, X.~Wang, D.~Schuurmans, M.~Bosma, B.~Ichter, F.~Xia, E.~Chi, Q.~V. Le,
+  D.~Zhou, Chain-of-thought prompting elicits reasoning in large language
+  models, in: Advances in Neural Information Processing Systems, Vol.~35, 2022,
+  pp. 24824--24837.
+
+\bibitem{aggarwal2023lets}
+P.~Aggarwal, A.~Madaan, Y.~Yang, Mausam, Let's sample step by step:
+  Adaptive-consistency for efficient reasoning and coding with {LLMs}, in:
+  Proceedings of the 2023 Conference on Empirical Methods in Natural Language
+  Processing, 2023, pp. 12375--12396.
+
+\bibitem{li2024escape}
+Y.~Li, P.~Yuan, S.~Feng, B.~Pan, X.~Wang, B.~Sun, H.~Wang, K.~Li, Escape
+  sky-high cost: Early-stopping self-consistency for multi-step reasoning, in:
+  International Conference on Learning Representations (ICLR), 2024.
+
+\bibitem{chen2023universal}
+X.~Chen, R.~Aksitov, U.~Alon, J.~Ren, K.~Xiao, P.~Yin, S.~Prakash, C.~Sutton,
+  X.~Wang, D.~Zhou, Universal self-consistency for large language model
+  generation, arXiv preprint arXiv:2311.17311 (2023).
+
+\bibitem{snell2024scaling}
+C.~Snell, J.~Lee, K.~Xu, A.~Kumar, Scaling llm test-time compute optimally can
+  be more effective than scaling model parameters, arXiv preprint
+  arXiv:2408.03314 (2024).
+
+\bibitem{brown2024large}
+B.~Brown, J.~Juravsky, R.~Ehrlich, R.~Clark, Q.~V. Le, C.~R{\'e},
+  A.~Mirhoseini, Large language monkeys: Scaling inference compute with
+  repeated sampling, arXiv preprint arXiv:2407.21787 (2024).
+
+\bibitem{lightman2023lets}
+H.~Lightman, V.~Kosaraju, Y.~Burda, H.~Edwards, B.~Baker, T.~Lee, J.~Leike,
+  J.~Schulman, I.~Sutskever, K.~Cobbe, Let's verify step by step, in:
+  International Conference on Learning Representations (ICLR), 2024.
+
+\bibitem{du2023improving}
+Y.~Du, S.~Li, A.~Torralba, J.~B. Tenenbaum, I.~Mordatch, Improving factuality
+  and reasoning in language models through multiagent debate, arXiv preprint
+  arXiv:2305.14325 (2023).
+
+\bibitem{naik2023diversity}
+R.~Naik, X.~Liu, S.~Wadhwa, S.~Vempala, A.~Galstyan, P.~Natarajan, K.~Lerman,
+  Diversity of thought improves reasoning abilities of large language models,
+  arXiv preprint arXiv:2310.07088 (2023).
+
+\bibitem{smit2024mad}
+Y.~Smit, S.~Fine, A.~Anaby~Tsur, Should we be going mad? a look at multi-agent
+  debate strategies for llms, arXiv preprint arXiv:2405.04331 (2024).
+
+\bibitem{arora2023ask}
+S.~Arora, A.~Narayan, M.~F. Chen, L.~Orr, N.~Guha, K.~Bhatia, Z.~Li, A.~Guha,
+  M.~Lam, C.~R{\'e}, et~al., Ask me anything: A simple strategy for prompting
+  language models, arXiv preprint arXiv:2210.03650 (2023).
+
+\bibitem{pitis2023boosted}
+S.~Pitis, M.~R. Zhang, A.~Wang, J.~Ba, Boosted prompt ensembles for large
+  language models, arXiv preprint arXiv:2304.05970 (2023).
+
+\bibitem{tian2023just}
+K.~Tian, E.~Mitchell, A.~Zhou, A.~Sharma, R.~Rafailov, H.~Yao, C.~Finn, C.~D.
+  Manning, Just ask for calibration: Strategies for eliciting calibrated
+  confidence scores from language models fine-tuned with human feedback, in:
+  Proceedings of the 2023 Conference on Empirical Methods in Natural Language
+  Processing, 2023, pp. 5433--5442.
+
+\bibitem{xiong2024can}
+M.~Xiong, Z.~Hu, X.~Lu, Y.~Li, J.~Fu, J.~He, B.~Hooi, Can llms express their
+  uncertainty? an empirical evaluation of confidence elicitation in llms, in:
+  International Conference on Learning Representations (ICLR), 2024.
+
+\bibitem{kadavath2022language}
+S.~Kadavath, T.~Conerly, A.~Askell, T.~Henighan, D.~Drain, E.~Perez,
+  N.~Schiefer, Z.~Hatfield-Dodds, N.~DasSarma, E.~Tran-Johnson, et~al.,
+  Language models (mostly) know what they know, arXiv preprint arXiv:2207.05221
+  (2022).
+
+\bibitem{lin2024uncertainty}
+Z.~Lin, Y.~Shang, S.~Sahoo, D.~Karmakar, J.~Chen, P.~Zhang, T.~Nag~Chowdhury,
+  X.~Jiang, H.~Xu, C.~Ziems, et~al., Uncertainty in language models:
+  Assessment, benchmarks, and mitigation, arXiv preprint arXiv:2407.03682
+  (2024).
+
+\bibitem{gao2024spuq}
+X.~Gao, J.~Zhang, L.~Mouatadid, K.~Das, {SPUQ}: Perturbation-based uncertainty
+  quantification for large language models, in: Proceedings of the 18th
+  Conference of the European Chapter of the Association for Computational
+  Linguistics (EACL), 2024, pp. 2336--2346.
+
+\bibitem{hou2023decomposing}
+B.~Hou, Y.~Liu, K.~Qian, J.~Andreas, S.~Chang, Y.~Zhang, Decomposing
+  uncertainty for large language models through input clarification ensembling,
+  arXiv preprint arXiv:2311.08718 (2023).
+
+\bibitem{guo2017calibration}
+C.~Guo, G.~Pleiss, Y.~Sun, K.~Q. Weinberger, On calibration of modern neural
+  networks, in: Proceedings of the 34th International Conference on Machine
+  Learning, 2017, pp. 1321--1330.
+
+\bibitem{lanham2023measuring}
+T.~Lanham, A.~Chen, A.~Radhakrishnan, B.~Steiner, C.~Denison, D.~Hernandez,
+  D.~Li, E.~Durmus, E.~Hubinger, J.~Kernion, et~al., Measuring faithfulness in
+  chain-of-thought reasoning, arXiv preprint arXiv:2307.13702 (2023).
+
+\bibitem{condorcet1785essai}
+M.~d.~C. de~Caritat, Marie Jean Antoine~Nicolas, Essai sur l'application de
+  l'analyse \`{a} la probabilit{\'e} des d{\'e}cisions rendues \`{a} la
+  pluralit{\'e} des voix, Imprimerie Royale, Paris, 1785.
+
+\bibitem{lin2022truthfulqa}
+S.~Lin, J.~Hilton, O.~Evans, Truthfulqa: Measuring how models mimic human
+  falsehoods, in: Proceedings of the 60th Annual Meeting of the Association for
+  Computational Linguistics, 2022, pp. 3214--3252.
+
+\bibitem{bisk2020piqa}
+Y.~Bisk, R.~Zellers, J.~Gao, Y.~Choi, et~al., Piqa: Reasoning about physical
+  intentionality by question answering, in: Proceedings of the 58th Annual
+  Meeting of the Association for Computational Linguistics, 2020, pp.
+  7273--7287.
+
+\bibitem{liu2020logiqa}
+J.~Liu, L.~Cui, H.~Liu, D.~Huang, Y.~Wang, Y.~Zhang, Logiqa: A challenge
+  dataset for machine reading comprehension with logical reasoning, in:
+  Proceedings of the Twenty-Ninth International Joint Conference on Artificial
+  Intelligence (IJCAI), 2020, pp. 3622--3628.
+
+\bibitem{zhong2023agieval}
+W.~Zhong, R.~Guo, Q.~Cao, J.~Wang, L.~Qin, J.~Li, J.~Wang, G.~Li, W.~Sun,
+  et~al., Agieval: A human-centric benchmark for evaluating foundation models,
+  arXiv preprint arXiv:2304.06364 (2023).
+
+\bibitem{cobbe2021training}
+K.~Cobbe, V.~Kosaraju, M.~Bavarian, M.~Chen, H.~Jun, L.~Kaiser, M.~Plappert,
+  J.~Tworek, J.~Hilton, R.~Nakano, C.~Hesse, J.~Schulman, Training verifiers to
+  solve math word problems, arXiv preprint arXiv:2110.14168 (2021).
+
+\bibitem{yang2025qwen3}
+A.~Yang, et~al., Qwen3 technical report, arXiv preprint arXiv:2505.09388
+  (2025).
+
+\bibitem{qwen2024qwen}
+Q.~Team, Qwen technical report, arXiv preprint arXiv:2309.16609 (2023).
+
+\bibitem{agnesai2026}
+{Agnes AI}, Agnes ai api documentation, \url{https://agnes-ai.com}, accessed
+  October 2026 (2026).
+
+\bibitem{openai2023gpt4}
+OpenAI, Gpt-4 technical report, arXiv preprint arXiv:2303.08774 (2023).
+
+\bibitem{openai2025gpt5}
+{OpenAI}, \href{https://openai.com/index/gpt-5-system-card}{Gpt-5 system card},
+  Tech. rep., OpenAI (2025).
+\newline\urlprefix\url{https://openai.com/index/gpt-5-system-card}
+
+\bibitem{comanici2025gemini}
+G.~Comanici, et~al., Gemini 2.5: Pushing the frontier with advanced reasoning,
+  multimodality, long context and next generation agentic capabilities, arXiv
+  preprint arXiv:2507.06261 (2025).
+
+\bibitem{wang2024mmlupro}
+Y.~Wang, Z.~Ma, Y.~Cao, K.~Zeng, C.~Wei, Z.~Liu, L.~Liu, A.~Gao, J.~Chen,
+  Y.~He, et~al., {MMLU-Pro}: A more robust and challenging multi-task language
+  understanding benchmark, arXiv preprint arXiv:2406.01574 (2024).
+
+\bibitem{holtzman2021surface}
+A.~Holtzman, P.~West, V.~Shwartz, Y.~Choi, L.~Zettlemoyer, Surface form
+  competition: Why the highest probability answer isn't always right,
+  Proceedings of the 2021 Conference on Empirical Methods in Natural Language
+  Processing (2021) 7038--7051.
+
+\end{thebibliography}

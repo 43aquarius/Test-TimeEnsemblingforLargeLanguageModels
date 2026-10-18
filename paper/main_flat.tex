@@ -1,0 +1,556 @@
+\documentclass[preprint,12pt]{elsarticle}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{document}
+
+
+
+\title{When Does Test-Time Ensembling Help Large Language Models? A Budget-Matched Study of Answer-Space and Prompt-Space Diversity}
+
+\author{Chang Tan}
+
+
+\institution{Dalian University of Technology, Dalian, Liaoning, China}
+
+\section*{Abstract}
+Test-time ensembling improves the reliability of large language models by aggregating answers from multiple model calls instead of trusting a single prediction. Two families of strategies dominate practice. Self-consistency resamples the stochastic decoder on one fixed prompt, so the ensemble varies along what we call the answer space. Prompt ensembling instead fixes the decoding configuration and varies the prompt over semantically equivalent paraphrases, so the ensemble varies along the prompt space. Both families consume the same scarce resource, namely the number of model calls, yet prior work studies them in isolation and the question of which source of diversity buys more accuracy per call remains open. We present a controlled, budget-matched comparison across six commercial large language models and six reasoning and knowledge benchmarks under a unified protocol in which every question is answered sixteen times per model: six decodes of the original prompt, six paraphrased prompts answered once each, a hybrid allocation that combines three paraphrases with two decodes each, a twelve-vote combined condition, and a greedy baseline, together with a single-sample baseline S1 estimated as the expected accuracy of one stochastic draw, a greedy-paraphrase control that isolates prompt-space effects from decoding stochasticity, a chain-of-thought variant, and a hard-task probe on MMLU-Pro. The results reveal a regime structure that current evaluation practice overlooks, and they turn on the choice of the k=1 reference. On benchmarks that modern flagship models saturate, the sampled answer distribution degenerates to a single value, both ensembles collapse onto both single-call baselines, and consistency-based uncertainty estimates lose their discriminative power, which raises a caution for sampling-based confidence in this regime. Where the votes disagree, measured against S1, neither ensemble buys a systematic gain: pooled over the four well-covered models, six-vote self-consistency sits $+0.9$ points above S1 and the six-paraphrase ensemble $0.9$ points below, with the twelve-vote ensemble exactly at S1, and no per-model test detects a difference between the two sources, though the study is not powered to establish equivalence. The gains that do appear track whether the modal answer is correct: on the two models whose modal answer is wrong, the paraphrase ensemble gains $5.6$ to $10.0$ points over S1 while self-consistency loses $2.8$ to $3.3$. Greedy decoding proves to be a biased reference, sitting four to eleven points below the sampled expectation on two models through mode locking and truncation artifacts, so apparent gains measured against greedy largely reflect the reference, not the ensembling. An adaptive allocation rule simulated on the collected matrices matches the best fixed strategy on four of six models at 68 to 78 percent of the budget and trails it by one question on the rest, and a sequential unanimity rule, a special case of early-stopping self-consistency, preserves accuracy within one question at two to three calls. We release all prompts, paraphrases, and raw predictions to support reproducible evaluation.
+
+
+\paragraph{Keywords: Large language models \sep test-time compute \sep self-consistency \sep prompt ensembling \sep uncertainty estimation \sep robustness}
+
+
+
+\section{Introduction}
+
+
+Large language models answer questions through a single forward pass whose output depends on two design choices that the user controls: the prompt that specifies the task, and the decoding configuration that maps model probabilities into text. Both choices turn out to be fragile. A long line of work on prompt sensitivity shows that semantically equivalent reformulations of the same question can change model answers by large margins [1,2,3,4]. A parallel line of work on test-time compute shows that a single greedy decode is an unreliable summary of what the model knows, and that aggregating several decodes of the same prompt, as in self-consistency [5], improves reasoning accuracy at the cost of additional inference calls.
+
+These two observations motivate two different ways of spending a fixed budget of model calls. The first spends the budget on the answer space: keep the prompt fixed, sample several decodes at nonzero temperature, and aggregate them by majority vote. The second spends the budget on the prompt space: keep decoding deterministic or lightly stochastic, present several semantically equivalent paraphrases of the task, and aggregate the resulting answers. Both strategies are used in practice, both appear in the evaluation literature under separate headings, and both consume the same scarce resource. Surprisingly, the literature offers little guidance on which source of diversity yields more accuracy per call, whether the two sources detect the same errors, and how the answer changes with model capability and task difficulty.
+
+The question is becoming more urgent as model behavior shifts. Post-trained flagship models are increasingly confident: on many legacy benchmarks they answer near ceiling, and preliminary reports suggest that repeated sampling at moderate temperature often returns identical answers, which would render answer-space ensembling inert precisely where deployments are most common. At the same time, uncertainty estimation methods built on sampling, such as semantic entropy [6,7], implicitly assume that the sample distribution carries information about correctness. If that assumption fails for confident models, practitioners need to know before they build on it.
+
+This paper presents, to our knowledge, the first budget-matched, within-question comparison of answer-space and prompt-space ensembling across multiple model families and task types. Every question in our protocol is answered sixteen times by every model under matched conditions: one greedy decode, six stochastic decodes of the original prompt, one stochastic decode of each of six validated paraphrases, and three additional second decodes that support a hybrid condition. From this single call matrix we derive self-consistency ensembles of any size up to six, paraphrase ensembles of the same sizes, a hybrid allocation, a combined twelve-vote ensemble, per-question consistency scores for both diversity sources, and fragility measures that record how often paraphrasing alone flips the majority answer. Three follow-up conditions then isolate the factors the matrix alone cannot separate: a greedy-paraphrase control that removes decoding stochasticity from the paraphrase side, a chain-of-thought variant that changes the answering mode, and a hard-task probe on MMLU-Pro. Because all conditions are derived from matched calls, comparisons between strategies hold the question, the model, and the total call budget constant by construction.
+
+Our study addresses four research questions. First, under equal budgets, does spending calls on paraphrases buy more, equal, or less accuracy than spending them on resampling, and does the hybrid allocation dominate either pure strategy? Second, how brittle are model answers to paraphrasing per se, and where do paraphrase-induced flips concentrate? Third, can agreement across paraphrases serve as an error signal in the way that agreement across samples does, and how do the two signals compare when both are available? Fourth, how do all of these effects interact with model capability and task difficulty? The last question turns out to govern the first three.
+
+The empirical picture that emerges has a clear regime structure. When a model finds a task easy, its answer distribution collapses: across our six benchmarks, flagship models return the same answer for essentially every sample and every paraphrase on saturated tasks, self-consistency and paraphrase ensembling both collapse onto both single-call baselines, and consistency scores carry no signal about which answers are wrong. When a task genuinely challenges a model, the votes disagree, and the interesting quantity stops being whether to aggregate and becomes what the aggregation is measured against: a single stochastic draw is already close to what six or twelve votes return on average, so the choice of the k=1 reference, greedy or single-sample, governs whether ensembling looks like a large gain or a wash, while the sign of the residual gain is set by whether the model's modal answer is correct. This structure implies that no single published claim about ensembling generalizes across regimes, and that practical systems should first measure the cheap statistics that identify the regime before choosing how to spend their budget.
+
+Our contributions are as follows. We formalize test-time ensembling as a choice between two diversity sources under a shared budget, and we introduce a call matrix design that derives all conditions of interest from one matched set of calls, with controls that separate prompt-space effects from decoding stochasticity, answering mode, and task difficulty. We provide a multi-model, multi-benchmark empirical map of when each source helps, including systematic evidence that paraphrase agreement functions as an uncertainty signal whose error coverage only partially overlaps that of sample agreement. We document the answer degeneracy phenomenon that renders both ensembling and consistency-based uncertainty estimation inert on saturated tasks for confident models, with direct implications for sampling-based confidence estimation in this regime. Finally, we translate the findings into an adaptive allocation rule checked by simulation on the collected matrices, and we release our complete prompt materials, validated paraphrases, and per-call predictions.
+
+The remainder of the paper is organized as follows. Section 2 reviews related work. Section 3 formalizes the ensembling framework and the protocol. Section 4 describes models, benchmarks, and validation procedures. Section 5 presents the results around our four research questions. Section 6 discusses implications and limitations, and Section 7 concludes.
+
+\section{Related Work}
+
+
+\subsection{Test-time compute and self-consistency}
+
+Scaling computation at inference time has become a standard tool for improving the reliability of large language models. Chain-of-thought prompting demonstrates that eliciting intermediate reasoning steps raises accuracy on arithmetic and symbolic tasks [8], and self-consistency extends this observation by sampling multiple reasoning paths at nonzero temperature and returning the most frequent final answer [5]. Follow-up work reduces the number of samples needed through adaptive stopping criteria [9] and early-stopping rules that monitor the stability of the running majority [10], generalizes aggregation to free-form generation by letting the model itself select among candidate answers [11], and studies the optimal allocation of test-time compute relative to model size [12]. Repeated sampling studies document that coverage grows log-linearly with the sample budget but that majority voting plateaus without a verifier [13], a plateau our regime analysis explains: where the modal answer is wrong, additional votes amplify the error. Process reward models that score intermediate steps represent a further refinement of the same budget idea [14]. Multi-agent debate aggregates answers across multiple model instances and rounds [15], with prompt variation proposed as one axis of diversity of thought [16], and controlled comparisons find that debate does not reliably outperform self-consistency at matched budgets [17], which reinforces the need for budget-matched comparisons when evaluating aggregation strategies. Our work differs from this literature in the source of diversity it studies: instead of asking how many samples to draw or how to weight them, we ask whether the same calls are better spent perturbing the prompt, and we answer under a matched-budget protocol.
+
+\subsection{Prompt sensitivity and prompt ensembling}
+
+A separate literature documents that model outputs are sensitive to semantically irrelevant details of the prompt. Reformatting alone, such as changing spacing or option ordering, shifts accuracy by several points [2], and the measured performance of a model depends strongly on which of many equivalent prompts an evaluator happens to choose [1]. Linguistic properties of the prompt, such as lexical familiarity, partially predict its success [3], and adversarial prompt perturbations can degrade performance further [4]. The natural constructive response is to aggregate over prompts. Ask Me Anything generates many question reformulations with a language model and combines the resulting pseudo-labels [18], an idea that predates and parallels self-consistency but targets zero-shot classification rather than matched-budget reasoning. Boosted prompt ensembles construct few-shot prompt sets stepwise on hard examples and outperform single-prompt output-space ensembles on GSM8K and AQuA [19]; diversity-of-thought prompting varies the prompt to induce diverse reasoning paths before aggregation [16]; and evaluation studies propose averaging over prompt templates to stabilize benchmark scores [1]. These methods share our premise that the prompt is a legitimate axis of ensembling, but none of them isolates prompt-space diversity from decoding stochasticity under a matched budget, and none quantifies when prompt-space aggregation beats answer-space aggregation on identical questions, which is the gap our protocol fills.
+
+\subsection{Uncertainty estimation from sampled behavior}
+
+Between the two aggregation literatures sits a third that uses sampling not to improve accuracy but to estimate uncertainty. Verbalized confidence asks the model to state a probability [20,21], and self-probing methods ask the model to evaluate its own candidate answers [22]. Behavioral methods infer uncertainty from the dispersion of sampled outputs, from simple answer agreement to semantic clustering that treats paraphrased answers as equivalent [6,7], with surveys consolidating the rapidly growing set of measures [23]. Perturbation-based methods broaden the probe beyond decoding: SPUQ perturbs the input, samples outputs per perturbation, and aggregates [24], and input clarification ensembling decomposes LLM uncertainty into data and model components by generating input clarifications and ensembling the predictions [25]. Calibration metrics such as expected calibration error [26] and selective prediction metrics such as the area under the risk-coverage curve quantify how well a confidence score ranks correct above incorrect answers. These methods inherit an assumption from sampling: that the sample distribution is informative. Our study tests this assumption directly, characterizes the regimes in which sample agreement and paraphrase agreement carry signal, and quantifies how much of the two signals' error coverage overlaps. In this sense our fragility analysis also connects to work on the faithfulness of chain-of-thought explanations, which finds that stated reasoning does not always cause the final answer [27]: paraphrase stability measures the robustness of the answer to surface form rather than to the reasoning trace.
+
+\subsection{Positioning}
+
+In summary, answer-space ensembling, prompt-space ensembling, and sampling-based uncertainty estimation have developed largely in isolation. Answer-space methods assume resampling generates useful diversity. Prompt-space methods assume paraphrases probe the same knowledge. Uncertainty methods assume sample dispersion tracks correctness. All three assumptions are regime dependent, and no prior work, to our knowledge, measures all three under a single matched-budget protocol on modern models. The comparison also carries practical weight for evaluation practice, since benchmark conclusions about model capability shift when prompts vary [1] and when aggregation is applied [5]. Our contribution is the unified empirical map, the validation machinery for paraphrases, and the decision guidance that follows from the regime structure.
+
+\section{A Budget-Matched Framework for Test-Time Ensembling}
+
+
+\subsection{Setup and notation}
+
+Let $M$ denote a large language model and let $q$ denote a question with a gold answer $y^*(q)$. For multiple-choice tasks the answer is an option letter, and for free-form numeric tasks the answer is a value compared numerically. A prompt $x$ is a rendering of $q$ into natural language, consisting of an optional passage, a question stem, an option list, and an instruction that specifies the required output format. We distinguish one canonical prompt $x_0$ and $K$ paraphrased prompts $x_1, \dots, x_K$ that preserve the semantics of $x_0$ under a validation procedure described in Section 4.
+
+The model produces an answer through stochastic decoding. We write $a(M, x, s)$ for the answer extracted from the $s$-th independent decode of prompt $x$ at temperature tau=0.7, and $a_g(M, x)$ for the greedy decode at tau=0. Answers are extracted from the model output by a fixed parser that searches for the mandated answer format and falls back to pattern matching over the final output lines; the parse rate is reported in Section 4, together with a retry policy and a sensitivity analysis for failed extractions.
+
+\subsection{The call matrix}
+
+For every question and model we collect a matrix of sixteen calls:
+\begin{equation}
+\mathcal{C}(M, q) \;=\; \bigl\{ a_g(M, x_0) \bigr\} \;\cup\; \bigcup_{s=1}^{S} \bigl\{ a(M, x_0, s) \bigr\} \;\cup\; \bigcup_{k=1}^{K} \bigl\{ a(M, x_k, s) : s \le r_k \bigr\},
+
+\end{equation}
+with $S = 6$ samples on the canonical prompt, $K = 6$ paraphrases, and $r_k = 2$ decodes for the first three paraphrases and $r_k = 1$ for the remaining three. The matrix therefore contains one greedy call, six canonical samples, six first-decode paraphrase calls, and three second-decode paraphrase calls. Every experimental condition studied in this paper is a deterministic function of this matrix, which guarantees that all comparisons hold the question, the model, and the realized decoding randomness constant across conditions.
+
+\subsection{Ensemble conditions}
+
+All conditions aggregate votes by majority rule. Ties are broken in favor of the earliest vote in a fixed canonical order, which prefers the canonical prompt over paraphrases and earlier paraphrases over later ones; we report tie incidence, which is negligible except where noted.
+
+The \emph{self-consistency} condition of size $k$ aggregates the first $k$ canonical samples:
+\begin{equation}
+SC-k(q) \;=\; \operatorname*{majority}\bigl( a(M, x_0, 1), \dots, a(M, x_0, k) \bigr), \qquad k \le 6 .
+\end{equation}
+The \emph{paraphrase ensemble} of size $k$ aggregates one decode of each of the first $k$ paraphrases:
+\begin{equation}
+PE-k(q) \;=\; \operatorname*{majority}\bigl( a(M, x_1, 1), \dots, a(M, x_k, 1) \bigr), \qquad k \le 6 .
+\end{equation}
+Both conditions spend exactly $k$ model calls and differ only in where the diversity comes from: $SC-k$ perturbs the decoder while the prompt is fixed, whereas $PE-k$ perturbs the prompt while the decoder configuration is fixed. This is the budget match that makes the two conditions comparable.
+
+The \emph{hybrid} condition splits a budget of six calls between the two sources, using two decodes of each of the first three paraphrases:
+\begin{equation}
+HB-6(q) \;=\; \operatorname*{majority}\bigl( a(M, x_k, s) : k \in \{1,2,3\},\ s \in \{1,2\} \bigr).
+\end{equation}
+Finally, the \emph{combined} condition aggregates all twelve stochastic votes available in the matrix, $COMB-12(q) = \operatorname{majority}\bigl( SC-6(q) \cup PE-6(q) \bigr)$, and serves as a twelve-call reference point for the marginal value of doubling the budget. Three further baselines and controls complete the design. The \emph{single-sample} baseline $S1$ is one stochastic draw of the canonical prompt at the decoding temperature used throughout (tau=0.7); its expected accuracy is estimated by averaging over the six canonical samples, and it is the \emph{primary} k=1 baseline of this study, because it is the marginal call that the ensembles actually add to. The greedy decode $a_g(M, x_0)$ at tau=0 is reported as a \emph{reference} baseline: it is a different decoding configuration, not a draw from the same distribution, and Section 5.2 quantifies how far it can sit from S1. A \emph{greedy-paraphrase} control re-decodes each paraphrase at tau=0, giving $PE^{g}-6(q) = \operatorname{majority}\bigl( a_g(M, x_1), \dots, a_g(M, x_6) \bigr)$; comparing PE-g-6 with PE-6 isolates the contribution of prompt-space variation from the decoding stochasticity that the standard paraphrase ensemble mixes in. A chain-of-thought variant repeats the single-call baseline, the self-consistency condition, and (for stem-locus datasets) the paraphrase ensemble under an explicit reasoning instruction, and a hard-task probe repeats the single-call and self-consistency conditions on MMLU-Pro; both are specified in Section 4 and analyzed in Section 5.
+
+\subsection{Consistency, modal share, and fragility}
+
+Three per-question statistics summarize the answer distribution. \emph{Sample agreement} is the frequency of the modal answer among the six canonical samples,
+\begin{equation}
+c_{S}(q) \;=\; \max_{v} \frac{1}{6} \sum_{s=1}^{6} \mathbb{1}\bigl[ a(M, x_0, s) = v \bigr],
+\end{equation}
+and \emph{paraphrase agreement} $c_{P}(q)$ is defined analogously over the six first-decode paraphrase answers. Both lie in $(0, 1]$, and the value $1$ indicates that the corresponding source produced no diversity at all, a situation we call \emph{answer degeneracy}. The \emph{modal vote share} is the corresponding statistic over the union of the twelve stochastic votes, that is, the fraction of all twelve votes that fall on the modal answer, and it is our primary per-question disagreement measure: it reads directly as the strength of the majority (one means unanimous, eleven of twelve means a single dissenting vote, and one half means a tie). We also compute the support-normalized answer entropy of the same twelve-vote distribution, divided by the maximum entropy attainable with the observed number of distinct answers, and report it for the follow-up conditions for comparability with our first release; all entropy values in the paper use this normalization and are reported as fractions, not percentages. The modal share is preferred as the headline statistic because a support-normalized entropy inflates near-unanimous distributions: with twelve votes, a single dissenter already yields a normalized entropy of $0.42$, so any entropy threshold below that value merely separates degenerate from non-degenerate questions rather than grading the strength of the majority.
+
+\emph{Fragility} captures disagreement between the two views of the same question: a question is fragile for a model when the majority answer of the canonical samples differs from the majority answer of the paraphrase answers, that is, when $SC-6(q) \ne PE-6(q)$. Fragility measures how much of the model's answer is an artifact of the particular surface form of the prompt rather than of the underlying question. The greedy-paraphrase control supports a noise-free variant, $SC-6(q) \ne PE^{g}-6(q)$, in which neither side involves stochastic decoding.
+
+\subsection{Error detection and selective prediction}
+
+We evaluate consistency scores as unsupervised error detectors. For each model, the consistency score of a question (reversed, so that lower agreement indicates higher predicted risk) ranks questions, and we compute the area under the receiver operating characteristic curve (AUROC) for predicting whether the reference answer is incorrect, where the reference is the combined twelve-vote ensemble unless stated otherwise. When both agreement scores are available, the \emph{combined} detector is their sum of disagreements, $2 - c_{S} - c_{P}$, so that a question is flagged when either source shows diversity; this is the synthesis used in the Both columns of Section 5. We complement AUROC with risk-coverage curves that plot the error rate of the accepted subset as the acceptance threshold varies, summarized by the area under the risk-coverage curve (AURC), computed by accepting questions in decreasing order of confidence and averaging the error rate over all prefix sizes; smaller AURC indicates a better ranking, and a random ranking yields AURC equal to the overall error rate. Because several questions typically share the same confidence value, the acceptance order within a tied group is not determined by the score; we therefore average AURC over uniformly random tie-breaking (1{,}000 permutations), which makes the estimate invariant to the arbitrary ordering of the prediction log. Where a model produces zero errors or constant scores, AUROC is undefined and we report the regime instead; where a model produces fewer than five errors, we report AUROC and AURC descriptively only, without confidence intervals or cross-model comparison.
+
+Because the agreement scores and the reference answer share the same underlying votes, part of the error-detection result is structural rather than empirical: when all twelve votes coincide, the reference equals that unanimous answer by construction, and any detector that reads unanimity is correct by definition on such questions. We therefore separate the degenerate stratum, where the detector outcome is definitional, from the non-degenerate stratum, where the ranking carries empirical content, and we report both. As an additional check against circularity, we recompute the entropy-gain correlation using disjoint votes: entropy over the canonical samples is correlated with the paraphrase-ensemble gain, and entropy over the paraphrase votes with the self-consistency gain, so that the predictor and the outcome share no votes.
+
+\subsection{Statistical analysis}
+
+Accuracy comparisons between two conditions on the same questions are paired by construction. We report bootstrap 95\% confidence intervals for accuracy differences (10,000 resamples, resampling questions) and two-sided exact McNemar tests for paired correctness indicators. Because we interpret a difference of three percentage points or less as practically negligible, we also report two one-sided tests (TOST) against equivalence bounds of $\pm 3$ points, implemented as bootstrap 90\% confidence intervals for the paired difference: equivalence is established only when the entire interval lies inside the bounds. One caveat is inherent to the design: accuracy moves in units of one question, so the $\pm 3$-point bound corresponds to 2.7 questions at $n = 90$, 2.1 at $n = 71$, and fewer than one question for the smallest completed sets, which makes the TOST verdict on the small models sensitive to the flip of a single question; we flag such cells explicitly. A failure to reject the null hypothesis of no difference is reported as \emph{no detectable difference} and never as evidence of equivalence; at our sample sizes, differences smaller than roughly five points often remain undetectable, and we state this power limitation explicitly wherever it applies. Pooled analyses aggregate (model, question) pairs that share questions across models; because such pairs are not independent, all pooled confidence intervals use a question-level cluster bootstrap that resamples questions and carries every model's pair within a resampled question. Per-model analyses use each model's own completed question set, with the sample size stated in every table. We treat question sets as fixed and do not extrapolate beyond the measured benchmarks.
+
+\subsection{When does majority voting help? A heuristic model}
+
+
+The empirical regime structure has a counterpart in a simple plurality-vote model in the spirit of the Condorcet jury theorem [28]. We state it as a heuristic, not a theorem: the asymptotic statements are standard, but the finite-$k$ behavior, the tie handling, and the application to language-model votes each require idealizations that we do not prove. Write $p$ for the probability that one vote drawn from the canonical sampling distribution is the correct answer, and $q_1 \ge q_2 \ge \dots$ for the probabilities of the incorrect answers, so that $p + \sum_i q_i = 1$. Three idealizations are implicit: the $k$ votes are independent and identically distributed draws from this distribution; plurality ties are broken uniformly at random; and the paraphrase ensemble is described by an analogous distribution of its own, which shares the same gold answer but need not coincide with the canonical one, because paraphrased prompts are not exchangeable with resampled decodes of the original prompt.
+
+\textbf{Asymptotic statement.} As $k$ grows, the plurality winner converges in probability to the modal answer of the vote distribution. Consequently, when $p > q_1$ the probability that the plurality winner is correct tends to one, and when $q_1 > p$ it tends to zero. The convergence is asymptotic; we do not assert monotonicity in $k$, and at small $k$ with near-tied leaders the win probability can move in either direction, which is visible in our budget curves as one-question zigzags.
+
+\textbf{Baseline statement.} A single vote is correct with probability $p$, so majority voting with $k \to \infty$ outperforms \emph{a single stochastic sample} if and only if $p > q_1$, and it underperforms it exactly when the modal answer is wrong. The comparison against greedy decoding is subtler and not covered by the model: greedy decoding approximates the argmax of the model's answer distribution rather than drawing one sample from it, so the greedy answer and the modal sampled answer coincide only when temperature-$0$ decoding is faithful to the underlying distribution. Section 5.2 shows that the two can disagree by up to ten points on real deployments, which is precisely a violation of this idealization, and it is why we take the single-sample expectation S1, not greedy, as the k=1 baseline.
+
+The model explains the three regimes we observe. In the degenerate regime, $p$ is zero or one and voting is vacuous. In the high-entropy regime with $p > q_1$ (for example Agnes3.0-Flash on logical reasoning), self-consistency converts a distribution that is right on average into a reliable majority. In the high-entropy regime with $q_1 > p$ (GPT-6-Luna and Gemini3.8-Flash on logical reasoning), voting amplifies the modal error and reduces accuracy relative to a single sample, while a second diversity source that shifts the effective vote distribution can restore $p > q_1$, which is what the paraphrase ensemble does for these two models. The model also clarifies why disagreement alone does not predict gains: the modal share measures the spread of the distribution, whereas the sign of $p - q_1$ measures whether the mode is correct, and two distributions with identical shares can sit on opposite sides of that threshold. The budget-matched comparison of Section 5 can then be read as asking which diversity source moves the effective vote distribution further toward the $p > q_1$ region at a given budget.
+
+\section{Experimental Setup}
+
+
+\subsection{Benchmarks}
+
+We assemble a six-benchmark suite that spans knowledge, commonsense, mathematical reasoning, and logical reasoning, with a mix of option counts and answer formats. TruthfulQA-MC1 [29] contributes adversarial factual questions with four or five options; we shuffle option order per question to avoid position bias. PIQA [30] contributes two-choice physical commonsense problems. LogiQA [31] contributes four-choice logical reading comprehension. LSAT logical reasoning and SAT mathematics, both from the AGIEval suite [32], contribute five-choice analytical reasoning and four-choice quantitative items respectively. GSM8K [33] contributes free-form grade-school mathematics problems answered with chain-of-thought reasoning and a final numeric value. We sample fifteen questions per benchmark uniformly at random with a fixed seed, giving ninety questions in total. The mixture is deliberately diverse in difficulty: as Section 5 shows, the strongest models in our pool saturate five of the six benchmarks while all models find LogiQA and, for some models, GSM8K and SAT mathematics challenging, which supplies both the degenerate and the high-entropy regimes that our analysis requires.
+
+\subsection{Models}
+
+We study six commercial models from four families, accessed through three providers under their free tiers: Qwen3.8-Max and Qwen3.8-Omni from the Qwen family [34,35]; Agnes3.0-Flash and Agnes2.5-Flash from the Agnes family [36]; GPT-6-Luna from the GPT family [37,38]; and Gemini3.8-Flash from the Gemini family [39]. The models span a range of capability tiers and post-training styles, including one model that emits an explicit private reasoning trace and one multimodal variant. All models are queried through OpenAI-compatible endpoints; the main-suite data was collected on October 17, 2026, and the follow-up conditions on October 18, 2026. Sampling uses temperature $0.7$ with default nucleus probability; greedy calls use temperature $0$. For the two Qwen models we disable the proprietary thinking mode on multiple-choice tasks to control token expenditure and enable it on GSM8K, where chain-of-thought is necessary; all other models run in their default configurations, and every model receives the identical instruction format described below. Because the models are served through third-party endpoints, we cannot verify whether the provider honors the requested temperature for reasoning-style models; the Qwen thinking mode is the one decoding parameter we control explicitly, and we report per-call token usage and timestamps in the released logs so that the decoding configuration is fully auditable. Table 1 states the exact model identifiers, the access dates, and the call counts.
+
+\subsection{Prompt design and paraphrase generation}
+
+The canonical prompt for a multiple-choice question consists of the passage when present, the question stem, the option list labeled $(A)$ through $(E)$, and a fixed instruction that requires a direct answer in the form \texttt{Answer: <letter>} without explanation. GSM8K prompts instead require step-by-step reasoning ending with \texttt{Answer: <number>}. Direct answering on multiple-choice tasks keeps the comparison uniform across models, keeps token costs bounded, and isolates the aggregation question from chain-of-thought length effects; the GSM8K condition covers the reasoning-trace regime.
+
+Paraphrases target the parts of the prompt where semantic-preserving variation is well defined: the question stem for TruthfulQA, LSAT, and LogiQA, and the instruction wording for GSM8K, PIQA, and SAT mathematics, whose stems contain problem-specific content such as numbers that should not be altered. This design yields two paraphrase loci, and Section 5 reports all fragility and gain statistics stratified by locus. Stem paraphrases are generated by a seventh model (Qwen3.7-Flash) that is not part of the evaluation pool, prompted to rewrite each stem in six ways while preserving all facts, entities, numbers, and the question type. Instruction paraphrases are six handcrafted variants per dataset that vary wording while keeping the literal answer-format requirement fixed, which keeps answer extraction reliable. As a robustness check, a second generator (Agnes3.0-Flash, outside its own evaluation role) regenerates paraphrases for all stem-locus questions, and the alternative set is validated to the same standard; a planned re-evaluation of the prompt-brittle models under the alternative paraphrases was cut short by provider quota exhaustion and is left to future work.
+
+Every generated paraphrase passes a three-stage validation filter. A lexical stage rejects paraphrases that are identical to the original or whose length ratio falls outside $[0.4, 2.5]$. A semantic stage embeds the original stem and each candidate with a text embedding model and rejects candidates whose cosine similarity to the original falls below $0.75$. A form stage, applied to factual questions, rejects rewrites that change the question type, for example from a wh-question to a yes-no question. Candidates that fail any stage are replaced by regenerated candidates until six valid paraphrases per question are obtained; the final set achieves a mean embedding similarity of $0.86$ with the originals. One further check strengthens the semantic stage: a bidirectional entailment test, administered by an auxiliary language model, asks whether each paraphrase entails the original and is entailed by it; 267 of 270 final paraphrases pass both directions, and 269 of 270 of the second generator's paraphrases pass, with the full per-item verdicts released alongside the paraphrases. As a sensitivity analysis, the fragility statistics are recomputed under a stricter embedding threshold of 0.80, and the qualitative pattern is unchanged.
+
+\subsection{Execution and quality control}
+
+The experiment executes the sixteen-call matrix of Section 3 for every question and model through an asynchronous runner with per-provider rate limiting, automatic retry with exponential backoff, and append-only checkpointing. Answer extraction uses the mandated \texttt{Answer:} format first and falls back to scanning the final output lines for a well-formed option letter or number, with the option range constrained by the question. Every stored record includes the extracted answer, its correctness, token usage, and a content snippet for auditing. Extraction succeeds on between 94.7\% and 100\% of calls across the six models; cells whose first decode fails to parse are re-drawn under the identical prompt and decoding configuration until extraction succeeds or the free-tier quota of the provider is exhausted, and questions with any remaining unparsed cell are excluded from that model's analysis, so all reported accuracies are computed over complete question matrices. Two safeguards address the residual exclusions. First, a sensitivity analysis recomputes every condition under a lenient rule that aggregates whichever votes parsed, requiring at least four of six; the qualitative ordering of conditions is unchanged. Second, the excluded questions are compared with the included ones on greedy accuracy to probe for difficulty-related selection bias; no systematic difference in difficulty is observed (Section 5). Per-model completed question counts, which vary between 12 and 90 owing to provider rate limits and quota, are stated alongside every result, and pooled analyses use the intersection of completed questions across the models involved, with question-level cluster bootstrap intervals.
+
+\subsection{Follow-up conditions}
+
+Three follow-up conditions extend the main matrix; all reuse its prompts, paraphrases, and parsing.
+
+\textbf{Greedy paraphrases.} For every model and every question in its completed set, each of the six paraphrases is decoded once at tau=0. The control yields the noise-free paraphrase ensemble PE-g-6 and the noise-free fragility indicator of Section 3, and it covers five of the six models (the free-tier quota of Qwen3.8-Omni was exhausted after completing its main matrix).
+
+\textbf{Hard-task probe.} Because the flagship models saturate most of the main suite, we probe a harder distribution: thirty questions sampled uniformly at random (fixed seed, stratified by subject) from the MMLU-Pro test set [40], which offers ten options per question. The probe administers the single-call greedy baseline and the six-sample self-consistency condition per question, without paraphrases, under the direct-answering instruction. GPT-6-Luna, Agnes2.5-Flash, and Agnes3.0-Flash cover fifteen, thirteen, and eight complete questions respectively; on hard quantitative items the direct-answering instruction does not always suppress reasoning, and outputs truncated at the token cap lost extraction on a majority of Qwen3.8-Max's probe calls, leaving six complete questions (eight with at least four parsed votes) before its quota was exhausted.
+
+\textbf{Chain-of-thought answering.} The main suite answers multiple-choice questions directly, while self-consistency was originally motivated for chain-of-thought reasoning [5,8]. The follow-up therefore repeats the greedy baseline, the six-sample self-consistency condition, and, for stem-locus questions, the six-paraphrase ensemble under an explicit instruction to reason step by step and end with the mandated answer format. The CoT condition covers the full multiple-choice sets of Agnes3.0-Flash, Agnes2.5-Flash, and GPT-6-Luna, a twelve-question stratified subset for Qwen3.8-Max, and a fifteen-question subset planned for Qwen3.8-Omni whose free-tier quota was exhausted before the condition could run; Gemini3.8-Flash is excluded because its small completed set left no provider capacity after the greedy-paraphrase control. GSM8K is excluded because its main-suite condition is already chain-of-thought.
+
+\subsection{Conditions and metrics}
+
+Each model and question yields the greedy reference baseline, the single-sample baseline $S1$, $SC-k$ and $PE-k$ for $k \in \{2, 4, 6\}$, the hybrid HB-6, the combined COMB-12, the agreement statistics $c_{S}$ and $c_{P}$, the modal vote share, and the fragility indicator. Accuracy is the fraction of questions answered correctly. Error detection is evaluated by AUROC and tie-randomized AURC as defined in Section 3. Budget curves plot accuracy against $k$ for both pure strategies. All analysis code operates on the raw prediction logs, and we release the logs together with the prompts and paraphrases.
+
+\section{Results}
+
+
+\subsection{Overview and data quality}
+
+
+Table 1 summarizes the six models and their completed question sets. Answer extraction succeeds on between 94.7\% and 100\% of calls across models; cells whose first decode fails to parse were re-drawn under the identical configuration until extraction succeeded, subject to provider quota. Qwen3.8-Max reached a complete sixteen-call matrix on all ninety questions; Qwen3.8-Omni reached it on seventy-one of the ninety, and the remaining four models on 12 to 40 questions each, bounded by provider rate limits and free-tier quotas. All within-model comparisons are paired and unaffected by coverage, and pooled analyses use the intersection of completed questions, stated explicitly wherever pooled numbers appear.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Models, coverage, and data quality. Parse rate is the fraction of calls from which the mandated answer format was extracted after retries; $n$ is the number of questions with a complete call matrix.}
+
+\begin{tabular}{l l l c c}
+\toprule
+Model & Family & Tier & Parse rate & $n$ \\
+\midrule
+Qwen3.8-Max & Qwen & flagship & 99.6\% & 90 \\
+Qwen3.8-Omni & Qwen & multimodal & 96.8\% & 71 \\
+Agnes3.0-Flash & Agnes & fast & 94.7\% & 33 \\
+Agnes2.5-Flash & Agnes & reasoning & 96.9\% & 40 \\
+GPT-6-Luna & GPT & reasoning & 100.0\% & 15 \\
+Gemini3.8-Flash & Gemini & fast & 99.6\% & 12 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The sensitivity analysis in Table 1 addresses the residual exclusions from two directions. Under a lenient aggregation rule that admits any question with at least four parsed votes per source, the ordering of conditions is preserved for every model: Agnes3.0-Flash moves from 78.8\% greedy to 88.1\% under SC-6 and 92.3\% under PE-6 on the extended set, and the flagship accuracies shift by at most one question. Comparing excluded with included questions on greedy accuracy shows that the excluded sets are not systematically easier: for Qwen3.8-Omni the excluded questions are nine points \emph{harder} (84.2\% versus 93.0\%), for Agnes2.5-Flash they are thirty points harder (60.0\% versus 90.0\%), while for GPT-6-Luna and Gemini3.8-Flash the few excluded questions happened to be answered correctly. The exclusions follow provider rate limits on a fixed question order rather than any adaptive choice, and both checks indicate that the complete-matrix requirement does not manufacture the effects we report.
+
+\subsection{RQ1: Accuracy under budget-matched ensembling}
+
+
+Table 2 reports accuracy for the five aggregation conditions together with the two single-call baselines, and Figure 1 visualizes the four models with at least twenty complete questions. Because the ensembles spend stochastic calls, the single-sample expectation S1 is the primary k=1 baseline, and the $\Delta$ columns of Table 2 express both ensemble gains relative to it. Three patterns dominate. First, the two Qwen flagships are at or near ceiling on five of six benchmarks, and for them the pure ensembles reproduce both baselines exactly: SC-6, PE-6, and COMB-12 all return 93.3\% for Qwen3.8-Max and 93.0\% for Qwen3.8-Omni, identical to greedy and S1. The aggregation strategies are not failing; they are vacuous, because the answer distribution they aggregate contains a single value, a point that Section 5.5 quantifies. Second, measured against S1, neither diversity source buys a systematic gain: pooled over the four well-covered models (112 model-question pairs on 28 common questions), SC-6 gains $+0.9$ points and PE-6 loses $0.9$ points, with the combined ensemble exactly matching S1; the largest per-model gain over S1 is $+1.5$ points (Agnes3.0-Flash, both sources). Third, the gains that do exist are concentrated where the modal answer is wrong: PE-6 lifts GPT-6-Luna by $+10.0$ points over S1 and Gemini3.8-Flash by $+5.6$, while SC-6 \emph{loses} $3.3$ and $2.8$ points on the same two models. The sign of the gain, not its size, is what separates the models, which is the plurality-vote signature of Section 3.7.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Main results. Accuracy (\%) under budget-matched conditions: greedy single call at tau=0, single-sample expectation S1 (mean over the six canonical draws at tau=0.7), six-vote self-consistency (SC-6), six-paraphrase ensemble (PE-6), three-paraphrase two-sample hybrid (HB-6), and the twelve-vote combined ensemble (COMB-12). $\Delta$SC and $\Delta$PE are the gains of SC-6 and PE-6 over the S1 baseline in points.}
+
+\scriptsize
+\begin{tabular}{l c c c c c c c c c}
+\toprule
+Model & $n$ & Greedy & S1 & SC-6 & PE-6 & HB-6 & COMB-12 & $\Delta$SC & $\Delta$PE \\
+\midrule
+Qwen3.8-Max & 90 & 93.3 & 93.3 & 93.3 & 93.3 & 92.2 & 93.3 & +0.0 & +0.0 \\
+Qwen3.8-Omni & 71 & 93.0 & 93.9 & 93.0 & 93.0 & 91.5 & 93.0 & -0.9 & -0.9 \\
+Agnes3.0-Flash & 33 & 78.8 & 89.4 & 90.9 & 90.9 & 90.9 & 90.9 & +1.5 & +1.5 \\
+Agnes2.5-Flash & 40 & 90.0 & 94.2 & 95.0 & 92.5 & 92.5 & 95.0 & +0.8 & -1.7 \\
+GPT-6-Luna & 15 & 80.0 & 76.7 & 73.3 & 86.7 & 86.7 & 86.7 & -3.3 & +10.0 \\
+Gemini3.8-Flash & 12 & 91.7 & 86.1 & 83.3 & 91.7 & 91.7 & 91.7 & -2.8 & +5.6 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{/home/z/my-project/paper/figures/conditions.png}
+\caption{Accuracy of the single-sample baseline S1, the greedy reference, and the four aggregation conditions for the four models with at least twenty complete question matrices. The two Qwen flagships show identical accuracy across conditions, which reflects answer degeneracy rather than agreement between strategies; the models where the modal answer is wrong (GPT-6-Luna, Gemini3.8-Flash) show the two diversity sources pulling in opposite directions. Exact values are given in Table 2.}
+
+\end{figure}
+
+A separate result concerns the greedy reference itself: greedy decoding at tau=0 is not an unbiased stand-in for a single stochastic draw. Pooled over the same 112 pairs, S1 reaches 96.4\% against 92.0\% for greedy, a $+4.5$ point gap whose question-level cluster-bootstrap interval, $[+0.9, +8.8]$, excludes zero. The gap is model dependent in both direction and mechanism. For the two Agnes models, greedy sits $10.6$ and $4.2$ points below S1; auditing the discordant questions shows one clear truncation artifact (a greedy chain-of-thought that hit the token cap, after which the parser extracted an intermediate number), two cases of mode locking where the greedy answer differed from every one of the six sampled answers, and remaining cases where greedy picks a minority answer. For GPT-6-Luna and Gemini3.8-Flash the sign reverses ($-3.3$ and $-5.6$ points), and for these models the greedy answer always coincided with the modal sampled answer on our data. Neither baseline subsumes the other, which is why Table 2 reports both; but because the ensembles aggregate stochastic calls, S1 is the fair comparison, and gains measured against greedy conflate the ensembling effect with the greedy-versus-sampled gap. Earlier releases of this study reported the larger greedy-referenced gains ($+12.1$ points for Agnes3.0-Flash under SC-6); under the S1 baseline the same cell is $+1.5$ points.
+
+Two further observations complete the accuracy picture. The hybrid allocation is a hedge rather than a dominant strategy: it matches the better pure strategy when one source fails, as for GPT-6-Luna where HB-6 and PE-6 both reach 86.7\% while SC-6 falls to 73.3\%, but it never exceeds the better pure strategy on any model, and it trails it by exactly one question on Qwen3.8-Max (92.2 versus 93.3), Qwen3.8-Omni (91.5 versus 93.0), and Agnes2.5-Flash (92.5 versus 95.0). The twelve-vote combined ensemble likewise does not dominate the six-vote conditions: pooled it exactly matches S1 at 96.4\% against 97.3\% for SC-6, because for three of the four pooled models the paraphrase votes it adds are individually no better than a single canonical draw and dilute the majority. Doubling the budget therefore buys no guarantee; the quality of the marginal vote, not the count, governs the outcome.
+
+On the central question, whether one diversity source buys more accuracy per call than the other, we detect no difference against either baseline. Against S1, the pooled SC-6 advantage over PE-6 is $1.8$ points, the question-level cluster-bootstrap interval is $[0.0, +3.6]$, and the per-model intervals for the gain over S1 all include zero (Table 3); no per-model McNemar test on the SC-6-versus-PE-6 discordances approaches significance (all $p \ge 0.5$), and the smallest McNemar $p$ anywhere in the table is $0.125$ (SC-6 versus greedy on Agnes3.0-Flash), which does not survive any multiple-comparison correction. We emphasize what this does and does not establish. The TOST procedure at equivalence bounds of $\pm 3$ points does not conclude equivalence for the pooled difference, and the bound itself is coarse at these sample sizes: $\pm 3$ points is 2.7 questions at $n = 90$ and fewer than one question on the smallest sets, so a single flipped question can move the verdict. At these sample sizes the study is powered to detect only large differences; a genuine advantage of either source of up to several points could go unnoticed. The two strategies are therefore not interchangeable in principle, and for two reasons the data show they are not interchangeable in practice either: they disagree on individual questions at measurable rates (Section 5.3), and their agreement signals catch different errors (Section 5.4).
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Paired comparisons between conditions: discordant counts ($b$: first condition right, second wrong; $c$: the reverse), exact McNemar $p$, accuracy difference with 95\% question-resampled bootstrap CI, and the TOST verdict at $\pm 3$ point equivalence bounds. ``no'' means equivalence is not established at this sample size, not that a difference was found.}
+
+\scriptsize
+\begin{tabular}{l c l c c c c c c}
+\toprule
+Model & $n$ & Comparison & $b$ & $c$ & McNemar $p$ & Diff. & 95\% CI & TOST $\pm$3 \\
+\midrule
+Qwen3.8-Max & 90 & SC-6 $-$ S1 & -- & -- & -- & +0.0 & [0.0,0.0] & -- \\
+ &  & PE-6 $-$ S1 & -- & -- & -- & +0.0 & [0.0,0.0] & -- \\
+ &  & SC-6 $-$ Greedy & 0 & 0 & 1.000 & +0.0 & [0.0,0.0] & -- \\
+ &  & SC-6 $-$ PE-6 & 0 & 0 & 1.000 & +0.0 & [0.0,0.0] & yes \\
+
+Qwen3.8-Omni & 71 & SC-6 $-$ S1 & -- & -- & -- & -0.9 & [-3.3,1.2] & -- \\
+ &  & PE-6 $-$ S1 & -- & -- & -- & -0.9 & [-4.0,1.6] & -- \\
+ &  & SC-6 $-$ Greedy & 1 & 1 & 1.000 & +0.0 & [-4.2,4.2] & -- \\
+ &  & SC-6 $-$ PE-6 & 1 & 1 & 1.000 & +0.0 & [-4.2,4.2] & yes \\
+
+Agnes3.0-Flash & 33 & SC-6 $-$ S1 & -- & -- & -- & +1.5 & [-2.5,6.1] & -- \\
+ &  & PE-6 $-$ S1 & -- & -- & -- & +1.5 & [-2.5,6.1] & -- \\
+ &  & SC-6 $-$ Greedy & 4 & 0 & 0.125 & +12.1 & [3.0,24.2] & -- \\
+ &  & SC-6 $-$ PE-6 & 0 & 0 & 1.000 & +0.0 & [0.0,0.0] & yes \\
+
+Agnes2.5-Flash & 40 & SC-6 $-$ S1 & -- & -- & -- & +0.8 & [0.0,2.5] & -- \\
+ &  & PE-6 $-$ S1 & -- & -- & -- & -1.7 & [-5.0,0.0] & -- \\
+ &  & SC-6 $-$ Greedy & 2 & 0 & 0.500 & +5.0 & [0.0,12.5] & -- \\
+ &  & SC-6 $-$ PE-6 & 1 & 0 & 1.000 & +2.5 & [0.0,7.5] & no \\
+
+GPT-6-Luna & 15 & SC-6 $-$ S1 & -- & -- & -- & -3.3 & [-12.2,4.4] & -- \\
+ &  & PE-6 $-$ S1 & -- & -- & -- & +10.0 & [0.0,22.2] & -- \\
+ &  & SC-6 $-$ Greedy & 0 & 1 & 1.000 & -6.7 & [-20.0,0.0] & -- \\
+ &  & SC-6 $-$ PE-6 & 0 & 2 & 0.500 & -13.3 & [-33.3,0.0] & no \\
+
+Gemini3.8-Flash & 12 & SC-6 $-$ S1 & -- & -- & -- & -2.8 & [-12.5,4.2] & -- \\
+ &  & PE-6 $-$ S1 & -- & -- & -- & +5.6 & [0.0,13.9] & -- \\
+ &  & SC-6 $-$ Greedy & 0 & 1 & 1.000 & -8.3 & [-25.0,0.0] & -- \\
+ &  & SC-6 $-$ PE-6 & 0 & 1 & 1.000 & -8.3 & [-25.0,0.0] & no \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The comparison is also matched in tokens, not only in calls. Averaged per call, canonical-sample and paraphrase calls cost within one to five percent of each other for every model (for example 223 versus 219 tokens for Qwen3.8-Max and 505 versus 528 for GPT-6-Luna), because validated paraphrases change the surface form but not the length of the task: the mean character-length ratio between paraphrase and original stems is 1.06 for the Qwen models and 1.13 to 1.14 for the API-served models. Budgets matched in calls are therefore approximately matched in cost for this suite.
+
+\subsection{RQ2: Paraphrase fragility}
+
+
+Fragility, the fraction of questions where paraphrasing alone flips the majority answer, is negligible in the degenerate regime and substantial in the high-entropy regime. Qwen3.8-Max shows fragility on 1.1\% of questions and Qwen3.8-Omni on 4.2\%, concentrated almost entirely in LogiQA, where the respective per-dataset fragility rates are 6.7\% and 21.4\%. The models with high answer entropy on logical reasoning show more: GPT-6-Luna flips on 13.3\% of its questions overall and on 40\% of its LogiQA questions, and Gemini3.8-Flash on 8.3\% overall and 33.3\% of LogiQA. Agnes3.0-Flash, whose gains come with fully consistent votes across both sources, shows zero fragility.
+
+Stratifying by paraphrase locus, which the design fixes in advance, shows that flips are entirely a stem-locus phenomenon. Across all six models, no question ever flips under instruction paraphrasing (zero of 52 pooled instruction-locus pairs), while 3.3\% of pooled stem-locus pairs flip, rising to 28.6\% and 20\% for GPT-6-Luna and Gemini3.8-Flash respectively. The two loci differ by construction in how much of the prompt they vary, so the asymmetry should be read as a property of the perturbation family rather than of the models: instruction rewordings touch only the answer-format scaffolding, while stem rewordings touch the problem content itself. For evaluation practice, the practical consequence is that a single-prompt score on a hard benchmark understates the instability of the measured system by an amount that stem fragility makes visible, and that instruction-level prompt ensembling, as sometimes used to stabilize benchmark scores, probes a much weaker axis of variation than stem-level paraphrasing.
+
+Fragility is not random noise; it tracks the same model-task cells that carry answer entropy and ensembling gains, which supports reading it as an observable symptom of unstable knowledge rather than as a formatting artifact. It is also not an artifact of loose paraphrases: recomputing the statistic with only the paraphrases whose fresh embedding similarity exceeds the stricter 0.80 threshold, requiring at least four such paraphrases per question, leaves the rates essentially unchanged or higher for every model (GPT-6-Luna 33.3\% on six qualifying questions versus 13.3\% overall; Gemini3.8-Flash 25.0\% versus 8.3\%; Qwen3.8-Omni 4.8\% versus 4.2\%), so if anything the tighter paraphrases flip more. Section 5.6 returns to fragility with a decoding-noise-free variant computed from greedy paraphrase decodes.
+
+\subsection{RQ3: Consistency as an error signal}
+
+
+Table 4 evaluates agreement scores as unsupervised detectors of ensemble errors, and Figure 2 visualizes AUROC. Models with fewer than five ensemble errors are marked with a dagger and reported descriptively only; at one to three errors, AUROC values are dominated by individual questions and their confidence intervals would span most of the unit interval. The pattern follows the regime structure. For the Qwen flagships, where almost every question is degenerate, sample agreement carries almost no signal (AUROC 0.58 for Qwen3.8-Max, 95\% CI $[0.50, 0.78]$) because the score is constant at one for nearly all questions, right or wrong; the degenerate stratum contributes errors that are invisible to any agreement-based detector by construction, and five of Qwen3.8-Max's six errors are missed by both signals. Qwen3.8-Omni retains moderate signal (0.79). In the models with genuine entropy the scores become informative and the stronger source differs across models: for Agnes3.0-Flash, sample agreement is highly discriminative (0.96, CI $[0.89, 1.00]$) while paraphrase agreement is weak (0.60), whereas for GPT-6-Luna paraphrase agreement is the stronger signal (0.92 against 0.58) and for Gemini3.8-Flash both signals separate its single error perfectly. Agnes2.5-Flash, whose answers are mostly degenerate, shows a reversed sample-agreement ranking that we read as noise at its two-error rate.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Uncertainty estimation. Error rate of the COMB-12 reference; AUROC of reversed agreement scores for predicting ensemble errors (95\% bootstrap CI where the model has at least five errors); and the area under the risk-coverage curve (AURC; lower is better), computed by accepting questions in decreasing order of confidence with ties broken uniformly at random and averaged over 1{,}000 permutations, so a random ranking yields AURC equal to the error-rate column. Both is the sum of the two disagreement scores (AUROC only). $^\dagger$Fewer than five errors: descriptive only. Dashes indicate constant scores or zero errors.}
+
+\footnotesize
+\begin{tabular}{l c c c c c c}
+\toprule
+ & & \multicolumn{3}{c}{AUROC} & \multicolumn{2}{c}{AURC$^{\ddagger}$} \\
+
+Model & Err. & $c_S$ & $c_P$ & Both & $c_S$ & $c_P$ \\
+\midrule
+Qwen3.8-Max & 6.7 & 0.583 & 0.576 & 0.578 & 0.057 & 0.058 \\
+Qwen3.8-Omni & 7.0 & 0.788 & 0.779 & 0.780 & 0.031 & 0.032 \\
+Agnes3.0-Flash$^\dagger$ & 9.1 & 0.961 & 0.600 & 0.922 & 0.009 & 0.073 \\
+Agnes2.5-Flash$^\dagger$ & 5.0 & 0.487 & 0.704 & 0.704 & 0.051 & 0.029 \\
+GPT-6-Luna$^\dagger$ & 13.3 & 0.577 & 0.923 & 0.769 & 0.105 & 0.024 \\
+Gemini3.8-Flash$^\dagger$ & 8.3 & 0.955 & 0.955 & 1.000 & 0.011 & 0.011 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{/home/z/my-project/paper/figures/auroc.png}
+\caption{AUROC of reversed agreement scores for detecting ensemble errors. The dashed line marks chance. Signal strength follows the entropy regime, and the stronger source differs across models. $^\dagger$Models with fewer than five errors, reported descriptively.}
+
+\end{figure}
+
+The risk-coverage analysis in Table 4 quantifies the selective-prediction value of each signal, with ties in the confidence score resolved by uniformly random tie-breaking (Section 3), so each AURC is directly comparable with the model's overall error rate, which is the AURC of a random ranking. Sample agreement attains an AURC of 0.031 for Qwen3.8-Omni against an error rate of 7.0\%, and 0.009 for Agnes3.0-Flash against 9.1\%; paraphrase agreement attains 0.032 and 0.073 on the same models, so the AURC ordering tracks the AUROC ordering rather than the earlier fixed-order artifact, which had overstated Qwen3.8-Omni's ranking quality and placed Agnes3.0-Flash's paraphrase signal above its error rate. For Qwen3.8-Max, whose signals are uninformative, AURC stays at 0.057 against a 6.7\% error rate, close to the random baseline as expected. Pooled over the four well-covered models, sample agreement reaches an AUROC of 0.74 (cluster-bootstrap 95\% CI $[0.71, 0.75]$) against 0.60 $[0.46, 0.73]$ for paraphrase agreement, an interval that overlaps chance: pooled across models with opposite signal strengths, the paraphrase signal averages out.
+
+The two agreement scores therefore measure different failure modes, but the evidence for complementarity is about coverage, not about a superior combined detector. Among the ensemble errors of the models with informative signals, the flagged sets overlap only partially: for Agnes3.0-Flash, sample agreement flags all three errors while paraphrase agreement flags one, two of them only through sample agreement; for GPT-6-Luna, paraphrase agreement flags both errors and sample agreement only one; for Qwen3.8-Omni the two signals flag the same three of five errors. Accordingly, the combined Both score exceeds the best single signal only for Gemini3.8-Flash, ties it for Agnes3.0-Flash (0.92 against 0.96 for sample agreement alone, i.e., slightly below), and falls between the two singles elsewhere; pooled it reaches 0.73 against 0.74 for sample agreement alone. A deployment that can afford both probes obtains partially disjoint evidence, and neither signal subsumes the other, but summing the two disagreement scores is not the way to combine them; a learned or calibrated combination is a natural next step. We also note the structural caveat of Section 3: on questions where all twelve votes coincide, the reference answer equals that unanimous vote by construction, so detectors that read unanimity are correct by definition on the degenerate stratum; the informative content of Table 4 lies in the non-degenerate stratum, which the flagged-error analysis above reflects.
+
+\subsection{RQ4: The regime structure}
+
+
+Table 5 reports per model and dataset the greedy accuracy, the single-sample expectation, the combined-ensemble accuracy, the mean modal vote share, and the degeneracy rate, and Figure 3 plots the ensemble gain over S1 against the dissent share (one minus the modal share) for every model-dataset cell. The scatter shows the dependency that anchors the whole study, in a sharper form than the entropy-based reading of our first release. Disagreement predicts the fragility of the greedy reference rather than the value of ensembling: across the pooled (model, question) pairs of the four well-covered models, the Spearman rank correlation between the dissent share and the gap $S1 - greedy$ is $-0.80$, meaning that greedy decoding departs furthest from the sampled consensus exactly where the votes disagree, while the correlation between dissent and the COMB-12 gain over S1 is only $-0.17$: relative to a single stochastic draw, ensembling neither gains nor loses much on average, it only converts an uncertain single draw into the modal answer. Because the share and the combined ensemble share the same underlying votes, we recompute the correlations with strictly disjoint votes: the sample-side share against the PE-6 gain over S1 gives $+0.17$, and the paraphrase-side share against the SC-6 gain over S1 gives $-0.49$, both weak, confirming that the strong dependency sits in the greedy reference, not in the ensemble gain. Stratified by modal share, the pooled pairs split 104 unanimous, five with a strong majority (share at least two thirds), and three with a weak or no majority. In the unanimous stratum every condition sits at 98.1\%. In the five strong-majority pairs, S1 is 76.7\% and the six-vote ensembles 80.0\%. In the three weak-majority pairs, S1 is 72.2\%, SC-6 reaches 100\%, PE-6 falls to 33.3\%, and the combined ensemble 66.7\%; with three pairs these numbers are descriptive, but they display the full plurality-vote signature of Section 3.7: aggregation pays where the mode is right and is destructive where it is wrong.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Regime map by model and dataset: greedy accuracy, single-sample expectation S1, COMB-12 accuracy, the COMB-12 gain over S1 ($\Delta_C$), the mean modal vote share over the twelve stochastic votes, and the mean dissent share (one minus the modal share, in percent).}
+
+\scriptsize
+\begin{tabular}{l l c c c c c c c}
+\toprule
+Model & Dataset & $n$ & Greedy & S1 & COMB & $\Delta_C$ & Share & Diss.\% \\
+\midrule
+Qwen3.8-Max & GSM8K & 15 & 100.0 & 100.0 & 100.0 & +0.0 & 100.0 & 0 \\
+Qwen3.8-Max & SAT-Math & 15 & 100.0 & 100.0 & 100.0 & +0.0 & 100.0 & 0 \\
+Qwen3.8-Max & PIQA & 15 & 100.0 & 100.0 & 100.0 & +0.0 & 98.9 & 111 \\
+Qwen3.8-Max & TruthfulQA & 15 & 100.0 & 100.0 & 100.0 & +0.0 & 100.0 & 0 \\
+Qwen3.8-Max & LSAT-LR & 15 & 100.0 & 100.0 & 100.0 & +0.0 & 100.0 & 0 \\
+Qwen3.8-Max & LogiQA & 15 & 60.0 & 60.0 & 60.0 & +0.0 & 97.2 & 278 \\
+\midrule
+Qwen3.8-Omni & GSM8K & 15 & 100.0 & 100.0 & 100.0 & +0.0 & 100.0 & 0 \\
+Qwen3.8-Omni & SAT-Math & 1 & 100.0 & 100.0 & 100.0 & +0.0 & 91.7 & 833 \\
+Qwen3.8-Omni & PIQA & 11 & 100.0 & 100.0 & 100.0 & +0.0 & 100.0 & 0 \\
+Qwen3.8-Omni & TruthfulQA & 15 & 93.3 & 96.7 & 93.3 & -3.3 & 96.1 & 389 \\
+Qwen3.8-Omni & LSAT-LR & 15 & 100.0 & 98.9 & 100.0 & +1.1 & 99.4 & 56 \\
+Qwen3.8-Omni & LogiQA & 14 & 71.4 & 73.8 & 71.4 & -2.4 & 89.3 & 1071 \\
+\midrule
+Agnes3.0-Flash & GSM8K & 7 & 85.7 & 97.6 & 100.0 & +2.4 & 94.0 & 595 \\
+Agnes3.0-Flash & SAT-Math & 2 & 100.0 & 100.0 & 100.0 & +0.0 & 95.8 & 417 \\
+Agnes3.0-Flash & PIQA & 5 & 100.0 & 100.0 & 100.0 & +0.0 & 100.0 & 0 \\
+Agnes3.0-Flash & TruthfulQA & 5 & 100.0 & 100.0 & 100.0 & +0.0 & 100.0 & 0 \\
+Agnes3.0-Flash & LSAT-LR & 6 & 83.3 & 88.9 & 83.3 & -5.6 & 95.8 & 417 \\
+Agnes3.0-Flash & LogiQA & 8 & 37.5 & 66.7 & 75.0 & +8.3 & 84.4 & 1562 \\
+\midrule
+Agnes2.5-Flash & GSM8K & 7 & 85.7 & 100.0 & 100.0 & +0.0 & 98.8 & 119 \\
+Agnes2.5-Flash & SAT-Math & 11 & 100.0 & 100.0 & 100.0 & +0.0 & 99.2 & 76 \\
+Agnes2.5-Flash & PIQA & 7 & 85.7 & 85.7 & 85.7 & +0.0 & 98.8 & 119 \\
+Agnes2.5-Flash & TruthfulQA & 4 & 100.0 & 100.0 & 100.0 & +0.0 & 100.0 & 0 \\
+Agnes2.5-Flash & LSAT-LR & 6 & 83.3 & 83.3 & 83.3 & +0.0 & 100.0 & 0 \\
+Agnes2.5-Flash & LogiQA & 5 & 80.0 & 93.3 & 100.0 & +6.7 & 90.0 & 1000 \\
+\midrule
+GPT-6-Luna & GSM8K & 1 & 100.0 & 100.0 & 100.0 & +0.0 & 100.0 & 0 \\
+GPT-6-Luna & SAT-Math & 5 & 80.0 & 80.0 & 80.0 & +0.0 & 96.7 & 333 \\
+GPT-6-Luna & PIQA & 2 & 100.0 & 100.0 & 100.0 & +0.0 & 100.0 & 0 \\
+GPT-6-Luna & TruthfulQA & 2 & 100.0 & 100.0 & 100.0 & +0.0 & 100.0 & 0 \\
+GPT-6-Luna & LogiQA & 5 & 60.0 & 50.0 & 80.0 & +30.0 & 73.3 & 2667 \\
+\midrule
+Gemini3.8-Flash & GSM8K & 1 & 100.0 & 100.0 & 100.0 & +0.0 & 100.0 & 0 \\
+Gemini3.8-Flash & SAT-Math & 4 & 100.0 & 100.0 & 100.0 & +0.0 & 93.8 & 625 \\
+Gemini3.8-Flash & PIQA & 2 & 100.0 & 100.0 & 100.0 & +0.0 & 100.0 & 0 \\
+Gemini3.8-Flash & TruthfulQA & 2 & 100.0 & 100.0 & 100.0 & +0.0 & 100.0 & 0 \\
+Gemini3.8-Flash & LogiQA & 3 & 66.7 & 44.4 & 66.7 & +22.2 & 66.7 & 3333 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{/home/z/my-project/paper/figures/regime.png}
+\caption{Combined-ensemble gain over the single-sample baseline S1 against the mean dissent share (one minus the modal vote share) for every model-dataset cell. Gains concentrate at moderate dissent and reverse at high dissent: the cell with the largest dissent and the largest loss is LogiQA under GPT-6-Luna, where the modal sampled answer is wrong, while LogiQA under Gemini3.8-Flash ($n=3$) combines high dissent with no combined-ensemble gain for the same reason. LogiQA under GPT-6-Luna gains 20 points over greedy under PE-6 and COMB-12 while losing 20 under SC-6, illustrating that the sign of the gain depends on whether the modal answer is correct, not on the amount of disagreement.}
+
+\end{figure}
+
+Within the high-dissent region, disagreement alone does not guarantee gains, and the exception is instructive. The highest-dissent cells in the study are LogiQA under GPT-6-Luna and Gemini3.8-Flash. GPT-6-Luna shows the full regime structure in one cell: greedy answers 60\% correctly, the six-sample majority drops to 40\% because the modal sampled answer is wrong, while the paraphrase majority rises to 80\% and takes the combined ensemble with it. Gemini3.8-Flash's LogiQA cell ($n=3$) shows the same signature at smaller scale. The plurality-vote model of Section 3.7 summarizes the pattern: disagreement is a necessary condition for aggregation to matter, but the sign of the gain is determined by whether the modal answer is correct, which the share does not measure.
+
+The budget curves in Figure 4 complete the picture, with the single-sample baseline S1 at $k=1$ and the greedy level marked as a dotted line; panel headers state how many percentage points one question contributes, since a single flipped question moves accuracy by 1.1 to 3.0 points at these sample sizes. For the flagships the curves are flat at the greedy level within one question at every budget, with the one-question deviations reflecting individual tie-breaks rather than trends: Qwen3.8-Max dips one question under PE at $k \in \{2,4\}$, and Qwen3.8-Omni wiggles one question above greedy under SC-4. For Agnes3.0-Flash, the paraphrase ensemble reaches its full 90.9\% already at $k=2$ while the sample majority needs $k=4$ to catch up, the two curves crossing rather than one leading throughout. For Agnes2.5-Flash the ordering is the reverse and persists: sample voting climbs to 95.0\% by $k=6$ while paraphrase voting plateaus at 92.5\%. The practical reading is that the choice between the two sources matters less than the choice of whether to aggregate at all, which the disagreement regime determines, and that neither source dominates the other in budget profile across models.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{/home/z/my-project/paper/figures/budget.png}
+\caption{Accuracy against call budget $k$ for self-consistency (SC-$k$) and paraphrase ensembling (PE-$k$), with the single-sample baseline S1 at $k=1$ and the greedy accuracy as a dotted line. Panel headers give each model's question count and the accuracy value of one question. Flat curves indicate the degenerate regime; rising or crossing curves indicate cells where aggregation changes answers.}
+
+\end{figure}
+
+\subsection{Isolating the prompt-space effect: greedy paraphrases}
+
+
+The standard paraphrase ensemble decodes each paraphrase once at tau=0.7, so its diversity mixes prompt-space variation with decoding stochasticity. The greedy-paraphrase control removes the second component by decoding each paraphrase at tau=0, yielding the noise-free ensemble PE-g-6 and a fragility indicator in which neither side involves sampling. Table 6 reports the control for the five models whose provider quota allowed it.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Greedy-paraphrase control. Accuracy (\%) of the greedy baseline, SC-6, PE-6, and the greedy-decoded paraphrase ensemble PE$^{g}$-6; Frag.$^{g}$ is the fraction of questions where SC-6 and PE$^{g}$-6 disagree (no decoding noise on the paraphrase side); Degen.$^{g}$ is the fraction of questions where all six greedy paraphrase answers coincide.}
+
+\footnotesize
+\begin{tabular}{l c c c c c c c c}
+\toprule
+Model & $n$ & Greedy & SC-6 & PE-6 & PE$^{g}$-6 & Ident. & Frag.$^{g}$ & Degen.$^{g}$ \\
+\midrule
+Qwen3.8-Max & 88 & 93.2 & 93.2 & 93.2 & 93.2 & 88/88 & 1.1 & 98.9 \\
+Qwen3.8-Omni & -- & \multicolumn{7}{c}{quota exhausted before the control could be run} \\
+Agnes3.0-Flash & 32 & 81.2 & 93.8 & 93.8 & 93.8 & 31/32 & 3.1 & 71.9 \\
+Agnes2.5-Flash & 39 & 89.7 & 94.9 & 92.3 & 92.3 & 38/39 & 2.6 & 89.7 \\
+GPT-6-Luna & 15 & 80.0 & 73.3 & 86.7 & 80.0 & 11/15 & 40.0 & 53.3 \\
+Gemini3.8-Flash & 12 & 91.7 & 83.3 & 91.7 & 83.3 & 10/12 & 25.0 & 41.7 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The control separates three effects. First, for the flagship, degeneracy is not a temperature artifact: 98.9\% of Qwen3.8-Max's questions return six identical answers even under greedy decoding of six different paraphrases, and the greedy paraphrase ensemble returns the same answer as the sampled paraphrase ensemble on 88 of 88 questions. The collapse is a property of the model-task pair, not of the sampling distribution around it. Second, for the mid-tier models, the prompt-space effect carries the paraphrase ensemble almost entirely: the PE$^{g}$-6 and PE-6 modal answers coincide on 31 of 32 questions for Agnes3.0-Flash and 38 of 39 for Agnes2.5-Flash, so the stochastic component of PE contributes almost nothing beyond the paraphrases themselves in these cells. Third, for the prompt-brittle models, decoding noise and prompt variation interact: GPT-6-Luna's greedy paraphrase ensemble reaches 80.0\% against 86.7\% for the sampled version with modal-answer agreement on only 11 of 15 questions, and Gemini3.8-Flash 83.3\% against 91.7\% with agreement on 10 of 12, so for the most fragile models the sampled paraphrase ensemble retains a two-to-eight point edge over its noise-free counterpart, and the two ensembles disagree on a quarter of the questions. Fragility itself survives the control in strengthened form: GPT-6-Luna flips on 40.0\% of questions and Gemini3.8-Flash on 25.0\% when both sides are decoded greedily, which rules out sampling noise as the cause of paraphrase-induced flips and locates the instability in the model's response to the prompt's surface form.
+
+\subsection{Harder tasks: the MMLU-Pro probe}
+
+
+The flagship models saturate five of the six main-suite benchmarks, so the degenerate regime dominates their measurements. The MMLU-Pro probe asks whether a harder distribution restores answer entropy under the same direct-answering protocol. Table 7 reports the probe; the coverage caveat is stated up front: on hard quantitative items the direct-answering instruction does not always suppress reasoning, and outputs truncated at the token cap lost extraction on a majority of Qwen3.8-Max's probe calls, leaving six complete questions (eight more with at least four parsed votes); the other models parsed cleanly.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{MMLU-Pro probe: greedy accuracy, single-sample accuracy S1, and SC-6 accuracy, with mean support-normalized sample entropy, sample degeneracy rate, and the model's main-suite entropy for comparison.}
+
+\footnotesize
+\begin{tabular}{l c c c c c c c}
+\toprule
+Model & $n$ & Greedy & S1 & SC-6 & Entropy & Degen. & Suite entropy \\
+\midrule
+Qwen3.8-Max & 6 & 50.0 & 50.0 & 50.0 & 0.153 & 83.3 & 0.018 \\
+Agnes3.0-Flash & 8 & 12.5 & 6.2 & 0.0 & 0.937 & 0.0 & 0.162 \\
+Agnes2.5-Flash & 13 & 84.6 & 76.9 & 84.6 & 0.241 & 69.2 & 0.055 \\
+GPT-6-Luna & 15 & 66.7 & 66.7 & 73.3 & 0.261 & 66.7 & 0.267 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The probe shows that difficulty alone does not determine the regime. GPT-6-Luna, the strongest model with full probe coverage, lands in the high-entropy regime: greedy accuracy 66.7\% with mean entropy 0.26 and a 66.7\% degeneracy rate, and self-consistency lifts it to 73.3\%; at $n = 15$ this 6.6 point difference is the movement of a single question and is reported as directional, not as evidence. Qwen3.8-Max remains essentially degenerate on the probe: its six complete questions are unanimous on five, and seven of the eight questions with at least four parsed votes return a single answer, so for this flagship a ten-option hard benchmark under direct answering still collapses to one answer per question. At the other end, Agnes3.0-Flash collapses into near-uniform guessing: entropy 0.94 with zero degeneracy, greedy accuracy 12.5\%, and a self-consistency majority of 0\% on its eight probe questions; at $n = 8$ these values are one to two questions from chance and are likewise directional, but they are consistent with the plurality-vote failure mode of Section 3.7 when the modal answer is wrong. Agnes2.5-Flash answers 84.6\% correctly with partial degeneracy and no aggregation change. The probe is small, and we read it as directional evidence: harder tasks shift models along the entropy axis, but into which regime depends on the model, and the flagship's degeneracy is robust to at least this level of difficulty increase under direct answering.
+
+\subsection{Answering mode: direct answer versus chain of thought}
+
+
+The main suite answers multiple-choice questions directly, while self-consistency was originally motivated for chain-of-thought reasoning. The CoT condition therefore repeats the greedy baseline, the six-sample self-consistency, and, for stem-locus questions, the paraphrase ensemble under an explicit step-by-step instruction. Table 8 reports the condition against the direct-answering cells on the same questions.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Chain-of-thought condition on multiple-choice questions: accuracy under greedy, SC-6, and PE-6 with CoT against the same conditions under direct answering on identical questions (Grd$_{dir}$, SC$_{dir}$, PE$_{dir}$), with mean answer entropy under both modes.}
+
+\scriptsize
+\begin{tabular}{l c c c c c c c c c}
+\toprule
+Model & $n$ & Grd & SC-6 & PE-6 & Grd$_{dir}$ & SC$_{dir}$ & PE$_{dir}$ & H & H$_{dir}$ \\
+\midrule
+Qwen3.8-Max & 9 & 100.0 & 100.0 & 100.0 & 88.9 & 88.9 & 75.0 & 0.000 & 0.000 \\
+Agnes3.0-Flash & 12 & 100.0 & 100.0 & 100.0 & 83.3 & 100.0 & 100.0 & 0.077 & 0.066 \\
+Agnes2.5-Flash & 33 & 87.9 & 93.9 & 93.3 & 90.9 & 93.9 & 86.7 & 0.095 & 0.028 \\
+GPT-6-Luna & 13 & 92.3 & 100.0 & 100.0 & 84.6 & 76.9 & 100.0 & 0.171 & 0.208 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Chain-of-thought answering raises accuracy where it completes, but it does not dissolve the regime structure. For the flagship subset, CoT lifts Qwen3.8-Max from 88.9\% to 100\% on its nine completed questions while leaving the answer distribution fully degenerate: entropy stays at zero and all six samples agree on every question, so self-consistency remains vacuous. For the mid-tier models, CoT preserves or slightly enlarges diversity: Agnes2.5-Flash holds self-consistency at 93.9\% in both modes on its 33 questions while greedy dips from 90.9\% to 87.9\% and entropy rises from 0.03 to 0.10, Agnes3.0-Flash gains from 83.3\% to 100\% under greedy on its 12 completed questions while remaining largely degenerate, and GPT-6-Luna's self-consistency improves from 76.9\% to 100\% on its 13 completed questions with its paraphrase ensemble at 100\% in both modes. The pattern that survives the mode change is the important one: aggregation gains track the entropy regime in both modes, the degenerate stratum stays degenerate under CoT for the flagship, and the paraphrase side continues to carry signal only where entropy exists. Absolute accuracies are not comparable across modes, the CoT subsets are small, and the slow long-form generations bounded coverage for the rate-limited models, so we read this condition as a robustness check on the regime structure rather than as a mode comparison.
+
+\subsection{Budget efficiency: early stopping and adaptive allocation}
+
+
+The regime structure implies that most of a fixed budget is spent confirming answers that additional calls cannot change. Two simulated policies quantify the waste; both are replays of our own data rather than new methods, and both descend from existing work on sample-adaptive stopping: the sequential unanimity rule is a special case of the early-stopping self-consistency line [10,?], and we read our simulation as a reproduction of that line's finding in the direct-answering, near-degenerate regime rather than as a novel contribution. The unanimity rule draws canonical samples until the first $k$ at which all drawn samples agree, answers with that unanimous vote, and otherwise falls back to the six-sample majority. The adaptive allocation rule of Section 6 probes each question with two canonical samples and two paraphrases, then routes the remaining budget to paraphrases, resampling, or a split according to which side shows diversity. Table 9 reports both policies against the fixed conditions, with the probe's calls charged to the adaptive rule; its mean budget runs 4.1 to 4.7 calls, 68 to 78 percent of the six-call budget.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Budget efficiency. Accuracy (\%) of the fixed conditions against the sequential unanimity rule (ES, with mean budget mean k) and the adaptive allocation rule (Ada, with mean budget and its share of the six-call budget), both simulated on the collected call matrices.}
+
+\scriptsize
+\begin{tabular}{l c c c c c c c c c}
+\toprule
+Model & S1 & SC-6 & PE-6 & ES acc & ES mean k & Ada acc & Ada mean k & Budget & COMB-12 \\
+\midrule
+Qwen3.8-Max & 93.3 & 93.3 & 93.3 & 93.3 & 2.0 & 93.3 & 4.1 & 68\% & 93.3 \\
+Qwen3.8-Omni & 93.9 & 93.0 & 93.0 & 93.0 & 2.2 & 91.5 & 4.3 & 71\% & 93.0 \\
+Agnes3.0-Flash & 89.4 & 90.9 & 90.9 & 90.9 & 2.5 & 90.9 & 4.6 & 77\% & 90.9 \\
+Agnes2.5-Flash & 94.2 & 95.0 & 92.5 & 95.0 & 2.1 & 92.5 & 4.2 & 70\% & 95.0 \\
+GPT-6-Luna & 76.7 & 73.3 & 86.7 & 80.0 & 2.0 & 86.7 & 4.5 & 76\% & 86.7 \\
+Gemini3.8-Flash & 86.1 & 83.3 & 91.7 & 83.3 & 2.7 & 91.7 & 4.7 & 78\% & 91.7 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The unanimity rule preserves SC-6 accuracy within one question for every model at a mean budget of 2.0 to 2.7 calls, because degenerate questions announce themselves after two or three unanimous draws. The adaptive rule matches the best fixed six-call strategy on four of the six models and trails it by exactly one question on the remaining two, Qwen3.8-Omni (91.5 against 93.0) and Agnes2.5-Flash (92.5 against 95.0), while spending a mean of 4.1 to 4.7 calls, 68 to 78 percent of the six-call budget; it never exceeds the best fixed strategy on any model, and the one-question deficits are exactly the questions whose diversity the two-call probe did not reveal. Because the rule was designed and evaluated on the same collected matrices, this simulation is a consistency check on the rule, not a validation of it; confirming its transfer requires fresh questions, which our free-tier quotas did not allow (Section 6). The savings are conservative estimates: the simulation commits to a fixed routing rule after the probe rather than continuing to monitor agreement as later calls arrive, and it charges the full probe even on questions where one call would have sufficed. Both simulations are exact replays of the released call matrices, so they can be re-derived from the logs.
+
+\section{Discussion}
+
+
+\subsection{Principal findings}
+
+The study yields four principal findings. First, the effectiveness of every test-time aggregation strategy is governed by a precondition that the literature rarely states explicitly: the model must produce diverse answers at all. For the flagship models in our pool, five of six benchmarks sit in a degenerate regime in which six stochastic samples and six paraphrases return the same answer for almost every question, and in that regime self-consistency, paraphrase ensembling, and the combined ensemble reproduce both single-call baselines exactly, with the hybrid allocation differing by at most one question. This part of the degeneracy result is structural rather than empirical: when all votes coincide, every aggregation of them returns the same answer by construction. The empirical content lies in how common the coincidence is, and in its consequence that agreement-based uncertainty scores are uninformative exactly there. Second, measured against the correct k=1 baseline, the single-sample expectation S1, neither diversity source buys a systematic gain: pooled, SC-6 sits $+0.9$ points above S1, PE-6 $0.9$ points below, and the twelve-vote ensemble exactly at S1. The apparent gains reported against greedy decoding are largely an artifact of the greedy reference, which for two of our models sits four to eleven points below the sampled expectation; the ensembles mostly convert an uncertain single draw into the modal answer, and that conversion pays only where the modal answer is right. Where it is wrong, the two sources pull in opposite directions: prompt ensembling lifted the two modal-answer-wrong models by 5.6 to 10.0 points over S1 while resampling lost 2.8 to 3.3, which is the plurality-vote signature of Section 3.7 in deployed form. Third, paraphrase agreement functions as an error signal in its own right, and its error coverage overlaps only partially with that of sample agreement: across models, the stronger source differs, so neither signal subsumes the other, and a deployment that can afford both probes obtains partially disjoint evidence, although the simple sum of the two disagreement scores does not dominate the best single signal in our data. Fourth, fragility, the fraction of questions whose answer flips under paraphrasing alone, tracks answer disagreement, concentrates entirely in stem-locus paraphrasing, and appears in the same model-task cells that carry disagreement, which supports the interpretation that paraphrase disagreement and sampling disagreement are two observable symptoms of the same underlying instability.
+
+\subsection{A practical allocation rule, and how it performs}
+
+The regime structure suggests a simple procedure for practitioners with a fixed per-question budget. Probe the question first with a small number of calls, compute sample agreement and paraphrase agreement, and branch on the result. If both agreement scores equal one, additional calls of either kind are unlikely to change the answer, and the budget is better spent elsewhere; the degenerate regime is identifiable from a handful of calls at negligible cost. If sample agreement is high but paraphrase agreement is low, the model is prompt-brittle, and the remaining budget should go to paraphrases. If the reverse holds, the budget should go to resampling. If both scores are low, split the remaining budget between the two sources.
+
+We evaluated this rule by simulation on the collected call matrices, charging the probe's four calls (two canonical samples and two paraphrases) to the adaptive condition's budget. The adaptive rule matches the best fixed six-call strategy on four of the six models and trails it by exactly one question on the other two (Qwen3.8-Omni and Agnes2.5-Flash), while spending a mean of 4.1 to 4.7 calls per question, 68 to 78 percent of the six-call budget; where it wins, it wins against a misallocated fixed budget, as for GPT-6-Luna, where it returns 86.7\% at a mean cost of 4.5 calls against 73.3\% for fixed SC-6. Because the rule was designed and evaluated on the same collected matrices, this simulation is a consistency check, not a validation; its transfer to fresh questions is untested and is the first follow-up we would run. Across all six models, an even simpler sequential rule that draws canonical samples until the first unanimity and otherwise falls back to the six-sample majority preserves SC-6 accuracy within one question everywhere at a mean budget of two to three calls; this is a special case of the early-stopping self-consistency family [10,?], and our simulation reproduces that family's finding in the direct-answering, near-degenerate regime. Because agreement statistics are cheap to compute online, the rules add no model training and no human labeling, and both simulations are reproducible from the released logs. The hybrid allocation, by contrast, is best understood as the fixed-budget version of the same hedge: it matches the best pure strategy when one source fails and trails it by about one question when both work, so the adaptive probe matches it in our data at two-thirds to three-quarters of the cost.
+
+\subsection{Implications for evaluation and for uncertainty estimation}
+
+Two methodological consequences follow. For benchmark evaluation, our results add an aggregation dimension to the multi-prompt argument of Mizrahi et al. [1]: the same question answered under one prompt with one decode, under six paraphrases, or under twelve combined calls yields systematically different accuracies in the high-entropy regime, so reported scores should state the aggregation configuration, and comparisons across papers that aggregate differently are not like for like. The single-sample baseline S1 deserves the same reporting discipline, because greedy decoding and a single stochastic draw differ by up to ten points in the high-entropy cells of our data, in both directions. For uncertainty estimation, the degenerate regime is a warning whose scope we state precisely. Our measurements cover multiple-choice questions answered directly, where sampling-based confidence measures, including simple agreement heuristics, are uninformative when the sample distribution collapses, and our data show that this collapse is the common case for strong models on saturated tasks. Semantic-entropy methods for free-form generation [6,7] face an analogous risk when the sampled paraphrase classes collapse, but our design does not test that setting, and the caution transfers by argument rather than by measurement. Paraphrase probes partially restore the signal because they perturb the input rather than the decoder, but they too inherit the collapse when the model is robust in both views, as our flagship models are on five of six benchmarks. Confidence methods should therefore be validated per regime rather than averaged over mixed test sets, and deployments should verify that the answer distribution carries variance before trusting agreement-based scores.
+
+\subsection{Limitations}
+
+Eight limitations bound the scope of our conclusions. First, sample size and power: fifteen questions per benchmark and completed sets of 12 to 90 questions per model support paired within-model comparisons of large effects, but the cluster-bootstrap intervals are wide, TOST does not establish equivalence for most pairs, and differences of a few points between strategies would go undetected; scaling each benchmark to hundreds of questions is the single change most likely to sharpen the conclusions. Second, provider rate limits and free-tier quotas constrained coverage unevenly across models, and the quota of Qwen3.8-Omni was exhausted before its follow-up conditions could be run; coverage follows a fixed question order rather than adaptive selection, but cross-model aggregates weight models unequally. Third, the models are commercial systems accessed through third-party endpoints: we cannot verify that the requested temperature is honored, especially for reasoning-style models, and decoding internals, post-training, and version pinning are outside our control; the greedy-versus-S1 gap documented in Section 5.2, including its truncation artifact, is itself a manifestation of this limitation, and findings describe the accessed systems as of October 2026 and need not transfer to other versions or serving configurations, although we release per-call timestamps and token usage so the configuration is auditable. Fourth, paraphrases were generated by two models and validated by embedding similarity with a fixed threshold plus a bidirectional entailment check, but semantic equivalence of adversarial questions is not fully formalizable, and stricter thresholds or human-curated paraphrases could shift the fragility statistics. Fifth, the multiple-choice tasks use direct answering while GSM8K uses chain of thought; the aggregation comparison is internally valid within each answering mode, and the follow-up condition of Section 5.8 measures the mode effect directly, but absolute accuracies are not comparable across modes. Sixth, the high-dissent regime is sampled through fewer model-task cells than the degenerate regime, resting primarily on logical reasoning and selected quantitative tasks; the MMLU-Pro probe of Section 5.7 begins to broaden this, at small scale. Seventh, error-detection metrics are computed against ensemble references that share votes with the detectors, and the adaptive allocation rule was designed and evaluated on the same collected matrices, so both carry a same-data caveat; we separate the definitional degenerate stratum and report disjoint-vote correlations, but an error reference from fully independent draws, and a validation of the allocation rule on fresh questions, would be cleaner. Eighth, all conditions use a fixed budget of six or twelve calls with majority voting; ranked voting, weighted aggregation, or learned vote combination could change the budget-matched comparison.
+
+\subsection{Future work}
+
+Three extensions follow naturally. The adaptive allocation rule can be moved online, interleaving probing and allocation per question rather than simulating the split afterwards, and its threshold can be tuned against a target budget rather than fixed at unanimity. The comparison can be extended to free-form generation, where semantic clustering replaces majority voting and paraphrase ensembles interact with surface-form competition effects [41], and where the degeneracy phenomenon has direct consequences for semantic-entropy hallucination detection that our multiple-choice design cannot measure. Finally, the fragility statistic can serve as a benchmark diagnostic in its own right, complementing accuracy with a measure of how strongly a model's answers depend on the surface form of the question.
+
+\section{Conclusion}
+
+
+We presented a budget-matched comparison of the two diversity sources available to test-time ensembling for large language models: resampling the decoder on a fixed prompt, and perturbing the prompt across validated semantic paraphrases. A sixteen-call matrix per question per model, evaluated on six models from four families and six benchmarks, allowed every condition, including self-consistency, paraphrase ensembling, a hybrid allocation, and a combined ensemble, to be derived from matched calls on identical questions, and follow-up controls isolated the prompt-space contribution with greedy paraphrase decodes, probed harder tasks on MMLU-Pro, and varied the answering mode with chain-of-thought instructions. The results organize into a regime structure. Where models are confident, answer distributions collapse, all aggregation strategies coincide with both single-call baselines, and consistency-based uncertainty estimation loses its signal. Where the votes disagree, the single-sample expectation S1, not greedy decoding, is the correct reference: pooled, self-consistency sits $+0.9$ points above S1, the paraphrase ensemble $0.9$ points below, and the twelve-vote ensemble exactly at S1, so neither diversity source buys a systematic gain at matched budget, and no per-model test detects a difference between them, though the study is not powered to establish equivalence. What differs is the sign of the gain where the modal answer is wrong: the paraphrase ensemble lifted the two affected models by up to ten points over S1 while resampling lost up to three, a deployed illustration of the plurality-vote model. Greedy decoding itself proved to be a biased reference that can sit four to eleven points from the sampled expectation on commercial endpoints, through mode locking and truncation artifacts, so we recommend reporting the single-sample expectation alongside every greedy score. An adaptive allocation rule, simulated on the collected matrices at 68 to 78 percent of the six-call budget, matched the best fixed strategy on four of six models and trailed it by one question on the other two; a sequential unanimity rule, a special case of early-stopping self-consistency, preserved accuracy within one question at two to three calls, and both await validation on fresh questions. We release prompts, paraphrases, and raw predictions to support replication as model behavior continues to shift.
+
+
+
+
+
+\end{document}

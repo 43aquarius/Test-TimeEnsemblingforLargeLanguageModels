@@ -1,13 +1,13 @@
 \footnotesize
-\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}} l c c c c c c c}
+\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}} l c c c c c c c c}
 \toprule
-Model & $n$ & Greedy & SC-6 & PE-6 & PE$^{g}$-6 & Frag.$^{g}$ & Degen.$^{g}$ \\
+Model & $n$ & Greedy & SC-6 & PE-6 & PE$^{g}$-6 & Ident. & Frag.$^{g}$ & Degen.$^{g}$ \\
 \midrule
-Qwen3.8-Max & 88 & 93.2 & 93.2 & 93.2 & 93.2 & 1.1 & 98.9 \\
-Qwen3.8-Omni & -- & \multicolumn{6}{c}{quota exhausted before the control could be run} \\
-Agnes3.0-Flash & 32 & 81.2 & 93.8 & 93.8 & 93.8 & 3.1 & 71.9 \\
-Agnes2.5-Flash & 39 & 89.7 & 94.9 & 92.3 & 92.3 & 2.6 & 89.7 \\
-GPT-6-Luna & 15 & 80.0 & 73.3 & 86.7 & 80.0 & 40.0 & 53.3 \\
-Gemini3.8-Flash & 12 & 91.7 & 83.3 & 91.7 & 83.3 & 25.0 & 41.7 \\
+Qwen3.8-Max & 88 & 93.2 & 93.2 & 93.2 & 93.2 & 88/88 & 1.1 & 98.9 \\
+Qwen3.8-Omni & -- & \multicolumn{7}{c}{quota exhausted before the control could be run} \\
+Agnes3.0-Flash & 32 & 81.2 & 93.8 & 93.8 & 93.8 & 31/32 & 3.1 & 71.9 \\
+Agnes2.5-Flash & 39 & 89.7 & 94.9 & 92.3 & 92.3 & 38/39 & 2.6 & 89.7 \\
+GPT-6-Luna & 15 & 80.0 & 73.3 & 86.7 & 80.0 & 11/15 & 40.0 & 53.3 \\
+Gemini3.8-Flash & 12 & 91.7 & 83.3 & 91.7 & 83.3 & 10/12 & 25.0 & 41.7 \\
 \bottomrule
 \end{tabular*}

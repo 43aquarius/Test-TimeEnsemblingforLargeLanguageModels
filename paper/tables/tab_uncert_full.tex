@@ -1,15 +1,15 @@
 \footnotesize
-\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}} l c c c c c c c}
+\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}} l c c c c c c}
 \toprule
- & & \multicolumn{3}{c}{AUROC} & \multicolumn{3}{c}{AURC} \\
-\cmidrule(lr){3-5}\cmidrule(lr){6-8}
-Model & Err. & $c_S$ & $c_P$ & Both & $c_S$ & $c_P$ & Both \\
+ & & \multicolumn{3}{c}{AUROC} & \multicolumn{2}{c}{AURC$^{\ddagger}$} \\
+\cmidrule(lr){3-5}\cmidrule(lr){6-7}
+Model & Err. & $c_S$ & $c_P$ & Both & $c_S$ & $c_P$ \\
 \midrule
-Qwen3.8-Max & 6.7 & 0.583 & 0.576 & 0.578 & 0.079 & 0.080 & 0.080 \\
-Qwen3.8-Omni & 7.0 & 0.788 & 0.779 & 0.780 & 0.009 & 0.010 & 0.010 \\
-Agnes3.0-Flash$^\dagger$ & 9.1 & 0.961 & 0.600 & 0.922 & 0.009 & 0.158 & 0.013 \\
-Agnes2.5-Flash$^\dagger$ & 5.0 & 0.487 & 0.704 & 0.704 & 0.026 & 0.029 & 0.029 \\
-GPT-6-Luna$^\dagger$ & 13.3 & 0.577 & 0.923 & 0.769 & 0.060 & 0.024 & 0.046 \\
-Gemini3.8-Flash$^\dagger$ & 8.3 & 0.955 & 0.955 & 1.000 & 0.015 & 0.015 & 0.007 \\
+Qwen3.8-Max & 6.7 & 0.583 & 0.576 & 0.578 & 0.057 & 0.058 \\
+Qwen3.8-Omni & 7.0 & 0.788 & 0.779 & 0.780 & 0.031 & 0.032 \\
+Agnes3.0-Flash$^\dagger$ & 9.1 & 0.961 & 0.600 & 0.922 & 0.009 & 0.073 \\
+Agnes2.5-Flash$^\dagger$ & 5.0 & 0.487 & 0.704 & 0.704 & 0.051 & 0.029 \\
+GPT-6-Luna$^\dagger$ & 13.3 & 0.577 & 0.923 & 0.769 & 0.105 & 0.024 \\
+Gemini3.8-Flash$^\dagger$ & 8.3 & 0.955 & 0.955 & 1.000 & 0.011 & 0.011 \\
 \bottomrule
 \end{tabular*}

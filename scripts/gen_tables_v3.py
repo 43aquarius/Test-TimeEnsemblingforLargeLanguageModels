@@ -73,7 +73,7 @@ for m in MODELS:
         gain = dd["comb12"] - dd["k1"]
         ml = "\\midrule\n" if (i == 0 and rows) else ""
         rows.append(ml + f"{LABEL[m]} & {DS_LABEL[ds]} & {dd['n']} & {pct(dd['greedy'])} & {pct(dd['k1'])} & "
-                     f"{pct(dd['comb12'])} & {gain*100:+.1f} & {pct(dd['mode_share'])} & {pct(100*(1-dd['mode_share']),0)} \\\\")
+                     f"{pct(dd['comb12'])} & {gain*100:+.1f} & {pct(dd['mode_share'])} & {pct(1-dd['mode_share'],1)} \\\\")
 open(f"{OUT}/tab_regime.tex", "w").write("\\scriptsize\n" + env(
     "l l c c c c c c c", "Model & Dataset & $n$ & Greedy & S1 & COMB & $\\Delta_C$ & Share & Diss.\\%", rows))
 

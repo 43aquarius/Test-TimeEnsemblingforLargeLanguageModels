@@ -1,0 +1,218 @@
+{
+ "qwen3.8-max": {
+  "n_questions": 90,
+  "greedy_acc": 0.9333333333333333,
+  "s1_acc": 0.9333333333333333,
+  "n_off_mode": 1,
+  "off_mode_questions": [
+   {
+    "qid": "q000",
+    "gold": "C",
+    "greedy_answer": "A",
+    "greedy_correct": false,
+    "greedy_usage": {
+     "pt": 275,
+     "ct": 3
+    },
+    "greedy_content_len": 9,
+    "greedy_snippet": "Answer: A",
+    "canonical_sample_answers": [
+     "B",
+     "B",
+     "B",
+     "A",
+     "A",
+     "B"
+    ],
+    "modal_sample_answer": "B",
+    "modal_votes": 4,
+    "s1_correct_fraction": 0.0
+   }
+  ]
+ },
+ "qwen3.8-omni": {
+  "n_questions": 72,
+  "greedy_acc": 0.9166666666666666,
+  "s1_acc": 0.9259259259259258,
+  "n_off_mode": 2,
+  "off_mode_questions": [
+   {
+    "qid": "q001",
+    "gold": "A",
+    "greedy_answer": "C",
+    "greedy_correct": false,
+    "greedy_usage": {
+     "pt": 191,
+     "ct": 4
+    },
+    "greedy_content_len": 9,
+    "greedy_snippet": "Answer: C",
+    "canonical_sample_answers": [
+     "A",
+     "C",
+     "A",
+     "A",
+     "C",
+     "A"
+    ],
+    "modal_sample_answer": "A",
+    "modal_votes": 4,
+    "s1_correct_fraction": 0.6666666666666666
+   },
+   {
+    "qid": "q026",
+    "gold": "A",
+    "greedy_answer": "C",
+    "greedy_correct": false,
+    "greedy_usage": {
+     "pt": 170,
+     "ct": 6
+    },
+    "greedy_content_len": 11,
+    "greedy_snippet": "Answer: (C)",
+    "canonical_sample_answers": [
+     "D",
+     "D",
+     "C",
+     "D",
+     "B",
+     "A"
+    ],
+    "modal_sample_answer": "D",
+    "modal_votes": 3,
+    "s1_correct_fraction": 0.16666666666666666
+   }
+  ]
+ },
+ "agnes-3.0-flash": {
+  "n_questions": 33,
+  "greedy_acc": 0.7878787878787878,
+  "s1_acc": 0.893939393939394,
+  "n_off_mode": 3,
+  "off_mode_questions": [
+   {
+    "qid": "q006",
+    "gold": "2",
+    "greedy_answer": "27",
+    "greedy_correct": false,
+    "greedy_usage": {
+     "pt": 173,
+     "ct": 1200
+    },
+    "greedy_content_len": 4006,
+    "greedy_snippet": "To determine how many good days were left in the month, we n ... \nThe first 24 days are fully defined.\nThe last 6 days (25-30) are partially defined by the totals (4 good, 2 neutral).\n\nHowever, the sentence \"If the next three days were good, neutral, and good\" is a conditional statement. It might be offering additional information about specific days. Which days? \"The next three days\" usually follows the last mentioned timeframe. The last mentioned timeframe is the \"third eight days\" (days 17-24). So \"the next three days\" would be days 25, 26, and 27.\n\nLet's assume this conditional applies to days 25, 26, and 27.\nIf Day 25 = Good\nIf Day 26 = Neutral\nIf Day 27 = Good\n\nWe previously determined that",
+    "canonical_sample_answers": [
+     "-24",
+     "2",
+     "2",
+     "2",
+     "2",
+     "2"
+    ],
+    "modal_sample_answer": "2",
+    "modal_votes": 5,
+    "s1_correct_fraction": 0.8333333333333334
+   },
+   {
+    "qid": "q008",
+    "gold": "C",
+    "greedy_answer": "D",
+    "greedy_correct": false,
+    "greedy_usage": {
+     "pt": 217,
+     "ct": 4
+    },
+    "greedy_content_len": 9,
+    "greedy_snippet": "Answer: D",
+    "canonical_sample_answers": [
+     "C",
+     "A",
+     "C",
+     "C",
+     "D",
+     "C"
+    ],
+    "modal_sample_answer": "C",
+    "modal_votes": 4,
+    "s1_correct_fraction": 0.6666666666666666
+   },
+   {
+    "qid": "q017",
+    "gold": "B",
+    "greedy_answer": "C",
+    "greedy_correct": false,
+    "greedy_usage": {
+     "pt": 207,
+     "ct": 4
+    },
+    "greedy_content_len": 9,
+    "greedy_snippet": "Answer: C",
+    "canonical_sample_answers": [
+     "B",
+     "B",
+     "B",
+     "B",
+     "B",
+     "B"
+    ],
+    "modal_sample_answer": "B",
+    "modal_votes": 6,
+    "s1_correct_fraction": 1.0
+   }
+  ]
+ },
+ "agnes-2.5-flash": {
+  "n_questions": 41,
+  "greedy_acc": 0.9024390243902439,
+  "s1_acc": 0.9430894308943089,
+  "n_off_mode": 2,
+  "off_mode_questions": [
+   {
+    "qid": "q001",
+    "gold": "A",
+    "greedy_answer": "C",
+    "greedy_correct": false,
+    "greedy_usage": {
+     "pt": 463,
+     "ct": 431
+    },
+    "greedy_content_len": 15,
+    "greedy_snippet": "\n\n**Answer: C**",
+    "canonical_sample_answers": [
+     "A",
+     "D",
+     "A",
+     "D",
+     "A",
+     "A"
+    ],
+    "modal_sample_answer": "A",
+    "modal_votes": 4,
+    "s1_correct_fraction": 0.6666666666666666
+   },
+   {
+    "qid": "q028",
+    "gold": "48",
+    "greedy_answer": "44",
+    "greedy_correct": false,
+    "greedy_usage": {
+     "pt": 335,
+     "ct": 150
+    },
+    "greedy_content_len": 210,
+    "greedy_snippet": "\n\nLet me calculate step by step:\n\n- **Dogs:** 5 dogs \u00d7 4 legs each = 20 legs\n- **Cats:** 2 cats \u00d7 2 legs each = 4 legs\n- **Birds:** 10 birds \u00d7 2 legs each = 20 legs\n\n**Total:** 20 + 4 + 20 = 44 legs\n\nAnswer: 44",
+    "canonical_sample_answers": [
+     "48",
+     "48",
+     "48",
+     "48",
+     "48",
+     "48"
+    ],
+    "modal_sample_answer": "48",
+    "modal_votes": 6,
+    "s1_correct_fraction": 1.0
+   }
+  ]
+ }
+}

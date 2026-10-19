@@ -984,6 +984,33 @@
   "spearman_share_gainpe": 0.16624332216665846,
   "spearman_share_greedydrop": -0.7952593486312177,
   "spearman_entropy_gaincomb_vs_s1": 0.1601285772070736,
+  "spearman_dissent_gap": 0.7952593486312177,
+  "spearman_dissent_abs_gap": 0.7952593486312177,
+  "spearman_dissent_gaincomb": 0.165879651057525,
+  "spearman_dissent_gainsc": 0.4891860465814264,
+  "spearman_dissent_gainpe": -0.16624332216665846,
+  "spearman_disjoint_dissSc_gainpe": -0.20327901665685752,
+  "spearman_disjoint_dissPe_gainsc": 0.5427283534584608,
+  "n_unanimous_pairs": 104,
+  "n_unanimous_gap_nonzero": 1,
+  "n_unanimous_comb_differs_s1": 0,
+  "spearman_dissent_gap_nonunan": 0.5705628847200405,
+  "spearman_dissent_gaincomb_nonunan": 0.21118419787498013,
+  "sc_pe_discordant_pairs": [
+   {
+    "model": "qwen3.8-omni",
+    "qid": "q001",
+    "sc6": 1,
+    "pe6": 0
+   },
+   {
+    "model": "agnes-2.5-flash",
+    "qid": "q001",
+    "sc6": 1,
+    "pe6": 0
+   }
+  ],
+  "n_sc_pe_discordant": 2,
   "auroc_cs_pooled": 0.7384259259259259,
   "auroc_cp_pooled": 0.5983796296296297,
   "auroc_both_pooled": 0.7256944444444444,

@@ -478,6 +478,33 @@ P["spearman_share_greedydrop"] = spearman([r["mode_share"] for r in rows],
 # legacy entropy spearman kept for comparison
 P["spearman_entropy_gaincomb_vs_s1"] = spearman([r["entropy"] for r in rows],
                                                 [r["comb12"] - r["k1"] for r in rows])
+# dissent-share convention (dissent = 1 - mode share; sign-flipped vs the share keys above)
+diss = [1 - r["mode_share"] for r in rows]
+P["spearman_dissent_gap"] = spearman(diss, [r["k1"] - r["greedy"] for r in rows])
+P["spearman_dissent_abs_gap"] = spearman(diss, [abs(r["k1"] - r["greedy"]) for r in rows])
+P["spearman_dissent_gaincomb"] = spearman(diss, [r["comb12"] - r["k1"] for r in rows])
+P["spearman_dissent_gainsc"] = spearman(diss, [r["sc6"] - r["k1"] for r in rows])
+P["spearman_dissent_gainpe"] = spearman(diss, [r["pe6"] - r["k1"] for r in rows])
+# TRUE disjoint-vote correlations: sample-side dissent vs PE-6 gain; paraphrase-side dissent vs SC-6 gain
+P["spearman_disjoint_dissSc_gainpe"] = spearman([1 - r["mode_share_sc"] for r in rows],
+                                                [r["pe6"] - r["k1"] for r in rows])
+P["spearman_disjoint_dissPe_gainsc"] = spearman([1 - r["mode_share_pe"] for r in rows],
+                                                [r["sc6"] - r["k1"] for r in rows])
+# tie structure: how many pairs carry any signal at all
+unan = [r for r in rows if r["mode_share"] == 1]
+P["n_unanimous_pairs"] = len(unan)
+P["n_unanimous_gap_nonzero"] = sum(1 for r in unan if abs(r["k1"] - r["greedy"]) > 1e-9)
+P["n_unanimous_comb_differs_s1"] = sum(1 for r in unan if abs(r["comb12"] - r["k1"]) > 1e-9)
+nonun = [r for r in rows if r["mode_share"] < 1]
+if nonun:
+    d2 = [1 - r["mode_share"] for r in nonun]
+    P["spearman_dissent_gap_nonunan"] = spearman(d2, [r["k1"] - r["greedy"] for r in nonun])
+    P["spearman_dissent_gaincomb_nonunan"] = spearman(d2, [r["comb12"] - r["k1"] for r in nonun])
+# SC-6 vs PE-6 discordance structure (which pairs drive the pooled 1.8pp)
+disc_pairs = [{"model": r["model"], "qid": r["qid"], "sc6": r["sc6"], "pe6": r["pe6"]}
+              for r in rows if r["sc6"] != r["pe6"]]
+P["sc_pe_discordant_pairs"] = disc_pairs
+P["n_sc_pe_discordant"] = len(disc_pairs)
 # pooled error detection (AUROC unchanged; AURC tie-randomized pooled)
 errs = [0 if r["comb12"] else 1 for r in rows]
 P["auroc_cs_pooled"] = auroc([1 - r["mode_share_sc"] for r in rows], errs)

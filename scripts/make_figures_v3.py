@@ -64,6 +64,7 @@ def fig_conditions():
               handlelength=1.2, columnspacing=1.2)
     style_ax(ax, grid=False)
     fig.savefig(f"{FIG}/conditions.pdf")
+    fig.savefig(f"{FIG}/conditions.png", dpi=200)
     plt.close(fig)
     print("fig conditions done")
 
@@ -80,7 +81,7 @@ def fig_regime():
             ax.scatter(x, y, s=34, color=COLORS[m], alpha=0.85, edgecolor="white", linewidth=0.5,
                        label=LABEL[m] if ds == first_ds else None)
     ax.axhline(0, color="#999999", linewidth=0.7, linestyle="-")
-    ax.set_xlabel("Mean dissent share $1-$ modal vote share (%))")
+    ax.set_xlabel("Mean dissent share (1 $-$ modal vote share, %)")
     ax.set_ylabel("COMB-12 gain over S1 (pp)")
     handles, labels = ax.get_legend_handles_labels()
     seen = {}
@@ -90,6 +91,7 @@ def fig_regime():
               handletextpad=0.2, borderaxespad=0.2)
     style_ax(ax)
     fig.savefig(f"{FIG}/regime.pdf")
+    fig.savefig(f"{FIG}/regime.png", dpi=200)
     plt.close(fig)
     print("fig regime done")
 
@@ -129,6 +131,7 @@ def fig_budget():
     fig.legend(handles=handles, loc="outside upper left", ncol=3, frameon=False, fontsize=8,
                handlelength=1.6, columnspacing=1.4)
     fig.savefig(f"{FIG}/budget.pdf")
+    fig.savefig(f"{FIG}/budget.png", dpi=200)
     plt.close(fig)
     print("fig budget done")
 
@@ -156,6 +159,7 @@ def fig_auroc():
     ax.legend(loc="lower left", bbox_to_anchor=(0.0, 1.02), ncol=3, frameon=False, fontsize=7.5)
     style_ax(ax)
     fig.savefig(f"{FIG}/auroc.pdf")
+    fig.savefig(f"{FIG}/auroc.png", dpi=200)
     plt.close(fig)
     print("fig auroc done")
 

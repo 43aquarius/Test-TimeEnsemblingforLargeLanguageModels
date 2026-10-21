@@ -1,3 +1,4 @@
-16:14:22
-  [agnes] rate=0.10/s ok=57 err=2
-  agnes-3.0-flash     407/1904 (21.4%) err=  2  HTTP429:{"error":{"code":"","message":"You’ve reached t
+04:49:07
+  [agnes] rate=0.17/s ok=10 err=1
+  [aliyun] rate=1.50/s ok=0 err=0
+  agnes-2.5-flash    1903/1904 (99.9%) err=  1  HTTP429:{"error":{"code":"","message":"You’ve reached t

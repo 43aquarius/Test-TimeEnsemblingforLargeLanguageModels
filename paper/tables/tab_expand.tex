@@ -1,0 +1,15 @@
+\scriptsize
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{l c c c c c c c c c c c c c}
+\toprule
+ & & \multicolumn{6}{c}{Accuracy (\%)} & & \multicolumn{2}{c}{Unanimity rule} & \multicolumn{3}{c}{Adaptive rule} \\
+\cmidrule(lr){3-8}\cmidrule(lr){10-11}\cmidrule(lr){12-14}
+Model & $n$ & Greedy & S1 & SC-6 & PE-6 & HB-6 & COMB & Unan.\% & Acc & $\bar{k}$ & Acc & $\bar{k}$ & Bud. \\
+\midrule
+Agnes3.0-Flash & 119 & 80.7 & 79.6 & 81.5 & 87.4 & 83.2 & 82.4 & 59 & 80.7 & 2.5 & 81.5 & 5.2 & 86\% \\
+Agnes2.5-Flash & 119 & 89.9 & 88.1 & 90.8 & 91.6 & 89.1 & 89.9 & 76 & 90.8 & 2.3 & 89.9 & 4.7 & 79\% \\
+Qwen3.7-Flash$^{\S}$ & 60 & 85.0 & 86.1 & 85.0 & 86.7 & 85.0 & 85.0 & 82 & 85.0 & 2.1 & 85.0 & 4.5 & 74\% \\
+\midrule
+Pooled & 238 & 85.3 & 83.8 & 86.1 & 89.5 & 86.1 & 86.1 & 67 & 85.7 & 2.4 & 85.7 & 5.0 & 83\% \\
+\bottomrule
+\end{tabular}}

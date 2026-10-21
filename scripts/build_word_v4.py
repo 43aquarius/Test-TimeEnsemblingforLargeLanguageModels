@@ -7,10 +7,6 @@
   - in-text 'Table N' / 'Figure N' references converted to REF fields
     (live cross-references, clickable with \\h)
 Then pandoc -> docx, append reference list, post-process, save."""
-
-# --- Portable repository root (added during artifact packaging) ---
-import os as _os
-ROOT = _os.path.abspath(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), ".."))
 import re, subprocess, os, shutil, copy
 import docx
 from docx import Document
@@ -18,9 +14,9 @@ from docx.shared import Pt
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 
-P = ROOT + "/paper"
-OUT = ROOT + "/download/paper_word_version.docx"
-REF_SNAPSHOT = ROOT + "/scripts/word_reference_v3.docx"
+P = "/home/z/my-project/paper"
+OUT = "/home/z/my-project/download/paper_word_version.docx"
+REF_SNAPSHOT = "/home/z/my-project/scripts/word_reference_v3.docx"
 
 # 0. one-time stable reference snapshot (v3 chained output-doc-as-reference)
 if not os.path.exists(REF_SNAPSHOT):
@@ -125,6 +121,11 @@ src = re.sub(r"\\begin\{keyword\}[\s\S]*?\\end\{keyword\}", "", src)
 # 5. tabular* -> tabular
 src = src.replace("\\begin{tabular*}{\\columnwidth}{@{\\extracolsep{\\fill}} ", "\\begin{tabular}{")
 src = src.replace("\\end{tabular*}", "\\end{tabular}")
+# 5b. strip resizebox wrappers introduced in v1.4.0 expansion tables
+src = re.sub(r"\\resizebox\{\\columnwidth\}\{!\}\{%\s*\n", "", src)
+src = src.replace("\\end{tabular}}", "\\end{tabular}")
+# 5c. section-symbol footnote markers -> Unicode (pandoc cannot parse \S in math)
+src = src.replace("$^{\\S}$", "\u00a7").replace("$\\S$", "\u00a7")
 src = re.sub(r"\\cmidrule\(lr\)\{[^}]*\}", "", src)
 src = re.sub(r"\\addlinespace", "", src)
 

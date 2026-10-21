@@ -6,16 +6,12 @@ the (empirically re-measured) Agnes rate differ.  Resumable via JSONL.
 
 Usage: python3 run_expand.py agnes-3.0-flash[,agnes-2.5-flash]
 """
-
-# --- Portable repository root (added during artifact packaging) ---
-import os as _os
-ROOT = _os.path.abspath(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), ".."))
 import asyncio, aiohttp, json, os, re, time, sys, random
-sys.path.insert(0, ROOT + "/scripts")
-from credentials import AGNES
+sys.path.insert(0, "/home/z/my-project/scripts")
+from credentials import AGNES, ALIYUN
 
-DATA = ROOT + "/data"
-RES = ROOT + "/results/expand"
+DATA = "/home/z/my-project/data"
+RES = "/home/z/my-project/results/expand"
 os.makedirs(RES, exist_ok=True)
 
 questions = json.load(open(f"{DATA}/questions_expand.json"))
@@ -88,16 +84,36 @@ def answer_to_int(ans, q):
         return False
 
 MODELS = {
-    "agnes-3.0-flash": ("agnes-3.0-flash", 200, 1200),
-    "agnes-2.5-flash": ("agnes-2.5-flash", 1400, 2500),
+    # mcq budget raised 200 -> 800: sat_math/piqa can trigger content-level
+    # chain-of-thought that overruns a 200-token cap before emitting the answer
+    "agnes-3.0-flash": ("agnes-3.0-flash", 800, 1200, False),
+    "agnes-2.5-flash": ("agnes-2.5-flash", 1400, 2500, False),
+    # reasoning model: completion budget must cover reasoning tokens too;
+    # 1000 was too small on logiqa (reasoning consumed it before any content)
+    "deepseek-v4.1-flash": ("deepseek-v4.1-flash", 2500, 3500, False),
+    "deepseek-v4-flash-0731": ("deepseek-v4-flash-0731", 2500, 3500, False),
+    # qwen3.7-flash: MCQ answered with enable_thinking=False (direct, ~1 token)
+    # EXCEPT sat_math (and GSM8K), where computation happens and thinking mode
+    # keeps the content channel short; piqa gets a 400-token content budget
+    "qwen3.7-flash": ("qwen3.7-flash", 400, 3000, True),
 }
 ENDPOINTS = {
     "agnes": {"base": AGNES["base_url"], "key": AGNES["api_key"],
-              "rate": 0.35, "max_rate": 0.5, "min_rate": 0.1, "conc": 6},
+              "rate": 0.35, "max_rate": 0.5, "min_rate": 0.1, "conc": 6, "batch": 1},
+    "aliyun": {"base": ALIYUN["base_url"].rstrip("/").rsplit("/compatible-mode", 1)[0] + "/compatible-mode/v1",
+               "key": ALIYUN["api_key"],
+               "rate": 1.5, "max_rate": 4.0, "min_rate": 0.3, "conc": 16, "batch": 8},
+}
+MODEL_EP = {
+    "agnes-3.0-flash": "agnes",
+    "agnes-2.5-flash": "agnes",
+    "deepseek-v4.1-flash": "aliyun",
+    "deepseek-v4-flash-0731": "aliyun",
+    "qwen3.7-flash": "aliyun",
 }
 
 def tasks_for_model(alias):
-    _, mcq_tok, gsm_tok = MODELS[alias]
+    _, mcq_tok, gsm_tok, _ = MODELS[alias]
     tlist = []
     for q in questions:
         mt = gsm_tok if q["dataset"] == "gsm8k" else mcq_tok
@@ -122,6 +138,10 @@ def load_done(alias):
             try:
                 r = json.loads(line)
                 if r.get("FAILED"):
+                    continue
+                # unparsed cells are re-queued (main-suite protocol: redraw
+                # until extraction succeeds, subject to provider quota)
+                if r.get("answer") is None:
                     continue
                 done.add((r["qid"], r["para"], str(r["sample"])))
             except Exception:
@@ -177,9 +197,11 @@ class RateLimiter:
             self.rate = max(self.min_rate, self.rate * 0.5)
             self.cooldown_until = time.monotonic() + 30
 
-async def call_api(session, ep_cfg, model_id, prompt, temperature, max_tokens):
+async def call_api(session, ep_cfg, model_id, prompt, temperature, max_tokens, enable_thinking=None):
     body = {"model": model_id, "messages": [{"role": "user", "content": prompt}],
             "temperature": temperature, "max_tokens": max_tokens}
+    if enable_thinking is not None:
+        body["enable_thinking"] = enable_thinking
     headers = {"Authorization": f"Bearer {ep_cfg['key']}", "Content-Type": "application/json"}
     try:
         async with session.post(f"{ep_cfg['base']}/chat/completions", json=body, headers=headers,
@@ -205,9 +227,55 @@ async def call_api(session, ep_cfg, model_id, prompt, temperature, max_tokens):
     except Exception as e:
         return {"ok": False, "err": f"EXC:{str(e)[:80]}", "retry": True}
 
+async def run_task(alias, session, ep_cfg, limiter, status, task, fout, state):
+    """Execute one (qid, para, sample, temp, mt) task with retries; write result."""
+    qid, para, sample, temp, mt = task
+    mid = state["mid"]
+    nothink_mcq = state["nothink"]
+    q = QMAP[qid]
+    prompt = build_prompt(q, para)
+    eth = (False if nothink_mcq and q["dataset"] not in ("gsm8k", "sat_math") else None)
+    for attempt in range(4):
+        if status[alias]["dead"]:
+            return
+        await limiter.acquire()
+        try:
+            res = await call_api(session, ep_cfg, mid, prompt, temp, mt, enable_thinking=eth)
+        finally:
+            limiter.release()
+        if res.get("ok"):
+            limiter.report_ok()
+            ans = extract_answer(res["content"], q)
+            c = res["content"]
+            snippet = (c[:60] + " ... " + c[-640:]) if len(c) > 720 else c
+            fout.write(json.dumps({
+                "model": alias, "qid": qid, "dataset": q["dataset"], "para": para,
+                "sample": sample, "temp": temp, "answer": ans,
+                "correct": answer_to_int(ans, q) if ans is not None else None,
+                "content_len": len(c), "reasoning_len": res["reasoning_len"],
+                "snippet": snippet,
+                "usage": res["usage"], "t": round(time.time(), 1)}, ensure_ascii=False) + "\n")
+            status[alias]["done"] += 1
+            return
+        else:
+            limiter.report_err(res.get("retry", False))
+            status[alias]["errors"] += 1
+            status[alias]["last_msg"] = res.get("err", "")[:70]
+            if res.get("fatal_model"):
+                status[alias]["dead"] = True
+                status[alias]["last_msg"] = "QUOTA_EXHAUSTED"
+                return
+            await asyncio.sleep(min(60, 5 * (2 ** attempt)) + random.uniform(0, 3))
+    if not status[alias]["dead"]:
+        fout.write(json.dumps({"model": alias, "qid": qid, "para": para, "sample": sample,
+                               "FAILED": True, "err": status[alias]["last_msg"],
+                               "t": round(time.time(), 1)}, ensure_ascii=False) + "\n")
+
 async def worker(alias, session, limiters, status):
-    mid, mcq_tok, gsm_tok = MODELS[alias]
-    ep_cfg, limiter = ENDPOINTS["agnes"], limiters["agnes"]
+    mid, mcq_tok, gsm_tok, nothink_mcq = MODELS[alias]
+    ep_name = MODEL_EP[alias]
+    ep_cfg, limiter = ENDPOINTS[ep_name], limiters[ep_name]
+    batch = ENDPOINTS[ep_name].get("batch", 1)
     done = load_done(alias)
     tasks = tasks_for_model(alias)
     todo = [t for t in tasks if (t[0], t[1], str(t[2])) not in done]
@@ -216,55 +284,19 @@ async def worker(alias, session, limiters, status):
     if not todo:
         status[alias]["last_msg"] = "COMPLETE"
         return
-    todo.sort(key=lambda t: (int(t[0][1:]), t[1], str(t[2])))
+    # order: complete cheap MCQ questions first, expensive GSM8K last, so that
+    # a mid-run quota death still leaves a maximum of complete 16-call questions
+    def qnum(t):
+        return int(t[0][1:])
+    todo.sort(key=lambda t: (1 if QMAP[t[0]]["dataset"] == "gsm8k" else 0, qnum(t), t[1], str(t[2])))
     fout = open(result_path(alias), "a", buffering=1)
-    consec_err = 0
-    for (qid, para, sample, temp, mt) in todo:
+    state = {"mid": mid, "nothink": nothink_mcq}
+    for i in range(0, len(todo), batch):
         if status[alias]["dead"]:
             break
-        q = QMAP[qid]
-        prompt = build_prompt(q, para)
-        success = False
-        for attempt in range(4):
-            await limiter.acquire()
-            try:
-                res = await call_api(session, ep_cfg, mid, prompt, temp, mt)
-            finally:
-                limiter.release()
-            if res.get("ok"):
-                limiter.report_ok()
-                consec_err = 0
-                ans = extract_answer(res["content"], q)
-                c = res["content"]
-                snippet = (c[:60] + " ... " + c[-640:]) if len(c) > 720 else c
-                fout.write(json.dumps({
-                    "model": alias, "qid": qid, "dataset": q["dataset"], "para": para,
-                    "sample": sample, "temp": temp, "answer": ans,
-                    "correct": answer_to_int(ans, q) if ans is not None else None,
-                    "content_len": len(c), "reasoning_len": res["reasoning_len"],
-                    "snippet": snippet,
-                    "usage": res["usage"], "t": round(time.time(), 1)}, ensure_ascii=False) + "\n")
-                status[alias]["done"] += 1
-                success = True
-                break
-            else:
-                limiter.report_err(res.get("retry", False))
-                status[alias]["errors"] += 1
-                status[alias]["last_msg"] = res.get("err", "")[:70]
-                if res.get("fatal_model"):
-                    status[alias]["dead"] = True
-                    status[alias]["last_msg"] = "QUOTA_EXHAUSTED"
-                    break
-                consec_err += 1
-                if consec_err >= 8:
-                    status[alias]["dead"] = True
-                    status[alias]["last_msg"] = "8 consecutive errors"
-                    break
-                await asyncio.sleep(min(60, 5 * (2 ** attempt)) + random.uniform(0, 3))
-        if not success and not status[alias]["dead"]:
-            fout.write(json.dumps({"model": alias, "qid": qid, "para": para, "sample": sample,
-                                   "FAILED": True, "err": status[alias]["last_msg"],
-                                   "t": round(time.time(), 1)}, ensure_ascii=False) + "\n")
+        chunk = todo[i:i + batch]
+        await asyncio.gather(*[run_task(alias, session, ep_cfg, limiter, status, t, fout, state)
+                               for t in chunk])
     if status[alias]["done"] >= status[alias]["total"]:
         status[alias]["last_msg"] = "COMPLETE"
     fout.close()

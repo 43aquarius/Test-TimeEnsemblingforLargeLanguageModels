@@ -8,7 +8,11 @@ Usage: python3 run_expand.py agnes-3.0-flash[,agnes-2.5-flash]
 """
 import asyncio, aiohttp, json, os, re, time, sys, random
 sys.path.insert(0, "/home/z/my-project/scripts")
-from credentials import AGNES, ALIYUN
+from credentials import AGNES, ALIYUN, APINEX
+
+# apinex sits behind Cloudflare: default urllib/aiohttp UA gets 403 (error 1010)
+BROWSER_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+              "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36")
 
 DATA = "/home/z/my-project/data"
 RES = "/home/z/my-project/results/expand"
@@ -103,13 +107,26 @@ ENDPOINTS = {
     "aliyun": {"base": ALIYUN["base_url"].rstrip("/").rsplit("/compatible-mode", 1)[0] + "/compatible-mode/v1",
                "key": ALIYUN["api_key"],
                "rate": 1.5, "max_rate": 4.0, "min_rate": 0.3, "conc": 16, "batch": 8},
+    # apinex free tier: account-wide "Max 5 requests per minute" (shared across
+    # models); pace at 0.080/s = 4.8/min to stay safely under the rolling window.
+    # 429 bodies carry "Retry in Ns" which run_task honours verbatim.
+    "apinex": {"base": APINEX["base_url"], "key": APINEX["api_key"], "ua": BROWSER_UA,
+               "rate": 0.080, "max_rate": 0.080, "min_rate": 0.060, "conc": 12, "batch": 8,
+               # origin sits behind Cloudflare and can slow down under load;
+               # a 240s ceiling lets slow-but-valid responses still land
+               "timeout": 240},
 }
 MODEL_EP = {
     "agnes-3.0-flash": "agnes",
     "agnes-2.5-flash": "agnes",
-    "deepseek-v4.1-flash": "aliyun",
-    "deepseek-v4-flash-0731": "aliyun",
+    "deepseek-v4.1-flash": "apinex",
+    "deepseek-v4-flash-0731": "apinex",
     "qwen3.7-flash": "aliyun",
+}
+# provider-specific model ids (apinex exposes the deepseeks under free/)
+EP_MODEL_ID = {
+    ("apinex", "deepseek-v4.1-flash"): "free/deepseek-v4.1-flash",
+    ("apinex", "deepseek-v4-flash-0731"): "free/deepseek-v4-flash-0731",
 }
 
 def tasks_for_model(alias):
@@ -190,11 +207,12 @@ class RateLimiter:
             self.rate = min(self.max_rate, self.rate * 1.1)
             self.success_streak = 0
 
-    def report_err(self, retryable):
+    def report_err(self, retryable, halve=True):
         self.total_err += 1
         self.success_streak = 0
         if retryable:
-            self.rate = max(self.min_rate, self.rate * 0.5)
+            if halve:
+                self.rate = max(self.min_rate, self.rate * 0.5)
             self.cooldown_until = time.monotonic() + 30
 
 async def call_api(session, ep_cfg, model_id, prompt, temperature, max_tokens, enable_thinking=None):
@@ -203,9 +221,12 @@ async def call_api(session, ep_cfg, model_id, prompt, temperature, max_tokens, e
     if enable_thinking is not None:
         body["enable_thinking"] = enable_thinking
     headers = {"Authorization": f"Bearer {ep_cfg['key']}", "Content-Type": "application/json"}
+    if ep_cfg.get("ua"):
+        headers["User-Agent"] = ep_cfg["ua"]
+        headers["Accept"] = "application/json"
     try:
         async with session.post(f"{ep_cfg['base']}/chat/completions", json=body, headers=headers,
-                                timeout=aiohttp.ClientTimeout(total=150)) as resp:
+                                timeout=aiohttp.ClientTimeout(total=ep_cfg.get("timeout", 150))) as resp:
             text = await resp.text()
             if resp.status == 200:
                 try:
@@ -221,7 +242,13 @@ async def call_api(session, ep_cfg, model_id, prompt, temperature, max_tokens, e
                                               or "FreeTier" in text or "unavailable" in text.lower()):
                 return {"ok": False, "err": f"MODEL_QUOTA:{text[:80]}", "retry": False, "fatal_model": True}
             retryable = resp.status in (429, 500, 502, 503, 504)
-            return {"ok": False, "err": f"HTTP{resp.status}:{text[:100]}", "retry": retryable}
+            ra = None
+            if resp.status == 429:
+                m = re.search(r"Retry in (\d+)s", text)
+                if m:
+                    ra = min(90, int(m.group(1)) + 2)
+            return {"ok": False, "err": f"HTTP{resp.status}:{text[:100]}", "retry": retryable,
+                    "retry_after": ra}
     except asyncio.TimeoutError:
         return {"ok": False, "err": "TIMEOUT", "retry": True}
     except Exception as e:
@@ -258,14 +285,18 @@ async def run_task(alias, session, ep_cfg, limiter, status, task, fout, state):
             status[alias]["done"] += 1
             return
         else:
-            limiter.report_err(res.get("retry", False))
+            ra = res.get("retry_after")
+            limiter.report_err(res.get("retry", False), halve=ra is None)
             status[alias]["errors"] += 1
             status[alias]["last_msg"] = res.get("err", "")[:70]
             if res.get("fatal_model"):
                 status[alias]["dead"] = True
                 status[alias]["last_msg"] = "QUOTA_EXHAUSTED"
                 return
-            await asyncio.sleep(min(60, 5 * (2 ** attempt)) + random.uniform(0, 3))
+            if ra:
+                await asyncio.sleep(ra)
+            else:
+                await asyncio.sleep(min(60, 5 * (2 ** attempt)) + random.uniform(0, 3))
     if not status[alias]["dead"]:
         fout.write(json.dumps({"model": alias, "qid": qid, "para": para, "sample": sample,
                                "FAILED": True, "err": status[alias]["last_msg"],
@@ -274,6 +305,7 @@ async def run_task(alias, session, ep_cfg, limiter, status, task, fout, state):
 async def worker(alias, session, limiters, status):
     mid, mcq_tok, gsm_tok, nothink_mcq = MODELS[alias]
     ep_name = MODEL_EP[alias]
+    mid = EP_MODEL_ID.get((ep_name, alias), mid)
     ep_cfg, limiter = ENDPOINTS[ep_name], limiters[ep_name]
     batch = ENDPOINTS[ep_name].get("batch", 1)
     done = load_done(alias)

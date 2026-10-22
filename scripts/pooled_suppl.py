@@ -5,9 +5,12 @@ import json, random
 from collections import defaultdict
 
 R = json.load(open('/home/z/my-project/results/analysis/expand_v1.json'))
-POOL = ["agnes-3.0-flash", "agnes-2.5-flash"]
+# v1.4.0 hardcoded the two agnes models; v1.5.0: every model with full
+# 119-question coverage joins the pool (currently 2 agnes + deepseek-v4.1-flash)
+POOL = [a for a in R["models"] if R["models"][a]["n"] >= 100]
 common = sorted(set.intersection(*[set(R["models"][a]["per_q"].keys()) for a in POOL]))
 n_q = len(common)
+M = len(POOL)
 
 # per-question, per-model values
 def qval(a, qid, field):
@@ -62,30 +65,33 @@ for a in POOL:
         for k in ("greedy", "k1", "sc6", "pe6", "comb12"):
             ds_tab[ds][k].append(v[k])
 out["by_ds_pooled"] = {ds: {k: sum(v)/len(v) for k, v in f.items()} for ds, f in ds_tab.items()}
-print("\npooled per-dataset (mean over 2 models):")
+# v1.5.0 fix: the printed table previously indexed [0] (first model only);
+# print from the averaged dict so console matches the JSON.
+pds = out["by_ds_pooled"]
+print(f"\npooled per-dataset (mean over {M} models):")
 hdr = ["dataset", "n", "greedy", "S1", "SC-6", "PE-6", "COMB-12"]
 print("  " + " | ".join(f"{h:>9s}" for h in hdr))
-for ds in sorted(ds_tab):
-    f = ds_tab[ds]
-    nn = R["models"][POOL[0]]["by_ds"][ds]["n"] + R["models"][POOL[1]]["by_ds"][ds]["n"]
+for ds in sorted(pds):
+    f = pds[ds]
+    nn = sum(R["models"][a]["by_ds"][ds]["n"] for a in POOL)
     print("  " + " | ".join([
         f"{ds:>9s}", f"{nn:>9d}",
-        f"{100*f['greedy'][0]:>8.1f}%", f"{100*f['k1'][0]:>8.1f}%",
-        f"{100*f['sc6'][0]:>8.1f}%", f"{100*f['pe6'][0]:>8.1f}%",
-        f"{100*f['comb12'][0]:>8.1f}%"]))
+        f"{100*f['greedy']:>8.1f}%", f"{100*f['k1']:>8.1f}%",
+        f"{100*f['sc6']:>8.1f}%", f"{100*f['pe6']:>8.1f}%",
+        f"{100*f['comb12']:>8.1f}%"]))
 
 # ---- off-mode & unanimous pooled ----
 off = sum(R["models"][a]["off_mode_n"] for a in POOL)
-unan = sum(R["models"][a]["unanimous_rate"] for a in POOL) / 2
+unan = sum(R["models"][a]["unanimous_rate"] for a in POOL) / M
 out["off_mode_pooled_n"] = off
-out["off_mode_pooled_rate"] = off / (2 * n_q)
+out["off_mode_pooled_rate"] = off / (M * n_q)
 out["unanimous_pooled_rate"] = unan
-print(f"\npooled off-mode: {off}/{2*n_q} ({100*off/(2*n_q):.1f}%), unanimous: {100*unan:.1f}%")
+print(f"\npooled off-mode: {off}/{M*n_q} ({100*off/(M*n_q):.1f}%), unanimous: {100*unan:.1f}%")
 
 # ---- discordant counts pooled ----
 disc = {k: sum(R["models"][a]["sc_pe_discordant"][k] for a in POOL) for k in ("sc_only", "pe_only")}
 out["sc_pe_discordant_pooled"] = disc
-print(f"pooled SC/PE discordant: sc_only={disc['sc_only']} pe_only={disc['pe_only']} of {2*n_q}")
+print(f"pooled SC/PE discordant: sc_only={disc['sc_only']} pe_only={disc['pe_only']} of {M*n_q}")
 
 # ---- strata pooled ----
 strata_out = {}
@@ -99,7 +105,7 @@ for sname in R["models"][POOL[0]]["strata"]:
                          for k in ("k1", "sc6", "pe6", "comb12", "greedy")}
     strata_out[sname]["n_per_model"] = [r["n"] for r in rows]
 out["strata_pooled"] = strata_out
-print("\npooled strata (mean of 2 models):")
+print(f"\npooled strata (mean of {M} models):")
 for sname, s in strata_out.items():
     print(f"  {sname}: n/model={s['n_per_model']} k1={100*s['k1']:.1f} sc6={100*s['sc6']:.1f} "
           f"pe6={100*s['pe6']:.1f} comb12={100*s['comb12']:.1f} greedy={100*s['greedy']:.1f}")

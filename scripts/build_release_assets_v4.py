@@ -120,7 +120,7 @@ Record fields: model, qid, dataset, para, sample, temp, answer, correct,
 content_len, reasoning_len, snippet, usage, t
 
 The full repository (experiment code, manuscript source, regeneration scripts):
-https://github.com/43aquaris/Test-TimeEnsemblingforLargeLanguageModels
+https://github.com/43aquarius/Test-TimeEnsemblingforLargeLanguageModels
 
 License: code MIT; evaluation questions sampled from public benchmarks listed in
 the repository (data/raw/README.md), their original licenses apply;

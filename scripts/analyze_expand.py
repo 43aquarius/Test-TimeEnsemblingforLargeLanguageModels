@@ -316,10 +316,13 @@ for alias in MODELS:
           f"({ad['budget_pct_of_6']*100:.0f}% of 6) gaps: sc6={ad['gap_vs_sc6_q']}q "
           f"pe6={ad['gap_vs_pe6_q']}q best={ad['gap_vs_best_q']}q strategies={ad['strategy_counts']}")
 
-# ---------------- pooled analysis (fully covered agnes pair) ----------------
-POOL = [a for a in ("agnes-3.0-flash", "agnes-2.5-flash")
+# ---------------- pooled analysis (all models with full 119-question coverage) ----------------
+# v1.4.0 hardcoded the two agnes models; v1.5.0 generalizes to every model
+# whose complete-question count reaches the full set (currently the two agnes
+# flashes plus the apinex deepseek-v4.1-flash rerun).
+POOL = [a for a in MODELS
         if a in R["models"] and R["models"][a]["n"] >= 100]
-if len(POOL) == 2:
+if len(POOL) >= 2:
     common = sorted(set.intersection(*[set(R["models"][a]["per_q"].keys()) for a in POOL]))
     rows = []
     for a in POOL:
@@ -332,7 +335,7 @@ if len(POOL) == 2:
                 "hb6_ok": 1 if v["hb6_ok"] else 0, "comb12_ok": 1 if v["comb12_ok"] else 0,
             })
     def pooled_ci(field, iters=10000, seed=42):
-        # cluster bootstrap on questions (each question carries both models)
+        # cluster bootstrap on questions (each question carries all pooled models)
         by_q = {}
         for r in rows:
             by_q.setdefault(r["qid"], []).append(r)

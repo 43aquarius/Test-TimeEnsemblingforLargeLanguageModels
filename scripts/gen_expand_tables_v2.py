@@ -100,8 +100,12 @@ def adaptive(complete):
     return 100 * sum(accs) / len(accs), sum(ks) / len(ks)
 
 M = {}
+# v1.5.0: deepseek-v4.1-flash joins as the third fully covered expansion model
+# (apinex provider, direct-answer mode); deepseek-v4-flash-0731 stays out (13 q,
+# aliyun partial, provider-gated mid-collection); qwen3.7-flash keeps its § star.
 for alias, disp in [("agnes-3.0-flash", "Agnes3.0-Flash"),
                     ("agnes-2.5-flash", "Agnes2.5-Flash"),
+                    ("deepseek-v4.1-flash", "DeepSeekV4.1-Flash"),
                     ("qwen3.7-flash", "Qwen3.7-Flash")]:
     comp = load(alias)
     if len(comp) < 50:
@@ -122,27 +126,29 @@ for disp, m in M.items():
     rows.append(f"{disp}{star} & {m['n']} & {a['greedy']:.1f} & {a['s1']:.1f} & {a['sc6']:.1f} & "
                 f"{a['pe6']:.1f} & {a['hb6']:.1f} & {a['comb12']:.1f} & {a['unanimous']:.0f} & "
                 f"{m['ua']:.1f} & {m['uk']:.1f} & {m['aa']:.1f} & {m['ak']:.1f} & {100*m['ak']/6:.0f}\\% \\\\")
-POOL = ["Agnes3.0-Flash", "Agnes2.5-Flash"]
+POOL = [d for d in M if M[d]["n"] >= 100]  # full-coverage models only (v1.5.0: 3 models)
 pool_pq = {}
 for disp in POOL:
     for qid, v in M[disp]["pq"].items():
         pool_pq.setdefault(qid, []).append(v)
 n_pairs = sum(len(v) for v in pool_pq.values())
+MP = len(POOL)
 def pacc(f):
     return 100 * sum(v[f] for vs in pool_pq.values() for v in vs) / n_pairs
 p_greedy, p_s1, p_sc6, p_pe6, p_hb6, p_c12, p_unan = (
     pacc(f) for f in ("greedy", "s1", "sc6", "pe6", "hb6", "comb12", "unanimous"))
-pu_a = sum(M[d]["ua"] for d in POOL) / 2
-pu_k = sum(M[d]["uk"] for d in POOL) / 2
-pa_a = sum(M[d]["aa"] for d in POOL) / 2
-pa_k = sum(M[d]["ak"] for d in POOL) / 2
+pu_a = sum(M[d]["ua"] for d in POOL) / MP
+pu_k = sum(M[d]["uk"] for d in POOL) / MP
+pa_a = sum(M[d]["aa"] for d in POOL) / MP
+pa_k = sum(M[d]["ak"] for d in POOL) / MP
 rows.append("\\midrule")
 rows.append(f"Pooled & {n_pairs} & {p_greedy:.1f} & {p_s1:.1f} & {p_sc6:.1f} & {p_pe6:.1f} & "
             f"{p_hb6:.1f} & {p_c12:.1f} & {p_unan:.0f} & {pu_a:.1f} & {pu_k:.1f} & "
             f"{pa_a:.1f} & {pa_k:.1f} & {100*pa_k/6:.0f}\\% \\\\")
 
 tab = """\\scriptsize
-\\begin{tabular*}{\\columnwidth}{@{\\extracolsep{\\fill}} l c c c c c c c c c c c c c}
+\\resizebox{\\columnwidth}{!}{%
+\\begin{tabular}{l c c c c c c c c c c c c c}
 \\toprule
  & & \\multicolumn{6}{c}{Accuracy (\\%)} & & \\multicolumn{2}{c}{Unanimity rule} & \\multicolumn{3}{c}{Adaptive rule} \\\\
 \\cmidrule(lr){3-8}\\cmidrule(lr){10-11}\\cmidrule(lr){12-14}
@@ -150,13 +156,15 @@ Model & $n$ & Greedy & S1 & SC-6 & PE-6 & HB-6 & COMB & Unan.\\% & Acc & $\\bar{
 \\midrule
 """ + "\n".join(rows) + """
 \\bottomrule
-\\end{tabular*}"""
+\\end{tabular}}"""
 open("/home/z/my-project/paper/tables/tab_expand.tex", "w").write(tab + "\n")
 print("\n--- tab_expand.tex written ---")
 print(tab)
 
 # ---------------- tab_expand_ds.tex ----------------
 ds_order = ["gsm8k", "logiqa", "lsat_lr", "piqa", "sat_math", "truthfulqa"]
+def tex_ds(ds):
+    return ds.replace("_", "\\_")
 lines = []
 for disp in POOL:
     pq = M[disp]["pq"]
@@ -169,7 +177,7 @@ for disp in POOL:
         pe1 = 100 * sum(v["pe1"] for v in dq.values()) / n
         sc6 = 100 * sum(v["sc6"] for v in dq.values()) / n
         pe6 = 100 * sum(v["pe6"] for v in dq.values()) / n
-        lines.append(f"{disp} & {ds} & {n} & {s1:.1f} & {pe1:.1f} & {sc6:.1f} & {pe6:.1f} & "
+        lines.append(f"{disp} & {tex_ds(ds)} & {n} & {s1:.1f} & {pe1:.1f} & {sc6:.1f} & {pe6:.1f} & "
                      f"{sc6-s1:+.1f} & {pe6-pe1:+.1f} \\\\")
     n = len(pq)
     s1 = 100 * sum(v["s1"] for v in pq.values()) / n
@@ -188,7 +196,7 @@ for ds in ds_order:
     pe1 = 100 * sum(v["pe1"] for v in dq) / n
     sc6 = 100 * sum(v["sc6"] for v in dq) / n
     pe6 = 100 * sum(v["pe6"] for v in dq) / n
-    lines.append(f"Pooled & {ds} & {n} & {s1:.1f} & {pe1:.1f} & {sc6:.1f} & {pe6:.1f} & "
+    lines.append(f"Pooled & {tex_ds(ds)} & {n} & {s1:.1f} & {pe1:.1f} & {sc6:.1f} & {pe6:.1f} & "
                  f"{sc6-s1:+.1f} & {pe6-pe1:+.1f} \\\\")
 dq_all = [v for disp in POOL for v in M[disp]["pq"].values()]
 n = len(dq_all)
@@ -200,7 +208,8 @@ lines.append(f"Pooled & pooled & {n} & {s1:.1f} & {pe1:.1f} & {sc6:.1f} & {pe6:.
              f"{sc6-s1:+.1f} & {pe6-pe1:+.1f} \\\\")
 
 tab2 = """\\scriptsize
-\\begin{tabular*}{\\columnwidth}{@{\\extracolsep{\\fill}} l l c c c c c c c c}
+\\resizebox{\\columnwidth}{!}{%
+\\begin{tabular}{l l c c c c c c c c}
 \\toprule
  & & & \\multicolumn{2}{c}{Single call (\\%)} & & \\multicolumn{2}{c}{6-vote (\\%)} & \\multicolumn{2}{c}{Ensembling gain (pp)} \\\\
 \\cmidrule(lr){4-5}\\cmidrule(lr){6-7}\\cmidrule(lr){8-9}
@@ -208,7 +217,7 @@ Model & Dataset & $n$ & S1 & PE-1 & SC-6 & PE-6 & $\\Delta$SC & $\\Delta$PE \\\\
 \\midrule
 """ + "\n".join(lines) + """
 \\bottomrule
-\\end{tabular*}"""
+\\end{tabular}}"""
 open("/home/z/my-project/paper/tables/tab_expand_ds.tex", "w").write(tab2 + "\n")
 print("\n--- tab_expand_ds.tex written ---")
 print(tab2)

@@ -5,7 +5,7 @@ import json, os, sys, time, urllib.request
 TOKEN = os.environ.get("GH_TOKEN")
 if not TOKEN:
     sys.exit("Set GH_TOKEN")
-OWNER_REPO = "43aquaris/Test-TimeEnsemblingforLargeLanguageModels"
+OWNER_REPO = "43aquarius/Test-TimeEnsemblingforLargeLanguageModels"
 API = f"https://api.github.com/repos/{OWNER_REPO}"
 UPLOADS = f"https://uploads.github.com/repos/{OWNER_REPO}"
 ASSETS = "/home/z/my-project/release_assets"

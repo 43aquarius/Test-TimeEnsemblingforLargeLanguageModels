@@ -1,0 +1,173 @@
+{
+ "n_complete": 119,
+ "n_off_mode": 5,
+ "off_mode_rate": 0.042,
+ "off_mode_but_greedy_correct": 1,
+ "evidence": [
+  {
+   "qid": "e024",
+   "dataset": "logiqa",
+   "gold": "D",
+   "greedy_answer": "D",
+   "greedy_correct": true,
+   "greedy_usage": {
+    "pt": 442,
+    "ct": 962
+   },
+   "greedy_content_len": 11,
+   "greedy_snippet": "\n\nAnswer: D",
+   "six_sample_answers": [
+    "A",
+    "B",
+    "D",
+    "A",
+    "A",
+    "A"
+   ],
+   "sample_answers_correct": [
+    false,
+    false,
+    true,
+    false,
+    false,
+    false
+   ],
+   "sample_acc": 0.167,
+   "modal_answer": "A",
+   "mode_share": 0.667,
+   "mode_is_gold": false
+  },
+  {
+   "qid": "e034",
+   "dataset": "truthfulqa",
+   "gold": "B",
+   "greedy_answer": "E",
+   "greedy_correct": false,
+   "greedy_usage": {
+    "pt": 385,
+    "ct": 251
+   },
+   "greedy_content_len": 11,
+   "greedy_snippet": "\n\nAnswer: E",
+   "six_sample_answers": [
+    "E",
+    "D",
+    "D",
+    "E",
+    "D",
+    "D"
+   ],
+   "sample_answers_correct": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "sample_acc": 0.0,
+   "modal_answer": "D",
+   "mode_share": 0.667,
+   "mode_is_gold": false
+  },
+  {
+   "qid": "e067",
+   "dataset": "logiqa",
+   "gold": "B",
+   "greedy_answer": "C",
+   "greedy_correct": false,
+   "greedy_usage": {
+    "pt": 483,
+    "ct": 1400
+   },
+   "greedy_content_len": 1114,
+   "greedy_snippet": "\n\n# Solving the Hot Dish Ordering Problem\n\n**Given:** K = 4t ...  {2, 4, 6} ✓\n\nSo: M, L ∈ {1, 2, 6}; Q, N, P ∈ {1, 3, 5, 7}; X ∈ remaining.\n\n## Testing Cases\n\nSince M < K(4), M ∈ {1, 2}.\n\n**If M = 2:** But position 2 is S, and M is Sichuan — works. Then L ∈ {1, 6}. But position 1 is C, so L must be at 6. C-position {1,3,5,7} → {Q, N, P, X}. With P < Q and P < X: One valid arrangement is **L=6, P=1, Q=3, N=5, X=7**.\n\nThis gives: **P=1, L=2, Q=3, K=4, N=5, L=6, X=7**\n\n## Checking Options\n- (A) P=5? In our valid arrangement P=1. ❌  \n- (B) X=6? X=7 in our arrangement. ❌  \n- (C) L=5? In arrangement above, L=6... Let me recheck: actually valid arrangement **M=1, L=3, P=2, K=4, Q=5, N=6, X=7** — but P(2",
+   "six_sample_answers": [
+    "A",
+    "A",
+    "B",
+    "A",
+    "A",
+    "D"
+   ],
+   "sample_answers_correct": [
+    false,
+    false,
+    true,
+    false,
+    false,
+    false
+   ],
+   "sample_acc": 0.167,
+   "modal_answer": "A",
+   "mode_share": 0.667,
+   "mode_is_gold": false
+  },
+  {
+   "qid": "e073",
+   "dataset": "lsat_lr",
+   "gold": "C",
+   "greedy_answer": "D",
+   "greedy_correct": false,
+   "greedy_usage": {
+    "pt": 586,
+    "ct": 581
+   },
+   "greedy_content_len": 11,
+   "greedy_snippet": "\n\nAnswer: D",
+   "six_sample_answers": [
+    "C",
+    "D",
+    "C",
+    "C",
+    "D",
+    "C"
+   ],
+   "sample_answers_correct": [
+    true,
+    false,
+    true,
+    true,
+    false,
+    true
+   ],
+   "sample_acc": 0.667,
+   "modal_answer": "C",
+   "mode_share": 0.667,
+   "mode_is_gold": true
+  },
+  {
+   "qid": "e103",
+   "dataset": "truthfulqa",
+   "gold": "C",
+   "greedy_answer": "B",
+   "greedy_correct": false,
+   "greedy_usage": {
+    "pt": 407,
+    "ct": 391
+   },
+   "greedy_content_len": 11,
+   "greedy_snippet": "\n\nAnswer: B",
+   "six_sample_answers": [
+    "C",
+    "C",
+    "B",
+    "C",
+    "C",
+    "C"
+   ],
+   "sample_answers_correct": [
+    true,
+    true,
+    false,
+    true,
+    true,
+    true
+   ],
+   "sample_acc": 0.833,
+   "modal_answer": "C",
+   "mode_share": 0.833,
+   "mode_is_gold": true
+  }
+ ]
+}

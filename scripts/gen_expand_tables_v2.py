@@ -103,9 +103,12 @@ M = {}
 # v1.5.0: deepseek-v4.1-flash joins as the third fully covered expansion model
 # (apinex provider, direct-answer mode); deepseek-v4-flash-0731 stays out (13 q,
 # aliyun partial, provider-gated mid-collection); qwen3.7-flash keeps its § star.
+# v1.6.0: deepseek-v4-pro-0813 (apinex, direct-answer) joins as the fourth fully
+# covered model — the pro-tier deepseek replacing the paywalled v4-flash-0731.
 for alias, disp in [("agnes-3.0-flash", "Agnes3.0-Flash"),
                     ("agnes-2.5-flash", "Agnes2.5-Flash"),
                     ("deepseek-v4.1-flash", "DeepSeekV4.1-Flash"),
+                    ("deepseek-v4-pro-0813", "DeepSeekV4-Pro-0813"),
                     ("qwen3.7-flash", "Qwen3.7-Flash")]:
     comp = load(alias)
     if len(comp) < 50:

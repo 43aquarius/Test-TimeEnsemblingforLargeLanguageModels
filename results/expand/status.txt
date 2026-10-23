@@ -1,5 +1,5 @@
-17:22:08
+21:59:33
   [agnes] rate=0.35/s ok=0 err=0
   [aliyun] rate=1.50/s ok=0 err=0
-  [apinex] rate=0.06/s ok=0 err=32
-  deepseek-v4-flash-0731    0/1904 ( 0.0%) err= 32  HTTP402:{"error":{"message":"This model is currently av
+  [apinex] rate=0.08/s ok=0 err=0
+  deepseek-v4-pro-0813 1903/1904 (99.9%) err=  0  running

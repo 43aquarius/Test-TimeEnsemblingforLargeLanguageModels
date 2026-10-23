@@ -23,7 +23,8 @@ def boot(model, cond, iters=10000, seed=42):
 def fmt(b, lo, hi):
     return f"+{100*b:.1f} (CI {100*lo:+.1f} to {100*hi:+.1f})"
 
-for model in ("agnes-3.0-flash", "agnes-2.5-flash", "deepseek-v4.1-flash"):
+for model in ("agnes-3.0-flash", "agnes-2.5-flash", "deepseek-v4.1-flash",
+               "deepseek-v4-pro-0813"):
     print(f"=== {model} (n={R['models'][model]['n']}) ===")
     for cond in ("sc6", "pe6", "hb6", "comb12"):
         b, lo, hi = boot(model, cond)

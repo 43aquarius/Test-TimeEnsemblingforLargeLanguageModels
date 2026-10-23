@@ -26,6 +26,7 @@ MAIN_NEED = [(0, "g")] + [(0, str(s)) for s in range(1, 7)] + \
             [(p, str(s)) for p in (1, 2, 3) for s in (1, 2)] + [(p, "1") for p in (4, 5, 6)]
 
 MODELS = [m for m in ("agnes-3.0-flash", "agnes-2.5-flash", "deepseek-v4.1-flash",
+                      "deepseek-v4-pro-0813",
                       "qwen3.7-flash", "deepseek-v4-flash-0731")
           if os.path.exists(f"{RES}/{m}.jsonl")]
 

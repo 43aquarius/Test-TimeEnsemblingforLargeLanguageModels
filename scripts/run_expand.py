@@ -96,6 +96,9 @@ MODELS = {
     # 1000 was too small on logiqa (reasoning consumed it before any content)
     "deepseek-v4.1-flash": ("deepseek-v4.1-flash", 2500, 3500, False),
     "deepseek-v4-flash-0731": ("deepseek-v4-flash-0731", 2500, 3500, False),
+    # pro-tier deepseek, apinex-only (aliyun lineup never had it); probe on
+    # 2026-10-23: direct-answer mode (rlen=0), "Answer: X" format, ct 4-76
+    "deepseek-v4-pro-0813": ("deepseek-v4-pro-0813", 2500, 3500, False),
     # qwen3.7-flash: MCQ answered with enable_thinking=False (direct, ~1 token)
     # EXCEPT sat_math (and GSM8K), where computation happens and thinking mode
     # keeps the content channel short; piqa gets a 400-token content budget
@@ -121,12 +124,14 @@ MODEL_EP = {
     "agnes-2.5-flash": "agnes",
     "deepseek-v4.1-flash": "apinex",
     "deepseek-v4-flash-0731": "apinex",
+    "deepseek-v4-pro-0813": "apinex",
     "qwen3.7-flash": "aliyun",
 }
 # provider-specific model ids (apinex exposes the deepseeks under free/)
 EP_MODEL_ID = {
     ("apinex", "deepseek-v4.1-flash"): "free/deepseek-v4.1-flash",
     ("apinex", "deepseek-v4-flash-0731"): "free/deepseek-v4-flash-0731",
+    ("apinex", "deepseek-v4-pro-0813"): "free/deepseek-v4-pro-0813",
 }
 
 def tasks_for_model(alias):

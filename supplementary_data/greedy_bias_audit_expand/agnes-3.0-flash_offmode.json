@@ -1,0 +1,503 @@
+{
+ "n_complete": 119,
+ "n_off_mode": 15,
+ "off_mode_rate": 0.1261,
+ "off_mode_but_greedy_correct": 6,
+ "evidence": [
+  {
+   "qid": "e024",
+   "dataset": "logiqa",
+   "gold": "D",
+   "greedy_answer": "D",
+   "greedy_correct": true,
+   "greedy_usage": {
+    "pt": 232,
+    "ct": 4
+   },
+   "greedy_content_len": 9,
+   "greedy_snippet": "Answer: D",
+   "six_sample_answers": [
+    "A",
+    "C",
+    "D",
+    "C",
+    "C",
+    "C"
+   ],
+   "sample_answers_correct": [
+    false,
+    false,
+    true,
+    false,
+    false,
+    false
+   ],
+   "sample_acc": 0.167,
+   "modal_answer": "C",
+   "mode_share": 0.667,
+   "mode_is_gold": false
+  },
+  {
+   "qid": "e035",
+   "dataset": "sat_math",
+   "gold": "A",
+   "greedy_answer": "C",
+   "greedy_correct": false,
+   "greedy_usage": {
+    "pt": 166,
+    "ct": 4
+   },
+   "greedy_content_len": 9,
+   "greedy_snippet": "Answer: C",
+   "six_sample_answers": [
+    "A",
+    "A",
+    "B",
+    "C",
+    "A",
+    "A"
+   ],
+   "sample_answers_correct": [
+    true,
+    true,
+    false,
+    false,
+    true,
+    true
+   ],
+   "sample_acc": 0.667,
+   "modal_answer": "A",
+   "mode_share": 0.667,
+   "mode_is_gold": true
+  },
+  {
+   "qid": "e039",
+   "dataset": "sat_math",
+   "gold": "A",
+   "greedy_answer": "D",
+   "greedy_correct": false,
+   "greedy_usage": {
+    "pt": 213,
+    "ct": 4
+   },
+   "greedy_content_len": 9,
+   "greedy_snippet": "Answer: D",
+   "six_sample_answers": [
+    "B",
+    "B",
+    "C",
+    "C",
+    "B",
+    "C"
+   ],
+   "sample_answers_correct": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "sample_acc": 0.0,
+   "modal_answer": "B",
+   "mode_share": 0.5,
+   "mode_is_gold": null
+  },
+  {
+   "qid": "e046",
+   "dataset": "logiqa",
+   "gold": "D",
+   "greedy_answer": "B",
+   "greedy_correct": false,
+   "greedy_usage": {
+    "pt": 277,
+    "ct": 4
+   },
+   "greedy_content_len": 9,
+   "greedy_snippet": "Answer: B",
+   "six_sample_answers": [
+    "B",
+    "B",
+    "C",
+    "D",
+    "D",
+    "D"
+   ],
+   "sample_answers_correct": [
+    false,
+    false,
+    false,
+    true,
+    true,
+    true
+   ],
+   "sample_acc": 0.5,
+   "modal_answer": "D",
+   "mode_share": 0.5,
+   "mode_is_gold": true
+  },
+  {
+   "qid": "e067",
+   "dataset": "logiqa",
+   "gold": "B",
+   "greedy_answer": "C",
+   "greedy_correct": false,
+   "greedy_usage": {
+    "pt": 273,
+    "ct": 4
+   },
+   "greedy_content_len": 9,
+   "greedy_snippet": "Answer: C",
+   "six_sample_answers": [
+    "B",
+    "B",
+    "C",
+    "D",
+    "A",
+    "D"
+   ],
+   "sample_answers_correct": [
+    true,
+    true,
+    false,
+    false,
+    false,
+    false
+   ],
+   "sample_acc": 0.333,
+   "modal_answer": "B",
+   "mode_share": 0.333,
+   "mode_is_gold": null
+  },
+  {
+   "qid": "e073",
+   "dataset": "lsat_lr",
+   "gold": "C",
+   "greedy_answer": "D",
+   "greedy_correct": false,
+   "greedy_usage": {
+    "pt": 376,
+    "ct": 4
+   },
+   "greedy_content_len": 9,
+   "greedy_snippet": "Answer: D",
+   "six_sample_answers": [
+    "C",
+    "C",
+    "C",
+    "D",
+    "C",
+    "C"
+   ],
+   "sample_answers_correct": [
+    true,
+    true,
+    true,
+    false,
+    true,
+    true
+   ],
+   "sample_acc": 0.833,
+   "modal_answer": "C",
+   "mode_share": 0.833,
+   "mode_is_gold": true
+  },
+  {
+   "qid": "e080",
+   "dataset": "logiqa",
+   "gold": "C",
+   "greedy_answer": "A",
+   "greedy_correct": false,
+   "greedy_usage": {
+    "pt": 346,
+    "ct": 4
+   },
+   "greedy_content_len": 9,
+   "greedy_snippet": "Answer: A",
+   "six_sample_answers": [
+    "C",
+    "C",
+    "A",
+    "C",
+    "C",
+    "C"
+   ],
+   "sample_answers_correct": [
+    true,
+    true,
+    false,
+    true,
+    true,
+    true
+   ],
+   "sample_acc": 0.833,
+   "modal_answer": "C",
+   "mode_share": 0.833,
+   "mode_is_gold": true
+  },
+  {
+   "qid": "e089",
+   "dataset": "sat_math",
+   "gold": "C",
+   "greedy_answer": "C",
+   "greedy_correct": true,
+   "greedy_usage": {
+    "pt": 156,
+    "ct": 4
+   },
+   "greedy_content_len": 9,
+   "greedy_snippet": "Answer: C",
+   "six_sample_answers": [
+    "B",
+    "B",
+    "C",
+    "A",
+    "B",
+    "B"
+   ],
+   "sample_answers_correct": [
+    false,
+    false,
+    true,
+    false,
+    false,
+    false
+   ],
+   "sample_acc": 0.167,
+   "modal_answer": "B",
+   "mode_share": 0.667,
+   "mode_is_gold": false
+  },
+  {
+   "qid": "e094",
+   "dataset": "gsm8k",
+   "gold": "15",
+   "greedy_answer": "15.00",
+   "greedy_correct": false,
+   "greedy_usage": {
+    "pt": 178,
+    "ct": 274
+   },
+   "greedy_content_len": 890,
+   "greedy_snippet": "To determine how much Greg will spend on jello, we need to c ... ep 1: Calculate the total number of jello cups needed.**\nGreg wants to provide 4 jello cups for each of the 30 kids.\n$$30 \\text{ kids} \\times 4 \\text{ cups/kid} = 120 \\text{ cups}$$\n\n**Step 2: Determine how many boxes of jello are required.**\nOne box makes 10 small jello cups. To find the number of boxes needed, divide the total cups required by the number of cups per box.\n$$120 \\text{ cups} / 10 \\text{ cups/box} = 12 \\text{ boxes}$$\n\n**Step 3: Calculate the total cost.**\nThe jello is on sale for $1.25 per box. Multiply the number of boxes by the price per box.\n$$12 \\text{ boxes} \\times \\$1.25 \\text{ /box} = \\$15.00$$\n\nAnswer: 15.00",
+   "six_sample_answers": [
+    "15.00",
+    "15",
+    "15",
+    "15",
+    "15",
+    "15"
+   ],
+   "sample_answers_correct": [
+    false,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "sample_acc": 0.833,
+   "modal_answer": "15",
+   "mode_share": 0.833,
+   "mode_is_gold": true
+  },
+  {
+   "qid": "e095",
+   "dataset": "truthfulqa",
+   "gold": "A",
+   "greedy_answer": "A",
+   "greedy_correct": true,
+   "greedy_usage": {
+    "pt": 209,
+    "ct": 4
+   },
+   "greedy_content_len": 9,
+   "greedy_snippet": "Answer: A",
+   "six_sample_answers": [
+    "C",
+    "A",
+    "C",
+    "C",
+    "C",
+    "A"
+   ],
+   "sample_answers_correct": [
+    false,
+    true,
+    false,
+    false,
+    false,
+    true
+   ],
+   "sample_acc": 0.333,
+   "modal_answer": "C",
+   "mode_share": 0.667,
+   "mode_is_gold": false
+  },
+  {
+   "qid": "e098",
+   "dataset": "sat_math",
+   "gold": "A",
+   "greedy_answer": "A",
+   "greedy_correct": true,
+   "greedy_usage": {
+    "pt": 183,
+    "ct": 4
+   },
+   "greedy_content_len": 9,
+   "greedy_snippet": "Answer: A",
+   "six_sample_answers": [
+    "B",
+    "B",
+    "B",
+    "A",
+    "B",
+    "A"
+   ],
+   "sample_answers_correct": [
+    false,
+    false,
+    false,
+    true,
+    false,
+    true
+   ],
+   "sample_acc": 0.333,
+   "modal_answer": "B",
+   "mode_share": 0.667,
+   "mode_is_gold": false
+  },
+  {
+   "qid": "e099",
+   "dataset": "logiqa",
+   "gold": "C",
+   "greedy_answer": "D",
+   "greedy_correct": false,
+   "greedy_usage": {
+    "pt": 292,
+    "ct": 4
+   },
+   "greedy_content_len": 9,
+   "greedy_snippet": "Answer: D",
+   "six_sample_answers": [
+    "A",
+    "D",
+    "C",
+    "D",
+    "A",
+    "A"
+   ],
+   "sample_answers_correct": [
+    false,
+    false,
+    true,
+    false,
+    false,
+    false
+   ],
+   "sample_acc": 0.167,
+   "modal_answer": "A",
+   "mode_share": 0.5,
+   "mode_is_gold": false
+  },
+  {
+   "qid": "e108",
+   "dataset": "gsm8k",
+   "gold": "106",
+   "greedy_answer": "106",
+   "greedy_correct": true,
+   "greedy_usage": {
+    "pt": 133,
+    "ct": 728
+   },
+   "greedy_content_len": 2484,
+   "greedy_snippet": "To determine how much Mandy should pay Benedict after 3 mont ... 2 = $2. Total owed: $104.\n    *   Month 3 Interest: $100 * 0.02 = $2. Total owed: $106.\n\n    *Let's consider if it implies compound interest.* If it were compound interest:\n    *   End of Month 1: $100 * 1.02 = $102.\n    *   End of Month 2: $102 * 1.02 = $104.04.\n    *   End of Month 3: $104.04 * 1.02 = $106.1208.\n\n    Usually, in basic word problems like this without the word \"compounded\", simple interest is the default assumption. The interest is calculated on the original principal.\n\n**Step 4: Calculate the total amount to be paid**\nTotal Payment = Principal + Total Interest\n$$ \\text{Total Payment} = 100 + 6 = 106 $$\n\nAnswer: 106",
+   "six_sample_answers": [
+    "106.12",
+    "106.12",
+    "106.12",
+    "106.12",
+    "106.12",
+    "106"
+   ],
+   "sample_answers_correct": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    true
+   ],
+   "sample_acc": 0.167,
+   "modal_answer": "106.12",
+   "mode_share": 0.833,
+   "mode_is_gold": false
+  },
+  {
+   "qid": "e112",
+   "dataset": "piqa",
+   "gold": "2",
+   "greedy_answer": "2",
+   "greedy_correct": true,
+   "greedy_usage": {
+    "pt": 169,
+    "ct": 5
+   },
+   "greedy_content_len": 9,
+   "greedy_snippet": "Answer: 2",
+   "six_sample_answers": [
+    "2",
+    "1",
+    "1",
+    "1",
+    "2",
+    "1"
+   ],
+   "sample_answers_correct": [
+    true,
+    false,
+    false,
+    false,
+    true,
+    false
+   ],
+   "sample_acc": 0.333,
+   "modal_answer": "1",
+   "mode_share": 0.667,
+   "mode_is_gold": false
+  },
+  {
+   "qid": "e116",
+   "dataset": "piqa",
+   "gold": "2",
+   "greedy_answer": "1",
+   "greedy_correct": false,
+   "greedy_usage": {
+    "pt": 163,
+    "ct": 5
+   },
+   "greedy_content_len": 9,
+   "greedy_snippet": "Answer: 1",
+   "six_sample_answers": [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   "sample_answers_correct": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "sample_acc": 1.0,
+   "modal_answer": "2",
+   "mode_share": 1.0,
+   "mode_is_gold": true
+  }
+ ]
+}

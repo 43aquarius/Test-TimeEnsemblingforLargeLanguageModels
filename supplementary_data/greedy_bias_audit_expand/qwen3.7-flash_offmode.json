@@ -1,0 +1,41 @@
+{
+ "n_complete": 60,
+ "n_off_mode": 1,
+ "off_mode_rate": 0.0167,
+ "off_mode_but_greedy_correct": 0,
+ "evidence": [
+  {
+   "qid": "e053",
+   "dataset": "lsat_lr",
+   "gold": "C",
+   "greedy_answer": "D",
+   "greedy_correct": false,
+   "greedy_usage": {
+    "pt": 282,
+    "ct": 3
+   },
+   "greedy_content_len": 9,
+   "greedy_snippet": "Answer: D",
+   "six_sample_answers": [
+    "A",
+    "A",
+    "C",
+    "A",
+    "C",
+    "A"
+   ],
+   "sample_answers_correct": [
+    false,
+    false,
+    true,
+    false,
+    true,
+    false
+   ],
+   "sample_acc": 0.333,
+   "modal_answer": "A",
+   "mode_share": 0.667,
+   "mode_is_gold": false
+  }
+ ]
+}

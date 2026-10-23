@@ -1,0 +1,38 @@
+{
+ "agnes-3.0-flash": {
+  "n_complete": 119,
+  "n_off_mode": 15,
+  "off_mode_rate": 0.1261,
+  "off_mode_but_greedy_correct": 6
+ },
+ "agnes-2.5-flash": {
+  "n_complete": 119,
+  "n_off_mode": 5,
+  "off_mode_rate": 0.042,
+  "off_mode_but_greedy_correct": 1
+ },
+ "deepseek-v4.1-flash": {
+  "n_complete": 119,
+  "n_off_mode": 16,
+  "off_mode_rate": 0.1345,
+  "off_mode_but_greedy_correct": 3
+ },
+ "deepseek-v4-pro-0813": {
+  "n_complete": 119,
+  "n_off_mode": 14,
+  "off_mode_rate": 0.1176,
+  "off_mode_but_greedy_correct": 4
+ },
+ "qwen3.7-flash": {
+  "n_complete": 60,
+  "n_off_mode": 1,
+  "off_mode_rate": 0.0167,
+  "off_mode_but_greedy_correct": 0
+ },
+ "deepseek-v4-flash-0731": {
+  "n_complete": 13,
+  "n_off_mode": 0,
+  "off_mode_rate": 0.0,
+  "off_mode_but_greedy_correct": 0
+ }
+}

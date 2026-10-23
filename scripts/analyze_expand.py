@@ -23,7 +23,7 @@ os.makedirs(OUT, exist_ok=True)
 questions = {q["id"]: q for q in json.load(open(f"{DATA}/questions_expand.json"))}
 STEM_DS = {"truthfulqa", "lsat_lr", "logiqa"}
 MODELS = ["agnes-3.0-flash", "agnes-2.5-flash", "qwen3.7-flash",
-          "deepseek-v4.1-flash", "deepseek-v4-flash-0731"]
+          "deepseek-v4.1-flash", "deepseek-v4-flash-0731", "deepseek-v4-pro-0813"]
 MAIN_NEED = [(0, "g")] + [(0, str(s)) for s in range(1, 7)] + \
             [(p, str(s)) for p in (1, 2, 3) for s in (1, 2)] + [(p, "1") for p in (4, 5, 6)]
 

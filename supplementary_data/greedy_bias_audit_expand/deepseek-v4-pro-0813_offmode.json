@@ -1,0 +1,470 @@
+{
+ "n_complete": 119,
+ "n_off_mode": 14,
+ "off_mode_rate": 0.1176,
+ "off_mode_but_greedy_correct": 4,
+ "evidence": [
+  {
+   "qid": "e001",
+   "dataset": "logiqa",
+   "gold": "B",
+   "greedy_answer": "B",
+   "greedy_correct": true,
+   "greedy_usage": {
+    "pt": 529,
+    "ct": 4
+   },
+   "greedy_content_len": 9,
+   "greedy_snippet": "Answer: B",
+   "six_sample_answers": [
+    "B",
+    "A",
+    "C",
+    "C",
+    "B",
+    "C"
+   ],
+   "sample_answers_correct": [
+    true,
+    false,
+    false,
+    false,
+    true,
+    false
+   ],
+   "sample_acc": 0.333,
+   "modal_answer": "C",
+   "mode_share": 0.5,
+   "mode_is_gold": false
+  },
+  {
+   "qid": "e015",
+   "dataset": "truthfulqa",
+   "gold": "C",
+   "greedy_answer": "A",
+   "greedy_correct": false,
+   "greedy_usage": {
+    "pt": 388,
+    "ct": 6
+   },
+   "greedy_content_len": 11,
+   "greedy_snippet": "Answer: (A)",
+   "six_sample_answers": [
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "A"
+   ],
+   "sample_answers_correct": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    false
+   ],
+   "sample_acc": 0.833,
+   "modal_answer": "C",
+   "mode_share": 0.833,
+   "mode_is_gold": true
+  },
+  {
+   "qid": "e022",
+   "dataset": "piqa",
+   "gold": "2",
+   "greedy_answer": "1",
+   "greedy_correct": false,
+   "greedy_usage": {
+    "pt": 427,
+    "ct": 5
+   },
+   "greedy_content_len": 9,
+   "greedy_snippet": "Answer: 1",
+   "six_sample_answers": [
+    "2",
+    "2",
+    "1",
+    "2",
+    "2",
+    "1"
+   ],
+   "sample_answers_correct": [
+    true,
+    true,
+    false,
+    true,
+    true,
+    false
+   ],
+   "sample_acc": 0.667,
+   "modal_answer": "2",
+   "mode_share": 0.667,
+   "mode_is_gold": true
+  },
+  {
+   "qid": "e025",
+   "dataset": "sat_math",
+   "gold": "C",
+   "greedy_answer": "B",
+   "greedy_correct": false,
+   "greedy_usage": {
+    "pt": 393,
+    "ct": 4
+   },
+   "greedy_content_len": 9,
+   "greedy_snippet": "Answer: B",
+   "six_sample_answers": [
+    "A",
+    "D",
+    "D",
+    "B",
+    "C",
+    "D"
+   ],
+   "sample_answers_correct": [
+    false,
+    false,
+    false,
+    false,
+    true,
+    false
+   ],
+   "sample_acc": 0.167,
+   "modal_answer": "D",
+   "mode_share": 0.5,
+   "mode_is_gold": false
+  },
+  {
+   "qid": "e028",
+   "dataset": "lsat_lr",
+   "gold": "B",
+   "greedy_answer": "A",
+   "greedy_correct": false,
+   "greedy_usage": {
+    "pt": 573,
+    "ct": 4
+   },
+   "greedy_content_len": 9,
+   "greedy_snippet": "Answer: A",
+   "six_sample_answers": [
+    "B",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C"
+   ],
+   "sample_answers_correct": [
+    true,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "sample_acc": 0.167,
+   "modal_answer": "C",
+   "mode_share": 0.833,
+   "mode_is_gold": false
+  },
+  {
+   "qid": "e038",
+   "dataset": "piqa",
+   "gold": "2",
+   "greedy_answer": "1",
+   "greedy_correct": false,
+   "greedy_usage": {
+    "pt": 401,
+    "ct": 5
+   },
+   "greedy_content_len": 9,
+   "greedy_snippet": "Answer: 1",
+   "six_sample_answers": [
+    "2",
+    "2",
+    "1",
+    "2",
+    "2",
+    "2"
+   ],
+   "sample_answers_correct": [
+    true,
+    true,
+    false,
+    true,
+    true,
+    true
+   ],
+   "sample_acc": 0.833,
+   "modal_answer": "2",
+   "mode_share": 0.833,
+   "mode_is_gold": true
+  },
+  {
+   "qid": "e043",
+   "dataset": "logiqa",
+   "gold": "A",
+   "greedy_answer": "A",
+   "greedy_correct": true,
+   "greedy_usage": {
+    "pt": 527,
+    "ct": 6
+   },
+   "greedy_content_len": 11,
+   "greedy_snippet": "Answer: (A)",
+   "six_sample_answers": [
+    "B",
+    "A",
+    "B",
+    "A",
+    "B",
+    "B"
+   ],
+   "sample_answers_correct": [
+    false,
+    true,
+    false,
+    true,
+    false,
+    false
+   ],
+   "sample_acc": 0.333,
+   "modal_answer": "B",
+   "mode_share": 0.667,
+   "mode_is_gold": false
+  },
+  {
+   "qid": "e058",
+   "dataset": "sat_math",
+   "gold": "B",
+   "greedy_answer": "B",
+   "greedy_correct": true,
+   "greedy_usage": {
+    "pt": 403,
+    "ct": 2
+   },
+   "greedy_content_len": 1,
+   "greedy_snippet": "B",
+   "six_sample_answers": [
+    "A",
+    "A",
+    "A",
+    "A",
+    "A",
+    "B"
+   ],
+   "sample_answers_correct": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    true
+   ],
+   "sample_acc": 0.167,
+   "modal_answer": "A",
+   "mode_share": 0.833,
+   "mode_is_gold": false
+  },
+  {
+   "qid": "e067",
+   "dataset": "logiqa",
+   "gold": "B",
+   "greedy_answer": "B",
+   "greedy_correct": true,
+   "greedy_usage": {
+    "pt": 510,
+    "ct": 4
+   },
+   "greedy_content_len": 9,
+   "greedy_snippet": "Answer: B",
+   "six_sample_answers": [
+    "B",
+    "C",
+    "D",
+    "C",
+    "C",
+    "C"
+   ],
+   "sample_answers_correct": [
+    true,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "sample_acc": 0.167,
+   "modal_answer": "C",
+   "mode_share": 0.667,
+   "mode_is_gold": false
+  },
+  {
+   "qid": "e084",
+   "dataset": "sat_math",
+   "gold": "A",
+   "greedy_answer": "D",
+   "greedy_correct": false,
+   "greedy_usage": {
+    "pt": 421,
+    "ct": 4
+   },
+   "greedy_content_len": 9,
+   "greedy_snippet": "Answer: D",
+   "six_sample_answers": [
+    "A",
+    "B",
+    "B",
+    "D",
+    "B",
+    "B"
+   ],
+   "sample_answers_correct": [
+    true,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "sample_acc": 0.167,
+   "modal_answer": "B",
+   "mode_share": 0.667,
+   "mode_is_gold": false
+  },
+  {
+   "qid": "e091",
+   "dataset": "gsm8k",
+   "gold": "15400",
+   "greedy_answer": "6400",
+   "greedy_correct": false,
+   "greedy_usage": {
+    "pt": 400,
+    "ct": 109
+   },
+   "greedy_content_len": 190,
+   "greedy_snippet": "- Plane tickets: $50 × 2 = $1000\n- Hotel per day: $1500 + (20% × $1500) = $1500 + $300 = $1800 per day\n- Hotel total: $1800 × 3 = $5400\n- Total trip cost: $1000 + $5400 = $6400\n\nAnswer: 6400",
+   "six_sample_answers": [
+    "15400",
+    "5500",
+    "5500",
+    "5500",
+    "5500",
+    "6400"
+   ],
+   "sample_answers_correct": [
+    true,
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "sample_acc": 0.167,
+   "modal_answer": "5500",
+   "mode_share": 0.667,
+   "mode_is_gold": false
+  },
+  {
+   "qid": "e098",
+   "dataset": "sat_math",
+   "gold": "A",
+   "greedy_answer": "B",
+   "greedy_correct": false,
+   "greedy_usage": {
+    "pt": 420,
+    "ct": 4
+   },
+   "greedy_content_len": 9,
+   "greedy_snippet": "Answer: B",
+   "six_sample_answers": [
+    "A",
+    "A",
+    "A",
+    "A",
+    "B",
+    "A"
+   ],
+   "sample_answers_correct": [
+    true,
+    true,
+    true,
+    true,
+    false,
+    true
+   ],
+   "sample_acc": 0.833,
+   "modal_answer": "A",
+   "mode_share": 0.833,
+   "mode_is_gold": true
+  },
+  {
+   "qid": "e112",
+   "dataset": "piqa",
+   "gold": "2",
+   "greedy_answer": "1",
+   "greedy_correct": false,
+   "greedy_usage": {
+    "pt": 406,
+    "ct": 5
+   },
+   "greedy_content_len": 9,
+   "greedy_snippet": "Answer: 1",
+   "six_sample_answers": [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   "sample_answers_correct": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "sample_acc": 1.0,
+   "modal_answer": "2",
+   "mode_share": 1.0,
+   "mode_is_gold": true
+  },
+  {
+   "qid": "e115",
+   "dataset": "logiqa",
+   "gold": "D",
+   "greedy_answer": "A",
+   "greedy_correct": false,
+   "greedy_usage": {
+    "pt": 552,
+    "ct": 4
+   },
+   "greedy_content_len": 9,
+   "greedy_snippet": "Answer: A",
+   "six_sample_answers": [
+    "B",
+    "D",
+    "D",
+    "D",
+    "D",
+    "D"
+   ],
+   "sample_answers_correct": [
+    false,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "sample_acc": 0.833,
+   "modal_answer": "D",
+   "mode_share": 0.833,
+   "mode_is_gold": true
+  }
+ ]
+}

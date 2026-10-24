@@ -1,0 +1,54 @@
+% Appendix for v1.7.0: follow-up conditions, moved out of the main
+% results section. Labels sec:greedypara / sec:mmlupro / sec:cot are
+% preserved so existing cross-references keep resolving.
+
+\section{Greedy paraphrases: isolating the prompt-space effect}
+\setcounter{table}{0}
+\label{app:greedypara}
+\label{sec:greedypara}
+
+The standard paraphrase ensemble decodes each paraphrase once at $\tau = 0.7$, so its diversity mixes prompt-space variation with decoding stochasticity. The greedy-paraphrase control removes the second component by decoding each paraphrase at $\tau = 0$, yielding the noise-free ensemble $\mathrm{PE}^{g}\text{-}6$ and a fragility indicator in which neither side involves sampling. Table~\ref{tab:greedypara} reports the control for the five models whose provider quota allowed it.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Greedy-paraphrase control. Accuracy (\%) of the greedy baseline, SC-6, PE-6, and the greedy-decoded paraphrase ensemble PE$^{g}$-6; Frag.$^{g}$ is the fraction of questions where SC-6 and PE$^{g}$-6 disagree (no decoding noise on the paraphrase side); Degen.$^{g}$ is the fraction of questions where all six greedy paraphrase answers coincide.}
+\label{tab:greedypara}
+\input{tables/tab_greedypara}
+\end{table}
+
+The control separates three effects. First, for the flagship, degeneracy is not a temperature artifact: 98.9\% of Qwen3.8-Max's questions return six identical answers even under greedy decoding of six different paraphrases, and the greedy paraphrase ensemble returns the same answer as the sampled paraphrase ensemble on 88 of 88 questions. The collapse is a property of the model-task pair, not of the sampling distribution around it. Second, for the mid-tier models, the prompt-space effect carries the paraphrase ensemble almost entirely: the PE$^{g}$-6 and PE-6 modal answers coincide on 31 of 32 questions for Agnes3.0-Flash and 38 of 39 for Agnes2.5-Flash, so the stochastic component of PE contributes almost nothing beyond the paraphrases themselves in these cells. Third, for the prompt-brittle models, decoding noise and prompt variation interact: GPT-6-Luna's greedy paraphrase ensemble reaches 80.0\% against 86.7\% for the sampled version with modal-answer agreement on only 11 of 15 questions, and Gemini3.8-Flash 83.3\% against 91.7\% with agreement on 10 of 12, so for the most fragile models the sampled paraphrase ensemble retains a two-to-eight point edge over its noise-free counterpart, and the two ensembles disagree on a quarter of the questions. Fragility itself survives the control in strengthened form: GPT-6-Luna flips on 40.0\% of questions and Gemini3.8-Flash on 25.0\% when both sides are decoded greedily, which rules out sampling noise as the cause of paraphrase-induced flips and locates the instability in the model's response to the prompt's surface form.
+
+\section{Harder tasks: the MMLU-Pro probe}
+\setcounter{table}{0}
+\label{app:mmlupro}
+\label{sec:mmlupro}
+
+The flagship models saturate five of the six main-suite benchmarks, so the degenerate regime dominates their measurements. The MMLU-Pro probe asks whether a harder distribution restores answer entropy under the same direct-answering protocol. Table~\ref{tab:mmlupro} reports the probe; the coverage caveat is stated up front: on hard quantitative items the direct-answering instruction does not always suppress reasoning, and outputs truncated at the token cap lost extraction on a majority of Qwen3.8-Max's probe calls, leaving six complete questions (eight more with at least four parsed votes); the other models parsed cleanly.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{MMLU-Pro probe: greedy accuracy, single-sample accuracy S1, and SC-6 accuracy, with mean support-normalized sample entropy, sample degeneracy rate, and the model's main-suite entropy for comparison.}
+\label{tab:mmlupro}
+\input{tables/tab_mmlupro}
+\end{table}
+
+The probe shows that difficulty alone does not determine the regime. GPT-6-Luna, the strongest model with full probe coverage, lands in the high-entropy regime: greedy accuracy 66.7\% with mean entropy 0.26 and a 66.7\% degeneracy rate, and self-consistency lifts it to 73.3\%; at $n = 15$ this 6.6 point difference is the movement of a single question and is reported as directional, not as evidence. Qwen3.8-Max remains essentially degenerate on the probe: its six complete questions are unanimous on five, and seven of the eight questions with at least four parsed votes return a single answer, so for this flagship a ten-option hard benchmark under direct answering still collapses to one answer per question. At the other end, Agnes3.0-Flash collapses into near-uniform guessing: entropy 0.94 with zero degeneracy, greedy accuracy 12.5\%, and a self-consistency majority of 0\% on its eight probe questions; at $n = 8$ these values are one to two questions from chance and are likewise directional, but they are consistent with the plurality-vote failure mode of Section~\ref{sec:condorcet} when the modal answer is wrong. Agnes2.5-Flash answers 84.6\% correctly with partial degeneracy and no aggregation change. The probe is small, and we read it as directional evidence: harder tasks shift models along the entropy axis, but into which regime depends on the model, and the flagship's degeneracy is robust to at least this level of difficulty increase under direct answering.
+
+\section{Answering mode: direct answer versus chain of thought}
+\setcounter{table}{0}
+\label{app:cot}
+\label{sec:cot}
+
+The main suite answers multiple-choice questions directly, while self-consistency was originally motivated for chain-of-thought reasoning. The CoT condition therefore repeats the greedy baseline, the six-sample self-consistency, and, for stem-locus questions, the paraphrase ensemble under an explicit step-by-step instruction. Table~\ref{tab:cot} reports the condition against the direct-answering cells on the same questions.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Chain-of-thought condition on multiple-choice questions: accuracy under greedy, SC-6, and PE-6 with CoT against the same conditions under direct answering on identical questions (Grd$_{dir}$, SC$_{dir}$, PE$_{dir}$), with mean answer entropy under both modes.}
+\label{tab:cot}
+\input{tables/tab_cot}
+\end{table}
+
+Chain-of-thought answering raises accuracy where it completes, but it does not dissolve the regime structure. For the flagship subset, CoT lifts Qwen3.8-Max from 88.9\% to 100\% on its nine completed questions while leaving the answer distribution fully degenerate: entropy stays at zero and all six samples agree on every question, so self-consistency remains vacuous. For the mid-tier models, CoT preserves or slightly enlarges diversity: Agnes2.5-Flash holds self-consistency at 93.9\% in both modes on its 33 questions while greedy dips from 90.9\% to 87.9\% and entropy rises from 0.03 to 0.10, Agnes3.0-Flash gains from 83.3\% to 100\% under greedy on its 12 completed questions while remaining largely degenerate, and GPT-6-Luna's self-consistency improves from 76.9\% to 100\% on its 13 completed questions with its paraphrase ensemble at 100\% in both modes. The pattern that survives the mode change is the important one: aggregation gains track the entropy regime in both modes, the degenerate stratum stays degenerate under CoT for the flagship, and the paraphrase side continues to carry signal only where entropy exists. Absolute accuracies are not comparable across modes, the CoT subsets are small, and the slow long-form generations bounded coverage for the rate-limited models, so we read this condition as a robustness check on the regime structure rather than as a mode comparison.

@@ -1,0 +1,918 @@
+{
+ "checks": [
+  {
+   "id": "main-qwen3.8-max",
+   "desc": "tab_main row",
+   "expected": "90,93.3,93.3,93.3,93.3,92.2,93.3",
+   "actual": "90,93.3,93.3,93.3,93.3,92.2,93.3",
+   "ok": true
+  },
+  {
+   "id": "parse-qwen3.8-max",
+   "desc": "parse rate",
+   "expected": null,
+   "actual": 99.6,
+   "ok": true
+  },
+  {
+   "id": "main-qwen3.8-omni",
+   "desc": "tab_main row",
+   "expected": "71,93.0,93.9,93.0,93.0,91.5,93.0",
+   "actual": "71,93.0,93.9,93.0,93.0,91.5,93.0",
+   "ok": true
+  },
+  {
+   "id": "parse-qwen3.8-omni",
+   "desc": "parse rate",
+   "expected": null,
+   "actual": 96.8,
+   "ok": true
+  },
+  {
+   "id": "main-agnes-3.0-flash",
+   "desc": "tab_main row",
+   "expected": "33,78.8,89.4,90.9,90.9,90.9,90.9",
+   "actual": "33,78.8,89.4,90.9,90.9,90.9,90.9",
+   "ok": true
+  },
+  {
+   "id": "parse-agnes-3.0-flash",
+   "desc": "parse rate",
+   "expected": null,
+   "actual": 94.7,
+   "ok": true
+  },
+  {
+   "id": "main-agnes-2.5-flash",
+   "desc": "tab_main row",
+   "expected": "40,90.0,94.2,95.0,92.5,92.5,95.0",
+   "actual": "40,90.0,94.2,95.0,92.5,92.5,95.0",
+   "ok": true
+  },
+  {
+   "id": "parse-agnes-2.5-flash",
+   "desc": "parse rate",
+   "expected": null,
+   "actual": 96.9,
+   "ok": true
+  },
+  {
+   "id": "main-gpt-6-luna",
+   "desc": "tab_main row",
+   "expected": "15,80.0,76.7,73.3,86.7,86.7,86.7",
+   "actual": "15,80.0,76.7,73.3,86.7,86.7,86.7",
+   "ok": true
+  },
+  {
+   "id": "parse-gpt-6-luna",
+   "desc": "parse rate",
+   "expected": null,
+   "actual": 100.0,
+   "ok": true
+  },
+  {
+   "id": "main-gemini-3.8-flash",
+   "desc": "tab_main row",
+   "expected": "12,91.7,86.1,83.3,91.7,91.7,91.7",
+   "actual": "12,91.7,86.1,83.3,91.7,91.7,91.7",
+   "ok": true
+  },
+  {
+   "id": "parse-gemini-3.8-flash",
+   "desc": "parse rate",
+   "expected": null,
+   "actual": 99.6,
+   "ok": true
+  },
+  {
+   "id": "main-pooled-s1",
+   "desc": "pooled S1",
+   "expected": 96.4,
+   "actual": 96.4,
+   "ok": true
+  },
+  {
+   "id": "main-pooled-greedy",
+   "desc": "pooled greedy",
+   "expected": 92.0,
+   "actual": 92.0,
+   "ok": true
+  },
+  {
+   "id": "main-pooled-sc",
+   "desc": "pooled SC-6",
+   "expected": 97.3,
+   "actual": 97.3,
+   "ok": true
+  },
+  {
+   "id": "main-pooled-pe",
+   "desc": "pooled PE-6",
+   "expected": 95.5,
+   "actual": 95.5,
+   "ok": true
+  },
+  {
+   "id": "main-pooled-comb",
+   "desc": "pooled COMB-12",
+   "expected": 96.4,
+   "actual": 96.4,
+   "ok": true
+  },
+  {
+   "id": "main-sc-s1",
+   "desc": "pooled SC-S1 (pp)",
+   "expected": 0.9,
+   "actual": 0.9,
+   "ok": true
+  },
+  {
+   "id": "main-pe-s1",
+   "desc": "pooled PE-S1 (pp)",
+   "expected": -0.9,
+   "actual": -0.9,
+   "ok": true
+  },
+  {
+   "id": "main-sc-pe",
+   "desc": "pooled SC-PE (pp)",
+   "expected": 1.8,
+   "actual": 1.8,
+   "ok": true
+  },
+  {
+   "id": "main-sc-pe-ci",
+   "desc": "SC-PE CI",
+   "expected": [
+    0.0,
+    5.4
+   ],
+   "actual": [
+    0.0,
+    5.4
+   ],
+   "ok": true
+  },
+  {
+   "id": "main-unan",
+   "desc": "unanimous pairs",
+   "expected": 104,
+   "actual": 104,
+   "ok": true
+  },
+  {
+   "id": "main-pairs",
+   "desc": "pooled pairs",
+   "expected": 112,
+   "actual": 112,
+   "ok": true
+  },
+  {
+   "id": "main-sc-wins",
+   "desc": "SC>PE discordant pairs",
+   "expected": 2,
+   "actual": 2,
+   "ok": true
+  },
+  {
+   "id": "main-s1-greedy",
+   "desc": "S1-greedy pooled (pp)",
+   "expected": 4.5,
+   "actual": 4.5,
+   "ok": true
+  },
+  {
+   "id": "main-s1-greedy-ci",
+   "desc": "S1-greedy CI",
+   "expected": [
+    0.9,
+    8.8
+   ],
+   "actual": [
+    0.9,
+    8.8
+   ],
+   "ok": true
+  },
+  {
+   "id": "spearman-dissent-s1greedy",
+   "desc": "Spearman(dissent, S1-greedy)",
+   "expected": 0.8,
+   "actual": 0.8,
+   "ok": true
+  },
+  {
+   "id": "spearman-dissent-comb",
+   "desc": "Spearman(dissent, COMB-S1)",
+   "expected": 0.17,
+   "actual": 0.17,
+   "ok": true
+  },
+  {
+   "id": "main-frag-inst",
+   "desc": "instruction-locus flips",
+   "expected": "0/52",
+   "actual": "0/52",
+   "ok": true
+  },
+  {
+   "id": "main-frag-stem",
+   "desc": "stem-locus flip rate",
+   "expected": 3.3,
+   "actual": 3.3,
+   "ok": true
+  },
+  {
+   "id": "frag-max",
+   "desc": "Max fragility %",
+   "expected": 1.1,
+   "actual": 1.1,
+   "ok": true
+  },
+  {
+   "id": "frag-omni",
+   "desc": "Omni fragility %",
+   "expected": 4.2,
+   "actual": 4.2,
+   "ok": true
+  },
+  {
+   "id": "frag-gpt6",
+   "desc": "GPT6 fragility %",
+   "expected": 13.3,
+   "actual": 13.3,
+   "ok": true
+  },
+  {
+   "id": "frag-gemini",
+   "desc": "Gemini fragility %",
+   "expected": 8.3,
+   "actual": 8.3,
+   "ok": true
+  },
+  {
+   "id": "frag-agnes3",
+   "desc": "Agnes3.0 fragility",
+   "expected": 0,
+   "actual": 0,
+   "ok": true
+  },
+  {
+   "id": "frag-logiqa-gpt-6-luna",
+   "desc": "LogiQA fragility %",
+   "expected": 40.0,
+   "actual": 40.0,
+   "ok": true
+  },
+  {
+   "id": "frag-logiqa-gemini-3.8-flash",
+   "desc": "LogiQA fragility %",
+   "expected": 33.3,
+   "actual": 33.3,
+   "ok": true
+  },
+  {
+   "id": "frag-logiqa-qwen3.8-max",
+   "desc": "LogiQA fragility %",
+   "expected": 6.7,
+   "actual": 6.7,
+   "ok": true
+  },
+  {
+   "id": "frag-logiqa-qwen3.8-omni",
+   "desc": "LogiQA fragility %",
+   "expected": 21.4,
+   "actual": 21.4,
+   "ok": true
+  },
+  {
+   "id": "tok-max",
+   "desc": "Max tokens c/p",
+   "expected": "223/219",
+   "actual": "223/219",
+   "ok": true
+  },
+  {
+   "id": "tok-gpt6",
+   "desc": "GPT6 tokens c/p",
+   "expected": "505/528",
+   "actual": "505/528",
+   "ok": true
+  },
+  {
+   "id": "bc-agnes3-pe2",
+   "desc": "Agnes3.0 PE-2 = full",
+   "expected": 90.9,
+   "actual": 90.9,
+   "ok": true
+  },
+  {
+   "id": "bc-agnes25-sc6",
+   "desc": "Agnes2.5 SC-6",
+   "expected": 95.0,
+   "actual": 95.0,
+   "ok": true
+  },
+  {
+   "id": "bc-agnes25-pe4",
+   "desc": "Agnes2.5 PE plateau",
+   "expected": 92.5,
+   "actual": 92.5,
+   "ok": true
+  },
+  {
+   "id": "exp-agnes-3.0-flash",
+   "desc": "tab_expand fixed-cond row",
+   "expected": "119,80.7,79.6,81.5,87.4,83.2,82.4",
+   "actual": "119,80.7,79.6,81.5,87.4,83.2,82.4",
+   "ok": true
+  },
+  {
+   "id": "exp-agnes-2.5-flash",
+   "desc": "tab_expand fixed-cond row",
+   "expected": "119,89.9,88.1,90.8,91.6,89.1,89.9",
+   "actual": "119,89.9,88.1,90.8,91.6,89.1,89.9",
+   "ok": true
+  },
+  {
+   "id": "exp-deepseek-v4.1-flash",
+   "desc": "tab_expand fixed-cond row",
+   "expected": "119,73.1,77.6,79.8,81.5,83.2,83.2",
+   "actual": "119,73.1,77.6,79.8,81.5,83.2,83.2",
+   "ok": true
+  },
+  {
+   "id": "exp-deepseek-v4-pro-0813",
+   "desc": "tab_expand fixed-cond row",
+   "expected": "119,79.0,78.0,80.7,82.4,82.4,84.0",
+   "actual": "119,79.0,78.0,80.7,82.4,82.4,84.0",
+   "ok": true
+  },
+  {
+   "id": "exp-qwen3.7-flash",
+   "desc": "tab_expand fixed-cond row",
+   "expected": "60,85.0,86.1,85.0,86.7,85.0,85.0",
+   "actual": "60,85.0,86.1,85.0,86.7,85.0,85.0",
+   "ok": true
+  },
+  {
+   "id": "exp-pooled-greedy",
+   "desc": "exp pooled greedy",
+   "expected": 80.7,
+   "actual": 80.7,
+   "ok": true
+  },
+  {
+   "id": "exp-pooled-s1",
+   "desc": "exp pooled S1",
+   "expected": 80.8,
+   "actual": 80.8,
+   "ok": true
+  },
+  {
+   "id": "exp-pooled-sc",
+   "desc": "exp pooled SC-6",
+   "expected": 83.2,
+   "actual": 83.2,
+   "ok": true
+  },
+  {
+   "id": "exp-pooled-pe",
+   "desc": "exp pooled PE-6",
+   "expected": 85.7,
+   "actual": 85.7,
+   "ok": true
+  },
+  {
+   "id": "exp-pooled-hb",
+   "desc": "exp pooled HB-6",
+   "expected": 84.5,
+   "actual": 84.5,
+   "ok": true
+  },
+  {
+   "id": "exp-pooled-comb",
+   "desc": "exp pooled COMB-12",
+   "expected": 84.9,
+   "actual": 84.9,
+   "ok": true
+  },
+  {
+   "id": "exp-pooled-pe1",
+   "desc": "exp pooled PE-1",
+   "expected": 82.7,
+   "actual": 82.7,
+   "ok": true
+  },
+  {
+   "id": "exp-SC-S1",
+   "desc": "exp pooled SC-S1 (pp)",
+   "expected": null,
+   "actual": "2.4 (1.1,3.7)",
+   "ok": true
+  },
+  {
+   "id": "exp-ci-SC-S1",
+   "desc": "exp pooled SC-S1 mean+CI within seed noise",
+   "expected": true,
+   "actual": true,
+   "ok": true
+  },
+  {
+   "id": "exp-PE-S1",
+   "desc": "exp pooled PE-S1 (pp)",
+   "expected": null,
+   "actual": "4.9 (2.3,7.6)",
+   "ok": true
+  },
+  {
+   "id": "exp-ci-PE-S1",
+   "desc": "exp pooled PE-S1 mean+CI within seed noise",
+   "expected": true,
+   "actual": true,
+   "ok": true
+  },
+  {
+   "id": "exp-COMB-S1",
+   "desc": "exp pooled COMB-S1 (pp)",
+   "expected": null,
+   "actual": "4.1 (2.0,6.2)",
+   "ok": true
+  },
+  {
+   "id": "exp-ci-COMB-S1",
+   "desc": "exp pooled COMB-S1 mean+CI within seed noise",
+   "expected": true,
+   "actual": true,
+   "ok": true
+  },
+  {
+   "id": "exp-PE-SC",
+   "desc": "exp pooled PE-SC (pp)",
+   "expected": null,
+   "actual": "2.5 (-0.6,5.7)",
+   "ok": true
+  },
+  {
+   "id": "exp-ci-PE-SC",
+   "desc": "exp pooled PE-SC mean+CI within seed noise",
+   "expected": true,
+   "actual": true,
+   "ok": true
+  },
+  {
+   "id": "exp-PE-HB",
+   "desc": "exp pooled PE-HB (pp)",
+   "expected": null,
+   "actual": "1.3 (-0.2,2.9)",
+   "ok": true
+  },
+  {
+   "id": "exp-ci-PE-HB",
+   "desc": "exp pooled PE-HB mean+CI within seed noise",
+   "expected": true,
+   "actual": true,
+   "ok": true
+  },
+  {
+   "id": "exp-COMB-PE",
+   "desc": "exp pooled COMB-PE (pp)",
+   "expected": null,
+   "actual": "-0.8 (-2.9,1.3)",
+   "ok": true
+  },
+  {
+   "id": "exp-ci-COMB-PE",
+   "desc": "exp pooled COMB-PE mean+CI within seed noise",
+   "expected": true,
+   "actual": true,
+   "ok": true
+  },
+  {
+   "id": "exp-ci-agnes-3.0-flash-pe6",
+   "desc": "agnes-3.0-flash pe6-S1 (CI seed-noise tol)",
+   "expected": true,
+   "actual": true,
+   "ok": true
+  },
+  {
+   "id": "exp-ci-agnes-3.0-flash-sc6",
+   "desc": "agnes-3.0-flash sc6-S1 (CI seed-noise tol)",
+   "expected": true,
+   "actual": true,
+   "ok": true
+  },
+  {
+   "id": "exp-ci-agnes-2.5-flash-pe6",
+   "desc": "agnes-2.5-flash pe6-S1 (CI seed-noise tol)",
+   "expected": true,
+   "actual": true,
+   "ok": true
+  },
+  {
+   "id": "exp-ci-agnes-2.5-flash-sc6",
+   "desc": "agnes-2.5-flash sc6-S1 (CI seed-noise tol)",
+   "expected": true,
+   "actual": true,
+   "ok": true
+  },
+  {
+   "id": "exp-ci-deepseek-v4.1-flash-pe6",
+   "desc": "deepseek-v4.1-flash pe6-S1 (CI seed-noise tol)",
+   "expected": true,
+   "actual": true,
+   "ok": true
+  },
+  {
+   "id": "exp-ci-deepseek-v4.1-flash-sc6",
+   "desc": "deepseek-v4.1-flash sc6-S1 (CI seed-noise tol)",
+   "expected": true,
+   "actual": true,
+   "ok": true
+  },
+  {
+   "id": "exp-ci-deepseek-v4-pro-0813-comb12",
+   "desc": "deepseek-v4-pro-0813 comb12-S1 (CI seed-noise tol)",
+   "expected": true,
+   "actual": true,
+   "ok": true
+  },
+  {
+   "id": "exp-ci-deepseek-v4-pro-0813-sc6",
+   "desc": "deepseek-v4-pro-0813 sc6-S1 (CI seed-noise tol)",
+   "expected": true,
+   "actual": true,
+   "ok": true
+  },
+  {
+   "id": "exp-ci-deepseek-v4-pro-0813-pe6",
+   "desc": "deepseek-v4-pro-0813 pe6-S1 (CI seed-noise tol)",
+   "expected": true,
+   "actual": true,
+   "ok": true
+  },
+  {
+   "id": "strat-weak-n-agnes-3.0-flash",
+   "desc": "weak-majority n",
+   "expected": 24,
+   "actual": 24,
+   "ok": true
+  },
+  {
+   "id": "strat-weak-n-agnes-2.5-flash",
+   "desc": "weak-majority n",
+   "expected": 8,
+   "actual": 8,
+   "ok": true
+  },
+  {
+   "id": "strat-weak-n-deepseek-v4.1-flash",
+   "desc": "weak-majority n",
+   "expected": 14,
+   "actual": 14,
+   "ok": true
+  },
+  {
+   "id": "strat-weak-n-deepseek-v4-pro-0813",
+   "desc": "weak-majority n",
+   "expected": 15,
+   "actual": 15,
+   "ok": true
+  },
+  {
+   "id": "strat-weak-pooled",
+   "desc": "weak stratum pooled S1/SC/PE (model-mean)",
+   "expected": "30.9/31.8/52.9",
+   "actual": "30.9/31.8/52.9",
+   "ok": true
+  },
+  {
+   "id": "strat-weak-n-pooled",
+   "desc": "weak stratum pairs",
+   "expected": 61,
+   "actual": 61,
+   "ok": true
+  },
+  {
+   "id": "strat-strong-s1",
+   "desc": "strong stratum pooled S1",
+   "expected": 67.0,
+   "actual": 67.0,
+   "ok": true
+  },
+  {
+   "id": "strat-unan-sat",
+   "desc": "unanimous stratum pooled (all conds)",
+   "expected": 96.3,
+   "actual": 96.3,
+   "ok": true
+  },
+  {
+   "id": "strat-weak-comb-v41",
+   "desc": "v4.1 weak COMB vs PE",
+   "expected": "57.1/50.0",
+   "actual": "57.1/50.0",
+   "ok": true
+  },
+  {
+   "id": "strat-weak-comb-pro",
+   "desc": "pro weak COMB vs PE",
+   "expected": "60.0/53.3",
+   "actual": "60.0/53.3",
+   "ok": true
+  },
+  {
+   "id": "offmode-agnes-3.0-flash",
+   "desc": "off-mode count",
+   "expected": 15,
+   "actual": 15,
+   "ok": true
+  },
+  {
+   "id": "offmode-agnes-2.5-flash",
+   "desc": "off-mode count",
+   "expected": 5,
+   "actual": 5,
+   "ok": true
+  },
+  {
+   "id": "offmode-deepseek-v4.1-flash",
+   "desc": "off-mode count",
+   "expected": 16,
+   "actual": 16,
+   "ok": true
+  },
+  {
+   "id": "offmode-deepseek-v4-pro-0813",
+   "desc": "off-mode count",
+   "expected": 14,
+   "actual": 14,
+   "ok": true
+  },
+  {
+   "id": "offmode-qwen3.7-flash",
+   "desc": "off-mode count",
+   "expected": 1,
+   "actual": 1,
+   "ok": true
+  },
+  {
+   "id": "offmode-deepseek-v4-flash-0731",
+   "desc": "off-mode count",
+   "expected": 0,
+   "actual": 0,
+   "ok": true
+  },
+  {
+   "id": "offmode-pooled",
+   "desc": "pooled off-mode",
+   "expected": "50/476",
+   "actual": "50/476",
+   "ok": true
+  },
+  {
+   "id": "nli-main",
+   "desc": "NLI bidirectional pass",
+   "expected": "267/270",
+   "actual": "267/270",
+   "ok": true
+  },
+  {
+   "id": "nli-agnes",
+   "desc": "NLI agnes summary pass",
+   "expected": 269,
+   "actual": 269,
+   "ok": true
+  },
+  {
+   "id": "sim-structure",
+   "desc": "para_sims_fresh structure (45 stem-locus questions)",
+   "expected": "45q x 6",
+   "actual": "45q x 6",
+   "ok": true
+  },
+  {
+   "id": "sim80-gpt-6-luna",
+   "desc": "tight-paraphrase fragility % (n=6)",
+   "expected": 33.3,
+   "actual": 33.3,
+   "ok": true
+  },
+  {
+   "id": "sim80-gemini-3.8-flash",
+   "desc": "tight-paraphrase fragility % (n=4)",
+   "expected": 25.0,
+   "actual": 25.0,
+   "ok": true
+  },
+  {
+   "id": "sim80-qwen3.8-omni",
+   "desc": "tight-paraphrase fragility % (n=42)",
+   "expected": 4.8,
+   "actual": 4.8,
+   "ok": true
+  },
+  {
+   "id": "lenient-agnes-3.0-flash",
+   "desc": "lenient SC/PE (n_sc,n_pe)",
+   "expected": "88.1/92.3 (42,39)",
+   "actual": "88.1/92.3 (42,39)",
+   "ok": true
+  },
+  {
+   "id": "lenient-qwen3.8-max",
+   "desc": "lenient SC/PE (n_sc,n_pe)",
+   "expected": "93.3/93.3 (90,90)",
+   "actual": "93.3/93.3 (90,90)",
+   "ok": true
+  },
+  {
+   "id": "lenient-qwen3.8-omni",
+   "desc": "lenient SC/PE (n_sc,n_pe)",
+   "expected": "88.9/89.7 (90,87)",
+   "actual": "88.9/89.7 (90,87)",
+   "ok": true
+  },
+  {
+   "id": "excl-qwen3.8-omni",
+   "desc": "excluded vs included greedy",
+   "expected": "84.2 vs 93.0",
+   "actual": "84.2 vs 93.0",
+   "ok": true
+  },
+  {
+   "id": "excl-agnes-2.5-flash",
+   "desc": "excluded vs included greedy",
+   "expected": "60.0 vs 90.0",
+   "actual": "60.0 vs 90.0",
+   "ok": true
+  },
+  {
+   "id": "audit-main",
+   "desc": "greedy audit file",
+   "expected": "present",
+   "actual": "present",
+   "ok": true
+  }
+ ],
+ "new": {
+  "SC-S1": {
+   "mean": 2.3809523809523814,
+   "ci95": [
+    1.1204481792717087,
+    3.746498599439776
+   ],
+   "p_boot": 0.0004
+  },
+  "PE-S1": {
+   "mean": 4.901960784313726,
+   "ci95": [
+    2.34593837535014,
+    7.563025210084033
+   ],
+   "p_boot": 0.0
+  },
+  "COMB-S1": {
+   "mean": 4.061624649859945,
+   "ci95": [
+    1.9607843137254901,
+    6.23249299719888
+   ],
+   "p_boot": 0.0
+  },
+  "PE-SC": {
+   "mean": 2.5210084033613445,
+   "ci95": [
+    -0.6302521008403361,
+    5.6722689075630255
+   ],
+   "p_boot": 0.1382
+  },
+  "PE-HB": {
+   "mean": 1.2605042016806722,
+   "ci95": [
+    -0.21008403361344538,
+    2.941176470588235
+   ],
+   "p_boot": 0.154
+  },
+  "COMB-PE": {
+   "mean": -0.8403361344537815,
+   "ci95": [
+    -2.941176470588235,
+    1.2605042016806722
+   ],
+   "p_boot": 0.4846
+  },
+  "holm": {
+   "SC-S1": {
+    "p_raw": 0.0004,
+    "p_holm": 0.0008
+   },
+   "PE-S1": {
+    "p_raw": 0.0,
+    "p_holm": 0.0
+   },
+   "COMB-S1": {
+    "p_raw": 0.0,
+    "p_holm": 0.0
+   },
+   "PE-SC": {
+    "p_raw": 0.1382,
+    "p_holm": 0.1382
+   }
+  },
+  "combined_agnes-3.0-flash": {
+   "n": 152,
+   "greedy": 80.26315789473684,
+   "s1": 81.68859649122808,
+   "pe1": 82.34649122807018,
+   "sc6": 83.55263157894737,
+   "pe6": 88.15789473684211,
+   "hb6": 84.86842105263158,
+   "comb": 84.21052631578948,
+   "dsc6": {
+    "mean": 1.8640350877192984,
+    "ci": [
+     -0.657894736842105,
+     4.385964912280702
+    ]
+   },
+   "dpe6": {
+    "mean": 6.469298245614036,
+    "ci": [
+     2.192982456140351,
+     11.074561403508772
+    ]
+   },
+   "dcomb12": {
+    "mean": 2.521929824561404,
+    "ci": [
+     -0.7675438596491226,
+     5.921052631578947
+    ]
+   },
+   "pe-sc": {
+    "mean": 4.605263157894736,
+    "ci": [
+     -0.6578947368421052,
+     10.526315789473683
+    ]
+   }
+  },
+  "combined_agnes-2.5-flash": {
+   "n": 159,
+   "greedy": 89.937106918239,
+   "s1": 89.62264150943396,
+   "pe1": 90.14675052410902,
+   "sc6": 91.82389937106919,
+   "pe6": 91.82389937106919,
+   "hb6": 89.937106918239,
+   "comb": 91.19496855345912,
+   "dsc6": {
+    "mean": 2.20125786163522,
+    "ci": [
+     0.628930817610063,
+     3.878406708595388
+    ]
+   },
+   "dpe6": {
+    "mean": 2.20125786163522,
+    "ci": [
+     -0.41928721174004185,
+     4.926624737945493
+    ]
+   },
+   "dcomb12": {
+    "mean": 1.5723270440251573,
+    "ci": [
+     -0.10482180293501042,
+     3.2494758909853254
+    ]
+   },
+   "pe-sc": {
+    "mean": 0.0,
+    "ci": [
+     -3.1446540880503147,
+     3.1446540880503147
+    ]
+   }
+  },
+  "exp_parse_rates": {
+   "agnes-3.0-flash": 98.71,
+   "agnes-2.5-flash": 98.14,
+   "qwen3.7-flash": 95.42,
+   "deepseek-v4.1-flash": 99.95,
+   "deepseek-v4-flash-0731": 93.12,
+   "deepseek-v4-pro-0813": 99.9
+  },
+  "main_parse_rates": {
+   "qwen3.8-max": 99.59,
+   "qwen3.8-omni": 96.81,
+   "agnes-3.0-flash": 94.65,
+   "agnes-2.5-flash": 96.86,
+   "gpt-6-luna": 100.0,
+   "gemini-3.8-flash": 99.55
+  }
+ }
+}

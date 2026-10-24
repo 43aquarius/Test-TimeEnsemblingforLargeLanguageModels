@@ -1,12 +1,25 @@
 \begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}} l l l c c}
 \toprule
-Model & Family & Tier & Parse rate & $n$ \\
+\multicolumn{5}{l}{\textbf{Panel A: Development suite} (Oct 17--18, 2026)} \\
 \midrule
-Qwen3.8-Max & Qwen & flagship & 99.6\% & 90 \\
-Qwen3.8-Omni & Qwen & multimodal & 96.8\% & 71 \\
-Agnes3.0-Flash & Agnes & fast & 94.7\% & 33 \\
-Agnes2.5-Flash & Agnes & reasoning & 96.9\% & 40 \\
-GPT-6-Luna & GPT & reasoning & 100.0\% & 15 \\
-Gemini3.8-Flash & Gemini & fast & 99.6\% & 12 \\
+Model & Family / endpoint & Tier & Parse rate & $n$ \\
+\midrule
+Qwen3.8-Max & Qwen / Aliyun & flagship & 99.6\% & 90 \\
+Qwen3.8-Omni & Qwen / Aliyun & multimodal & 96.8\% & 71 \\
+Agnes3.0-Flash & Agnes / Agnes & fast & 94.7\% & 33 \\
+Agnes2.5-Flash & Agnes / Agnes & reasoning & 96.9\% & 40 \\
+GPT-6-Luna & GPT / Apinex & reasoning & 100.0\% & 15 \\
+Gemini3.8-Flash & Gemini / Apinex & fast & 99.6\% & 12 \\
+\midrule
+\multicolumn{5}{l}{\textbf{Panel B: Held-out suite} (Oct 19--23, 2026)} \\
+\midrule
+Model & Family / endpoint & Tier & Parse rate & $n$ \\
+\midrule
+Agnes3.0-Flash & Agnes / Agnes & fast & 98.7\% & 119 \\
+Agnes2.5-Flash & Agnes / Agnes & reasoning & 98.1\% & 119 \\
+Qwen3.7-Flash$^{\dagger}$ & Qwen / Aliyun & fast & 95.4\% & 60 \\
+DeepSeekV4.1-Flash$^{\ddagger}$ & DeepSeek / Aliyun $\to$ Apinex & fast & 99.9\% & 119 \\
+DeepSeekV4-Pro-0813 & DeepSeek / Apinex & pro & 99.9\% & 119 \\
+DeepSeekV4-Flash-0731$^{\S}$ & DeepSeek / Aliyun & fast & 93.1\% & 13 \\
 \bottomrule
 \end{tabular*}

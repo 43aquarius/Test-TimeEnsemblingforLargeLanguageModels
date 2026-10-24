@@ -37,6 +37,10 @@ def flatten(s):
 
 src = flatten(src)
 
+# 1b. v1.7.0: strip appendix counter plumbing (handled by the numbering scan)
+src = re.sub(r"\\setcounter\{table\}\{0\}", "", src)
+src = re.sub(r"\\renewcommand\{\\thetable\}.*$", "", src, flags=re.M)
+
 # 2. citation numbers from .bbl
 bbl_path = f"{P}/main.bbl"
 num = {}
@@ -57,31 +61,47 @@ def cite_repl(m):
 src = re.sub(r"\\citep\{([^}]+)\}", cite_repl, src)
 src = re.sub(r"\\citet\{([^}]+)\}", cite_repl, src)
 
-# 3. resolve \ref to REAL numbers
+# 3. resolve \ref to REAL numbers (v1.7.0: appendix-aware — sections letter
+# A/B/C, appendix tables A.1/B.1/C.1)
 sec_n = 0
 sub_n = 0
 tab_n = 0
 fig_n = 0
+in_appendix = False
+app_sec = 0
+app_tab = 0
 label2num = {}
 token_re = re.compile(
-    r"\\section\{|\\subsection\{|\\begin\{table\}|\\begin\{figure\}|\\label\{([^}]+)\}")
+    r"\\appendix|\\section\{|\\subsection\{|\\begin\{table\}|\\begin\{figure\}|\\label\{([^}]+)\}")
 for m in token_re.finditer(src):
     tok = m.group(0)
-    if tok.startswith("\\section{"):
-        sec_n += 1
+    if tok == "\\appendix":
+        in_appendix = True
+    elif tok.startswith("\\section{"):
         sub_n = 0
+        if in_appendix:
+            app_sec += 1
+            app_tab = 0
+        else:
+            sec_n += 1
     elif tok.startswith("\\subsection{"):
         sub_n += 1
     elif tok.startswith("\\begin{table}"):
-        tab_n += 1
+        if in_appendix:
+            app_tab += 1
+        else:
+            tab_n += 1
     elif tok.startswith("\\begin{figure}"):
         fig_n += 1
     elif tok.startswith("\\label{"):
         lab = m.group(1)
         if lab.startswith("sec:"):
             label2num[lab] = str(sec_n) if sub_n == 0 else f"{sec_n}.{sub_n}"
+        elif lab.startswith("app:"):
+            label2num[lab] = chr(ord("A") + app_sec - 1)
         elif lab.startswith("tab:"):
-            label2num[lab] = str(tab_n)
+            label2num[lab] = (f"{chr(ord('A') + app_sec - 1)}.{app_tab}"
+                              if in_appendix else str(tab_n))
         elif lab.startswith("fig:"):
             label2num[lab] = str(fig_n)
 
@@ -94,6 +114,7 @@ src = re.sub(r"\\ref\{([^}]+)\}", ref_repl, src)
 src = src.replace("Section~", "Section ").replace("Table~", "Table ")
 src = src.replace("Figure~", "Figure ").replace("Section\\\\~", "Section ")
 src = src.replace("Tables~", "Tables ").replace("Figures~", "Figures ")
+src = src.replace("Appendix~", "Appendix ").replace("Appendices~", "Appendices ")
 src = re.sub(r"\\label\{[^}]*\}", "", src)
 print(f"resolved {n_refs} refs; sample map:",
       {k: label2num[k] for k in ("sec:rq1", "sec:results", "tab:main", "fig:budget") if k in label2num})
@@ -115,6 +136,7 @@ src = re.sub(r"\\setlength\{\\emergencystretch\}\{[^}]*\}", "", src)
 src = re.sub(r"\\hypersetup\{[\s\S]*?\n\}", "", src)
 src = re.sub(r"\\usepackage(\[[^\]]*\])?\{[^}]*\}", "", src)
 src = src.replace("\\bibliographystyle{elsarticle-num}", "").replace("\\bibliography{refs}", "")
+src = src.replace("\\appendix", "")
 src = re.sub(r"\\begin\{thebibliography\}[\s\S]*?\\end\{thebibliography\}", "", src)
 src = re.sub(r"\\begin\{keyword\}[\s\S]*?\\end\{keyword\}", "", src)
 
@@ -257,31 +279,40 @@ print(f"caption paragraphs: {len(tab_caps)} tables, {len(fig_caps)} figures")
 bid = 500
 bookmark_names = set()
 def add_caption_prefix(p_el, label, number, bold=True):
-    """Prepend 'Label {SEQ Label}: ' with a bookmark around the SEQ number."""
+    """Prepend 'Label {number}: ' — SEQ field for arabic numbers, plain text
+    for appendix numbers (A.1 etc.)."""
     global bid
     ppr = p_el.find(qn("w:pPr"))
     anchor = ppr.getnext() if ppr is not None else (list(p_el)[0] if len(p_el) else None)
-    name = f"{'Tab' if label == 'Table' else 'Fig'}{number}"
+    # bookmark names must be alphanumeric: TabA1 for display number A.1
+    bm_name = f"{'Tab' if label == 'Table' else 'Fig'}{str(number).replace('.', '')}"
     rpr = bold_rpr() if bold else None
-    elems = [
-        bm_start(bid, name),
-        run_text(f"{label} ", rpr),
-        fld(f" SEQ {label} \\* ARABIC ", str(number), rpr),
-        bm_end(bid),
-        run_text(": ", rpr),
-    ]
+    if isinstance(number, int) or (isinstance(number, str) and number.isdigit()):
+        num_elems = [fld(f" SEQ {label} \\* ARABIC ", str(number), rpr)]
+    else:
+        num_elems = [run_text(str(number), rpr)]
+    elems = (
+        [bm_start(bid, bm_name), run_text(f"{label} ", rpr)]
+        + num_elems
+        + [bm_end(bid), run_text(": ", rpr)]
+    )
     for e in elems:
         anchor.addprevious(e)
-    bookmark_names.add(name)
+    bookmark_names.add(bm_name)
     bid += 1
 
-for k, (pc, p) in enumerate(tab_caps, 1):
-    add_caption_prefix(pc, "Table", k)
+# v1.7.0: table caption numbers match the LaTeX numbering — 1..8 in the main
+# text, then A.1/B.1/C.1 in the appendices (document order)
+tab_numbers = [str(i) for i in range(1, len(tab_caps) - 3)] + ["A.1", "B.1", "C.1"]
+if len(tab_numbers) < len(tab_caps):  # safety: pad if fewer appendix tables
+    tab_numbers += [str(i) for i in range(len(tab_numbers) + 1, len(tab_caps) + 1)]
+for (pc, p), num_str in zip(tab_caps, tab_numbers[: len(tab_caps)]):
+    add_caption_prefix(pc, "Table", num_str)
 for k, (pc, p) in enumerate(fig_caps, 1):
     add_caption_prefix(pc, "Figure", k)
 
-# in-text references -> REF fields
-ref_pat = re.compile(r"\b(Table|Figure) (\d+)\b")
+# in-text references -> REF fields (v1.7.0: also match appendix numbers A.1 etc.)
+ref_pat = re.compile(r"\b(Table|Figure) (\d+|[A-C]\.\d+)\b")
 n_converted = 0
 caption_els = {id(pc) for pc, _ in tab_caps} | {id(pc) for pc, _ in fig_caps}
 for para in d.paragraphs:
@@ -297,10 +328,10 @@ for para in d.paragraphs:
         rpr = r._r.find(qn("w:rPr"))
         new_nodes = []
         for part in parts:
-            m = re.fullmatch(r"(Table|Figure) (\d+)", part)
+            m = re.fullmatch(r"(Table|Figure) (\d+|[A-C]\.\d+)", part)
             if m:
                 label, n = m.group(1), m.group(2)
-                name = f"{'Tab' if label == 'Table' else 'Fig'}{n}"
+                name = f"{'Tab' if label == 'Table' else 'Fig'}{n.replace('.', '')}"
                 if name in bookmark_names:
                     new_nodes.append(run_text(f"{label} ", rpr))
                     new_nodes.append(fld(f" REF {name} \\h ", n, rpr))

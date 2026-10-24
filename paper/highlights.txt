@@ -1,0 +1,7 @@
+Highlights
+
+- Budget-matched comparison of answer-space and prompt-space test-time ensembling
+- Held-out suite: both sources gain (+2.4/+4.9 pp over S1), statistically inseparable
+- Paraphrase margin splits into +1.9 pp difficulty offset and +3.0 pp aggregation
+- Gains concentrate where resampling is exhausted; reverse on verbal-reasoning stems
+- Adaptive rule saves 13-21% of calls; unanimity rule keeps accuracy at 2-3 calls

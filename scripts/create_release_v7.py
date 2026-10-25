@@ -15,19 +15,12 @@ UPLOADS = f"https://uploads.github.com/repos/{OWNER_REPO}"
 ASSETS = "/home/z/my-project/release_assets"
 TAG = "v1.8.1"
 
-# --- guard: refuse to ship a placeholder Zenodo DOI without a loud warning ----
+# --- guard: the Zenodo DOI must be the real reserved one (record 23642990) ----
 tex = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "paper", "main.tex")).read()
 m = re.search(r"\\newcommand\{\\zenododoi\}\{([^}]*)\}", tex)
-if m and "XXXXXXX" in m.group(1):
-    print("=" * 74)
-    print("WARNING: paper/main.tex still carries the PLACEHOLDER Zenodo DOI")
-    print(f"         ({m.group(1)}).")
-    print("Before submitting to the journal: enable the Zenodo-GitHub integration")
-    print("(zenodo.org -> Settings -> Applications -> GitHub -> enable this repo),")
-    print("publish/release v1.8.1 there to mint the DOI, replace the placeholder")
-    print("in main.tex, and rebuild. Continuing with the release in 5 seconds ...")
-    print("=" * 74)
-    time.sleep(5)
+if not m or not re.fullmatch(r"10\.5281/zenodo\.\d+", m.group(1)):
+    sys.exit(f"paper/main.tex Zenodo DOI is not a real reserved DOI: {m.group(1) if m else 'macro missing'}")
+print(f"Zenodo DOI in paper: {m.group(1)}")
 
 BODY = """## When Does Test-Time Ensembling Help Large Language Models? (v1.8.1 — submission-ready, corrected)
 **A Budget-Matched Study of Answer-Space and Prompt-Space Diversity**
@@ -56,7 +49,7 @@ Preprint (sixth revision), prepared for submission to *Neurocomputing* (Elsevier
 
 **8. Endpoint verification.** The Apinex relay — an aggregator that served GPT-6-Luna, Gemini3.8-Flash, and the completed DeepSeek runs — is named explicitly: model identity/version and temperature compliance cannot be verified through it, no condition was replicated on a first-party API or an open-weight model, and findings therefore describe the accessed endpoints as of October 2026 (Sections 4.2 and 6.4).
 
-**9. Data archival.** The data availability statement now points at a DOI-archived Zenodo snapshot in addition to GitHub, and a `.zenodo.json` metadata file ships with the repo so the Zenodo–GitHub integration can archive releases with correct metadata. ⚠️ The DOI in `paper/main.tex` is a **placeholder** (`10.5281/zenodo.XXXXXXX`) until the Zenodo integration is enabled and the v1.8.1 release published there — replace it and rebuild before journal submission.
+**9. Data archival.** The data availability statement now points at a DOI-archived Zenodo snapshot in addition to GitHub: **this release is archived on Zenodo with DOI [10.5281/zenodo.23642990](https://doi.org/10.5281/zenodo.23642990)** (full repository snapshot: paper source, all raw call matrices, validated paraphrases, audits, analysis outputs, and the verification scripts). A `.zenodo.json` metadata file ships with the repo so future releases can be archived via the Zenodo–GitHub integration with correct metadata.
 
 ### Verification (all green from a fresh checkout)
 - `scripts/recompute_all.py`: **145/145 checks pass** — every number in the paper re-derived from the raw call logs, including 39 new checks for the greedy-divergence count, the held-out fragility/AUROC/flagging numbers, and the instruction-variant control.

@@ -1,0 +1,16 @@
+\footnotesize
+\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}} l c c c c c c c}
+\toprule
+ & & \multicolumn{3}{c}{AUROC [95\% CI]} & \multicolumn{3}{c}{Flagged errors} \\
+\cmidrule(lr){3-5}\cmidrule(lr){6-8}
+Model & Errors & $c_S$ & $c_P$ & Both & $c_S$ & $c_P$ & Either \\
+\midrule
+Agnes3.0-Flash & 21 & 0.80 [0.69, 0.90] & 0.81 [0.71, 0.90] & 0.86 [0.78, 0.93] & 16/21 & 18/21 & 20/21 \\
+Agnes2.5-Flash & 12 & 0.74 [0.58, 0.89] & 0.84 [0.68, 0.98] & 0.83 [0.67, 0.97] & 7/12 & 9/12 & 9/12 \\
+DeepSeekV4.1-Flash & 20 & 0.70 [0.58, 0.82] & 0.62 [0.50, 0.75] & 0.73 [0.61, 0.84] & 13/20 & 9/20 & 16/20 \\
+DeepSeekV4-Pro-0813 & 19 & 0.74 [0.61, 0.86] & 0.69 [0.56, 0.82] & 0.80 [0.69, 0.90] & 13/19 & 10/19 & 16/19 \\
+Qwen3.7-Flash$^{\S}$ & 9 & 0.72 [0.56, 0.90] & 0.78 [0.60, 0.94] & 0.80 [0.61, 0.97] & 4/9 & 6/9 & 6/9 \\
+\midrule
+Pooled (476 pairs) & 72 & 0.75 [0.67, 0.84] & 0.74 [0.65, 0.83] & 0.81 [0.73, 0.89] & 49/72 & 46/72 & 61/72 \\
+\bottomrule
+\end{tabular*}

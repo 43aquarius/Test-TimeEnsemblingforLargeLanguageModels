@@ -1,0 +1,31 @@
+{
+  "title": "When Does Test-Time Ensembling Help Large Language Models? A Budget-Matched Study of Answer-Space and Prompt-Space Diversity",
+  "description": "Complete research artifacts for a budget-matched comparison of the two diversity sources available to test-time ensembling for large language models: resampling the stochastic decoder on a fixed prompt (self-consistency, answer space) versus aggregating validated semantic paraphrases (prompt space). Includes the full paper source (LaTeX), the 16-call matrix raw prediction logs for ten commercial systems across a 90-question development suite and a 119-question held-out suite, validated paraphrases with per-item NLI and embedding-similarity verdicts, the greedy-bias audits, the analysis outputs (including the held-out fragility and error-signal recomputation and the SAT-Math instruction-variant control), and the scripts (recompute_all.py, final_crosscheck.py, analyze_rq23_expand.py) that re-derive every table and statistic in the paper directly from the raw logs.",
+  "creators": [
+    {
+      "name": "Tan, Chang",
+      "affiliation": "Dalian University of Technology"
+    }
+  ],
+  "upload_type": "software",
+  "language": "eng",
+  "license": {
+    "id": "MIT"
+  },
+  "keywords": [
+    "large language models",
+    "test-time compute",
+    "self-consistency",
+    "prompt ensembling",
+    "uncertainty estimation",
+    "prompt robustness"
+  ],
+  "version": "v1.8.1",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/43aquarius/Test-TimeEnsemblingforLargeLanguageModels",
+      "relation": "isSupplementTo",
+      "resource_type": "software"
+    }
+  ]
+}

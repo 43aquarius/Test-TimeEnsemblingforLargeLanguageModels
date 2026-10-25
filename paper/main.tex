@@ -11,6 +11,13 @@
 
 \journal{Neurocomputing}
 
+% TODO(zenodo): placeholder DOI for the Zenodo archive of this release.
+% To finalize: (1) sign in at zenodo.org, (2) Settings -> Applications -> GitHub,
+% authorize the Zenodo app and enable this repository, (3) push tag v1.8.1
+% (or create the deposit manually and reserve its DOI), (4) replace the
+% placeholder below with the reserved DOI, (5) rebuild the PDF and Word version.
+\newcommand{\zenododoi}{10.5281/zenodo.XXXXXXX}
+
 \widowpenalty=10000
 \setlength{\emergencystretch}{1.5em}
 \clubpenalty=10000
@@ -34,7 +41,7 @@
 \address[inst1]{Dalian University of Technology, No. 2 Linggong Road, Ganjingzi District, Dalian 116024, Liaoning, China}
 
 \begin{abstract}
-Test-time ensembling for large language models draws diversity from two sources: resampling the stochastic decoder on a fixed prompt (answer space) or aggregating semantically equivalent paraphrases (prompt space). We compare them budget-matched, answering every question sixteen times per model. A development suite (90 questions, six systems) fixed the conditions; the primary evidence is a held-out suite of 119 fresh questions fully covered by four models from two families (476 model--question pairs). Against the single-sample expectation S1, both six-vote ensembles improve out of sample: self-consistency by $+2.4$ points and the paraphrase ensemble by $+4.9$ (95\% cluster-bootstrap intervals $+1.1$ to $+3.7$ and $+2.3$ to $+7.6$), with the twelve-vote combination at $+4.1$; the two sources remain statistically inseparable ($+2.5$, interval touching zero), and $+1.9$ points of the paraphrase headline is a single-call difficulty offset, leaving $+3.0$ of within-family aggregation against $+2.4$ for resampling. The margin is conditional: it concentrates where answer-space diversity is exhausted (computation-deterministic tasks), reverses where paraphrases distort verbal-reasoning stems, and its realizing allocation is model-dependent. On saturated benchmarks, answer distributions collapse, no strategy moves accuracy, and agreement-based uncertainty estimates lose their signal. Greedy divergence from S1 is endpoint-specific (three of ten configurations). An adaptive probe-and-route rule transfers at 79--87 percent of the six-call budget, beating every fixed allocation on one model and trailing the best fixed conditions elsewhere by one to seven questions; a sequential unanimity rule preserves accuracy at two to three calls. We release prompts, paraphrases, per-call logs, and recomputation scripts.
+Test-time ensembling for large language models draws diversity from two sources: resampling the stochastic decoder on a fixed prompt (answer space) or aggregating semantically equivalent paraphrases (prompt space). We compare them budget-matched, answering every question sixteen times per model. A development suite (90 questions, six systems) fixed the conditions; the primary evidence is a held-out suite of 119 fresh questions fully covered by four models from two families (476 model--question pairs). Against the single-sample expectation S1, both six-vote ensembles improve out of sample: self-consistency by $+2.4$ points and the paraphrase ensemble by $+4.9$ (95\% cluster-bootstrap intervals $+1.1$ to $+3.7$ and $+2.3$ to $+7.6$), with the twelve-vote combination at $+4.1$; the two sources remain statistically inseparable ($+2.5$, interval touching zero), and $+1.9$ points of the paraphrase headline is a single-call difficulty offset, leaving $+3.0$ of within-family aggregation against $+2.4$ for resampling. The margin is conditional: it concentrates where answer-space diversity is exhausted (computation-deterministic tasks), reverses where paraphrases distort verbal-reasoning stems, and its realizing allocation is model-dependent. On saturated benchmarks, answer distributions collapse, no strategy moves accuracy, and agreement-based uncertainty estimates lose their signal. Greedy divergence from S1 is endpoint-specific (four of ten configurations). An adaptive probe-and-route rule transfers at 79--87 percent of the six-call budget, beating every fixed allocation on one model and trailing the best fixed conditions elsewhere by one to seven questions; a sequential unanimity rule preserves accuracy at two to three calls. We release prompts, paraphrases, per-call logs, and recomputation scripts.
 \end{abstract}
 
 \begin{keyword}
@@ -63,7 +70,7 @@ The author declares no competing interests. All model access was obtained throug
 This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors.
 
 \subsection*{Data availability}
-All prompts, validated paraphrases with per-item validation verdicts, per-call raw predictions (with timestamps and token usage), analysis outputs, and the scripts that recompute every table and statistic directly from the raw logs are available at \url{https://github.com/43aquarius/Test-TimeEnsemblingforLargeLanguageModels} (releases v1.0.0--v1.8.0).
+All prompts, validated paraphrases with per-item validation verdicts, per-call raw predictions (with timestamps and token usage), analysis outputs, and the scripts that recompute every table and statistic directly from the raw logs are available at \url{https://github.com/43aquarius/Test-TimeEnsemblingforLargeLanguageModels} (releases v1.0.0--v1.8.1) and are archived on Zenodo with the DOI \zenododoi.
 
 \subsection*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}
 During the preparation of this work the author used generative AI writing assistants (large language model tools) to support drafting and editing of the manuscript text. After using these tools, the author reviewed and edited the content as needed and takes full responsibility for the content of the published article.

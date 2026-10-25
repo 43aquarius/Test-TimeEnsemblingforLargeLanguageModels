@@ -753,6 +753,279 @@
    "expected": "present",
    "actual": "present",
    "ok": true
+  },
+  {
+   "id": "gd-count",
+   "desc": "configs with |S1-greedy| >= 4pp",
+   "expected": 4,
+   "actual": 4,
+   "ok": true
+  },
+  {
+   "id": "gd-below",
+   "desc": "greedy below S1 among them",
+   "expected": 3,
+   "actual": 3,
+   "ok": true
+  },
+  {
+   "id": "gd-above",
+   "desc": "greedy above S1 among them",
+   "expected": 1,
+   "actual": 1,
+   "ok": true
+  },
+  {
+   "id": "gd-agnes-3.0-flash",
+   "desc": "S1-greedy agnes-3.0-flash (pp)",
+   "expected": 10.6,
+   "actual": 10.6,
+   "ok": true
+  },
+  {
+   "id": "gd-agnes-2.5-flash",
+   "desc": "S1-greedy agnes-2.5-flash (pp)",
+   "expected": 4.2,
+   "actual": 4.2,
+   "ok": true
+  },
+  {
+   "id": "gd-gpt-6-luna",
+   "desc": "S1-greedy gpt-6-luna (pp)",
+   "expected": -3.3,
+   "actual": -3.3,
+   "ok": true
+  },
+  {
+   "id": "gd-gemini-3.8-flash",
+   "desc": "S1-greedy gemini-3.8-flash (pp)",
+   "expected": -5.6,
+   "actual": -5.6,
+   "ok": true
+  },
+  {
+   "id": "gd-deepseek-v4.1-flash",
+   "desc": "S1-greedy deepseek-v4.1-flash@expand (pp)",
+   "expected": 4.5,
+   "actual": 4.5,
+   "ok": true
+  },
+  {
+   "id": "frag-ho-stem",
+   "desc": "held-out stem-locus flips",
+   "expected": "41/236",
+   "actual": "41/236",
+   "ok": true
+  },
+  {
+   "id": "frag-ho-inst",
+   "desc": "held-out instruction-locus flips",
+   "expected": "23/240",
+   "actual": "23/240",
+   "ok": true
+  },
+  {
+   "id": "frag-ho-stem-rate",
+   "desc": "held-out stem flip rate %",
+   "expected": 17.4,
+   "actual": 17.4,
+   "ok": true
+  },
+  {
+   "id": "frag-ho-inst-rate",
+   "desc": "held-out instruction flip rate %",
+   "expected": 9.6,
+   "actual": 9.6,
+   "ok": true
+  },
+  {
+   "id": "frag-ho-logiqa-agnes-3.0-flash",
+   "desc": "held-out LogiQA fragility %",
+   "expected": 40.0,
+   "actual": 40.0,
+   "ok": true
+  },
+  {
+   "id": "frag-ho-logiqa-agnes-2.5-flash",
+   "desc": "held-out LogiQA fragility %",
+   "expected": 15.0,
+   "actual": 15.0,
+   "ok": true
+  },
+  {
+   "id": "frag-ho-logiqa-deepseek-v4.1-flash",
+   "desc": "held-out LogiQA fragility %",
+   "expected": 35.0,
+   "actual": 35.0,
+   "ok": true
+  },
+  {
+   "id": "frag-ho-logiqa-deepseek-v4-pro-0813",
+   "desc": "held-out LogiQA fragility %",
+   "expected": 35.0,
+   "actual": 35.0,
+   "ok": true
+  },
+  {
+   "id": "frag-ho-sat-agnes-3.0-flash",
+   "desc": "held-out SAT-Math fragility %",
+   "expected": 40.0,
+   "actual": 40.0,
+   "ok": true
+  },
+  {
+   "id": "frag-ho-sat-agnes-2.5-flash",
+   "desc": "held-out SAT-Math fragility %",
+   "expected": 0.0,
+   "actual": 0.0,
+   "ok": true
+  },
+  {
+   "id": "frag-ho-sat-deepseek-v4.1-flash",
+   "desc": "held-out SAT-Math fragility %",
+   "expected": 15.0,
+   "actual": 15.0,
+   "ok": true
+  },
+  {
+   "id": "frag-ho-sat-deepseek-v4-pro-0813",
+   "desc": "held-out SAT-Math fragility %",
+   "expected": 20.0,
+   "actual": 20.0,
+   "ok": true
+  },
+  {
+   "id": "sig-ho-n-agnes-3.0-flash",
+   "desc": "held-out COMB-12 errors",
+   "expected": 21,
+   "actual": 21,
+   "ok": true
+  },
+  {
+   "id": "sig-ho-n-agnes-2.5-flash",
+   "desc": "held-out COMB-12 errors",
+   "expected": 12,
+   "actual": 12,
+   "ok": true
+  },
+  {
+   "id": "sig-ho-n-deepseek-v4.1-flash",
+   "desc": "held-out COMB-12 errors",
+   "expected": 20,
+   "actual": 20,
+   "ok": true
+  },
+  {
+   "id": "sig-ho-n-deepseek-v4-pro-0813",
+   "desc": "held-out COMB-12 errors",
+   "expected": 19,
+   "actual": 19,
+   "ok": true
+  },
+  {
+   "id": "sig-ho-auroc-agnes-3.0-flash",
+   "desc": "held-out AUROC cs/cp/both",
+   "expected": "0.798/0.811/0.861",
+   "actual": "0.798/0.811/0.861",
+   "ok": true
+  },
+  {
+   "id": "sig-ho-auroc-agnes-2.5-flash",
+   "desc": "held-out AUROC cs/cp/both",
+   "expected": "0.736/0.838/0.826",
+   "actual": "0.736/0.838/0.826",
+   "ok": true
+  },
+  {
+   "id": "sig-ho-auroc-deepseek-v4.1-flash",
+   "desc": "held-out AUROC cs/cp/both",
+   "expected": "0.704/0.621/0.729",
+   "actual": "0.704/0.621/0.729",
+   "ok": true
+  },
+  {
+   "id": "sig-ho-auroc-deepseek-v4-pro-0813",
+   "desc": "held-out AUROC cs/cp/both",
+   "expected": "0.743/0.690/0.804",
+   "actual": "0.743/0.690/0.804",
+   "ok": true
+  },
+  {
+   "id": "sig-ho-pooled",
+   "desc": "pooled AUROC cs/cp/both",
+   "expected": "0.752/0.738/0.814",
+   "actual": "0.752/0.738/0.814",
+   "ok": true
+  },
+  {
+   "id": "sig-ho-pooled-errors",
+   "desc": "pooled errors",
+   "expected": 72,
+   "actual": 72,
+   "ok": true
+  },
+  {
+   "id": "sig-ho-flags",
+   "desc": "pooled flagged cs/cp",
+   "expected": "49/46",
+   "actual": "49/46",
+   "ok": true
+  },
+  {
+   "id": "sig-ho-only",
+   "desc": "pooled only-cs/only-cp",
+   "expected": "15/12",
+   "actual": "15/12",
+   "ok": true
+  },
+  {
+   "id": "sig-ho-nd-err-rate",
+   "desc": "error rate non-degenerate %",
+   "expected": 35.1,
+   "actual": 35.1,
+   "ok": true
+  },
+  {
+   "id": "sig-ho-un-err-rate",
+   "desc": "error rate unanimous %",
+   "expected": 3.6,
+   "actual": 3.6,
+   "ok": true
+  },
+  {
+   "id": "instr-sat-canonical",
+   "desc": "SAT-Math canonical S1 pooled %",
+   "expected": 76.2,
+   "actual": 76.2,
+   "ok": true
+  },
+  {
+   "id": "instr-sat-best",
+   "desc": "SAT-Math best variant pooled %",
+   "expected": 95.0,
+   "actual": 95.0,
+   "ok": true
+  },
+  {
+   "id": "instr-sat-pe6",
+   "desc": "SAT-Math PE-6 pooled %",
+   "expected": 91.2,
+   "actual": 91.2,
+   "ok": true
+  },
+  {
+   "id": "instr-sat-a3",
+   "desc": "SAT-Math Agnes3.0 canonical/best/PE-6",
+   "expected": "61.7/100.0/100.0",
+   "actual": "61.7/100.0/100.0",
+   "ok": true
+  },
+  {
+   "id": "instr-piqa-best",
+   "desc": "PIQA best-variant vs canonical pooled",
+   "expected": "86.2 vs 87.9",
+   "actual": "86.2 vs 87.9",
+   "ok": true
   }
  ],
  "new": {
@@ -913,6 +1186,302 @@
    "agnes-2.5-flash": 96.86,
    "gpt-6-luna": 100.0,
    "gemini-3.8-flash": 99.55
+  },
+  "greedy_divergence": {
+   "qwen3.8-max": {
+    "greedy": 93.3,
+    "s1": 93.3,
+    "gap": 0.0
+   },
+   "qwen3.8-omni": {
+    "greedy": 93.0,
+    "s1": 93.9,
+    "gap": 0.9
+   },
+   "agnes-3.0-flash": {
+    "greedy": 78.8,
+    "s1": 89.4,
+    "gap": 10.6
+   },
+   "agnes-2.5-flash": {
+    "greedy": 90.0,
+    "s1": 94.2,
+    "gap": 4.2
+   },
+   "gpt-6-luna": {
+    "greedy": 80.0,
+    "s1": 76.7,
+    "gap": -3.3
+   },
+   "gemini-3.8-flash": {
+    "greedy": 91.7,
+    "s1": 86.1,
+    "gap": -5.6
+   },
+   "agnes-3.0-flash@expand": {
+    "greedy": 80.7,
+    "s1": 79.6,
+    "gap": -1.1
+   },
+   "agnes-2.5-flash@expand": {
+    "greedy": 89.9,
+    "s1": 88.1,
+    "gap": -1.8
+   },
+   "qwen3.7-flash@expand": {
+    "greedy": 85.0,
+    "s1": 86.1,
+    "gap": 1.1
+   },
+   "deepseek-v4.1-flash@expand": {
+    "greedy": 73.1,
+    "s1": 77.6,
+    "gap": 4.5
+   },
+   "deepseek-v4-flash-0731@expand": {
+    "greedy": 92.3,
+    "s1": 92.3,
+    "gap": 0.0
+   },
+   "deepseek-v4-pro-0813@expand": {
+    "greedy": 79.0,
+    "s1": 78.0,
+    "gap": -1.0
+   }
+  },
+  "fragility_heldout": {
+   "stem": [
+    41,
+    236
+   ],
+   "inst": [
+    23,
+    240
+   ],
+   "logiqa": {
+    "agnes-3.0-flash": 40.0,
+    "agnes-2.5-flash": 15.0,
+    "deepseek-v4.1-flash": 35.0,
+    "deepseek-v4-pro-0813": 35.0
+   },
+   "sat_math": {
+    "agnes-3.0-flash": 40.0,
+    "agnes-2.5-flash": 0.0,
+    "deepseek-v4.1-flash": 15.0,
+    "deepseek-v4-pro-0813": 20.0
+   }
+  },
+  "error_signals_heldout": {
+   "agnes-3.0-flash": {
+    "n": 119,
+    "n_errors": 21,
+    "auroc_cs": 0.798,
+    "auroc_cp": 0.811,
+    "auroc_both": 0.861,
+    "flag_cs": 16,
+    "flag_cp": 18,
+    "only_cs": 2,
+    "only_cp": 4,
+    "n_nd": 49,
+    "err_nd": 20
+   },
+   "agnes-2.5-flash": {
+    "n": 119,
+    "n_errors": 12,
+    "auroc_cs": 0.736,
+    "auroc_cp": 0.838,
+    "auroc_both": 0.826,
+    "flag_cs": 7,
+    "flag_cp": 9,
+    "only_cs": 0,
+    "only_cp": 2,
+    "n_nd": 29,
+    "err_nd": 9
+   },
+   "deepseek-v4.1-flash": {
+    "n": 119,
+    "n_errors": 20,
+    "auroc_cs": 0.704,
+    "auroc_cp": 0.621,
+    "auroc_both": 0.729,
+    "flag_cs": 13,
+    "flag_cp": 9,
+    "only_cs": 7,
+    "only_cp": 3,
+    "n_nd": 50,
+    "err_nd": 16
+   },
+   "deepseek-v4-pro-0813": {
+    "n": 119,
+    "n_errors": 19,
+    "auroc_cs": 0.743,
+    "auroc_cp": 0.69,
+    "auroc_both": 0.804,
+    "flag_cs": 13,
+    "flag_cp": 10,
+    "only_cs": 6,
+    "only_cp": 3,
+    "n_nd": 46,
+    "err_nd": 16
+   },
+   "POOLED": {
+    "auroc_cs": 0.752,
+    "auroc_cp": 0.738,
+    "auroc_both": 0.814,
+    "n_errors": 72,
+    "flag_cs": 49,
+    "flag_cp": 46,
+    "only_cs": 15,
+    "only_cp": 12
+   }
+  },
+  "instruction_control": {
+   "sat_math": {
+    "models": {
+     "agnes-3.0-flash": {
+      "n": 20,
+      "canonical": 61.7,
+      "variants": [
+       70.0,
+       65.0,
+       100.0,
+       85.0,
+       80.0,
+       95.0
+      ],
+      "best": 100.0,
+      "pe6": 100.0
+     },
+     "agnes-2.5-flash": {
+      "n": 20,
+      "canonical": 98.3,
+      "variants": [
+       100.0,
+       95.0,
+       100.0,
+       100.0,
+       100.0,
+       100.0
+      ],
+      "best": 100.0,
+      "pe6": 100.0
+     },
+     "deepseek-v4.1-flash": {
+      "n": 20,
+      "canonical": 75.8,
+      "variants": [
+       75.0,
+       70.0,
+       90.0,
+       65.0,
+       80.0,
+       65.0
+      ],
+      "best": 90.0,
+      "pe6": 80.0
+     },
+     "deepseek-v4-pro-0813": {
+      "n": 20,
+      "canonical": 69.2,
+      "variants": [
+       80.0,
+       60.0,
+       90.0,
+       85.0,
+       85.0,
+       75.0
+      ],
+      "best": 90.0,
+      "pe6": 85.0
+     }
+    },
+    "pooled": {
+     "canonical": 76.2,
+     "variants": [
+      81.2,
+      72.5,
+      95.0,
+      83.8,
+      86.2,
+      83.8
+     ],
+     "best": 95.0,
+     "pe6": 91.2
+    }
+   },
+   "piqa": {
+    "models": {
+     "agnes-3.0-flash": {
+      "n": 20,
+      "canonical": 88.3,
+      "variants": [
+       90.0,
+       85.0,
+       80.0,
+       85.0,
+       90.0,
+       90.0
+      ],
+      "best": 90.0,
+      "pe6": 95.0
+     },
+     "agnes-2.5-flash": {
+      "n": 20,
+      "canonical": 94.2,
+      "variants": [
+       95.0,
+       90.0,
+       90.0,
+       95.0,
+       95.0,
+       95.0
+      ],
+      "best": 95.0,
+      "pe6": 95.0
+     },
+     "deepseek-v4.1-flash": {
+      "n": 20,
+      "canonical": 79.2,
+      "variants": [
+       75.0,
+       70.0,
+       70.0,
+       80.0,
+       70.0,
+       70.0
+      ],
+      "best": 80.0,
+      "pe6": 75.0
+     },
+     "deepseek-v4-pro-0813": {
+      "n": 20,
+      "canonical": 90.0,
+      "variants": [
+       80.0,
+       75.0,
+       90.0,
+       85.0,
+       80.0,
+       90.0
+      ],
+      "best": 90.0,
+      "pe6": 80.0
+     }
+    },
+    "pooled": {
+     "canonical": 87.9,
+     "variants": [
+      85.0,
+      80.0,
+      82.5,
+      86.2,
+      83.8,
+      86.2
+     ],
+     "best": 86.2,
+     "pe6": 86.2
+    }
+   }
   }
  }
 }

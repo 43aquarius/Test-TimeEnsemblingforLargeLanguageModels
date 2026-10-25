@@ -112,6 +112,10 @@ for m in token_re.finditer(src):
 
 def ref_repl(m):
     lab = m.group(1)
+    # v1.8.1: elsarticle's \appendix renders \ref{app:...} as "Appendix A";
+    # the LaTeX source no longer carries a manual prefix, so restore it here.
+    if lab.startswith("app:"):
+        return "Appendix " + label2num.get(lab, "?")
     return label2num.get(lab, "??")
 
 n_refs = len(re.findall(r"\\ref\{[^}]+\}", src))
@@ -196,10 +200,18 @@ for m in re.finditer(r"\\bibitem\{([^}]+)\}([\s\S]*?)(?=\\bibitem\{|\\end\{thebi
     body = re.sub(r"\\newblock", " ", body)
     body = body.replace("~", " ").replace("--", "-")
     body = re.sub(r"\s+", " ", body).strip()
+    body = body.replace("\\urlprefix", "")   # v1.8.1: strip elsarticle URL prefix artifact
     body = re.sub(r"\\url\{([^}]+)\}", r"\1", body)
     body = re.sub(r"\\href\{([^}]+)\}\{([^}]+)\}", r"\2 (\1)", body)
     body = body.replace("\\newline", " ").replace("{", "").replace("}", "")
     body = re.sub(r"\s+", " ", body).strip()
+    # v1.8.1: elsarticle prints linked titles AND a trailing URL line; drop the
+    # duplicate trailing copy so each URL appears once in the Word reference list
+    url_m = re.search(r"\\url\{([^}]+)\}", m.group(2))
+    if url_m:
+        u = url_m.group(1)
+        if body.count(u) > 1:
+            body = body[:body.rfind(u)].rstrip().rstrip(".")
     entries.append((m.group(1), body))
 
 d = Document(OUT)

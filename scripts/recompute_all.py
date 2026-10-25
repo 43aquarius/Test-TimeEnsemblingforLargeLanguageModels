@@ -543,6 +543,167 @@ try:
 except Exception as e:
     check("audit-main", "greedy audit file", "present", f"ERR {e}")
 
+# ============ 5. v1.8.1: greedy divergence (10 configs), held-out RQ2/RQ3, instruction control ============
+# (a) greedy vs S1 over all ten model--endpoint configurations
+gd = {}
+for m in MAIN_MODELS:
+    gd[m] = (main[m]["greedy"], main[m]["s1"])
+for m in EXP_MODELS:
+    gd[m + "@expand"] = (exp[m]["greedy"], exp[m]["s1"])
+ge4 = {k: s - g for k, (g, s) in gd.items() if abs(s - g) >= 4.0}
+check("gd-count", "configs with |S1-greedy| >= 4pp", 4, len(ge4))
+check("gd-below", "greedy below S1 among them", 3, sum(1 for v in ge4.values() if v > 0))
+check("gd-above", "greedy above S1 among them", 1, sum(1 for v in ge4.values() if v < 0))
+for k, e_gap in [("agnes-3.0-flash", 10.6), ("agnes-2.5-flash", 4.2), ("gpt-6-luna", -3.3),
+                 ("gemini-3.8-flash", -5.6), ("deepseek-v4.1-flash@expand", 4.5)]:
+    g, s = gd[k]
+    check(f"gd-{k.split('@')[0]}", f"S1-greedy {k} (pp)", e_gap, round(s - g, 1))
+NEW["greedy_divergence"] = {k: {"greedy": round(g, 1), "s1": round(s, 1),
+                                "gap": round(s - g, 1)} for k, (g, s) in gd.items()}
+
+# (b) held-out fragility by locus over FULL4 common questions
+fl_stem = fl_inst = n_stem = n_inst = 0
+for q, rows in by_qe.items():
+    is_stem = QE[q]["dataset"] in STEM_DS
+    for r in rows:
+        if is_stem:
+            n_stem += 1
+            fl_stem += r["fragile"]
+        else:
+            n_inst += 1
+            fl_inst += r["fragile"]
+check("frag-ho-stem", "held-out stem-locus flips", "41/236", f"{fl_stem}/{n_stem}")
+check("frag-ho-inst", "held-out instruction-locus flips", "23/240", f"{fl_inst}/{n_inst}")
+check("frag-ho-stem-rate", "held-out stem flip rate %", 17.4, round(100 * fl_stem / n_stem, 1))
+check("frag-ho-inst-rate", "held-out instruction flip rate %", 9.6, round(100 * fl_inst / n_inst, 1))
+logiqa_ho = {}
+for m, v in [("agnes-3.0-flash", 40.0), ("agnes-2.5-flash", 15.0),
+             ("deepseek-v4.1-flash", 35.0), ("deepseek-v4-pro-0813", 35.0)]:
+    pq = exp[m]["pq"]
+    lq = [q for q in pq if QE[q]["dataset"] == "logiqa"]
+    logiqa_ho[m] = round(100 * sum(pq[q]["fragile"] for q in lq) / len(lq), 1)
+    check(f"frag-ho-logiqa-{m}", "held-out LogiQA fragility %", v, logiqa_ho[m])
+satfrag = {}
+for m, v in [("agnes-3.0-flash", 40.0), ("agnes-2.5-flash", 0.0),
+             ("deepseek-v4.1-flash", 15.0), ("deepseek-v4-pro-0813", 20.0)]:
+    pq = exp[m]["pq"]
+    sq = [q for q in pq if QE[q]["dataset"] == "sat_math"]
+    satfrag[m] = round(100 * sum(pq[q]["fragile"] for q in sq) / len(sq), 1)
+    check(f"frag-ho-sat-{m}", "held-out SAT-Math fragility %", v, satfrag[m])
+NEW["fragility_heldout"] = {"stem": [fl_stem, n_stem], "inst": [fl_inst, n_inst],
+                            "logiqa": logiqa_ho, "sat_math": satfrag}
+
+# (c) held-out error signals (reference: COMB-12 errors)
+def auroc_(scores, labels):
+    pairs_ = [(s, l) for s, l in zip(scores, labels) if s is not None]
+    if len(set(l for _, l in pairs_)) < 2:
+        return None
+    pos = [s for s, l in pairs_ if l == 1]
+    neg = [s for s, l in pairs_ if l == 0]
+    if not pos or not neg:
+        return None
+    w = t = 0
+    for p in pos:
+        for n in neg:
+            if p > n:
+                w += 1
+            elif p == n:
+                t += 1
+    return (w + 0.5 * t) / (len(pos) * len(neg))
+
+sig_ho = {}
+all_rows = []
+for m in FULL4:
+    comp = exp[m]["complete"]
+    pq = exp[m]["pq"]
+    qids = sorted(pq)
+    cs = {q: mode_share([comp[q][(0, str(s))]["answer"] for s in range(1, 7)]) for q in qids}
+    cp = {q: mode_share([comp[q][(p, "1")]["answer"] for p in range(1, 7)]) for q in qids}
+    err = {q: 0 if pq[q]["comb12_ok"] else 1 for q in qids}
+    n_err = sum(err.values())
+    row = {"n": len(qids), "n_errors": n_err,
+           "auroc_cs": auroc_([1 - cs[q] for q in qids], [err[q] for q in qids]),
+           "auroc_cp": auroc_([1 - cp[q] for q in qids], [err[q] for q in qids]),
+           "auroc_both": auroc_([2 - cs[q] - cp[q] for q in qids], [err[q] for q in qids]),
+           "flag_cs": sum(1 for q in qids if err[q] and cs[q] < 1),
+           "flag_cp": sum(1 for q in qids if err[q] and cp[q] < 1),
+           "only_cs": sum(1 for q in qids if err[q] and cs[q] < 1 and cp[q] == 1),
+           "only_cp": sum(1 for q in qids if err[q] and cp[q] < 1 and cs[q] == 1)}
+    nd = [q for q in qids if pq[q]["mode_share"] < 1]
+    row["n_nd"] = len(nd)
+    row["err_nd"] = sum(err[q] for q in nd)
+    sig_ho[m] = row
+    all_rows += [(cs[q], cp[q], err[q], pq[q]["mode_share"]) for q in qids]
+for m, e_n in [("agnes-3.0-flash", 21), ("agnes-2.5-flash", 12),
+               ("deepseek-v4.1-flash", 20), ("deepseek-v4-pro-0813", 19)]:
+    check(f"sig-ho-n-{m}", "held-out COMB-12 errors", e_n, sig_ho[m]["n_errors"])
+for m, e_cs, e_cp, e_b in [("agnes-3.0-flash", 0.798, 0.811, 0.861),
+                           ("agnes-2.5-flash", 0.736, 0.838, 0.826),
+                           ("deepseek-v4.1-flash", 0.704, 0.621, 0.729),
+                           ("deepseek-v4-pro-0813", 0.743, 0.690, 0.804)]:
+    r = sig_ho[m]
+    check(f"sig-ho-auroc-{m}", "held-out AUROC cs/cp/both", f"{e_cs:.3f}/{e_cp:.3f}/{e_b:.3f}",
+          f"{r['auroc_cs']:.3f}/{r['auroc_cp']:.3f}/{r['auroc_both']:.3f}")
+p_cs = auroc_([1 - r[0] for r in all_rows], [r[2] for r in all_rows])
+p_cp = auroc_([1 - r[1] for r in all_rows], [r[2] for r in all_rows])
+p_b = auroc_([2 - r[0] - r[1] for r in all_rows], [r[2] for r in all_rows])
+check("sig-ho-pooled", "pooled AUROC cs/cp/both", "0.752/0.738/0.814",
+      f"{p_cs:.3f}/{p_cp:.3f}/{p_b:.3f}")
+tot_err = sum(r[2] for r in all_rows)
+f_cs = sum(1 for r in all_rows if r[2] and r[0] < 1)
+f_cp = sum(1 for r in all_rows if r[2] and r[1] < 1)
+o_cs = sum(1 for r in all_rows if r[2] and r[0] < 1 and r[1] == 1)
+o_cp = sum(1 for r in all_rows if r[2] and r[1] < 1 and r[0] == 1)
+check("sig-ho-pooled-errors", "pooled errors", 72, tot_err)
+check("sig-ho-flags", "pooled flagged cs/cp", "49/46", f"{f_cs}/{f_cp}")
+check("sig-ho-only", "pooled only-cs/only-cp", "15/12", f"{o_cs}/{o_cp}")
+nd_rows = [r for r in all_rows if r[3] < 1]
+un_rows = [r for r in all_rows if r[3] == 1]
+check("sig-ho-nd-err-rate", "error rate non-degenerate %", 35.1,
+      round(100 * sum(r[2] for r in nd_rows) / len(nd_rows), 1))
+check("sig-ho-un-err-rate", "error rate unanimous %", 3.6,
+      round(100 * sum(r[2] for r in un_rows) / len(un_rows), 1))
+NEW["error_signals_heldout"] = {
+    m: {k: (round(v, 3) if isinstance(v, float) else v) for k, v in r.items()}
+    for m, r in sig_ho.items()}
+NEW["error_signals_heldout"]["POOLED"] = {
+    "auroc_cs": round(p_cs, 3), "auroc_cp": round(p_cp, 3), "auroc_both": round(p_b, 3),
+    "n_errors": tot_err, "flag_cs": f_cs, "flag_cp": f_cp, "only_cs": o_cs, "only_cp": o_cp}
+
+# (d) instruction-variant control (per handcrafted variant, held-out suite)
+instr = {}
+for ds in ("sat_math", "piqa"):
+    per_model = {}
+    for m in FULL4:
+        comp = exp[m]["complete"]
+        pq = exp[m]["pq"]
+        qds = [q for q in sorted(pq) if QE[q]["dataset"] == ds]
+        canon = 100 * sum(pq[q]["k1_acc"] for q in qds) / len(qds)
+        variants = [100 * sum(1 for q in qds if comp[q][(k, "1")]["answer"] == gold_of(QE[q])) / len(qds)
+                    for k in range(1, 7)]
+        pe6 = 100 * sum(pq[q]["pe6_ok"] for q in qds) / len(qds)
+        per_model[m] = {"n": len(qds), "canonical": round(canon, 1),
+                        "variants": [round(v, 1) for v in variants],
+                        "best": round(max(variants), 1), "pe6": round(pe6, 1)}
+    pooled_canon = sum(per_model[m]["canonical"] for m in FULL4) / 4
+    pooled_variants = [round(sum(per_model[m]["variants"][k] for m in FULL4) / 4, 1) for k in range(6)]
+    pooled_best = max(pooled_variants)
+    pooled_pe6 = sum(per_model[m]["pe6"] for m in FULL4) / 4
+    instr[ds] = {"models": per_model, "pooled": {"canonical": round(pooled_canon, 1),
+                                                 "variants": pooled_variants,
+                                                 "best": round(pooled_best, 1),
+                                                 "pe6": round(pooled_pe6, 1)}}
+check("instr-sat-canonical", "SAT-Math canonical S1 pooled %", 76.2, instr["sat_math"]["pooled"]["canonical"])
+check("instr-sat-best", "SAT-Math best variant pooled %", 95.0, instr["sat_math"]["pooled"]["best"])
+check("instr-sat-pe6", "SAT-Math PE-6 pooled %", 91.2, instr["sat_math"]["pooled"]["pe6"])
+check("instr-sat-a3", "SAT-Math Agnes3.0 canonical/best/PE-6", "61.7/100.0/100.0",
+      f"{instr['sat_math']['models']['agnes-3.0-flash']['canonical']}/"
+      f"{instr['sat_math']['models']['agnes-3.0-flash']['best']}/"
+      f"{instr['sat_math']['models']['agnes-3.0-flash']['pe6']}")
+check("instr-piqa-best", "PIQA best-variant vs canonical pooled", "86.2 vs 87.9",
+      f"{instr['piqa']['pooled']['best']} vs {instr['piqa']['pooled']['canonical']}")
+NEW["instruction_control"] = instr
+
 json.dump({"checks": CHECKS, "new": NEW}, open(f"{RES}/analysis/recompute_report.json", "w"), indent=1)
 
 fails = [c for c in CHECKS if not c["ok"]]

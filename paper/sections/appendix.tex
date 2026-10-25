@@ -7,7 +7,7 @@
 \label{app:greedypara}
 \label{sec:greedypara}
 
-The standard paraphrase ensemble decodes each paraphrase once at $\tau = 0.7$, so its diversity mixes prompt-space variation with decoding stochasticity. The greedy-paraphrase control removes the second component by decoding each paraphrase at $\tau = 0$, yielding the noise-free ensemble $\mathrm{PE}^{g}\text{-}6$ and a fragility indicator in which neither side involves sampling. Table~\ref{tab:greedypara} reports the control for the five models whose provider quota allowed it.
+The standard paraphrase ensemble decodes each paraphrase once at $\tau = 0.7$, so its diversity mixes prompt-space variation with decoding stochasticity. The greedy-paraphrase control removes the second component by decoding each paraphrase at $\tau = 0$, yielding the noise-free ensemble $\mathrm{PE}^{g}\text{-}6$ and a fragility indicator in which neither side involves sampling. Table~\ref{tab:greedypara} reports the control for the five models whose provider quota allowed it. The control is a development-suite condition: it was not re-collected on the held-out suite, so the held-out paraphrase margins of Section~\ref{sec:expand} retain the mixing that this control removes. Where the control exists, the mixing is small for exactly the family that carries the held-out prompt-space margins --- the two Agnes models show $\mathrm{PE}^{g}$-6 versus PE-6 modal-answer agreement on 31 of 32 and 38 of 39 questions --- while the two DeepSeek endpoints, whose held-out significant conditions are the mixed and combined allocations rather than pure PE-6, have no such measurement, and their prompt-space margins are read with that caveat.
 
 \begin{table}[htbp]
 \centering

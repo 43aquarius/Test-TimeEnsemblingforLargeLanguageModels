@@ -162,9 +162,9 @@ T.~Lanham, A.~Chen, A.~Radhakrishnan, B.~Steiner, C.~Denison, D.~Hernandez,
   chain-of-thought reasoning, arXiv preprint arXiv:2307.13702 (2023).
 
 \bibitem{condorcet1785essai}
-M.~d.~C. de~Caritat, Marie Jean Antoine~Nicolas, Essai sur l'application de
-  l'analyse \`{a} la probabilit\'{e} des d\'{e}cisions rendues \`{a} la
-  pluralit\'{e} des voix, Imprimerie Royale, Paris, 1785.
+{Marquis de Condorcet}, Essai sur l'application de l'analyse \`{a} la
+  probabilit\'{e} des d\'{e}cisions rendues \`{a} la pluralit\'{e} des voix,
+  Imprimerie Royale, Paris, 1785.
 
 \bibitem{lin2022truthfulqa}
 S.~Lin, J.~Hilton, O.~Evans, Truthfulqa: Measuring how models mimic human
@@ -210,21 +210,21 @@ A.~Yang, et~al., Qwen3 technical report, arXiv preprint arXiv:2505.09388
 Q.~Team, Qwen technical report, arXiv preprint arXiv:2309.16609 (2023).
 
 \bibitem{agnesai2026}
-{Agnes AI}, Agnes ai api documentation, \url{https://agnes-ai.com}, accessed
+{Agnes AI}, {Agnes AI API Documentation}, \url{https://agnes-ai.com}, accessed
   October 2026 (2026).
 
 \bibitem{openai2023gpt4}
-OpenAI, Gpt-4 technical report, arXiv preprint arXiv:2303.08774 (2023).
+OpenAI, {GPT-4} technical report, arXiv preprint arXiv:2303.08774 (2023).
 
 \bibitem{openai2025gpt5}
-{OpenAI}, \href{https://openai.com/index/gpt-5-system-card}{Gpt-5 system card},
-  Tech. rep., OpenAI (2025).
+{OpenAI}, \href{https://openai.com/index/gpt-5-system-card}{{GPT-5} system
+  card}, Tech. rep., OpenAI (2025).
 \newline\urlprefix\url{https://openai.com/index/gpt-5-system-card}
 
-\bibitem{comanici2025gemini}
-G.~Comanici, et~al., Gemini 2.5: Pushing the frontier with advanced reasoning,
-  multimodality, long context and next generation agentic capabilities, arXiv
-  preprint arXiv:2507.06261 (2025).
+\bibitem{google2026gemini38}
+{Google DeepMind}, {Gemini 3.8 Flash Model Card},
+  \url{https://deepmind.google/models/model-cards/gemini-3-8-flash}, published
+  September 2026; accessed October 2026 via a third-party endpoint (2026).
 
 \bibitem{deepseek2026api}
 {DeepSeek-AI}, {DeepSeek API Documentation},

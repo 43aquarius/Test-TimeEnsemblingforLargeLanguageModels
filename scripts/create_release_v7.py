@@ -6,7 +6,7 @@ control, LaTeX residue cleanup, bibliography casing, Zenodo archival statement).
 Usage: GH_TOKEN=<token> python3 scripts/create_release_v7.py
 Requires the local tag v1.8.1 to have been pushed first (git push origin main --tags).
 """
-import json, os, re, sys, time, urllib.request
+import json, os, re, sys, time, urllib.request, urllib.error
 
 TOKEN = os.environ["GH_TOKEN"]
 OWNER_REPO = "43aquarius/Test-TimeEnsemblingforLargeLanguageModels"
@@ -70,14 +70,24 @@ Preprint (sixth revision), prepared for submission to *Neurocomputing* (Elsevier
 All numbers are regenerable from the released call matrices via `scripts/recompute_all.py` and `scripts/analyze_rq23_expand.py`.
 """
 
+# plain-text DOI rendering for the release body (see note in step 4 below)
+BODY_PLAIN = BODY.replace(
+    "[10.5281/zenodo.23642990](https://doi.org/10.5281/zenodo.23642990)",
+    "10.5281/zenodo.23642990 (https://doi.org/10.5281/zenodo.23642990)")
+
 def api(url, data=None, method=None, ctype="application/json"):
     req = urllib.request.Request(url, method=method or ("POST" if data else "GET"))
     req.add_header("Authorization", f"Bearer {TOKEN}")
     if data is not None:
         req.add_header("Content-Type", ctype)
         data = data if isinstance(data, bytes) else json.dumps(data).encode()
-    with urllib.request.urlopen(req) as r:
-        return r.status, json.loads(r.read() or b"{}")
+    try:
+        with urllib.request.urlopen(req) as r:
+            return r.status, json.loads(r.read() or b"{}")
+    except urllib.error.HTTPError as e:
+        body = e.read()[:800]
+        print(f"HTTP {e.code} from {url}: {body.decode('utf-8', 'replace')}")
+        sys.exit(1)
 
 # 1. verify default branch head
 status, repo = api(f"{API}")
@@ -93,17 +103,33 @@ if tag_obj is None:
     sys.exit(f"tag {TAG} not found on remote")
 print(f"tag {TAG} -> {tag_obj['commit']['sha'][:7]}")
 
-# 2. create release
-status, rel = api(f"{API}/releases",
-                  {"tag_name": TAG, "name": f"{TAG} — submission-ready revision (corrected)",
-                   "body": BODY, "draft": False, "prerelease": False})
-print(f"release id={rel['id']} url={rel['html_url']}")
+# 2. create (or reuse) a DRAFT release. Publishing directly (draft=false) with a
+#    body containing markdown links trips GitHub's 'links/0/schema' 422 bug, so
+#    the flow is: draft -> upload assets -> PATCH draft=false. If the publish
+#    PATCH still 422s, the DOI markdown link is downgraded to plain text.
+NAME = f"{TAG} — submission-ready revision (corrected)"
+status, rels = api(f"{API}/releases?per_page=100")
+rel = next((r for r in rels if r["tag_name"] == TAG), None)
+if rel is None:
+    status, rel = api(f"{API}/releases",
+                      {"tag_name": TAG, "name": NAME, "body": BODY,
+                       "draft": True, "prerelease": False})
+    print(f"draft release id={rel['id']}")
+elif not rel["draft"]:
+    sys.exit(f"published release for {TAG} already exists: {rel['html_url']}")
+else:
+    print(f"reusing draft release id={rel['id']}")
 RID = rel["id"]
 
-# 3. upload assets
+# 3. upload assets (skip ones already present)
+status, have = api(f"{API}/releases/{RID}/assets")
+have_names = {a["name"] for a in have}
 for f in ["paper_main.pdf", "paper_word_version.docx", "latex_source.zip",
           "supplementary_data.zip", "highlights.txt", "Highlights.docx",
           "cover_letter.docx"]:
+    if f in have_names:
+        print(f"  {f} already uploaded, skipping")
+        continue
     path = os.path.join(ASSETS, f)
     ctype = "application/zip" if f.endswith(".zip") else (
         "application/pdf" if f.endswith(".pdf") else (
@@ -115,9 +141,35 @@ for f in ["paper_main.pdf", "paper_word_version.docx", "latex_source.zip",
         f"{UPLOADS}/releases/{RID}/assets?name={f}", data=data, method="POST")
     req.add_header("Authorization", f"Bearer {TOKEN}")
     req.add_header("Content-Type", ctype)
-    with urllib.request.urlopen(req) as r:
-        out = json.loads(r.read() or b"{}")
-    print(f"  uploaded {f} ({len(data)/1024:.0f} KB) -> {out.get('browser_download_url')}")
+    try:
+        with urllib.request.urlopen(req) as r:
+            out = json.loads(r.read() or b"{}")
+        print(f"  uploaded {f} ({len(data)/1024:.0f} KB) -> {out.get('browser_download_url')}")
+    except urllib.error.HTTPError as e:
+        print(f"  upload {f}: HTTP {e.code} {e.read()[:200]}")
+        sys.exit(1)
     time.sleep(1)
 
+# 4. publish the draft: GitHub's new draft system ignores tag/name changes when
+#    they are combined with the draft:false flip (the PATCH returns 200 but
+#    applies nothing), so publish and relabel must be two separate PATCHes. The
+#    body carries the DOI as plain text — a markdown link in a non-draft release
+#    payload trips GitHub's 'links/0/schema' 422 bug.
+def publish():
+    return api(f"{API}/releases/{RID}", {"draft": False}, method="PATCH")
+
+status, rel = publish()
+if status != 200 or rel.get("draft"):
+    sys.exit(f"could not publish the draft release (status={status} draft={rel.get('draft')})")
+print(f"draft published -> {rel['html_url']}")
+
+def relabel():
+    return api(f"{API}/releases/{RID}",
+               {"tag_name": TAG, "name": NAME, "body": BODY_PLAIN,
+                "draft": False, "prerelease": False}, method="PATCH")
+
+status, rel = relabel()
+if status != 200 or rel.get("tag_name") != TAG:
+    sys.exit(f"could not relabel the release to tag {TAG} (status={status})")
+print(f"PUBLISHED: {rel['html_url']}")
 print("done")

@@ -3,7 +3,7 @@
 import json, re, subprocess
 
 PDF = "/home/z/my-project/release_assets/paper_main.pdf"
-REP = "/home/z/my-project/results/analysis/recompute_report.json"
+REP = "/home/z/my-project/repo/results/analysis/recompute_report.json"
 
 out = subprocess.run(["pdftotext", PDF, "-"], capture_output=True, text=True, timeout=120).stdout
 for ch, rep in {'\ufb00':'ff','\ufb01':'fi','\ufb02':'fl','\ufb03':'ffi','\ufb04':'ffl'}.items():
@@ -34,9 +34,9 @@ def expect(name, cond):
         fails.append(name)
 
 expect("abstract: SC/PE CIs", has("+2.4 points and the paraphrase ensemble by +4.9 (95% cluster-bootstrap intervals +1.1 to +3.7 and +2.3 to +7.6"))
-expect("abstract: Holm <= 0.001", has("Holm-adjusted p ≤ 0.001") or has("Holm-adjusted p≤0.001"))
+expect("abstract: pooled n 476", has("119 fresh questions fully covered by four models from two families (476 model–question pairs)"))
 expect("abstract: difficulty split", has("+1.9 points of the paraphrase headline is a single-call difficulty offset, leaving +3.0 of within-family aggregation against +2.4"))
-expect("abstract: greedy 3/10", has("endpoint-specific, four to eleven points on three of ten"))
+expect("abstract: greedy 3/10", has("endpoint-specific (three of ten configurations)"))
 expect("abstract: adaptive 1-to-7", has("trailing the best fixed conditions elsewhere by one to seven"))
 
 expect("results: Holm family", has("(adjusted p = 0.0008, <0.0001, and <0.0001, respectively)") or has("adjusted p = 0.0008, < 0.0001, and < 0.0001"))

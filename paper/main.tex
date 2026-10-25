@@ -31,10 +31,10 @@
 \author[inst1]{Chang Tan\corref{cor1}}
 \ead{aquars43@foxmail.com}
 \cortext[cor1]{Corresponding author.}
-\address[inst1]{Dalian University of Technology, Dalian, Liaoning, China}
+\address[inst1]{Dalian University of Technology, No. 2 Linggong Road, Ganjingzi District, Dalian 116024, Liaoning, China}
 
 \begin{abstract}
-Test-time ensembling for large language models draws diversity from two sources: resampling the stochastic decoder on a fixed prompt (answer space) or aggregating semantically equivalent paraphrases (prompt space). We compare them budget-matched, answering every question sixteen times per model. A development suite (90 questions, six systems, coverage 12--90 per model after provider-quota truncation) fixed the conditions, strata, and rules; the primary evidence is a held-out suite of 119 fresh questions fully covered by four models from two providers and two families (476 model--question pairs). Against the single-sample expectation S1, both six-vote ensembles improve out of sample: self-consistency by $+2.4$ points and the paraphrase ensemble by $+4.9$ (95\% cluster-bootstrap intervals $+1.1$ to $+3.7$ and $+2.3$ to $+7.6$; Holm-adjusted $p \le 0.001$), with the twelve-vote combination at $+4.1$; the two sources remain statistically inseparable ($+2.5$, interval touching zero), and $+1.9$ points of the paraphrase headline is a single-call difficulty offset, leaving $+3.0$ of within-family aggregation against $+2.4$ for resampling. The margin is conditional: it concentrates where answer-space diversity is exhausted (computation-deterministic tasks), reverses where paraphrases distort verbal-reasoning stems, and its realizing allocation is model-dependent. On saturated benchmarks, answer distributions collapse, no strategy moves accuracy, and agreement-based uncertainty estimates lose their signal. Greedy divergence from S1 is endpoint-specific, four to eleven points on three of ten configurations. An adaptive probe-and-route rule transfers at 79--87 percent of the six-call budget, beating every fixed allocation on one model by one question and trailing the best fixed conditions elsewhere by one to seven; a sequential unanimity rule preserves accuracy within one question at two to three calls. We release prompts, paraphrases, per-call logs, and recomputation scripts.
+Test-time ensembling for large language models draws diversity from two sources: resampling the stochastic decoder on a fixed prompt (answer space) or aggregating semantically equivalent paraphrases (prompt space). We compare them budget-matched, answering every question sixteen times per model. A development suite (90 questions, six systems) fixed the conditions; the primary evidence is a held-out suite of 119 fresh questions fully covered by four models from two families (476 model--question pairs). Against the single-sample expectation S1, both six-vote ensembles improve out of sample: self-consistency by $+2.4$ points and the paraphrase ensemble by $+4.9$ (95\% cluster-bootstrap intervals $+1.1$ to $+3.7$ and $+2.3$ to $+7.6$), with the twelve-vote combination at $+4.1$; the two sources remain statistically inseparable ($+2.5$, interval touching zero), and $+1.9$ points of the paraphrase headline is a single-call difficulty offset, leaving $+3.0$ of within-family aggregation against $+2.4$ for resampling. The margin is conditional: it concentrates where answer-space diversity is exhausted (computation-deterministic tasks), reverses where paraphrases distort verbal-reasoning stems, and its realizing allocation is model-dependent. On saturated benchmarks, answer distributions collapse, no strategy moves accuracy, and agreement-based uncertainty estimates lose their signal. Greedy divergence from S1 is endpoint-specific (three of ten configurations). An adaptive probe-and-route rule transfers at 79--87 percent of the six-call budget, beating every fixed allocation on one model and trailing the best fixed conditions elsewhere by one to seven questions; a sequential unanimity rule preserves accuracy at two to three calls. We release prompts, paraphrases, per-call logs, and recomputation scripts.
 \end{abstract}
 
 \begin{keyword}
@@ -51,11 +51,6 @@ Large language models \sep test-time compute \sep self-consistency \sep prompt e
 \input{sections/discussion}
 \input{sections/conclusion}
 
-\appendix
-% appendix tables numbered per-section (A.1, B.1, C.1)
-\renewcommand{\thetable}{\Alph{section}.\arabic{table}}
-\input{sections/appendix}
-
 \section*{Declarations}
 
 \subsection*{CRediT authorship contribution statement}
@@ -68,10 +63,15 @@ The author declares no competing interests. All model access was obtained throug
 This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors.
 
 \subsection*{Data availability}
-All prompts, validated paraphrases with per-item validation verdicts, per-call raw predictions (with timestamps and token usage), analysis outputs, and the scripts that recompute every table and statistic directly from the raw logs are available at \url{https://github.com/43aquarius/Test-TimeEnsemblingforLargeLanguageModels} (releases v1.0.0--v1.7.0).
+All prompts, validated paraphrases with per-item validation verdicts, per-call raw predictions (with timestamps and token usage), analysis outputs, and the scripts that recompute every table and statistic directly from the raw logs are available at \url{https://github.com/43aquarius/Test-TimeEnsemblingforLargeLanguageModels} (releases v1.0.0--v1.8.0).
 
-\subsection*{Declaration of generative AI in scientific writing}
-Generative AI was used as a writing assistant for drafting and editing under the author's direction. All scientific content --- the study design, the data collection, the analyses, and the conclusions --- was specified, executed, verified, and approved by the author, who takes full responsibility for the content of this article.
+\subsection*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}
+During the preparation of this work the author used generative AI writing assistants (large language model tools) to support drafting and editing of the manuscript text. After using these tools, the author reviewed and edited the content as needed and takes full responsibility for the content of the published article.
+
+\appendix
+% appendix tables numbered per-section (A.1, B.1, C.1)
+\renewcommand{\thetable}{\Alph{section}.\arabic{table}}
+\input{sections/appendix}
 
 \bibliographystyle{elsarticle-num}
 \bibliography{refs}

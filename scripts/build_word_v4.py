@@ -14,13 +14,18 @@ from docx.shared import Pt
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 
-P = "/home/z/my-project/paper"
-OUT = "/home/z/my-project/download/paper_word_version.docx"
-REF_SNAPSHOT = "/home/z/my-project/scripts/word_reference_v3.docx"
+# repo-relative, overridable via environment (portable across checkouts)
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+P = os.environ.get("PAPER_DIR", os.path.join(ROOT, "paper"))
+OUT = os.environ.get("WORD_OUT", os.path.join(ROOT, "download", "paper_word_version.docx"))
+REF_SNAPSHOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "word_reference_v3.docx")
 
-# 0. one-time stable reference snapshot (v3 chained output-doc-as-reference)
-if not os.path.exists(REF_SNAPSHOT):
-    shutil.copy(OUT, REF_SNAPSHOT)
+# 0. optional stable reference snapshot (v3 chained output-doc-as-reference);
+# when absent, pandoc's built-in reference docx supplies the styles
+os.makedirs(os.path.dirname(OUT), exist_ok=True)
+HAVE_SNAPSHOT = os.path.exists(REF_SNAPSHOT)
+if not HAVE_SNAPSHOT:
+    print("note: no reference snapshot found; using pandoc default styles")
 
 src = open(f"{P}/main.tex").read()
 
@@ -127,8 +132,10 @@ src = re.sub(r"\\begin\{abstract\}\n([\s\S]*?)\\end\{abstract\}", abstract_to_se
 src = src.replace("\\journal{Neurocomputing}", "")
 src = re.sub(r"\\corref\{[^}]*\}", "", src)
 src = re.sub(r"\\cortext\[[^\]]*\]\{[^}]*\}", "", src)
-src = re.sub(r"\\ead\{[^}]*\}", "", src)
-src = re.sub(r"\\address\[[^\]]*\]\{([^}]*)\}", r"\\institution{" + r"\1" + "}", src)
+# keep the corresponding-author email and the full postal affiliation on the
+# title page (Neurocomputing guide: title page must carry both)
+src = re.sub(r"\\ead\{([^}]*)\}", r"\\texttt{\1}", src)
+src = re.sub(r"\\address\[[^\]]*\]\{([^}]*)\}", r"\\textit{\1}", src)
 src = re.sub(r"\\author\[inst1\]\{([^}]*)\}", r"\\author{\1}", src)
 src = re.sub(r"\\begin\{keyword\}\n([\s\S]*?)\\end\{keyword\}", lambda m: "\\paragraph{Keywords: " + m.group(1).strip() + "}", src)
 src = re.sub(r"\\widowpenalty=\d+|\\clubpenalty=\d+", "", src)
@@ -173,8 +180,9 @@ print("flattened tex written,", len(src), "chars; citation numbers:", len(num))
 
 # 8. pandoc
 cmd = ["pandoc", "-f", "latex", "-t", "docx",
-       "--reference-doc", REF_SNAPSHOT,
        "-o", OUT, f"{P}/main_flat.tex"]
+if HAVE_SNAPSHOT:
+    cmd[2:2] = ["--reference-doc", REF_SNAPSHOT]
 r = subprocess.run(cmd, capture_output=True, text=True, timeout=900)
 print("pandoc exit:", r.returncode)
 if r.stderr:

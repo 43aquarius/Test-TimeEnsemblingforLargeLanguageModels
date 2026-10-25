@@ -10,7 +10,8 @@ Deterministic (fixed seeds)."""
 import json, math, os, random
 from collections import defaultdict, Counter
 
-BASE = "/home/z/my-project"
+# repo root = parent of this scripts/ directory (portable across checkouts)
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = f"{BASE}/data"
 RES = f"{BASE}/results"
 EXP = f"{RES}/expand"
@@ -537,7 +538,7 @@ for m, exp_in, exp_ex in [("qwen3.8-omni", 93.0, 84.2), ("agnes-2.5-flash", 90.0
 
 # (e) greedy off-mode audit counts (main suite)
 try:
-    aud = json.load(open(f"{BASE}/supplementary_data/greedy_bias_audit/greedy_bias_audit.json"))
+    aud = json.load(open(f"{BASE}/results/analysis/greedy_bias_audit/greedy_bias_audit.json"))
     check("audit-main", "greedy audit file", "present", "present")
 except Exception as e:
     check("audit-main", "greedy audit file", "present", f"ERR {e}")

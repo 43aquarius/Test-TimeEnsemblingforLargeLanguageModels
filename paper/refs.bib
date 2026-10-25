@@ -1,134 +1,162 @@
-@article{wang2023selfconsistency,
+% References for "When Does Test-Time Ensembling Help Large Language Models?"
+% All entries verified against publisher records (ACL Anthology, PMLR, Nature,
+% AAAI, IJCAI, OpenReview, arXiv) in October 2026. Works whose preprint has
+% subsequently appeared in a peer-reviewed venue cite the formal publication;
+% arXiv-only works are cited as preprints with their arXiv identifiers.
+
+@inproceedings{wang2023selfconsistency,
   author = {Wang, Xuezhi and Wei, Jason and Schuurmans, Dale and Le, Quoc and Chi, Ed and Narang, Sharan and Chowdhery, Aakanksha and Zhou, Denny},
   title = {Self-Consistency Improves Chain of Thought Reasoning in Language Models},
-  journal = {International Conference on Learning Representations (ICLR)},
+  booktitle = {International Conference on Learning Representations (ICLR)},
   year = {2023}
 }
+
 @article{farquhar2024detecting,
   author = {Farquhar, Sebastian and Kossen, Jannik and Kuhn, Lore and Gal, Yarin},
   title = {Detecting hallucinations in large language models using semantic entropy},
   journal = {Nature},
   volume = {630},
   pages = {625--630},
-  year = {2024}
+  year = {2024},
+  doi = {10.1038/s41586-024-07421-0}
 }
+
 @article{arora2023ask,
   author = {Arora, Simran and Narayan, Avanika and Chen, Mayee F. and Orr, Laurel and Guha, Neel and Bhatia, Kush and Li, Zhiyuan and Guha, Atri and Lam, Michael and R{\'e}, Christopher and others},
   title = {Ask Me Anything: A simple strategy for prompting language models},
-  journal = {arXiv preprint arXiv:2210.03650},
-  year = {2023}
+  journal = {arXiv preprint arXiv:2210.02441},
+  year = {2022}
 }
+
 @article{mizrahi2024state,
   author = {Mizrahi, Moran and Kaplan, Guy and Malkin, Dan and Dror, Rotem and Shahaf, Dafna and Stanovsky, Gabriel},
-  title = {State of What Art? A Call for Multi-Prompt LLM Evaluation},
+  title = {State of What Art? A Call for Multi-Prompt {LLM} Evaluation},
   journal = {Transactions of the Association for Computational Linguistics},
   volume = {12},
   pages = {933--949},
-  year = {2024}
+  year = {2024},
+  doi = {10.1162/tacl_a_00681}
 }
+
 @inproceedings{kuhn2023semantic,
   author = {Kuhn, Lorenz and Gal, Yarin and Farquhar, Sebastian},
   title = {Semantic Uncertainty: Linguistic Invariances for Uncertainty Estimation in Natural Language Generation},
   booktitle = {International Conference on Learning Representations (ICLR)},
   year = {2023}
 }
+
 @inproceedings{lin2022truthfulqa,
   author = {Lin, Stephanie and Hilton, Jacob and Evans, Owen},
   title = {TruthfulQA: Measuring How Models Mimic Human Falsehoods},
   booktitle = {Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics},
   pages = {3214--3252},
-  year = {2022}
+  year = {2022},
+  doi = {10.18653/v1/2022.acl-long.229}
 }
+
 @article{cobbe2021training,
   author = {Cobbe, Karl and Kosaraju, Vineet and Bavarian, Mohammad and Chen, Mark and Jun, Heewoo and Kaiser, Lukasz and Plappert, Matthias and Tworek, Jerry and Hilton, Jacob and Nakano, Reiichiro and Hesse, Christopher and Schulman, John},
   title = {Training Verifiers to Solve Math Word Problems},
   journal = {arXiv preprint arXiv:2110.14168},
   year = {2021}
 }
+
 @inproceedings{bisk2020piqa,
-  author = {Bisk, Yonatan and Zellers, Rowan and Gao, Jianfeng and Choi, Yejin and others},
-  title = {PIQA: Reasoning about Physical Intentionality by Question Answering},
-  booktitle = {Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics},
-  pages = {7273--7287},
-  year = {2020}
+  author = {Bisk, Yonatan and Zellers, Rowan and Le Bras, Ronan and Gao, Jianfeng and Choi, Yejin},
+  title = {{PIQA}: Reasoning about Physical Commonsense in Natural Language},
+  booktitle = {Proceedings of the Thirty-Fourth AAAI Conference on Artificial Intelligence},
+  pages = {7432--7439},
+  year = {2020},
+  doi = {10.1609/aaai.v34i05.6239}
 }
+
 @inproceedings{liu2020logiqa,
   author = {Liu, Jian and Cui, Leyang and Liu, Hanmeng and Huang, Dandan and Wang, Yile and Zhang, Yue},
   title = {LogiQA: A Challenge Dataset for Machine Reading Comprehension with Logical Reasoning},
   booktitle = {Proceedings of the Twenty-Ninth International Joint Conference on Artificial Intelligence (IJCAI)},
   pages = {3622--3628},
-  year = {2020}
+  year = {2020},
+  doi = {10.24963/ijcai.2020/501}
 }
-@article{zhong2023agieval,
-  author = {Zhong, Wanjun and Guo, Ruixiang and Cao, Qihao and Wang, Jiaheng and Qin, Lin and Li, Junzhao and Wang, Jianheng and Li, Guanheng and Sun, Weihua and others},
-  title = {AGIEval: A Human-Centric Benchmark for Evaluating Foundation Models},
-  journal = {arXiv preprint arXiv:2304.06364},
-  year = {2023}
+
+@inproceedings{zhong2023agieval,
+  author = {Zhong, Wanjun and Cui, Ruixiang and Guo, Yiduo and Liang, Yaobo and Lu, Shuai and Wang, Yanlin and Saied, Amin and Chen, Weizhu and Duan, Nan},
+  title = {{AGIEval}: A Human-Centric Benchmark for Evaluating Foundation Models},
+  booktitle = {Findings of the Association for Computational Linguistics: NAACL 2024},
+  pages = {2299--2314},
+  year = {2024},
+  doi = {10.18653/v1/2024.findings-naacl.149}
 }
-@article{snell2024scaling,
+
+@inproceedings{snell2024scaling,
   author = {Snell, Charlie and Lee, Jaehoon and Xu, Kelvin and Kumar, Aviral},
-  title = {Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters},
-  journal = {arXiv preprint arXiv:2408.03314},
-  year = {2024}
+  title = {Scaling {LLM} Test-Time Compute Optimally Can be More Effective than Scaling Parameters for Reasoning},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year = {2025}
 }
+
 @inproceedings{xiong2024can,
   author = {Xiong, Miao and Hu, Zhiyuan and Lu, Xinyang and Li, Yifei and Fu, Jie and He, Junxian and Hooi, Bryan},
-  title = {Can LLMs Express Their Uncertainty? An Empirical Evaluation of Confidence Elicitation in LLMs},
+  title = {Can {LLMs} Express Their Uncertainty? An Empirical Evaluation of Confidence Elicitation in {LLMs}},
   booktitle = {International Conference on Learning Representations (ICLR)},
   year = {2024}
 }
-@article{lin2024uncertainty,
-  author = {Lin, Zhen and Shang, Yuhan and Sahoo, Shubhobrata and Karmakar, Dhrubajyoti and Chen, Junxian and Zhang, Pengyu and Nag Chowdhury, Tanya and Jiang, Xiangran and Xu, Hui and Ziems, Caleb and others},
-  title = {Uncertainty in Language Models: Assessment, Benchmarks, and Mitigation},
-  journal = {arXiv preprint arXiv:2407.03682},
-  year = {2024}
+
+@article{liu2025uqsurvey,
+  author = {Liu, Xiaoou and Chen, Tiejin and Da, Longchao and Chen, Chacha and Lin, Zhen and Wei, Hua},
+  title = {Uncertainty Quantification and Confidence Calibration in Large Language Models: A Survey},
+  journal = {arXiv preprint arXiv:2503.15850},
+  year = {2025}
 }
+
 @inproceedings{sclar2024quantifying,
   author = {Sclar, Melanie and Choi, Yejin and Tsvetkov, Yulia and Suhr, Alane},
   title = {Quantifying Language Models' Sensitivity to Spurious Features in Prompt Design, or: How I learned to start worrying about prompt formatting},
   booktitle = {International Conference on Learning Representations (ICLR)},
   year = {2024}
 }
+
 @inproceedings{leidinger2023language,
   author = {Leidinger, Alina and van Rooij, Robert and Shutova, Ekaterina},
   title = {The language of prompting: What linguistic properties make a prompt successful?},
   booktitle = {Findings of the Association for Computational Linguistics: EMNLP 2023},
-  pages = {9049--9066},
-  year = {2023}
+  pages = {9210--9232},
+  year = {2023},
+  doi = {10.18653/v1/2023.findings-emnlp.618}
 }
+
 @article{chen2023universal,
   author = {Chen, Xinyun and Aksitov, Renat and Alon, Uri and Ren, Jie and Xiao, Kefan and Yin, Pengcheng and Prakash, Sushant and Sutton, Charles and Wang, Xuezhi and Zhou, Denny},
   title = {Universal Self-Consistency for Large Language Model Generation},
   journal = {arXiv preprint arXiv:2311.17311},
   year = {2023}
 }
+
 @inproceedings{aggarwal2023lets,
   author = {Aggarwal, Pranjal and Madaan, Aman and Yang, Yiming and Mausam},
   title = {Let's Sample Step by Step: Adaptive-Consistency for Efficient Reasoning and Coding with {LLMs}},
   booktitle = {Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing},
   pages = {12375--12396},
-  year = {2023}
+  year = {2023},
+  doi = {10.18653/v1/2023.emnlp-main.761}
 }
-@article{zheng2024judging,
-  author = {Zheng, Lianmin and Chiang, Wei-Lin and Sheng, Ying and Zhuang, Siyuan and Wu, Zhanghao and Zhuang, Yonghao and Lin, Zi and Li, Zhuohan and Li, Dacheng and Xing, Eric and Zhang, Hao and Gonzalez, Joseph E. and Stoica, Ion},
-  title = {Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena},
-  journal = {Advances in Neural Information Processing Systems},
-  volume = {37},
-  year = {2024}
-}
+
 @article{kadavath2022language,
   author = {Kadavath, Saurav and Conerly, Tom and Askell, Amanda and Henighan, Tom and Drain, Dawn and Perez, Ethan and Schiefer, Nicholas and Hatfield-Dodds, Zac and DasSarma, Nova and Tran-Johnson, Eli and others},
   title = {Language Models (Mostly) Know What They Know},
   journal = {arXiv preprint arXiv:2207.05221},
   year = {2022}
 }
+
 @inproceedings{tian2023just,
   author = {Tian, Katherine and Mitchell, Eric and Zhou, Allan and Sharma, Archit and Rafailov, Rafael and Yao, Huaxiu and Finn, Chelsea and Manning, Christopher D.},
   title = {Just Ask for Calibration: Strategies for Eliciting Calibrated Confidence Scores from Language Models Fine-Tuned with Human Feedback},
   booktitle = {Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing},
   pages = {5433--5442},
-  year = {2023}
+  year = {2023},
+  doi = {10.18653/v1/2023.emnlp-main.330}
 }
+
 @inproceedings{guo2017calibration,
   author = {Guo, Chuan and Pleiss, Geoff and Sun, Yu and Weinberger, Kilian Q.},
   title = {On Calibration of Modern Neural Networks},
@@ -136,42 +164,52 @@
   pages = {1321--1330},
   year = {2017}
 }
+
 @article{lanham2023measuring,
   author = {Lanham, Tamera and Chen, Anna and Radhakrishnan, Ansh and Steiner, Benoit and Denison, Carson and Hernandez, Danny and Li, Dustin and Durmus, Esin and Hubinger, Evan and Kernion, Jackson and others},
   title = {Measuring Faithfulness in Chain-of-Thought Reasoning},
   journal = {arXiv preprint arXiv:2307.13702},
   year = {2023}
 }
-@article{du2023improving,
+
+@inproceedings{du2023improving,
   author = {Du, Yilun and Li, Shuang and Torralba, Antonio and Tenenbaum, Joshua B. and Mordatch, Igor},
   title = {Improving Factuality and Reasoning in Language Models through Multiagent Debate},
-  journal = {arXiv preprint arXiv:2305.14325},
-  year = {2023}
-}
-@article{smit2024mad,
-  author = {Smit, Yoav and Fine, Shai and Anaby Tsur, Ateret},
-  title = {Should we be going MAD? A Look at Multi-Agent Debate Strategies for LLMs},
-  journal = {arXiv preprint arXiv:2405.04331},
+  booktitle = {Proceedings of the 41st International Conference on Machine Learning},
+  series = {Proceedings of Machine Learning Research},
+  volume = {235},
+  pages = {11733--11763},
   year = {2024}
 }
+
+@article{smit2024mad,
+  author = {Smit, Andries and Duckworth, Paul and Grinsztajn, Nathan and Barrett, Thomas D. and Pretorius, Arnu},
+  title = {Should we be going {MAD}? A Look at Multi-Agent Debate Strategies for {LLMs}},
+  journal = {arXiv preprint arXiv:2311.17371},
+  year = {2023}
+}
+
 @inproceedings{lightman2023lets,
   author = {Lightman, Hunter and Kosaraju, Vineet and Burda, Yura and Edwards, Harri and Baker, Bowen and Lee, Teddy and Leike, Jan and Schulman, John and Sutskever, Ilya and Cobbe, Karl},
   title = {Let's Verify Step by Step},
   booktitle = {International Conference on Learning Representations (ICLR)},
   year = {2024}
 }
+
 @article{openai2023gpt4,
   author = {OpenAI},
   title = {GPT-4 Technical Report},
   journal = {arXiv preprint arXiv:2303.08774},
   year = {2023}
 }
+
 @article{qwen2024qwen,
   author = {Qwen Team},
   title = {Qwen Technical Report},
   journal = {arXiv preprint arXiv:2309.16609},
   year = {2023}
 }
+
 @inproceedings{wei2022chain,
   author = {Wei, Jason and Wang, Xuezhi and Schuurmans, Dale and Bosma, Maarten and Ichter, Brian and Xia, Fei and Chi, Ed and Le, Quoc V. and Zhou, Denny},
   title = {Chain-of-Thought Prompting Elicits Reasoning in Large Language Models},
@@ -180,118 +218,120 @@
   pages = {24824--24837},
   year = {2022}
 }
-@article{holtzman2021surface,
+
+@inproceedings{holtzman2021surface,
   author = {Holtzman, Ari and West, Peter and Shwartz, Vered and Choi, Yejin and Zettlemoyer, Luke},
   title = {Surface Form Competition: Why the Highest Probability Answer Isn't Always Right},
-  journal = {Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing},
+  booktitle = {Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing},
   pages = {7038--7051},
-  year = {2021}
+  year = {2021},
+  doi = {10.18653/v1/2021.emnlp-main.564}
 }
+
 @article{zhu2023promptbench,
-  author = {Zhu, Kaijie and Wang, Jindong and Zhou, Huan and Wang, Zichen and Chen, Hao and Wang, Yidong and Yang, Linyi and Ye, Wei and Zhang, Yue and Gong, Neil Zhenqiang and Xie, Xing},
-  title = {PromptBench: Towards Evaluating the Robustness of Large Language Models on Adversarial Prompts},
+  author = {Zhu, Kaijie and Wang, Jindong and Zhou, Jiaheng and Wang, Zichen and Chen, Hao and Wang, Yidong and Yang, Linyi and Ye, Wei and Zhang, Yue and Gong, Neil Zhenqiang and Xie, Xing},
+  title = {PromptRobust: Towards Evaluating the Robustness of Large Language Models on Adversarial Prompts},
   journal = {arXiv preprint arXiv:2306.04528},
-  year = {2023}
-}
-@article{yang2024chatgpt,
-  author = {Yang, Chengrun and Wang, Xuezhi and Lu, Yifeng and Liu, Hanxiao and Le, Quoc V. and Zhou, Denny and Chen, Xinyun},
-  title = {Asking Before Acting: Gather Information to Align Language Models with Human Preferences},
-  journal = {arXiv preprint arXiv:2311.07849},
   year = {2023}
 }
 
 @article{brown2024large,
-  title={Large Language Monkeys: Scaling Inference Compute with Repeated Sampling},
-  author={Brown, Bradley and Juravsky, Jordan and Ehrlich, Ryan and Clark, Ronald and Le, Quoc V. and R{\'e}, Christopher and Mirhoseini, Azalia},
-  journal={arXiv preprint arXiv:2407.21787},
-  year={2024}
+  title = {Large Language Monkeys: Scaling Inference Compute with Repeated Sampling},
+  author = {Brown, Bradley and Juravsky, Jordan and Ehrlich, Ryan and Clark, Ronald and Le, Quoc V. and R{\'e}, Christopher and Mirhoseini, Azalia},
+  journal = {arXiv preprint arXiv:2407.21787},
+  year = {2024}
 }
 
 @inproceedings{gao2024spuq,
-  title={{SPUQ}: Perturbation-Based Uncertainty Quantification for Large Language Models},
-  author={Gao, Xiang and Zhang, Jiaxin and Mouatadid, Lalla and Das, Kamalika},
-  booktitle={Proceedings of the 18th Conference of the European Chapter of the Association for Computational Linguistics (EACL)},
-  pages={2336--2346},
-  year={2024}
+  title = {{SPUQ}: Perturbation-Based Uncertainty Quantification for Large Language Models},
+  author = {Gao, Xiang and Zhang, Jiaxin and Mouatadid, Lalla and Das, Kamalika},
+  booktitle = {Proceedings of the 18th Conference of the European Chapter of the Association for Computational Linguistics (EACL)},
+  pages = {2336--2346},
+  year = {2024},
+  doi = {10.18653/v1/2024.eacl-long.143}
 }
 
-@article{hou2023decomposing,
-  title={Decomposing Uncertainty for Large Language Models through Input Clarification Ensembling},
-  author={Hou, Bairu and Liu, Yujian and Qian, Kaizhi and Andreas, Jacob and Chang, Shiyu and Zhang, Yang},
-  journal={arXiv preprint arXiv:2311.08718},
-  year={2023}
+@inproceedings{hou2023decomposing,
+  title = {Decomposing Uncertainty for Large Language Models through Input Clarification Ensembling},
+  author = {Hou, Bairu and Liu, Yujian and Qian, Kaizhi and Andreas, Jacob and Chang, Shiyu and Zhang, Yang},
+  booktitle = {Proceedings of the 41st International Conference on Machine Learning},
+  series = {Proceedings of Machine Learning Research},
+  volume = {235},
+  pages = {19023--19042},
+  year = {2024}
 }
 
 @article{pitis2023boosted,
-  title={Boosted Prompt Ensembles for Large Language Models},
-  author={Pitis, Silviu and Zhang, Michael R. and Wang, Andrew and Ba, Jimmy},
-  journal={arXiv preprint arXiv:2304.05970},
-  year={2023}
+  title = {Boosted Prompt Ensembles for Large Language Models},
+  author = {Pitis, Silviu and Zhang, Michael R. and Wang, Andrew and Ba, Jimmy},
+  journal = {arXiv preprint arXiv:2304.05970},
+  year = {2023}
 }
 
 @article{naik2023diversity,
-  title={Diversity of Thought Improves Reasoning Abilities of Large Language Models},
-  author={Naik, Rakesh and Liu, Xiaoxiao and Wadhwa, Sahil and Vempala, Santosh and Galstyan, Aram and Natarajan, Prem and Lerman, Kristina},
-  journal={arXiv preprint arXiv:2310.07088},
-  year={2023}
+  title = {Diversity of Thought Improves Reasoning Abilities of {LLMs}},
+  author = {Naik, Ranjita and Chandrasekaran, Varun and Yuksekgonul, Mert and Palangi, Hamid and Nushi, Besmira},
+  journal = {arXiv preprint arXiv:2310.07088},
+  year = {2023}
 }
 
 @article{yang2025qwen3,
-  title={Qwen3 Technical Report},
-  author={Yang, An and others},
-  journal={arXiv preprint arXiv:2505.09388},
-  year={2025}
+  title = {Qwen3 Technical Report},
+  author = {Yang, An and others},
+  journal = {arXiv preprint arXiv:2505.09388},
+  year = {2025}
 }
 
 @article{comanici2025gemini,
-  title={Gemini 2.5: Pushing the Frontier with Advanced Reasoning, Multimodality, Long Context and Next Generation Agentic Capabilities},
-  author={Comanici, Gheorghe and others},
-  journal={arXiv preprint arXiv:2507.06261},
-  year={2025}
+  title = {Gemini 2.5: Pushing the Frontier with Advanced Reasoning, Multimodality, Long Context and Next Generation Agentic Capabilities},
+  author = {Comanici, Gheorghe and others},
+  journal = {arXiv preprint arXiv:2507.06261},
+  year = {2025}
 }
 
 @techreport{openai2025gpt5,
-  title={GPT-5 System Card},
-  author={{OpenAI}},
-  institution={OpenAI},
-  year={2025},
-  url={https://openai.com/index/gpt-5-system-card}
+  title = {GPT-5 System Card},
+  author = {{OpenAI}},
+  institution = {OpenAI},
+  year = {2025},
+  url = {https://openai.com/index/gpt-5-system-card}
 }
 
 @misc{agnesai2026,
-  title={Agnes AI API Documentation},
-  author={{Agnes AI}},
-  howpublished={\url{https://agnes-ai.com}},
-  note={Accessed October 2026},
-  year={2026}
+  title = {Agnes AI API Documentation},
+  author = {{Agnes AI}},
+  howpublished = {\url{https://agnes-ai.com}},
+  note = {Accessed October 2026},
+  year = {2026}
 }
 
 @book{condorcet1785essai,
-  title={Essai sur l'application de l'analyse \`{a} la probabilit{\'e} des d{\'e}cisions rendues \`{a} la pluralit{\'e} des voix},
-  author={de Caritat, Marie Jean Antoine Nicolas, Marquis de Condorcet},
-  year={1785},
-  publisher={Imprimerie Royale},
-  address={Paris}
+  title = {Essai sur l'application de l'analyse \`{a} la probabilit\'{e} des d\'{e}cisions rendues \`{a} la pluralit\'{e} des voix},
+  author = {de Caritat, Marie Jean Antoine Nicolas, Marquis de Condorcet},
+  year = {1785},
+  publisher = {Imprimerie Royale},
+  address = {Paris}
 }
 
-@article{wang2024mmlupro,
-  title={{MMLU-Pro}: A More Robust and Challenging Multi-Task Language Understanding Benchmark},
-  author={Wang, Yubo and Ma, Zhoutian and Cao, Yuyi and Zeng, Kehai and Wei, Chiyue and Liu, Zirui and Liu, Lechen and Gao, Aixin and Chen, Jiazheng and He, Yuxin and others},
-  journal={arXiv preprint arXiv:2406.01574},
-  year={2024}
+@inproceedings{wang2024mmlupro,
+  title = {{MMLU-Pro}: A More Robust and Challenging Multi-Task Language Understanding Benchmark},
+  author = {Wang, Yubo and Ma, Xueguang and Zhang, Ge and Ni, Yuansheng and Chandra, Abhranil and Guo, Shiguang and Ren, Weiming and Arulraj, Aaran and He, Xuan and Jiang, Ziyan and Li, Tianle and Ku, Max and Wang, Kai and Zhuang, Alex and Fan, Rongqi and Yue, Xiang and Chen, Wenhu},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume = {37},
+  year = {2024}
 }
 
 @inproceedings{li2024escape,
-  title={Escape Sky-high Cost: Early-stopping Self-Consistency for Multi-step Reasoning},
-  author={Li, Yiwei and Yuan, Peiwen and Feng, Shaoxiong and Pan, Boyuan and Wang, Xinglin and Sun, Bin and Wang, Heda and Li, Kan},
-  booktitle={International Conference on Learning Representations (ICLR)},
-  year={2024}
+  title = {Escape Sky-high Cost: Early-stopping Self-Consistency for Multi-step Reasoning},
+  author = {Li, Yiwei and Yuan, Peiwen and Feng, Shaoxiong and Pan, Boyuan and Wang, Xinglin and Sun, Bin and Wang, Heda and Li, Kan},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year = {2024}
 }
 
 @misc{deepseek2026api,
-  title={{DeepSeek API Documentation}},
-  author={{DeepSeek-AI}},
-  howpublished={\url{https://api-docs.deepseek.com}},
-  note={Accessed October 2026 via third-party providers (Aliyun MaaS, Apinex)},
-  year={2026}
+  title = {{DeepSeek API Documentation}},
+  author = {{DeepSeek-AI}},
+  howpublished = {\url{https://api-docs.deepseek.com}},
+  note = {Accessed October 2026 via third-party providers (Aliyun MaaS, Apinex)},
+  year = {2026}
 }

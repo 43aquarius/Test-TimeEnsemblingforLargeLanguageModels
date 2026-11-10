@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Diversity probe: 6x temp-0.7 samples on logiqa/lsat + gsm8k math check."""
 import json, re, sys, time
+import os
 sys.path.insert(0, "/home/z/my-project/scripts")
 from collections import Counter
 
@@ -14,7 +15,9 @@ INSTR = {**_orig["instructions"], **INSTR}
 
 import urllib.request
 BASE = "https://api.apinex.bond/v1"
-KEY = "sk-apxe8e3bc610bd556066ca665074a4ba0c722a9cce84fbe1cf"
+KEY = os.environ.get("APINEX_API_KEY", "sk-YOUR-KEY-HERE")
+# The previously hard-coded key was redacted (leaked in public history;
+# it must be revoked at the provider regardless of this redaction).
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
 
 def build_prompt(q, para_idx):

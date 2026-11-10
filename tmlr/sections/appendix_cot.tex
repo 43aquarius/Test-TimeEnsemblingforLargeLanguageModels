@@ -1,0 +1,16 @@
+\section{Answering mode: direct answer versus chain of thought}
+\setcounter{table}{0}
+\label{app:cot}
+\label{sec:cot}
+
+The main suite answers multiple-choice questions directly, while self-consistency was originally motivated for chain-of-thought reasoning. The CoT condition therefore repeats the greedy baseline, the six-sample self-consistency, and, for stem-locus questions, the paraphrase ensemble under an explicit step-by-step instruction. Table~\ref{tab:cot} reports the condition against the direct-answering cells on the same questions.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Chain-of-thought condition on multiple-choice questions: accuracy under greedy, SC-6, and PE-6 with CoT against the same conditions under direct answering on identical questions (Grd$_{dir}$, SC$_{dir}$, PE$_{dir}$), with mean answer entropy under both modes.}
+\label{tab:cot}
+\input{tables/tab_cot}
+\end{table}
+
+Chain-of-thought answering raises accuracy where it completes, but it does not dissolve the regime structure. For the flagship subset, CoT lifts Qwen3.8-Max from 88.9\% to 100\% on its nine completed questions while leaving the answer distribution fully degenerate: entropy stays at zero and all six samples agree on every question, so self-consistency remains vacuous. For the mid-tier models, CoT preserves or slightly enlarges diversity: Agnes2.5-Flash holds self-consistency at 93.9\% in both modes on its 33 questions while greedy dips from 90.9\% to 87.9\% and entropy rises from 0.03 to 0.10, Agnes3.0-Flash gains from 83.3\% to 100\% under greedy on its 12 completed questions while remaining largely degenerate, and GPT-6-Luna's self-consistency improves from 76.9\% to 100\% on its 13 completed questions with its paraphrase ensemble at 100\% in both modes. The pattern that survives the mode change is the important one: aggregation gains track the entropy regime in both modes, the degenerate stratum stays degenerate under CoT for the flagship, and the paraphrase side continues to carry signal only where entropy exists. Absolute accuracies are not comparable across modes, the CoT subsets are small, and the slow long-form generations bounded coverage for the rate-limited models, so we read this condition as a robustness check on the regime structure rather than as a mode comparison.

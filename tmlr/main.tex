@@ -1,0 +1,85 @@
+% TMLR submission version (double-blind).
+% Style: official TMLR style files (JmlrOrg/tmlr-style-file, main branch).
+% \usepackage{tmlr} with no option = anonymous submission mode:
+% header "Under review as submission to TMLR", author block replaced by
+% "Anonymous authors". De-anonymize after acceptance with \usepackage[accepted]{tmlr}.
+\documentclass[10pt]{article}
+\usepackage{tmlr}
+% \usepackage[accepted]{tmlr}   % camera-ready (after acceptance)
+% \usepackage[preprint]{tmlr}   % preprint / arXiv version
+
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,bookmarks=true]{hyperref}
+
+% ---------------------------------------------------------------
+% Placeholders that the author must fill before submission.
+% ---------------------------------------------------------------
+% [TOOLS]  = names of the generative AI writing tools used (be honest).
+% [PURPOSE] = what they were used for (e.g. language editing).
+% [CHECK: ...] = bibliographic or factual details to verify against the
+%                provider's official documentation before submission.
+
+\newcommand{\TODO}[1]{\textcolor{red}{[TODO: #1]}}
+\newcommand{\UNVERIFIED}[1]{\textcolor{red}{[UNVERIFIED: #1]}}
+\newcommand{\CHECK}[1]{\textcolor{red}{[CHECK: #1]}}
+
+% Appendix table numbering per-section (A.1, B.1, ...) for multi-part appendix
+\newcommand{\appendixtablecounters}{}
+
+\title{When Does Test-Time Ensembling Help Large Language Models? A Budget-Matched Study of Answer-Space and Prompt-Space Diversity}
+
+% Authors are suppressed by tmlr.sty in submission mode. Fill in only for
+% the accepted/preprint variants.
+\author{
+%  \name Anonymous Author(s) \\
+%  \addr Institution
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\noindent
+Test-time ensembling draws diversity from two sources: resampling the stochastic decoder on a fixed prompt, or aggregating semantically equivalent paraphrases, each call decoded stochastically. We compare the two under matched call budgets. A development suite (90 questions, six systems) fixed the conditions; the primary evidence is a held-out suite of 119 fresh questions fully covered by four models from two families (476 model--question pairs). Against the single-sample expectation S1, both six-vote ensembles improve out of sample: self-consistency by $+2.4$ points (95\% cluster-bootstrap interval $+1.1$ to $+3.7$), the paraphrase ensemble by $+4.9$ ($+2.3$ to $+7.6$), and the twelve-vote combination by $+4.1$; the two sources remain statistically inseparable ($+2.5$, interval touching zero), and $+1.9$ of the paraphrase headline is a single-call difficulty offset, leaving $+3.0$ of within-condition aggregation against $+2.4$ for resampling. The margin is conditional: it concentrates on quantitative tasks, where the canonical directive under-elicits --- the best single instruction variant, selected post hoc, already reaches $95.0\%$ pooled single-call accuracy against $91.2\%$ for the six-variant ensemble --- it reverses where paraphrases shift verbal-reasoning stems, and the allocation that realizes it is model-dependent. Every paraphrase vote mixes prompt variation with decoding noise and no greedy-paraphrase control exists out of sample, so these margins characterize paraphrase ensembles (with sampling noise), not pure prompt-space effects. Greedy divergence from S1 is endpoint-specific; on saturated benchmarks, answer distributions collapse and agreement-based uncertainty estimates lose their signal. We recommend reporting S1 alongside greedy scores; an adaptive probe-and-route rule saves 13--21 percent of the six-call budget at equal or slightly lower accuracy on the held-out suite.
+\end{abstract}
+
+\input{sections/introduction}
+\input{sections/related}
+\input{sections/method}
+\input{sections/setup}
+\input{sections/heldout}
+\input{sections/discussion}
+\input{sections/conclusion}
+
+% Non-anonymized Elsevier declarations are replaced by the two statements
+% below. Neither contains identity information.
+\section*{Reproducibility Statement}
+All prompts, validated paraphrases with per-item validation verdicts, per-call raw predictions (with timestamps and token usage), analysis outputs, and the scripts that recompute every table and statistic directly from the raw call logs are released in an anonymous repository that accompanies this submission\TODO{insert anonymous repository link, e.g.\ an OpenReview supplementary zip or an anonymous GitHub link; add the DOI archive after acceptance}. Every number in the paper can be re-derived from the per-call logs by a single deterministic script included with the submission.
+
+\section*{Declaration on the Use of Generative AI}
+During the preparation of this work the author used generative AI writing assistants\TODO{fill [TOOLS]: name the tools actually used} for \TODO{fill [PURPOSE]: state the actual purpose, e.g.\ language editing and code review}. After using these tools, the author reviewed and edited the content as needed and takes full responsibility for the content of the submission. No experimental number in this paper was generated by an AI tool: all statistics are computed by the released scripts from the recorded model calls.
+
+\appendix
+% appendix tables numbered per-section (A.1, B.1, ...), matching the paper's
+% convention; each appendix section resets its table counter. TheH* variants
+% keep hyperref anchors unique across the reset counters.
+\renewcommand{\thetable}{\Alph{section}.\arabic{table}}
+\renewcommand{\theHtable}{\Alph{section}.\arabic{table}}
+\renewcommand{\theHfigure}{\Alph{section}.\arabic{figure}}
+\input{sections/appendix_dev}   % A: development-suite details
+\input{sections/appendix_greedypara}  % B
+\input{sections/appendix_mmlupro}     % C
+\input{sections/appendix_cot}         % D
+\input{sections/appendix_claims}      % E: claim-evidence map, equivalence-check plan
+
+\bibliographystyle{tmlr}
+\bibliography{refs}
+
+\end{document}

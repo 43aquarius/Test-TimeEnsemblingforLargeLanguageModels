@@ -1,0 +1,16 @@
+\section{Greedy paraphrases: isolating the prompt-space effect}
+\setcounter{table}{0}
+\label{app:greedypara}
+\label{sec:greedypara}
+
+The standard paraphrase ensemble decodes each paraphrase once at $\tau = 0.7$, so its diversity mixes prompt-space variation with decoding stochasticity. The greedy-paraphrase control removes the second component by decoding each paraphrase at $\tau = 0$, yielding the noise-free ensemble $\mathrm{PE}^{g}\text{-}6$ and a fragility indicator in which neither side involves sampling. Table~\ref{tab:greedypara} reports the control for the five models whose provider quota allowed it. The control is a development-suite condition: it was not re-collected on the held-out suite, so the held-out paraphrase margins of Section~\ref{sec:expand} retain the mixing that this control removes. Where the control exists, the mixing is small for exactly the family that carries the held-out prompt-space margins --- the two Agnes models show $\mathrm{PE}^{g}$-6 versus PE-6 modal-answer agreement on 31 of 32 and 38 of 39 questions --- while the two DeepSeek endpoints, whose held-out significant conditions are the mixed and combined allocations rather than pure PE-6, have no such measurement, and their prompt-space margins are read with that caveat.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Greedy-paraphrase control. Accuracy (\%) of the greedy baseline, SC-6, PE-6, and the greedy-decoded paraphrase ensemble PE$^{g}$-6; Frag.$^{g}$ is the fraction of questions where SC-6 and PE$^{g}$-6 disagree (no decoding noise on the paraphrase side); Degen.$^{g}$ is the fraction of questions where all six greedy paraphrase answers coincide.}
+\label{tab:greedypara}
+\input{tables/tab_greedypara}
+\end{table}
+
+The control separates three effects. First, for the flagship, degeneracy is not a temperature artifact: 98.9\% of Qwen3.8-Max's questions return six identical answers even under greedy decoding of six different paraphrases, and the greedy paraphrase ensemble returns the same answer as the sampled paraphrase ensemble on 88 of 88 questions. The collapse is a property of the model-task pair, not of the sampling distribution around it. Second, for the mid-tier models, the prompt-space effect carries the paraphrase ensemble almost entirely: the PE$^{g}$-6 and PE-6 modal answers coincide on 31 of 32 questions for Agnes3.0-Flash and 38 of 39 for Agnes2.5-Flash, so the stochastic component of PE contributes almost nothing beyond the paraphrases themselves in these cells. Third, for the prompt-brittle models, decoding noise and prompt variation interact: GPT-6-Luna's greedy paraphrase ensemble reaches 80.0\% against 86.7\% for the sampled version with modal-answer agreement on only 11 of 15 questions, and Gemini3.8-Flash 83.3\% against 91.7\% with agreement on 10 of 12, so for the most fragile models the sampled paraphrase ensemble retains a two-to-eight point edge over its noise-free counterpart, and the two ensembles disagree on a quarter of the questions. Fragility itself survives the control in strengthened form: GPT-6-Luna flips on 40.0\% of questions and Gemini3.8-Flash on 25.0\% when both sides are decoded greedily, which rules out sampling noise as the cause of paraphrase-induced flips and locates the instability in the model's response to the prompt's surface form.

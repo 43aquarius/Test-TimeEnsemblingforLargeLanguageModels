@@ -1,0 +1,68 @@
+{
+ "task": "pre-registration of the best SAT-Math instruction variant",
+ "rule": "argmax pooled single-call accuracy over development-suite SAT-Math items; ties broken by lower cross-model spread, then smaller index",
+ "selected_variant": "P1",
+ "wording": "Give only the letter of the right answer, formatted as \"Answer: <letter>\". No explanation.",
+ "canonical_wording": "Do not explain your reasoning. Reply with only the letter of the correct option, in the form \"Answer: <letter>\".",
+ "development_scores_by_variant": {
+  "P0": 0.9056,
+  "P1": 0.8985,
+  "P2": 0.8985,
+  "P3": 0.5955,
+  "P4": 0.5455,
+  "P5": 0.7803,
+  "P6": 0.764
+ },
+ "per_model": {
+  "qwen3.8-max": {
+   "n_items": 15,
+   "scores": {
+    "P0": 1.0,
+    "P1": 1.0,
+    "P2": 1.0,
+    "P3": 1.0,
+    "P4": 1.0,
+    "P5": 1.0,
+    "P6": 1.0
+   }
+  },
+  "qwen3.8-omni": {
+   "n_items": 15,
+   "scores": {
+    "P0": 0.8333,
+    "P1": 0.8667,
+    "P2": 0.8667,
+    "P3": 0.2,
+    "P4": 0.0,
+    "P5": 0.6667,
+    "P6": 0.8667
+   }
+  },
+  "agnes-3.0-flash": {
+   "n_items": 11,
+   "scores": {
+    "P0": 0.803,
+    "P1": 0.7273,
+    "P2": 0.7273,
+    "P3": 0.1818,
+    "P4": 0.1818,
+    "P5": 0.4545,
+    "P6": 0.2727
+   }
+  },
+  "agnes-2.5-flash": {
+   "n_items": 12,
+   "scores": {
+    "P0": 0.9861,
+    "P1": 1.0,
+    "P2": 1.0,
+    "P3": 1.0,
+    "P4": 1.0,
+    "P5": 1.0,
+    "P6": 0.9167
+   }
+  }
+ },
+ "date": "2026-11-10",
+ "sha256": "783c7c575e8c108fab6672be36636a83f2aaefd0fbb7c50804c8c46de8c80294"
+}

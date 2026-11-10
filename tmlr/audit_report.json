@@ -1,0 +1,2131 @@
+{
+ "summary": {
+  "match": 102,
+  "mismatch": 0,
+  "unverifiable": 0
+ },
+ "claims": [
+  {
+   "loc": "Abstract",
+   "desc": "SC-6 pooled gain over S1 (+2.4)",
+   "paper": 2.4,
+   "computed": 2.4,
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "Abstract",
+   "desc": "PE-6 pooled gain over S1 (+4.9)",
+   "paper": 4.9,
+   "computed": 4.9,
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "Abstract",
+   "desc": "COMB-12 pooled gain over S1 (+4.1)",
+   "paper": 4.1,
+   "computed": 4.1,
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "Abstract",
+   "desc": "SC-6 CI (+1.1, +3.7)",
+   "paper": [
+    1.1,
+    3.7
+   ],
+   "computed": [
+    1.1,
+    3.7
+   ],
+   "tol": null,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "Abstract",
+   "desc": "PE-6 CI (+2.3, +7.6)",
+   "paper": [
+    2.3,
+    7.6
+   ],
+   "computed": [
+    2.4,
+    7.6
+   ],
+   "tol": null,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "Abstract",
+   "desc": "PE-SC gap (+2.5, interval touching zero)",
+   "paper": 2.5,
+   "computed": 2.5,
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "Abstract",
+   "desc": "PE-SC CI (-0.6, +5.7)",
+   "paper": [
+    -0.6,
+    5.7
+   ],
+   "computed": [
+    -0.6,
+    5.7
+   ],
+   "tol": null,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "Abstract",
+   "desc": "difficulty offset (+1.9)",
+   "paper": 1.9,
+   "computed": 1.9,
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "Abstract",
+   "desc": "within-condition aggregation +3.0 vs +2.4",
+   "paper": [
+    3.0,
+    2.4
+   ],
+   "computed": [
+    3.0,
+    2.4
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "Abstract",
+   "desc": "held-out 119 questions / 476 pairs",
+   "paper": [
+    119,
+    476
+   ],
+   "computed": [
+    119,
+    476
+   ],
+   "tol": null,
+   "kind": "count",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "Abstract",
+   "desc": "best instruction variant 95.0% vs PE-6 91.2% (SAT-Math pooled)",
+   "paper": [
+    95.0,
+    91.2
+   ],
+   "computed": [
+    95.0,
+    91.2
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "Abstract",
+   "desc": "adaptive rule saves 13-21% of the six-call budget (uses 79-87%)",
+   "paper": [
+    13,
+    21
+   ],
+   "computed": [
+    13,
+    21
+   ],
+   "tol": 1.1,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "Intro",
+   "desc": "pooled +2.4 / +4.9 with CIs excluding zero (same as abstract)",
+   "paper": null,
+   "computed": 0.0,
+   "tol": null,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "Intro",
+   "desc": "dev coverage 12 to 90; held-out four fully covered models",
+   "paper": [
+    12,
+    90
+   ],
+   "computed": [
+    12,
+    90
+   ],
+   "tol": null,
+   "kind": "count",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.1",
+   "desc": "Agnes3.0: PE-6 87.4 / S1 79.6 / +7.8",
+   "paper": [
+    87.4,
+    79.6,
+    7.8
+   ],
+   "computed": [
+    87.4,
+    79.6,
+    7.8
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.1",
+   "desc": "Agnes3.0: PE-6 CI (+2.4, +13.7)",
+   "paper": [
+    2.4,
+    13.7
+   ],
+   "computed": [
+    2.4,
+    13.6
+   ],
+   "tol": null,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.1",
+   "desc": "Agnes3.0: SC-6 +2.0 CI (-1.0, +5.0); COMB 82.4",
+   "paper": [
+    2.0,
+    -1.0,
+    5.0,
+    82.4
+   ],
+   "computed": [
+    2.0,
+    -1.0,
+    4.9,
+    82.4
+   ],
+   "tol": 0.36,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.1",
+   "desc": "Agnes2.5: PE-6 91.6 / S1 88.1 / +3.5 CI (+0.4,+7.0); SC-6 90.8 / +2.7 CI (+0.7,+4.9); COMB 89.9",
+   "paper": [
+    91.6,
+    88.1,
+    3.5,
+    0.4,
+    7.0,
+    90.8,
+    2.7,
+    0.7,
+    4.9,
+    89.9
+   ],
+   "computed": [
+    91.6,
+    88.1,
+    3.5,
+    0.3,
+    6.9,
+    90.8,
+    2.7,
+    0.7,
+    4.9,
+    89.9
+   ],
+   "tol": 0.36,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.1",
+   "desc": "DSV4.1: PE-6 81.5 / S1 77.6 / +3.9 CI (-0.8,+8.7); SC-6 79.8 / +2.2 CI (-0.4,+4.9); HB=COMB 83.2 / +5.6 CIs (+1.5,+9.8)/(+1.7,+9.7)",
+   "paper": [
+    81.5,
+    77.6,
+    3.9,
+    -0.8,
+    8.7,
+    79.8,
+    2.2,
+    -0.4,
+    4.9,
+    83.2,
+    5.6,
+    1.5,
+    9.8,
+    1.7,
+    9.7
+   ],
+   "computed": [
+    81.5,
+    77.6,
+    3.9,
+    -0.7,
+    8.8,
+    79.8,
+    2.2,
+    -0.6,
+    5.0,
+    83.2,
+    5.6,
+    1.5,
+    9.8,
+    1.8,
+    9.7
+   ],
+   "tol": 0.36,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.1",
+   "desc": "Pro tier: COMB 84.0 / +6.0 CI (+2.1,+10.2); SC-6 80.7 / +2.7 CI (+0.1,+5.5); PE=HB 82.4 / +4.3 CIs (-0.7,+9.4)/(-0.4,+9.1)",
+   "paper": [
+    84.0,
+    6.0,
+    2.1,
+    10.2,
+    80.7,
+    2.7,
+    0.1,
+    5.5,
+    82.4,
+    4.3,
+    -0.7,
+    9.4,
+    -0.4,
+    9.1
+   ],
+   "computed": [
+    84.0,
+    6.0,
+    2.1,
+    10.2,
+    80.7,
+    2.7,
+    0.1,
+    5.3,
+    82.4,
+    4.3,
+    -0.8,
+    9.5,
+    -0.4,
+    9.2
+   ],
+   "tol": 0.36,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.1",
+   "desc": "Holm-adjusted p: SC-S1 0.0008",
+   "paper": "0.0008",
+   "computed": 0.0,
+   "tol": null,
+   "kind": "pval",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.1",
+   "desc": "Holm-adjusted p: PE-S1 <0.0001",
+   "paper": "<0.0001",
+   "computed": 0.0,
+   "tol": null,
+   "kind": "pval",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.1",
+   "desc": "Holm-adjusted p: COMB-S1 <0.0001",
+   "paper": "<0.0001",
+   "computed": 0.0,
+   "tol": null,
+   "kind": "pval",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.1",
+   "desc": "Holm-adjusted p: PE-SC 0.14",
+   "paper": "0.14",
+   "computed": 0.13,
+   "tol": 0.02,
+   "kind": "pval",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.1",
+   "desc": "PE-HB +1.3 CI (-0.4,+2.9); COMB-PE -0.8 CI (-2.9,+1.3)",
+   "paper": [
+    1.3,
+    -0.4,
+    2.9,
+    -0.8,
+    -2.9,
+    1.3
+   ],
+   "computed": [
+    1.3,
+    -0.2,
+    2.9,
+    -0.8,
+    -2.9,
+    1.3
+   ],
+   "tol": 0.36,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.1",
+   "desc": "Qwen3.7-Flash partial: 82% unanimous; within 1.1 of S1; replays match SC-6 85.0",
+   "paper": [
+    82,
+    1.1,
+    85.0
+   ],
+   "computed": [
+    82,
+    1.1,
+    85.0
+   ],
+   "tol": 0.6,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.2",
+   "desc": "pooled PE-1 82.7 / PE-6 85.7 / S1 80.8 / SC-6 83.2",
+   "paper": [
+    82.7,
+    85.7,
+    80.8,
+    83.2
+   ],
+   "computed": [
+    82.7,
+    85.7,
+    80.8,
+    83.2
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.2",
+   "desc": "Agnes3.0: PE-1 81.2 / S1 79.6 / dPE +6.2 / dSC +2.0",
+   "paper": [
+    81.2,
+    79.6,
+    6.2,
+    2.0
+   ],
+   "computed": [
+    81.2,
+    79.6,
+    6.2,
+    2.0
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.2",
+   "desc": "Agnes2.5: PE-1 89.2 / S1 88.1 / dPE +2.4 / dSC +2.7",
+   "paper": [
+    89.2,
+    88.1,
+    2.4,
+    2.7
+   ],
+   "computed": [
+    89.2,
+    88.1,
+    2.4,
+    2.7
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.2",
+   "desc": "DSV4.1: PE-1 79.1 / S1 77.6 / dPE +2.4 / dSC +2.2",
+   "paper": [
+    79.1,
+    77.6,
+    2.4,
+    2.2
+   ],
+   "computed": [
+    79.1,
+    77.6,
+    2.4,
+    2.2
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.2",
+   "desc": "Pro: PE-1 81.1 / S1 78.0 / dSC +2.7 vs dPE +1.3",
+   "paper": [
+    81.1,
+    78.0,
+    2.7,
+    1.3
+   ],
+   "computed": [
+    81.1,
+    78.0,
+    2.7,
+    1.3
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.2",
+   "desc": "union Agnes3.0: n=152, PE-6 +6.5 CI (+2.2,+11.1); SC-6 +1.9 CI (-0.7,+4.4)",
+   "paper": [
+    152,
+    6.5,
+    2.2,
+    11.1,
+    1.9,
+    -0.7,
+    4.4
+   ],
+   "computed": [
+    152,
+    6.5,
+    2.1,
+    11.1,
+    1.9,
+    -0.5,
+    4.4
+   ],
+   "tol": 0.36,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.2",
+   "desc": "union Agnes2.5: n=159, +2.2 both; SC-6 CI (+0.6,+3.9), PE-6 CI (-0.4,+4.9)",
+   "paper": [
+    159,
+    2.2,
+    2.2,
+    0.6,
+    3.9,
+    -0.4,
+    4.9
+   ],
+   "computed": [
+    159,
+    2.2,
+    2.2,
+    0.6,
+    3.9,
+    -0.3,
+    4.8
+   ],
+   "tol": 0.36,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.2",
+   "desc": "Agnes2.5 PE-6 minus S1: dev -1.7 (40q) / held-out +3.5 / union +2.2",
+   "paper": [
+    -1.7,
+    3.5,
+    2.2
+   ],
+   "computed": [
+    -1.7,
+    3.5,
+    2.2
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.3",
+   "desc": "Agnes3.0 SAT-Math: S1 61.7 / SC-6 60.0 (dSC -1.7) / PE-6 100.0 (dPE +17.5); 8 flips all won by PE",
+   "paper": [
+    61.7,
+    60.0,
+    -1.7,
+    100.0,
+    17.5,
+    8
+   ],
+   "computed": [
+    61.7,
+    60.0,
+    -1.7,
+    100.0,
+    17.5,
+    null
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.3",
+   "desc": "Agnes3.0 SAT-Math: PE-1 82.5 (+20.8 over S1)",
+   "paper": [
+    82.5,
+    20.8
+   ],
+   "computed": [
+    82.5,
+    20.8
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.3",
+   "desc": "SAT-Math instruction: canonical 76.2 -> best 95.0; PE-6 91.2 (~80%)",
+   "paper": [
+    76.2,
+    95.0,
+    91.2
+   ],
+   "computed": [
+    76.2,
+    95.0,
+    91.2
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.3",
+   "desc": "SAT-Math per-model canonical->best: Agnes3.0 61.7->100.0; DSV4.1 75.8->90.0; pro 69.2->90.0",
+   "paper": [
+    61.7,
+    100.0,
+    75.8,
+    90.0,
+    69.2,
+    90.0
+   ],
+   "computed": [
+    61.7,
+    100.0,
+    75.8,
+    90.0,
+    69.2,
+    90.0
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.3",
+   "desc": "PIQA best variant 86.2 vs canonical 87.9",
+   "paper": [
+    86.2,
+    87.9
+   ],
+   "computed": [
+    86.2,
+    87.9
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.3",
+   "desc": "Agnes3.0 GSM8K: PE-6 100.0, dPE +2.5, floor 95.0",
+   "paper": [
+    100.0,
+    2.5,
+    95.0
+   ],
+   "computed": [
+    100.0,
+    2.5,
+    95.0
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.3",
+   "desc": "Agnes3.0 LogiQA: PE-1 63.3 vs S1 75.0 (-11.7); SC-6 90.0 dSC +15.0 vs dPE +1.7; 5/7 flips SC",
+   "paper": [
+    63.3,
+    75.0,
+    -11.7,
+    90.0,
+    15.0,
+    1.7
+   ],
+   "computed": [
+    63.3,
+    75.0,
+    -11.7,
+    90.0,
+    15.0,
+    1.7
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.3",
+   "desc": "Agnes3.0 TruthfulQA: SC-6 65.0 vs S1 70.8; pooled dPE +3.1",
+   "paper": [
+    65.0,
+    70.8,
+    3.1
+   ],
+   "computed": [
+    65.0,
+    70.8,
+    3.1
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.3",
+   "desc": "Agnes2.5 floors SAT 98.3 / GSM 94.2; pooled dPE +2.4; LogiQA PE-6 80.0 vs SC-6 70.0 dPE +2.5 dSC -3.3",
+   "paper": [
+    98.3,
+    94.2,
+    2.4,
+    80.0,
+    70.0,
+    2.5,
+    -3.3
+   ],
+   "computed": [
+    98.3,
+    94.2,
+    2.4,
+    80.0,
+    70.0,
+    2.5,
+    -3.3
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.3",
+   "desc": "DSV4.1 LogiQA: PE-1 65.0 vs S1 52.5 (+12.5); dSC +7.5 dPE 0.0; SAT -0.8/+5.8; TruthfulQA dSC +5.0",
+   "paper": [
+    65.0,
+    52.5,
+    12.5,
+    7.5,
+    0.0,
+    -0.8,
+    5.8,
+    5.0
+   ],
+   "computed": [
+    65.0,
+    52.5,
+    12.5,
+    7.5,
+    0.0,
+    -0.8,
+    5.8,
+    5.0
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.3",
+   "desc": "Pro LogiQA: PE-1 68.3 vs S1 54.2 (+14.1); PE-6 70.0 vs SC-6 55.0; dPE +1.7 dSC +0.8",
+   "paper": [
+    68.3,
+    54.2,
+    14.1,
+    70.0,
+    55.0,
+    1.7,
+    0.8
+   ],
+   "computed": [
+    68.3,
+    54.2,
+    14.1,
+    70.0,
+    55.0,
+    1.7,
+    0.8
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.3",
+   "desc": "Pro PIQA: paraphrases 6.7 harder; PE-6 80.0 vs SC-6 95.0 (15 pts); -10.0 vs S1 (6.7 base, -3.3 within); dSC +5.0",
+   "paper": [
+    6.7,
+    80.0,
+    95.0,
+    15.0,
+    -10.0,
+    6.7,
+    -3.3,
+    5.0
+   ],
+   "computed": [
+    6.7,
+    80.0,
+    95.0,
+    15.0,
+    -10.0,
+    6.7,
+    -3.3,
+    5.0
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.3",
+   "desc": "pooled dSAT: dPE +7.5 vs dSC 0.0; GSM +2.1/+0.8; LogiQA dSC +5.0 vs dPE +1.5; LogiQA single-call +4.8; TruthfulQA dSC +0.8 dPE +3.1",
+   "paper": [
+    7.5,
+    0.0,
+    2.1,
+    0.8,
+    5.0,
+    1.5,
+    4.8,
+    0.8,
+    3.1
+   ],
+   "computed": [
+    7.5,
+    -0.0,
+    2.1,
+    0.8,
+    5.0,
+    1.5,
+    4.8,
+    0.8,
+    3.1
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.3",
+   "desc": "LogiQA difficulty swing across models: -11.7 / +12.5 / +14.1",
+   "paper": [
+    -11.7,
+    12.5,
+    14.1
+   ],
+   "computed": [
+    -11.7,
+    12.5,
+    14.099999999999994
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.4",
+   "desc": "weak-majority n: 24 / 8 / 14 / 15",
+   "paper": [
+    24,
+    8,
+    14,
+    15
+   ],
+   "computed": [
+    24,
+    8,
+    14,
+    15
+   ],
+   "tol": null,
+   "kind": "count",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.4",
+   "desc": "weak stratum PE/SC/S1 per model: 58.3/33.3/31.9; 50.0/25.0/27.1; 50.0/35.7/33.3; 53.3/33.3/31.1",
+   "paper": [
+    58.3,
+    33.3,
+    31.9,
+    50.0,
+    25.0,
+    27.1,
+    50.0,
+    35.7,
+    33.3,
+    53.3,
+    33.3,
+    31.1
+   ],
+   "computed": [
+    58.3,
+    33.3,
+    31.9,
+    50.0,
+    25.0,
+    27.1,
+    50.0,
+    35.7,
+    33.3,
+    53.3,
+    33.3,
+    31.1
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.4",
+   "desc": "weak stratum model-mean PE 52.9 / SC 31.8 / S1 30.9; 61 pairs",
+   "paper": [
+    52.9,
+    31.8,
+    30.9,
+    61
+   ],
+   "computed": [
+    52.9,
+    31.8,
+    30.9,
+    61
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.4",
+   "desc": "DS weak COMB 57.1 vs PE 50.0; pro 60.0 vs 53.3",
+   "paper": [
+    57.1,
+    50.0,
+    60.0,
+    53.3
+   ],
+   "computed": [
+    57.1,
+    50.0,
+    60.0,
+    53.3
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.4",
+   "desc": "unanimous n 70/90/69/73 at 96.3%; strong n 25/21/36/31, S1 67.0",
+   "paper": [
+    70,
+    90,
+    69,
+    73,
+    96.3,
+    25,
+    21,
+    36,
+    31,
+    67.0
+   ],
+   "computed": [
+    70,
+    90,
+    69,
+    73,
+    96.3,
+    25,
+    21,
+    36,
+    31,
+    67.0
+   ],
+   "tol": 0.36,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.5",
+   "desc": "S1-greedy held-out: Agnes3.0 -1.1 / Agnes2.5 -1.8 / pro -1.0; DSV4.1 +4.5 (73.1 vs 77.6)",
+   "paper": [
+    -1.1,
+    -1.8,
+    -1.0,
+    4.5,
+    73.1,
+    77.6
+   ],
+   "computed": [
+    -1.1,
+    -1.8,
+    -1.0,
+    4.5,
+    73.1,
+    77.6
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.5",
+   "desc": "off-mode greedy: DSV4.1 16 (13 wrong); pro 14 (10/4); pooled 50/476 (10.5%)",
+   "paper": [
+    16,
+    13,
+    14,
+    10,
+    4,
+    50,
+    476,
+    10.5
+   ],
+   "computed": [
+    16,
+    null,
+    14,
+    null,
+    null,
+    50,
+    476,
+    10.5
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.6",
+   "desc": "held-out flips: stem 41/236 (17.4%); instruction 23/240 (9.6%)",
+   "paper": [
+    41,
+    236,
+    17.4,
+    23,
+    240,
+    9.6
+   ],
+   "computed": [
+    41,
+    236,
+    17.4,
+    23,
+    240,
+    9.6
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.6",
+   "desc": "LogiQA fragility per model: 40 / 15 / 35 / 35",
+   "paper": [
+    40,
+    15,
+    35,
+    35
+   ],
+   "computed": [
+    40.0,
+    15.0,
+    35.0,
+    35.0
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.6",
+   "desc": "SAT-Math instruction-locus flips per model: 40 / 0 / 15 / 20",
+   "paper": [
+    40,
+    0,
+    15,
+    20
+   ],
+   "computed": [
+    40.0,
+    0.0,
+    15.0,
+    20.0
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.6",
+   "desc": "dev-suite instruction-locus flips 0/52; stem pooled 3.3% (P4 common set)",
+   "paper": [
+    0,
+    52,
+    3.3
+   ],
+   "computed": [
+    0,
+    52,
+    3.3
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "A.2",
+   "desc": "GPT stem-locus 28.6% / Gemini 20.0% (per-model stem rates)",
+   "paper": [
+    28.6,
+    20.0
+   ],
+   "computed": [
+    28.6,
+    20.0
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "A.2",
+   "desc": "tight-0.80 fragility: GPT 33.3% (n=6) / Gemini 25.0% / Omni 4.8%",
+   "paper": [
+    33.3,
+    25.0,
+    4.8
+   ],
+   "computed": [
+    33.3,
+    25.0,
+    4.8
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.7",
+   "desc": "pooled AUROC: sample 0.75 CI (0.67,0.84); paraphrase 0.74 CI (0.65,0.83); Both 0.81 CI (0.73,0.89)",
+   "paper": [
+    0.75,
+    0.67,
+    0.84,
+    0.74,
+    0.65,
+    0.83,
+    0.81,
+    0.73,
+    0.89
+   ],
+   "computed": [
+    0.75,
+    0.69,
+    0.82,
+    0.74,
+    0.68,
+    0.8,
+    0.81,
+    0.75,
+    0.86
+   ],
+   "tol": 0.036,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.7",
+   "desc": "per-model errors: 21 / 12 / 20 / 19 (12-21 range); pooled 72",
+   "paper": [
+    21,
+    12,
+    20,
+    19,
+    72
+   ],
+   "computed": [
+    21,
+    12,
+    20,
+    19,
+    72
+   ],
+   "tol": null,
+   "kind": "count",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.7",
+   "desc": "Agnes3.0 held-out AUROC: paraphrase 0.81 vs sample 0.80 (comparable)",
+   "paper": [
+    0.81,
+    0.8
+   ],
+   "computed": [
+    0.81,
+    0.8
+   ],
+   "tol": 0.006,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.7",
+   "desc": "Agnes2.5: paraphrase 0.84 vs sample 0.74; DS tiers: sample 0.70/0.74 vs paraphrase 0.62/0.69",
+   "paper": [
+    0.84,
+    0.74,
+    0.7,
+    0.74,
+    0.62,
+    0.69
+   ],
+   "computed": [
+    0.84,
+    0.74,
+    0.7,
+    0.74,
+    0.62,
+    0.69
+   ],
+   "tol": 0.006,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.7",
+   "desc": "flagged: sample 49 / paraphrase 46; only-sample 15 / only-paraphrase 12",
+   "paper": [
+    49,
+    46,
+    15,
+    12
+   ],
+   "computed": [
+    49,
+    46,
+    15,
+    12
+   ],
+   "tol": null,
+   "kind": "count",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.7",
+   "desc": "non-degenerate error rate 35.1% vs unanimous 3.6%; nd AUROC range 0.49-0.86 (all detectors, FULL4)",
+   "paper": [
+    35.1,
+    3.6,
+    0.49,
+    0.86
+   ],
+   "computed": [
+    35.1,
+    3.6,
+    0.49,
+    0.86
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.8",
+   "desc": "Agnes3.0 rule: 81.5% at 5.2 calls (86%); seven questions below PE-6",
+   "paper": [
+    81.5,
+    5.2,
+    86
+   ],
+   "computed": [
+    81.5,
+    5.2,
+    86
+   ],
+   "tol": 0.36,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.8",
+   "desc": "Agnes2.5 rule: 89.9 vs SC 90.8 vs PE 91.6 (-1/-2) at 4.7 calls (79%); routes 97/10/9/3",
+   "paper": [
+    89.9,
+    90.8,
+    91.6,
+    4.7,
+    79,
+    97,
+    10,
+    9,
+    3
+   ],
+   "computed": [
+    89.9,
+    90.8,
+    91.6,
+    4.7,
+    79,
+    97,
+    10,
+    9,
+    3
+   ],
+   "tol": 0.36,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.8",
+   "desc": "DSV4.1 rule: 84.0% at 5.2 (87%), +5 over SC-6, +3 over PE-6, +1 over HB/COMB; routes 83/18/12/6",
+   "paper": [
+    84.0,
+    5.2,
+    87,
+    83,
+    18,
+    12,
+    6
+   ],
+   "computed": [
+    84.0,
+    5.2,
+    87,
+    83,
+    18,
+    12,
+    6
+   ],
+   "tol": 0.36,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.8",
+   "desc": "pro rule: 83.2% at 5.1 (85%), one below COMB 84.0; routes 86/20/9/4",
+   "paper": [
+    83.2,
+    5.1,
+    85,
+    86,
+    20,
+    9,
+    4
+   ],
+   "computed": [
+    83.2,
+    5.1,
+    85,
+    86,
+    20,
+    9,
+    4
+   ],
+   "tol": 0.36,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.8",
+   "desc": "rule pooled 84.7% at mean 5.1 (84%)",
+   "paper": [
+    84.7,
+    5.1,
+    84
+   ],
+   "computed": [
+    84.7,
+    5.1,
+    84
+   ],
+   "tol": 0.36,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "5.9",
+   "desc": "per-model dSC across both suites: -3.3 to +2.7",
+   "paper": [
+    -3.3,
+    2.7
+   ],
+   "computed": [
+    -3.3,
+    2.7
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "A.1",
+   "desc": "Qwen3.8-Max all conditions 93.3; Omni 93.0",
+   "paper": [
+    93.3,
+    93.0
+   ],
+   "computed": [
+    93.3,
+    93.0
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "A.1",
+   "desc": "dev pooled: SC +0.9 / PE -0.9 over 112 pairs on 28 questions",
+   "paper": [
+    0.9,
+    -0.9,
+    112,
+    28
+   ],
+   "computed": [
+    0.9,
+    -0.9,
+    112,
+    28
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "A.1",
+   "desc": "GPT-6 PE-6 +10.0 over S1 CI (0.0,+22.2) n=15; Gemini +5.6 CI (0.0,+13.9) n=12; SC -3.3/-2.8",
+   "paper": [
+    10.0,
+    15,
+    -3.3,
+    5.6,
+    12,
+    -2.8
+   ],
+   "computed": [
+    10.0,
+    15,
+    -3.3,
+    5.6,
+    12,
+    -2.8
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "A.1",
+   "desc": "dev pooled S1 96.4 / greedy 92.0 / SC 97.3 / PE 95.5 / COMB 96.4; SC-PE 1.8 CI (0.0,+5.4), 90% CI (0.0,+3.6)",
+   "paper": [
+    96.4,
+    92.0,
+    97.3,
+    95.5,
+    96.4,
+    1.8,
+    0.0,
+    5.4,
+    0.0,
+    3.6
+   ],
+   "computed": [
+    96.4,
+    92.0,
+    97.3,
+    95.5,
+    96.4,
+    1.8,
+    0.0,
+    5.4,
+    0.0,
+    3.6
+   ],
+   "tol": 0.36,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "A.1",
+   "desc": "S1-greedy dev pooled +4.5 CI (+0.9,+8.8)",
+   "paper": [
+    4.5,
+    0.9,
+    8.8
+   ],
+   "computed": [
+    4.5,
+    0.9,
+    8.9
+   ],
+   "tol": 0.36,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "A.1",
+   "desc": "greedy divergence dev: Agnes3.0 10.6 / Agnes2.5 4.2 below; GPT -3.3 / Gemini -5.6",
+   "paper": [
+    10.6,
+    4.2,
+    -3.3,
+    -5.6
+   ],
+   "computed": [
+    10.6,
+    4.2,
+    -3.3,
+    -5.6
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "A.1",
+   "desc": "hybrid trails by one question: Max 92.2 vs 93.3; Omni 91.5 vs 93.0; Agnes2.5 92.5 vs 95.0; GPT-6 HB/PE 86.7 SC 73.3",
+   "paper": [
+    92.2,
+    93.3,
+    91.5,
+    93.0,
+    92.5,
+    95.0,
+    86.7,
+    73.3
+   ],
+   "computed": [
+    92.2,
+    93.3,
+    91.5,
+    93.0,
+    92.5,
+    95.0,
+    86.7,
+    73.3
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "A.2",
+   "desc": "dev fragility: Max 1.1% / Omni 4.2%; LogiQA 6.7%/21.4%; GPT 13.3% (LogiQA 40%); Gemini 8.3% (33.3%); Agnes3.0 zero",
+   "paper": [
+    1.1,
+    4.2,
+    6.7,
+    21.4,
+    13.3,
+    40.0,
+    8.3,
+    33.3,
+    0
+   ],
+   "computed": [
+    1.1,
+    4.2,
+    null,
+    null,
+    13.3,
+    null,
+    8.3,
+    null,
+    0
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "A.3",
+   "desc": "dev AUROC: Max 0.58 CI (0.50,0.78); Omni 0.79; Agnes3.0 0.96 CI (0.89,1.00) vs 0.60; GPT 0.92 vs 0.58",
+   "paper": [
+    0.58,
+    0.79,
+    0.96,
+    0.6,
+    0.92,
+    0.58
+   ],
+   "computed": [
+    0.58,
+    0.79,
+    0.96,
+    0.6,
+    0.92,
+    0.58
+   ],
+   "tol": 0.006,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "A.3",
+   "desc": "dev AURC: Omni 0.031 (err 7.0%); Agnes3.0 0.009 (9.1%); PE 0.032/0.073; Max 0.057 (6.7%)",
+   "paper": [
+    0.031,
+    7.0,
+    0.009,
+    9.1,
+    0.032,
+    0.073,
+    0.057,
+    6.7
+   ],
+   "computed": [
+    0.031,
+    7.0,
+    0.009,
+    9.1,
+    0.032,
+    0.073,
+    0.056,
+    6.7
+   ],
+   "tol": 0.006,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "A.3",
+   "desc": "dev pooled AUROC: sample 0.74 CI (0.71,0.75); paraphrase 0.60 CI (0.46,0.73)",
+   "paper": [
+    0.74,
+    0.71,
+    0.75,
+    0.6,
+    0.46,
+    0.73
+   ],
+   "computed": [
+    0.74,
+    0.71,
+    0.75,
+    0.6,
+    0.46,
+    0.73
+   ],
+   "tol": 0.036,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "A.3",
+   "desc": "dev flagged: Agnes3.0 sample flags 3, paraphrase 1; GPT paraphrase 2, sample 1",
+   "paper": [
+    3,
+    1,
+    2,
+    1
+   ],
+   "computed": [
+    3,
+    1,
+    2,
+    1
+   ],
+   "tol": null,
+   "kind": "count",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "A.4",
+   "desc": "Spearman(dissent, S1-greedy)=+0.80; (dissent, COMB-S1)=+0.17; non-unanimous +0.57; disjoint -0.20/+0.54",
+   "paper": [
+    0.8,
+    0.17,
+    0.57,
+    -0.2,
+    0.54
+   ],
+   "computed": [
+    0.8,
+    0.17,
+    null,
+    -0.2,
+    0.54
+   ],
+   "tol": 0.011,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "A.4",
+   "desc": "strata: 104 unanimous / 5 strong / 3 weak; unanimous k1 98.1 greedy 97.1; strong 76.7->80.0; weak k1 72.2 SC 100 PE 33.3 COMB 66.7",
+   "paper": [
+    104,
+    5,
+    3,
+    98.1,
+    97.1,
+    76.7,
+    80.0,
+    72.2,
+    100.0,
+    33.3,
+    66.7
+   ],
+   "computed": [
+    104,
+    5,
+    3,
+    98.1,
+    97.1,
+    76.7,
+    80.0,
+    72.2,
+    100.0,
+    33.3,
+    66.7
+   ],
+   "tol": 0.36,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "A.4",
+   "desc": "GPT LogiQA: S1 50 / SC 40 / PE 80 (+30.0, n=5); Gemini 44.4/33.3/66.7 (+22.2, n=3); LSAT Agnes3.0 loss -5.6",
+   "paper": [
+    50.0,
+    40.0,
+    80.0,
+    5,
+    44.4,
+    33.3,
+    66.7,
+    3,
+    -5.6
+   ],
+   "computed": [
+    null,
+    null,
+    null,
+    5,
+    null,
+    null,
+    null,
+    3,
+    null
+   ],
+   "tol": 0.36,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "A.4",
+   "desc": "budget curves: Agnes3.0 PE full 90.9 at k=2, SC needs k=4; Agnes2.5 SC 95.0 by k=6, PE plateau 92.5",
+   "paper": [
+    90.9,
+    95.0,
+    92.5
+   ],
+   "computed": [
+    90.9,
+    95.0,
+    92.5
+   ],
+   "tol": 0.06,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "A.5",
+   "desc": "dev efficiency: ES 2.0-2.7 calls; adaptive 4.1-4.7 (68-78%); trails by one on Omni/Agnes2.5; GPT-6 86.7 at 4.5 vs SC 73.3",
+   "paper": [
+    2.0,
+    2.7,
+    4.1,
+    4.7,
+    68,
+    78,
+    86.7,
+    73.3
+   ],
+   "computed": [
+    2.0,
+    2.7,
+    4.1,
+    4.7,
+    68,
+    78,
+    86.7,
+    73.3
+   ],
+   "tol": 0.36,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "A.1",
+   "desc": "lenient rule: Agnes3.0 78.8->88.1/92.3 on 42/39 (strict 90.9/90.9); excluded harder: Omni 84.2 vs 93.0; Agnes2.5 60.0 vs 90.0",
+   "paper": [
+    88.1,
+    92.3,
+    42,
+    39,
+    90.9,
+    84.2,
+    93.0,
+    60.0,
+    90.0
+   ],
+   "computed": [
+    null,
+    null,
+    null,
+    null,
+    90.9,
+    null,
+    null,
+    null,
+    null
+   ],
+   "tol": 0.36,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "A.1",
+   "desc": "tokens: Max 223 vs 219; GPT 505 vs 528",
+   "paper": [
+    223,
+    219,
+    505,
+    528
+   ],
+   "computed": [
+    223,
+    219,
+    505,
+    528
+   ],
+   "tol": 1.1,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "Setup",
+   "desc": "parse rates 94.7-100%",
+   "paper": [
+    94.7,
+    100.0
+   ],
+   "computed": [
+    94.7,
+    100.0
+   ],
+   "tol": 0.11,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "B",
+   "desc": "Qwen3.8-Max: 98.9% degeneracy under greedy paraphrases; PEg=PE on 88/88",
+   "paper": [
+    98.9,
+    88,
+    88
+   ],
+   "computed": [
+    98.9,
+    88,
+    88
+   ],
+   "tol": 0.36,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "B",
+   "desc": "Agnes3.0 PEg/PE agree 31/32; Agnes2.5 38/39",
+   "paper": [
+    31,
+    32,
+    38,
+    39
+   ],
+   "computed": [
+    31,
+    32,
+    38,
+    39
+   ],
+   "tol": null,
+   "kind": "count",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "B",
+   "desc": "GPT-6: PEg 80.0 vs PE 86.7 (agree 11/15); Gemini 83.3 vs 91.7 (10/12)",
+   "paper": [
+    80.0,
+    86.7,
+    11,
+    15,
+    83.3,
+    91.7,
+    10,
+    12
+   ],
+   "computed": [
+    80.0,
+    86.7,
+    11,
+    15,
+    83.3,
+    91.7,
+    10,
+    12
+   ],
+   "tol": 0.36,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "B",
+   "desc": "noise-free fragility: GPT-6 40.0%; Gemini 25.0%",
+   "paper": [
+    40.0,
+    25.0
+   ],
+   "computed": [
+    40.0,
+    25.0
+   ],
+   "tol": 0.36,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "C",
+   "desc": "GPT-6 MMLU-Pro: greedy 66.7 / SC 73.3; entropy 0.26; degen 66.7%; n=15",
+   "paper": [
+    66.7,
+    73.3,
+    0.26,
+    66.7,
+    15
+   ],
+   "computed": [
+    66.7,
+    73.3,
+    0.26,
+    66.7,
+    15
+   ],
+   "tol": 0.36,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "C",
+   "desc": "Agnes3.0 probe: entropy 0.94, degen 0, greedy 12.5%, SC 0%, n=8; Agnes2.5 84.6%",
+   "paper": [
+    0.94,
+    0.0,
+    12.5,
+    0.0,
+    8,
+    84.6
+   ],
+   "computed": [
+    0.94,
+    0.0,
+    12.5,
+    0.0,
+    8,
+    84.6
+   ],
+   "tol": 0.36,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "C",
+   "desc": "Qwen3.8-Max probe: 6 complete (8 lenient); 7/8 single answer",
+   "paper": [
+    6,
+    8,
+    7
+   ],
+   "computed": [
+    6,
+    8,
+    7
+   ],
+   "tol": null,
+   "kind": "count",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "D",
+   "desc": "CoT tab_cot rows (n, Grd, SC, PE | Grd_dir, SC_dir, PE_dir): Max 9: 100/100/100 | 88.9/88.9/75.0; Agnes3.0 12: 100/100/100 | 83.3/100/100; Agnes2.5 33: 87.9/93.9/93.3 | 90.9/93.9/86.7; GPT 13: 92.3/100/100 | 84.6/76.9/100",
+   "paper": [
+    9,
+    100.0,
+    100.0,
+    100.0,
+    88.9,
+    88.9,
+    75.0,
+    12,
+    100.0,
+    100.0,
+    100.0,
+    83.3,
+    100.0,
+    100.0,
+    33,
+    87.9,
+    93.9,
+    93.3,
+    90.9,
+    93.9,
+    86.7,
+    13,
+    92.3,
+    100.0,
+    100.0,
+    84.6,
+    76.9,
+    100.0
+   ],
+   "computed": [
+    9,
+    100.0,
+    100.0,
+    100.0,
+    88.9,
+    88.9,
+    75.0,
+    12,
+    100.0,
+    100.0,
+    100.0,
+    83.3,
+    100.0,
+    100.0,
+    33,
+    87.9,
+    93.9,
+    93.3,
+    90.9,
+    93.9,
+    86.7,
+    13,
+    92.3,
+    100.0,
+    100.0,
+    84.6,
+    76.9,
+    100.0
+   ],
+   "tol": 0.36,
+   "kind": "num",
+   "verdict": "MATCH"
+  },
+  {
+   "loc": "Setup",
+   "desc": "NLI bidirectional 267/270; second generator 269/270 (recomputed)",
+   "paper": [
+    267,
+    270,
+    269
+   ],
+   "computed": [
+    267,
+    270,
+    269
+   ],
+   "tol": null,
+   "kind": "count",
+   "verdict": "MATCH"
+  }
+ ],
+ "computed": {
+  "main": "{'qwen3.8-max': {'n': 90, 'pq': {'q006': {'dataset': 'gsm8k', 'gold': '2', 'greedy_ok': True, 'k1_acc': 1.0, 'pe1_acc': 1.0, 'sc6_ok': True, 'pe6_ok': True, 'hb6_ok': True, 'comb12_ok': True, 'mode_sh",
+  "dev_pooled": "{'n_pairs': 112, 'n_q': 28, 's1': 96.42857142857143, 'greedy': 91.96428571428571, 'sc6': 97.32142857142857, 'pe6': 95.53571428571429, 'comb': 96.42857142857143, 'sc_s1': 0.8928571428571388, 'pe_s1': -",
+  "rq4": "{'spearman_dissent_gap': 0.7952593486312177, 'spearman_dissent_comb': 0.165879651057525, 'spearman_sampdiss_pegain': -0.19717834017416633, 'spearman_paradiss_scgain': 0.5427283534584608, 'n_unanimous_",
+  "dev_flags": "{'qwen3.8-max': {'errors': 6, 'flag_cs': 1, 'flag_cp': 1, 'only_cs': 0, 'only_cp': 0}, 'qwen3.8-omni': {'errors': 5, 'flag_cs': 3, 'flag_cp': 3, 'only_cs': 0, 'only_cp': 0}, 'agnes-3.0-flash': {'error",
+  "dev_pooled_auroc": "{'cs': 0.7384259259259259, 'cp': 0.5983796296296297, 'ci_cs': (0.7075471698113207, 0.75), 'ci_cp': (0.4636363636363636, 0.7318181818181818)}",
+  "frag_dev_pooled": "{'inst': [0, 52], 'stem_rate': 3.3333333333333335}",
+  "tight_frag": "{'gpt-6-luna': (33.333333333333336, 6), 'gemini-3.8-flash': (25.0, 4), 'qwen3.8-omni': (4.761904761904762, 42)}",
+  "exp": "{'agnes-3.0-flash': {'n': 119, 'pq': {'e000': {'dataset': 'piqa', 'gold': '2', 'greedy_ok': True, 'k1_acc': 1.0, 'pe1_acc': 1.0, 'sc6_ok': True, 'pe6_ok': True, 'hb6_ok': True, 'comb12_ok': True, 'mod",
+  "primary": "{'sc6_ok': {'mean': 2.3809523809523814, 'ci': [1.085434173669468, 3.746498599439776], 'p': 0.0, 'p_holm': 0.0}, 'pe6_ok': {'mean': 4.901960784313726, 'ci': [2.3809523809523814, 7.598039215686275], 'p'",
+  "exp_pooled": "{'greedy': 80.67226890756302, 's1': 80.812324929972, 'sc6': 83.19327731092437, 'pe6': 85.71428571428571, 'comb': 84.87394957983193, 'hb': 84.45378151260505, 'pe1': 82.66806722689076, 'difficulty_offse",
+  "exp_model_ci": "{'agnes-3.0-flash': {'sc6_ok': {'mean': 1.9607843137254901, 'ci': [-0.980392156862745, 4.901960784313726]}, 'pe6_ok': {'mean': 7.8431372549019605, 'ci': [2.3809523809523814, 13.58543417366947]}, 'comb",
+  "union": "{'agnes-3.0-flash': {'n': 152, 's1': 81.68859649122808, 'sc6': 83.55263157894737, 'pe6': 88.15789473684211, 'dsc6_ok': {'mean': 1.8640350877192984, 'ci': [-0.5482456140350876, 4.385964912280702]}, 'dp",
+  "strata": "{('agnes-3.0-flash', 'unan'): {'n': 70, 's1': 98.57142857142857, 'sc6': 98.57142857142857, 'pe6': 98.57142857142857, 'comb': 98.57142857142857}, ('agnes-3.0-flash', 'strong'): {'n': 25, 's1': 72.0, 's",
+  "strata_pooled": "{'weak': {'n': 61, 's1': 30.868055555555554, 'sc6': 31.845238095238095, 'pe6': 52.91666666666667}, 'strong': {'s1': 67.04207202594299}, 'unan': {'max_cond': 96.332851186931}}",
+  "greedy_divergence": "{'qwen3.8-max': {'greedy': 93.3, 's1': 93.3, 'gap': 0.0}, 'qwen3.8-omni': {'greedy': 93.0, 's1': 93.9, 'gap': 0.9}, 'agnes-3.0-flash': {'greedy': 78.8, 's1': 89.4, 'gap': 10.6}, 'agnes-2.5-flash': {'g",
+  "off_mode": "{'agnes-3.0-flash': 15, 'agnes-2.5-flash': 5, 'qwen3.7-flash': 1, 'deepseek-v4.1-flash': 16, 'deepseek-v4-flash-0731': 0, 'deepseek-v4-pro-0813': 14}",
+  "frag_ho": "{'stem': [41, 236], 'inst': [23, 240], 'stem_rate': 17.372881355932204, 'inst_rate': 9.583333333333334, 'logiqa': {'agnes-3.0-flash': 40.0, 'agnes-2.5-flash': 15.0, 'deepseek-v4.1-flash': 35.0, 'deeps",
+  "sig_ho": "{'agnes-3.0-flash': {'n_errors': 21, 'auroc_cs': 0.7983479105928085, 'auroc_cp': 0.8109815354713313, 'auroc_both': 0.8607871720116618, 'ci_cs': [0.6827445652173914, 0.8969072164948454], 'ci_cp': [0.71",
+  "instr": "{'sat_math': {'models': {'agnes-3.0-flash': {'n': 20, 'canonical': 61.66666666666667, 'variants': [70.0, 65.0, 100.0, 85.0, 80.0, 95.0], 'best': 100.0, 'pe6': 100.0}, 'agnes-2.5-flash': {'n': 20, 'can",
+  "ds_cells": "{('agnes-3.0-flash', 'sat_math'): {'n': 20, 's1': 61.66666666666667, 'pe1': 82.5, 'sc6': 60.0, 'pe6': 100.0}, ('agnes-3.0-flash', 'gsm8k'): {'n': 20, 's1': 95.0, 'pe1': 97.5, 'sc6': 95.0, 'pe6': 100.0",
+  "ds_pooled": "{'sat_math': {'dsc': -0.0, 'dpe': 7.5, 'pe1_minus_s1': 7.5}, 'gsm8k': {'dsc': 0.8, 'dpe': 2.1, 'pe1_minus_s1': 1.3}, 'logiqa': {'dsc': 5.0, 'dpe': 1.5, 'pe1_minus_s1': 4.8}, 'truthfulqa': {'dsc': 0.8,",
+  "greedypara": "{'qwen3.8-max': {'n': 88, 'degen_g_pct': 98.86363636363636, 'pe6_peg_agree': 88}, 'agnes-3.0-flash': {'n': 32, 'pe6_peg_agree': 31, 'acc_peg': 93.75, 'degen_g_pct': 71.875, 'frag_g_pct': 3.125}, 'agne",
+  "mmlupro": "{'gpt-6-luna': {'n': 15, 'greedy': 66.66666666666667, 's1': 66.66666666666667, 'sc6': 73.33333333333333, 'entropy': 0.26131941098755396, 'degen_pct': 66.66666666666667}, 'qwen3.8-max': {'n': 6, 'greed",
+  "cot": "{'qwen3.8-max': {'n': 9, 'n_stem': 4, 'greedy': 100.0, 'sc6': 100.0, 'pe6': 100.0, 'entropy': 0.0, 'entropy_dir': 0.0, 'n_direct': 9, 'direct_greedy': 88.88888888888889, 'direct_sc6': 88.8888888888888"
+ }
+}

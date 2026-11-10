@@ -1,0 +1,7 @@
+{
+ "n_pool": 210,
+ "n_sample": 100,
+ "seed": 20261110,
+ "dataset": "logiqa",
+ "sha256": "15d87400f74b9d91d1c1a623f76f8811744deeef9bfd48c6dfcf7a73ece085e7"
+}

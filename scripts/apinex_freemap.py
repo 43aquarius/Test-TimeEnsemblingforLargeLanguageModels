@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """Map which free/* models still work vs subscription-gated (3 tries each)."""
 import urllib.request, json, time
+import os
 
-KEY = "sk-apxe8e3bc610bd556066ca665074a4ba0c722a9cce84fbe1cf"
+KEY = os.environ.get("APINEX_API_KEY", "sk-YOUR-KEY-HERE")
+# The previously hard-coded key was redacted (leaked in public history;
+# it must be revoked at the provider regardless of this redaction).
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
 
 def chat(model):

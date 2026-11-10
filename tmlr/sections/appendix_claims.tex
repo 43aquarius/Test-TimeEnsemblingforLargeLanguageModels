@@ -1,0 +1,44 @@
+% Appendix E: claim-evidence map for every quantitative or causal claim made
+% in the abstract, the introduction, and the conclusion. Downgraded claims are
+% marked; the corresponding audit is re-run by the released script.
+\section{Claim--Evidence Map}
+\setcounter{table}{0}
+\label{app:claims}
+
+\emph{In one sentence:} every quantitative or causal claim in the abstract, the introduction, and the conclusion is listed below with its supporting table, figure, or test, together with the confidence interval where one exists; claims whose evidence is descriptive or post hoc are marked as such.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Claim--evidence map. ``Primary'' marks one of the four designated primary contrasts of Section~\ref{sec:stats} (Holm-adjusted within the family); ``expl.'' marks exploratory evidence (no correction claim); ``post hoc'' marks a selection made on the same data it scores; ``by construction'' marks a structural property of the design rather than an empirical finding.}
+\label{tab:claims}
+\begin{tabularx}{\textwidth}{@{}p{0.44\textwidth}p{0.30\textwidth}X@{}}
+\toprule
+Claim (as stated) & Evidence & Status / interval \\
+\midrule
+Held-out pooled: SC-6 gains $+2.4$ over S1 & Table~\ref{tab:expand}; cluster bootstrap & Primary; CI $+1.1$ to $+3.7$; Holm $p=0.0008$ \\
+Held-out pooled: PE-6 gains $+4.9$ over S1 & Table~\ref{tab:expand}; cluster bootstrap & Primary; CI $+2.3$ to $+7.6$; Holm $p<0.0001$ \\
+Held-out pooled: COMB-12 gains $+4.1$ over S1 & Table~\ref{tab:expand}; cluster bootstrap & Primary; CI $+2.0$ to $+6.3$; Holm $p<0.0001$ \\
+SC-6 and PE-6 statistically inseparable & Table~\ref{tab:expand}; PE$-$SC $+2.5$ & Primary; CI $-0.6$ to $+5.7$; Holm $p=0.14$; ``no detectable difference'', not equivalence \\
+$+1.9$ of PE headline is a single-call difficulty offset & Table~\ref{tab:expand_ds} (PE-1 $-$ S1 pooled) & Expl.; decomposition of the same votes \\
+Like-for-like aggregation: $+3.0$ (paraphrase side) vs $+2.4$ (resampling) & Table~\ref{tab:expand_ds} ($\Delta$PE, $\Delta$SC pooled) & Expl.; intervals overlap between sources \\
+Paraphrase margin concentrates on quantitative tasks; coincides with an instruction effect & Table~\ref{tab:expand_ds} by dataset; instruction-variant analysis (Section~\ref{sec:heldoutmech}) & Expl.; post-hoc variant selection (optimistic ceiling) \\
+Best single instruction variant reaches 95.0\% on pooled SAT-Math vs 76.2\% canonical and 91.2\% PE-6 & Per-call logs, six handcrafted variants & Post hoc; same data as the selection \\
+SC-6 under the best instruction not run & --- & Absent control; flagged in Section~\ref{sec:heldoutmech} and limitations \\
+Agnes3.0-Flash held-out: PE-6 $+7.8$ over S1 & Table~\ref{tab:expand} & Expl. per-model; CI $+2.4$ to $+13.7$ \\
+Per-model $\Delta$SC between $-3.3$ and $+2.7$ across both suites & Tables~\ref{tab:main}, \ref{tab:expand_ds} & Expl.; descriptive range \\
+Greedy divergence from S1 is endpoint-specific (one of four held-out endpoints; four of ten overall) & Greedy-bias audit; Section~\ref{sec:heldoutgreedy} & Expl.; audit of discordant questions \\
+Fragility: 17.4\% stem-locus vs 9.6\% instruction-locus pooled flips (held-out) & Held-out call matrices & Expl.; 41/236 vs 23/240 pairs \\
+Pooled error-detection AUROC: sample 0.75, paraphrase 0.74, Both 0.81 & Table~\ref{tab:uncertexp} & CI 0.67--0.84, 0.65--0.83, 0.73--0.89; Both ranking is descriptive (overlapping intervals) \\
+Union of the two flagged sets is an upper bound by construction; partial disjointness (15 and 12) is the empirical content & Table~\ref{tab:uncertexp} & By construction / expl. \\
+Non-degenerate stratum AUROC falls to 0.49--0.86; 35.1\% vs 3.6\% error rates & Table~\ref{tab:uncertexp}; held-out logs & Expl.; regime signal \\
+Adaptive rule: 79--87\% of six-call budget on held-out; exceeds fixed frontier on one model by one question & Table~\ref{tab:expand} (rule replay); Section~\ref{sec:heldoutrule} & Expl.; transfer test of a rule designed on development data \\
+Sequential unanimity preserves SC-6 within one question at 2--3 calls & Table~\ref{tab:efficiency} & Expl.; simulation (replay of collected matrices) \\
+Degenerate regime: ensembles collapse onto single-call baselines; agreement scores uninformative & Table~\ref{tab:regime}; Figure~\ref{fig:budget}; Table~\ref{tab:uncert} & Partly by construction (unanimous votes), prevalence is empirical \\
+First budget-matched within-question comparison, to our knowledge & Section~\ref{sec:related} positioning & Literature claim; cannot be verified exhaustively \\
+Every paraphrase vote mixes prompt variation with decoding noise; no held-out greedy-paraphrase control & Section~\ref{sec:conditions}; \ref{app:greedypara} & By design \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Claims that were downgraded relative to earlier drafts of this work: (i) ``the stronger error signal tracks the model's stronger diversity source'' --- downgraded after the held-out recomputation (Section~\ref{sec:heldouterror}); (ii) ``instruction-locus flips never occur'' --- downgraded to a property of the development-suite draw (Section~\ref{sec:heldoutfragility}); (iii) ``the paraphrase margin concentrates where answer-space diversity is exhausted'' --- downgraded to the instruction-effect reading, because the SAT-Math cell is dominated by the instruction-variant effect and the best-instruction SC-6 control was not run (Section~\ref{sec:heldoutmech}); (iv) ``TruthfulQA is neutral for the paraphrase side'' --- downgraded to ``retains a small within-condition margin ($+3.1$), reported as a residual prompt-side effect'' (Section~\ref{sec:heldoutmech}).

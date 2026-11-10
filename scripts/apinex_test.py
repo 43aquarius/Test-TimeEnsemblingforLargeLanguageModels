@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 """Test apinex endpoint: chat format, usage reporting, latency, burst rate."""
 import urllib.request, json, time, statistics
+import os
 
 BASE = "https://api.apinex.bond/v1"
-KEY = "sk-apxe8e3bc610bd556066ca665074a4ba0c722a9cce84fbe1cf"
+KEY = os.environ.get("APINEX_API_KEY", "sk-YOUR-KEY-HERE")
+# The previously hard-coded key was redacted (leaked in public history;
+# it must be revoked at the provider regardless of this redaction).
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
 
 def chat(model, prompt="What is 2+2? Answer with just the number.", max_tokens=512, temperature=0.7):

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Precise gap count (analysis-grade) + real-question parse test on apinex."""
 import json, os, re, sys, time
+import os
 from collections import defaultdict
 
 DATA = "/home/z/my-project/data"
@@ -37,7 +38,9 @@ for alias in ["deepseek-v4.1-flash", "deepseek-v4-flash-0731", "qwen3.7-flash"]:
 print("\n=== real-question parse test ===")
 import urllib.request
 BASE = "https://api.apinex.bond/v1"
-KEY = "sk-apxe8e3bc610bd556066ca665074a4ba0c722a9cce84fbe1cf"
+KEY = os.environ.get("APINEX_API_KEY", "sk-YOUR-KEY-HERE")
+# The previously hard-coded key was redacted (leaked in public history;
+# it must be revoked at the provider regardless of this redaction).
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
 
 def build_prompt(q, para_idx):

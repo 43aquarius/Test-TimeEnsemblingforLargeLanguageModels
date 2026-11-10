@@ -4,7 +4,7 @@
 
 Chang Tan · Dalian University of Technology · aquars43@foxmail.com
 
-> Preprint, submitted to *Neurocomputing* (Elsevier).
+> Preprint v1.8.1 (Neurocomputing submission, under revision as a preprint archive). See **[TMLR submission version](#tmlr-submission-v190--double-blind) (v1.9.0)** for the current double-blind manuscript.
 > 📦 Manuscript and full research artifacts: **[Release v1.8.1 (submission-ready, corrected)](https://github.com/43aquarius/Test-TimeEnsemblingforLargeLanguageModels/releases/tag/v1.8.1)** · [v1.8.0 (guide-compliance pass)](https://github.com/43aquarius/Test-TimeEnsemblingforLargeLanguageModels/releases/tag/v1.8.0) · [v1.7.0 (audited revision)](https://github.com/43aquarius/Test-TimeEnsemblingforLargeLanguageModels/releases/tag/v1.7.0) · [v1.0.0 (original)](https://github.com/43aquarius/Test-TimeEnsemblingforLargeLanguageModels/releases/tag/v1.0.0)
 > 🏛️ DOI-archived snapshot of v1.8.1: [10.5281/zenodo.23642990](https://doi.org/10.5281/zenodo.23642990)
 
@@ -38,8 +38,20 @@ Paraphrases were generated with an LLM and retained only if their sentence-embed
 5. **Practical rule: measure agreement first, then allocate the budget.** Disagreement strongly predicts the fragility of the greedy reference (Spearman +0.80 between dissent share and the S1−greedy gap, driven by the 8 non-unanimous of 112 pooled pairs) but only weakly the ensemble gain over S1 (+0.17); a sequential unanimity rule (a special case of early-stopping self-consistency) preserves SC-6 accuracy within one question at 2–3 calls, and an adaptive probe rule reproduces fixed PE-6 on five of six models at 68–78% of its calls (matching the best fixed strategy on four of six) — its measured value is the call saving, not accuracy.
 
 
+## TMLR submission (v1.9.0) — double-blind
+
+The current manuscript is a double-blind TMLR (Transactions on Machine Learning Research) submission, prepared with the official TMLR style file in anonymous mode. It lives in [`tmlr/`](tmlr/):
+
+* **`tmlr/main.pdf`** — compiled submission (39 pp); LaTeX source, sections, tables, figures alongside.
+* **`tmlr/audit_report.md`** — the number-consistency audit: `scripts/audit_paper_numbers.py` recomputes **all 102 quantitative claims** of the manuscript from the raw per-call logs (102/102 MATCH, deterministic).
+* **`tmlr/experiments/`** — four pre-registered follow-up experiments (D1 open-weight vLLM replication, D2 held-out greedy-paraphrase control, D3 SC-6 under the pre-selected best instruction variant, D4 human equivalence annotation) with scripts; **no results yet** — the manuscript carries them as explicit TODO placeholders.
+* **`tmlr/CHANGELOG.md` / `DECISIONS.md` / `REVIEW.md`** — modification log vs. the Neurocomputing version, author decision list, and a simulated TMLR reviewer self-audit.
+
+> The TMLR manuscript's Reproducibility Statement points reviewers to an *anonymous* repository/package; **this public repository is the author's working copy and is not linked from the submission.**
+
 ## Version history
 
+- **v1.9.0 (Nov 2026) — TMLR submission version (double-blind).** The manuscript is converted to the official TMLR style (`tmlr/`, 39 pp): anonymous mode ("Under review as submission to TMLR"), development-suite analyses moved to Appendix A with one-sentence conclusions per subsection, abstract rewritten to a single ~250-word conclusion chain, every paraphrase margin relabelled "paraphrase ensemble (with sampling noise)" with the dev-only greedy-paraphrase control stated wherever held-out margins are read, error-signal claims recalibrated (0.81-vs-0.80 stated as comparable; the dev 0.96-vs-0.60 contrast marked as a three-error artifact that the held-out suite overturns; "Both strongest" marked descriptive with overlapping intervals; Either-coverage marked as an upper bound by construction), the mechanism wording aligned with the SAT-Math instruction-variant control (best post-hoc variant 95.0% pooled single-call vs 91.2% for PE-6; the unrun best-instruction SC-6 control flagged as a limitation with a pre-registered protocol), limitations expanded to ten numbered items (no self-defence), and a new Appendix E maps every quantitative claim to its evidence with primary/exploratory/post-hoc/by-construction status. **Number-consistency audit:** new `scripts/audit_paper_numbers.py` recomputes all 102 quantitative claims of the TMLR manuscript from the raw call logs — **102/102 MATCH**, deterministic across runs (four paper numbers corrected to the recomputed values, see `tmlr/CHANGELOG.md` C1–C4). **New experiment protocols** (`tmlr/experiments/`, results deliberately absent and carried in the manuscript as TODO placeholders): D1 vLLM open-weight 16-call replication, D2 held-out greedy-paraphrase control, D3 SC-6 under the pre-registered best instruction variant (P1, selected on dev data at 89.9% vs canonical 90.6%), D4 100-item human equivalence annotation for LogiQA stem rewrites. **Security:** the hard-coded Apinex API key in the six exploratory `apinex_*.py` probe scripts is redacted (read from `APINEX_API_KEY` env var); the key had been public since v1.5.0 and **must still be revoked at the provider**. Note: the TMLR manuscript references an *anonymous* repository; this public repo is the author's working copy, not the review artifact.
 - **v1.8.1 (Oct 2026) — post-review correction pass.** All remaining issues from the final internal review fixed. **(1) LaTeX residue:** the seven duplicated “Appendix Appendix”/“Appendices Appendix” cross-reference prefixes removed (elsarticle's `\appendix` already renders `\ref` as “Appendix A”) and a duplicated sentence in Section 5.7 removed. **(2) Greedy-divergence count:** four of ten model–endpoint configurations differ by 4–11 points (three with greedy below S1: Agnes3.0 +10.6, Agnes2.5 +4.2, DeepSeekV4.1 +4.5; one above: Gemini3.8 −5.6) — corrected in the abstract, Section 6.3, and the conclusion with the direction split stated. **(3) Held-out RQ2/RQ3 recomputation:** fragility and the error-signal analysis are recomputed on the held-out suite via the new `analyze_rq23_expand.py`: fragility loses its clean locus split (stem 17.4% vs. instruction 9.6% pooled flips — the dev-suite 0/52 instruction-locus result was a question-draw property, the held-out instruction flips sit almost entirely on SAT-Math), and the error-signal analysis now runs at 12–21 reference errors per model (new Table 9: pooled AUROC 0.75 sample / 0.74 paraphrase / 0.81 summed; the stronger single signal tracks the model's stronger diversity source; 15/12 pooled errors flagged by only one side); Section 6.1's third and fourth findings restated on these numbers instead of the 1–3-error development models, with the regime-signal caveat made explicit (non-degenerate stratum AUROC 0.49–0.86). **(4) SAT-Math instruction control:** “left to future work” replaced with a computable control from the released logs — the best handcrafted instruction variant (post hoc) lifts pooled single-call accuracy 76.2%→95.0%, the six-variant ensemble captures about eighty percent of it (91.2%) without variant selection, and PIQA shows no variant effect (86.2 vs. 87.9). **(5) PE description:** Section 3.3 now states that every paraphrase vote carries the same τ=0.7 decoding noise as a canonical sample, and the greedy-paraphrase control's development-suite-only scope is stated wherever held-out paraphrase margins are read. **(6) TruthfulQA:** “neutral in aggregate” corrected to near-neutral for resampling (ΔSC +0.8) with a small prompt-space margin (ΔPE +3.1). **(7) Bibliography:** Condorcet author format fixed (“Marquis de Condorcet”), Gemini3.8-Flash now cites its official Gemini 3.8 Flash model card instead of the Gemini 2.5 report, and bst downcasing artifacts repaired (GPT-4, GPT-5, Agnes AI, Gemini titles). **(8) Endpoint verification:** the Apinex relay's unverifiable model identity/temperature and the absence of any first-party-API or open-weight replication are stated explicitly (Sections 4.2 and 6.4). **(9) Data archival:** the data availability statement now points at a DOI-archived Zenodo snapshot in addition to GitHub (`.zenodo.json` added; DOI [10.5281/zenodo.23642990](https://doi.org/10.5281/zenodo.23642990), archiving release v1.8.1). Validation extended: `recompute_all.py` 145/145 checks (39 new), `final_crosscheck.py` green (73 in-text placements); PDF and Word versions rebuilt from the same source.
 - **v1.8.0 (Oct 2026) — submission-ready revision for Neurocomputing.** Compliance pass against the journal's Guide for Authors: abstract trimmed to 247 words (250-word limit), title-page affiliation completed with the full postal address, declarations block (CRediT, competing interests, funding, data availability, generative-AI statement in the journal's required format) moved ahead of the appendices, and highlights re-issued as an editable `Highlights.docx` alongside the existing `highlights.txt`. **Reference audit:** all 42 cited works verified against publisher records — eight entries corrected or upgraded (PIQA restored to its AAAI 2020 publication; AGIEval to NAACL 2024 Findings; MMLU-Pro to NeurIPS 2024 with its correct 17-author list; multiagent-debate, scaling-test-time-compute, and uncertainty-decomposition papers upgraded from arXiv preprints to their ICML 2024 / ICLR 2025 formal publications; a survey citation that did not resolve to a real record replaced with a verified arXiv survey; two arXiv identifiers fixed; page ranges corrected; 11 DOIs added). `recompute_all.py` (106 checks) and `final_crosscheck.py` (38 in-text placements) both pass against the rebuilt PDF; the Word version is regenerated from the same source with the complete title page. A `cover_letter.docx` draft is included with the release assets.
 
@@ -56,17 +68,26 @@ Paraphrases were generated with an LLM and retained only if their sentence-embed
 
 ```
 .
-├── paper/                  # Manuscript (LaTeX source + compiled main.pdf)
+├── paper/                  # Neurocomputing manuscript (LaTeX source + compiled main.pdf)
 │   ├── main.tex            # elsarticle preprint format
 │   ├── sections/           # 7 section files
 │   ├── tables/             # auto-generated from results (gen_tables.py)
 │   ├── figures/            # auto-generated from results (make_figures.py)
 │   └── refs.bib            # 42 references (verified against publisher records)
+├── tmlr/                   # TMLR submission version (double-blind, v1.9.0)
+│   ├── main.tex / main.pdf # tmlr.sty anonymous mode, 39 pp
+│   ├── sections/           # 12 section files incl. appendices A–E
+│   ├── experiments/        # D1–D4 pre-registered follow-up protocols + scripts
+│   ├── audit_report.md     # 102-claim number-consistency audit (102/102 MATCH)
+│   ├── CHANGELOG.md        # A–D modification log vs the Neurocomputing version
+│   ├── DECISIONS.md        # decisions required from the author + packaging notes
+│   └── REVIEW.md           # simulated TMLR reviewer self-audit
 ├── scripts/                # Full experiment pipeline (Python + Node)
 │   ├── run_experiment.py   # 16-call matrix per question × model
 │   ├── analyze.py          # conditions, AUROC, statistical tests
 │   ├── gen_tables.py       # LaTeX tables
 │   ├── make_figures.py     # publication figures
+│   ├── audit_paper_numbers.py  # TMLR manuscript number audit (102 claims)
 │   ├── word/               # Word manuscript generator (Node, docx)
 │   └── credentials.example.py
 ├── data/

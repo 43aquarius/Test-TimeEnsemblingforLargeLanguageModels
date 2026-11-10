@@ -1,0 +1,6 @@
+{
+  "agnes-3.0-flash":  {"model_id": "agnes-3.0-flash",  "base_url": "https://REPLACE-ME/v1", "key_env": "AGNES_API_KEY"},
+  "agnes-2.5-flash":  {"model_id": "agnes-2.5-flash",  "base_url": "https://REPLACE-ME/v1", "key_env": "AGNES_API_KEY"},
+  "deepseek-v4.1-flash": {"model_id": "deepseek-v4.1-flash", "base_url": "https://REPLACE-ME/v1", "key_env": "APINEX_API_KEY"},
+  "deepseek-v4-pro-0813": {"model_id": "deepseek-v4-pro-0813", "base_url": "https://REPLACE-ME/v1", "key_env": "APINEX_API_KEY"}
+}

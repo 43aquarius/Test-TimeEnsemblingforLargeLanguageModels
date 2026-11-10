@@ -1,0 +1,16 @@
+\section{Harder tasks: the MMLU-Pro probe}
+\setcounter{table}{0}
+\label{app:mmlupro}
+\label{sec:mmlupro}
+
+The flagship models saturate five of the six main-suite benchmarks, so the degenerate regime dominates their measurements. The MMLU-Pro probe asks whether a harder distribution restores answer entropy under the same direct-answering protocol. Table~\ref{tab:mmlupro} reports the probe; the coverage caveat is stated up front: on hard quantitative items the direct-answering instruction does not always suppress reasoning, and outputs truncated at the token cap lost extraction on a majority of Qwen3.8-Max's probe calls, leaving six complete questions (eight more with at least four parsed votes); the other models parsed cleanly.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{MMLU-Pro probe: greedy accuracy, single-sample accuracy S1, and SC-6 accuracy, with mean support-normalized sample entropy, sample degeneracy rate, and the model's main-suite entropy for comparison.}
+\label{tab:mmlupro}
+\input{tables/tab_mmlupro}
+\end{table}
+
+The probe shows that difficulty alone does not determine the regime. GPT-6-Luna, the strongest model with full probe coverage, lands in the high-entropy regime: greedy accuracy 66.7\% with mean entropy 0.26 and a 66.7\% degeneracy rate, and self-consistency lifts it to 73.3\%; at $n = 15$ this 6.6 point difference is the movement of a single question and is reported as directional, not as evidence. Qwen3.8-Max remains essentially degenerate on the probe: its six complete questions are unanimous on five, and seven of the eight questions with at least four parsed votes return a single answer, so for this flagship a ten-option hard benchmark under direct answering still collapses to one answer per question. At the other end, Agnes3.0-Flash collapses into near-uniform guessing: entropy 0.94 with zero degeneracy, greedy accuracy 12.5\%, and a self-consistency majority of 0\% on its eight probe questions; at $n = 8$ these values are one to two questions from chance and are likewise directional, but they are consistent with the plurality-vote failure mode of Section~\ref{sec:condorcet} when the modal answer is wrong. Agnes2.5-Flash answers 84.6\% correctly with partial degeneracy and no aggregation change. The probe is small, and we read it as directional evidence: harder tasks shift models along the entropy axis, but into which regime depends on the model, and the flagship's degeneracy is robust to at least this level of difficulty increase under direct answering.
